@@ -1,0 +1,3 @@
+   Make sure everyone has Python set up
+   They must all have virtual envs
+      pip install numpy, time

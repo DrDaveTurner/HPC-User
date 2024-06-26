@@ -13,8 +13,10 @@ message: >-
   training material.
 type: dataset
 authors:
-  - given-names: FIXME
-    family-names: FIXME
+  Dr Dave Turner
+  Kansas State University
+  daveturner@ksu.edu
+  Spring of 2022+
 abstract: >-
   FIXME Replace this with a short abstract describing the
   lesson, e.g. its target audience and main intended

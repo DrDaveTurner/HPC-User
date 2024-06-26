@@ -1,0 +1,12 @@
+HPC user section 03
+
+   Need to verify cache latencies
+   number of registers
+L1 4-5 clock cycles (1-2 ns) --> diagram
+   workstation costs, 16 TB max
+   fill in file access rates and latencies
+
+   virtual environment and pip install numpy
+
+   why is sparse16 run only 3x speedup?
+
