@@ -1,78 +1,114 @@
 ---
-title: "Introduction"
-teaching: 5
-exercises: 0
-questions:
-- "What are the pre-requisits for the HPC User lesson?"
-- "What should I expect to learn from these modules?"
-objectives:
-- "Understand what to expect out of the HPC User lesson"
-keypoints:
-- "This lesson will help to understand basic concpets affecting performance in programming"
+title: "Using Markdown"
+teaching: 10
+exercises: 2
 ---
 
-**NOTE - Examples are currently in Python.
-There will eventually be the ability to choose which language the examples in
-the concepts part of the lesson are shown in, 
-plus at each example the user will be able to
-click on a tab to see the examples in other languages.**
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How do you write a lesson using Markdown and `{sandpaper}`?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain how to use markdown with The Carpentries Workbench
+- Demonstrate how to include pieces of code, figures, and nested challenge blocks
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+This is a lesson created via The Carpentries Workbench. It is written in
+[Pandoc-flavored Markdown](https://pandoc.org/MANUAL.txt) for static files and
+[R Markdown][r-markdown] for dynamic files that can render code into output. 
+Please refer to the [Introduction to The Carpentries 
+Workbench](https://carpentries.github.io/sandpaper-docs/) for full documentation.
+
+What you need to know is that there are three sections required for a valid
+Carpentries lesson:
+
+ 1. `questions` are displayed at the beginning of the episode to prime the
+    learner for the content.
+ 2. `objectives` are the learning objectives for an episode displayed with
+    the questions.
+ 3. `keypoints` are displayed at the end of the episode to reinforce the
+    objectives.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+Inline instructor notes can help inform instructors of timing challenges
+associated with the lessons. They appear in the "Instructor View"
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 1: Can you do it?
+
+What is the output of this command?
+
+```r
+paste("This", "new", "lesson", "looks", "good")
+```
+
+:::::::::::::::::::::::: solution 
+
+## Output
+ 
+```output
+[1] "This new lesson looks good"
+```
+
+:::::::::::::::::::::::::::::::::
 
 
-## Overview
+## Challenge 2: how do you nest solutions within challenge blocks?
 
-In doing computational science it is very common to start a project by
-writing code on a laptop or desktop computer.
-Often as the project proceeds we find that we need more computer resources
-to get all the science project done.
-This may come in the form of needing more processing power to get a job
-done in a reasonable time.
-It may mean needing more memory to be able to run larger calculations.
-Or it may just mean needing to do a very large number of smaller jobs
-that would overwhelm a single computer.
+:::::::::::::::::::::::: solution 
 
-In these cases where we need to seek out more computational resources,
-we also need to start understanding the performance aspects of our code.
-More power is not always the answer, sometimes writing more efficient
-code can get the job done equally as well.
+You can add a line with at least three colons and a `solution` tag.
 
-This HPC User lesson is aimed at scientists who need to use computers
-to do calculations, and not at computer scientists or computer engineers
-who need to be experts at programming in a High-Performance Computing
-environment.
-This lesson will be aimed at giving an overview of performance concepts
-to provide a general understanding of how to operate in an HPC environment.
+:::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Figures
 
-## Organization
+You can use standard markdown for static figures with the following syntax:
 
-The first few chapters concentrate on discussing performance issues
-at the conceptual level with practical examples.
-**These examples are currently given in Python but it is intended to
-eventually have the user choose the language that the examples display
-in to make it more appropriate to teach this to groups primarily 
-interested in R, Matlab, or C/C++ too**.
-As the lesson proceeds these same concepts will be used in different
-ways and with examples in different computer languages to help drill them in.
+`![optional caption that appears below the figure](figure url){alt='alt text for
+accessibility purposes'}`
 
-The middle third of the lesson is a language survey.
-Even though most scientists may work mainly in a single language,
-it is important for everyone to understand the strengths and
-weaknesses of alternative languages as well as their own favorite.
+![You belong in The Carpentries!](https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg){alt='Blue Carpentries hex person logo with no text.'}
 
-The last sections provide overviews of some more advanced topics
-like working with GPUs to accelerate scientific codes.
-It may be that some of this will be skipped by your instructor
-due to time limitations but it is good to have these available
-for reference purposes.
+::::::::::::::::::::::::::::::::::::: callout
 
-There are hands-on exercises throughout the lesson where you will
-be asked to apply some of what you have learned.
-There are also optional homework assignments available for those
-who want to challenge themselves outside of the workshop.
+Callout sections can highlight information.
 
-Most sections also have website links at the end which provide
-a means to seek out more information.
+They are sometimes used to emphasise particularly important points
+but are also used in some lessons to present "asides": 
+content that is not central to the narrative of the lesson,
+e.g. by providing the answer to a commonly-asked question.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-{% include links.md %}
+## Math
 
+One of our episodes contains $\LaTeX$ equations when describing how to create
+dynamic reports with {knitr}, so we now use mathjax to describe this:
+
+`$\alpha = \dfrac{1}{(1 - \beta)^2}$` becomes: $\alpha = \dfrac{1}{(1 - \beta)^2}$
+
+Cool, right?
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Use `.md` files for episodes when you want static content
+- Use `.Rmd` files for episodes when you need to generate output
+- Run `sandpaper::check_lesson()` to identify any issues with your lesson
+- Run `sandpaper::build_lesson()` to preview your lesson locally
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+[r-markdown]: https://rmarkdown.rstudio.com/
