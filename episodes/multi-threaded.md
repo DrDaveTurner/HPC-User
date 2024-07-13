@@ -57,7 +57,7 @@ at the same time but operating on different parts of the data.
 After they have all completed their parts, then the master thread
 sums all for partial sums into the dot product and prints it out.
 
-![Diagram of a shared-memory multi-threaded dot product](fig/multi-threaded-dot-product-0.jpg )
+![Diagram of a shared-memory multi-threaded dot product](../fig/multi-threaded-dot-product-0.jpg )
 
 ### The multi-threaded dot product code
 
