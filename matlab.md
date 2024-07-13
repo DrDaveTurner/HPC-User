@@ -288,7 +288,7 @@ Octave world itself.
 ### Links for additional information
 
 * [Matlab documentation](https://www.mathworks.com/)
-* [Octave website](http://octave.org/ )
+* [Octave website](https://octave.org/ )
 * [Matlab Parallel Computing Toolbox](https://www.mathworks.com/products/parallel-computing.html)
 * [Matlab Simulink](https://www.mathworks.com/products/simulink.html)
 * [Matlab Toolboxes and Examples](https://www.mathworks.com/help/thingspeak/matlab-toolbox-access.html)
