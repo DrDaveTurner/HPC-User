@@ -49,3 +49,6 @@ docs/
 # translation temp files
 po/*~
 
+bup
+
+old_version
