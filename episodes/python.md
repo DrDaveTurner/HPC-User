@@ -5,22 +5,15 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "What are the strengths and weaknesses of programming with Python"
-
+- What are the strengths and weaknesses of programming with Python?
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Analyze the merits of programming in Python"
-- "Learn how to work with virtual environments"
-- "Learn about common performance-oriented libraries"
-
+- Analyze the merits of programming in Python.
+- Learn how to work with virtual environments.
+- Learn about common performance-oriented libraries.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
----
 
 ### Python performance
 
@@ -47,7 +40,7 @@ many others.
 Even these can be slower than their compiled language counterparts
 though, as a **NumPy** matrix multiplication is still 50%-25% the
 speed depending on the matrix size compared to a 
-**BLAS** library **DGEMM** function.  
+**BLAS** library **DGEMM** function.
 
 While Python is not intended to be a performance language, there
 are very good options available for parallelization.
@@ -332,6 +325,11 @@ around the problem.
 > {: .solution}
 {: .challenge}
 
+::::::::::::::::::::::::::::::::::::: keypoints
+- Learn about the characteristics of the Python language.
+- When performance is important always use optimized libraries!!!
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ### Links for additional information
 
 * [Python tutorial](https://docs.python.org/3/tutorial/)
@@ -343,14 +341,4 @@ around the problem.
 * [Dask](https://dask.org)
 * [Numba](https://numba.pydata.org)
 
-
-::::::::::::::::::::::::::::::::::::: keypoints
-
-- "Learn about the characteristics of the Python language"
-- "When performance is important always use optimized libraries!!!"
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-{% include links.md %}
 

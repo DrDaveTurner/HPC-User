@@ -5,21 +5,13 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
 - "What do array jobs have to do with high-performance computing?"
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
 - "Learn what an array job is in a batch scheduler"
 - "Understand what types of science can make use of array jobs"
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-
----
 
 ### Array jobs using Slurm
 
@@ -128,13 +120,9 @@ Then when you are confident that your script is doing what it is
 supposed to, you are ready to submit the full array job.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
-
 - "Array jobs provide an easy way to do large numbers of small jobs"
 - "Array jobs are another way to do parallel computing, but by running
 lots of small jobs individually"
 - "Test your script carefully on a few array IDs before submitting the full job"
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-{% include links.md %}
 

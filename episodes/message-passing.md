@@ -5,20 +5,14 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "What is the distribed-memory programming model?"
-
+- What is the distribed-memory programming model?
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Learn about message-passing in distributed-memory computing."
-- "What are the strengths and limitations of this approach?"
-
+- Learn about message-passing in distributed-memory computing.
+- What are the strengths and limitations of this approach?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
----
 
 ## The Message-Passing Paradigm
 
@@ -253,6 +247,11 @@ it is the only way to go.
 > {: .solution}
 {: .challenge}
 
+::::::::::::::::::::::::::::::::::::: keypoints
+- Distributed-memory computing is very flexible, extremely scalable, but more difficult to program.
+- Understand key factors that can limit the efficient scaling of message-passing programs.
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ### Links for additional information
 
 * [mpi4py](https://mpi4py.readthedocs.io/)
@@ -260,14 +259,4 @@ it is the only way to go.
 * [MPICH user guides](https://www.mpich.org/documentation/guides/)
 * [OpenMPI function manpages](https://www.open-mpi.org/doc/)
 
-
-::::::::::::::::::::::::::::::::::::: keypoints
-
-- "Distributed-memory computing is very flexible, extremely scalable, but more difficult to program."
-- "Understand key factors that can limit the efficient scaling of message-passing programs."
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-{% include links.md %}
 

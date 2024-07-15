@@ -5,20 +5,13 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "What are the strengths and weaknesses of Fortran?"
-
+- What are the strengths and weaknesses of Fortran?
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Analyze the merits of Fortran"
-- "Learn how to compile andd run a Fortran program"
-
+- Analyze the merits of Fortran
+- Learn how to compile andd run a Fortran program
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
----
 
 ## Modern Fortran
 
@@ -135,16 +128,12 @@ together to produce the executable.
 > {: .solution}
 {: .challenge}
 
+::::::::::::::::::::::::::::::::::::: keypoints
+- Learn about the characteristics of modern Fortran
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ### Links for additional information
 
 * [Fortran wiki](https://en.wikipedia.org/wiki/Fortran)
 * [Fortran tutorials](https://fortran-lang.org/learn/)
-
-::::::::::::::::::::::::::::::::::::: keypoints
-
-- "Learn about the characteristics of modern Fortran"
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-{% include links.md %}
 

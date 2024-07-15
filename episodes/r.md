@@ -5,22 +5,15 @@ exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "What are the strengths and weaknesses of the R language?"
-
+- What are the strengths and weaknesses of the R language?
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Analyze the merits of the R Language"
-- "Learn what to avoid in R when performance is important"
-- "Learn how to parallelize R code"
-
+- Analyze the merits of the R Language.
+- Learn what to avoid in R when performance is important.
+- Learn how to parallelize R code.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
----
  
 ## Programming in the R Language
 
@@ -383,6 +376,9 @@ It is hoped that this section can at least steer people
 in the correct direction with some of these performance oriented
 issues.
 
+::::::::::::::::::::::::::::::::::::: keypoints
+- Learn about the characteristics of the R language.
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Links for additional information
 
@@ -395,14 +391,4 @@ issues.
 
 * [Rstudio](https://www.rstudio.com)
 * [Rshiny](https://shiny.rstudio.com)
-
-
-::::::::::::::::::::::::::::::::::::: keypoints
-
-- "Learn about the characteristics of the R language"
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-{% include links.md %}
 
