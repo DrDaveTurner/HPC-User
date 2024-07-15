@@ -5,12 +5,12 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-- "What do array jobs have to do with high-performance computing?"
+- What do array jobs have to do with high-performance computing?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- "Learn what an array job is in a batch scheduler"
-- "Understand what types of science can make use of array jobs"
+- Learn what an array job is in a batch scheduler.
+- Understand what types of science can make use of array jobs.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Array jobs using Slurm
@@ -38,7 +38,7 @@ For this job the
 since the script specifies that the task ID starts at 1,
 ends at 5, and steps by 2.
 
-~~~
+```bash
 #!/bin/bash -l
 #SBATCH --job-name=array_test
 #SBATCH --time=0-0:1:00
@@ -49,22 +49,23 @@ ends at 5, and steps by 2.
 
 hostname
 echo "Hello from array task ID $SLURM_ARRAY_TASK_ID"
-~~~
-{: .language-bash}
+```
 
 
-> ## Submit an array job
-> If you have access to an HPC system with Slurm installed,
-> submit the **sb.array_test** script from the **code/scripts**
-> subdirectory using **sbatch sb.array_test** then look at the
-> output.
-> You can try writing a script to choose an input filename from
-> a list using **$SLURM_ARRAY_TASK_ID** if you would like.
->  > ## Solution and Analysis
-> This will run 3 individual jobs that will show the
-> **$SLURM_ARRAY_TASK_ID** to be 1, 3, or 5.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
+## Submit an array job
+If you have access to an HPC system with Slurm installed,
+submit the **sb.array_test** script from the **code/scripts**
+subdirectory using **sbatch sb.array_test** then look at the
+output.
+You can try writing a script to choose an input filename from
+a list using **$SLURM_ARRAY_TASK_ID** if you would like.
+:::::::::::::::::: solution
+## Solution and Analysis
+This will run 3 individual jobs that will show the
+**$SLURM_ARRAY_TASK_ID** to be 1, 3, or 5.
+::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::
 
 
 ### Array jobs as parallel computing
@@ -120,9 +121,9 @@ Then when you are confident that your script is doing what it is
 supposed to, you are ready to submit the full array job.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
-- "Array jobs provide an easy way to do large numbers of small jobs"
-- "Array jobs are another way to do parallel computing, but by running
-lots of small jobs individually"
-- "Test your script carefully on a few array IDs before submitting the full job"
+- Array jobs provide an easy way to do large numbers of small jobs.
+- Array jobs are another way to do parallel computing, but by running
+lots of small jobs individually.
+- Test your script carefully on a few array IDs before submitting the full job.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
