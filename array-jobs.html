@@ -477,9 +477,9 @@ at 1, ends at 5, and steps by 2.</p>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">hostname</span></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Hello from array task ID </span><span class="va">$SLURM_ARRAY_TASK_ID</span><span class="st">"</span></span></code></pre>
 </div>
-<div id="submit-an-array-job" class="callout discussion">
+<div id="submit-an-array-job" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="submit-an-array-job" class="callout-inner">
 <h3 class="callout-title">Submit an array job<a class="anchor" aria-label="anchor" href="#submit-an-array-job"></a>
@@ -489,15 +489,24 @@ at 1, ends at 5, and steps by 2.</p>
 <strong>sb.array_test</strong> script from the
 <strong>code/scripts</strong> subdirectory using <strong>sbatch
 sb.array_test</strong> then look at the output. You can try writing a
-script to choose an input filename from a list using <strong><span class="math inline">\(SLURM_ARRAY_TASK_ID** if you would like.
-:::::::::::::::::: solution
-## Solution and Analysis
-This will run 3 individual jobs that will show the
-**\)</span>SLURM_ARRAY_TASK_ID</strong> to be 1, 3, or 5.</p>
+script to choose an input filename from a list using
+<strong>$SLURM_ARRAY_TASK_ID</strong> if you would like.</p>
 </div>
 </div>
 </div>
-<p>::::::::::::::::::::::::::::::::::::::</p>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>This will run 3 individual jobs that will show the
+<strong>$SLURM_ARRAY_TASK_ID</strong> to be 1, 3, or 5.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="array-jobs-as-parallel-computing">Array jobs as parallel computing<a class="anchor" aria-label="anchor" href="#array-jobs-as-parallel-computing"></a></h3>
