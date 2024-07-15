@@ -2,13 +2,21 @@
 title: "Language Survey"
 teaching: 5
 exercises: 0
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What are the strengths and weaknesses of each computer language?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Understand the criteria we will use to evaluate each language."
-keypoints:
-- "Performance is just one criteria we need to understand when choosing
-   the best language for a given project."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ---
 
 People choose a programming language for a given project for many reasons.
@@ -96,6 +104,14 @@ and alternative approaches presented.
 * Python, R, and Matlab have some optimized libraries for performance
 
 * capability summary
+
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Performance is just one criteria we need to understand when choosing
+   the best language for a given project."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 {% include links.md %}
 

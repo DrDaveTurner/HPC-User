@@ -2,14 +2,24 @@
 title: "The R Language"
 teaching: 30
 exercises: 15
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What are the strengths and weaknesses of the R language?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Analyze the merits of the R Language"
 - "Learn what to avoid in R when performance is important"
 - "Learn how to parallelize R code"
-keypoints:
-- "Learn about the characteristics of the R language"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ---
  
 ## Programming in the R Language
@@ -386,6 +396,12 @@ issues.
 * [Rstudio](https://www.rstudio.com)
 * [Rshiny](https://shiny.rstudio.com)
 
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Learn about the characteristics of the R language"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 {% include links.md %}

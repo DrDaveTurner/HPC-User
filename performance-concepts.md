@@ -2,22 +2,28 @@
 title: "Performance Concepts"
 teaching: 20
 exercises: 10
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What does performance mean in programming?"
 - "How do I take advantage of optimized libraries?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Understand that what actually goes on in the computer may be much more
 complex than what the user tells it to do"
 - "Have a basic understanding of some of the performance issues to be aware of"
 - "Learn that you don't have to be an expert programmer to take advantage of 
 advanced performance techniques, you just need to be aware of how to use libraries
 optimized by experts."
-keypoints:
-- "A computer's view of code is more complex than a user's view."
-- "It's important to understand a little about what goes on when code 
-actually runs, but you don't need to be able to program at that level"
-- "Whenever possible, use code written and optimized by experts instead of
-writing your own version."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ---
 
 ## Conceptual View
@@ -293,5 +299,16 @@ Quite often, writing optimal code just means taking advantage of
 highly optimized libraries that experts have written and tuned.
 So most of us just need to know when and where to look for these
 optimized routines in order to write highly optimized code.
+
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "A computer's view of code is more complex than a user's view."
+- "It's important to understand a little about what goes on when code 
+actually runs, but you don't need to be able to program at that level"
+- "Whenever possible, use code written and optimized by experts instead of
+writing your own version."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 {% include links.md %}

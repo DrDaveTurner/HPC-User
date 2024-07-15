@@ -2,19 +2,24 @@
 title: "Parallel Computing Concepts"
 teaching: 20
 exercises: 10
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "Now that we can profile programs to find where the time is being spent,
   how do we speed the code up?"
 - "What is parallel computing, and what are the underlying concpets that
   make it work?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Learn different approaches to speeding up code."
-keypoints:
-- "What techniques  can be used to speed up scalar code?"
-- "How to improve input and output?"
-- "Learn about the difference between multi-core and multi-node programs."
-- "Understand the fundamentals of locks, barriers, and forks."
-- "Practice doing a scaling study."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ---
 
 In the last chapter we learned how to profile a program to understand
@@ -329,6 +334,15 @@ available.
 {: .challenge}
 
 
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "What techniques  can be used to speed up scalar code?"
+- "How to improve input and output?"
+- "Learn about the difference between multi-core and multi-node programs."
+- "Understand the fundamentals of locks, barriers, and forks."
+- "Practice doing a scaling study."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 

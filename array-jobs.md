@@ -2,16 +2,23 @@
 title: "Array Jobs"
 teaching: 10
 exercises: 5
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What do array jobs have to do with high-performance computing?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Learn what an array job is in a batch scheduler"
 - "Understand what types of science can make use of array jobs"
-keypoints:
-- "Array jobs provide an easy way to do large numbers of small jobs"
-- "Array jobs are another way to do parallel computing, but by running
-lots of small jobs individually"
-- "Test your script carefully on a few array IDs before submitting the full job"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ---
 
 ### Array jobs using Slurm
@@ -119,6 +126,15 @@ ensure that each job is using the **$SLURM_ARRAY_TASK_ID**
 in the desired manner.
 Then when you are confident that your script is doing what it is
 supposed to, you are ready to submit the full array job.
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Array jobs provide an easy way to do large numbers of small jobs"
+- "Array jobs are another way to do parallel computing, but by running
+lots of small jobs individually"
+- "Test your script carefully on a few array IDs before submitting the full job"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 {% include links.md %}
 
