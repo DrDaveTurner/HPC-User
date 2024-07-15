@@ -5,22 +5,16 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "Now that we can profile programs to find where the time is being spent,
-  how do we speed the code up?"
-- "What is parallel computing, and what are the underlying concpets that
-  make it work?"
-
+- Now that we can profile programs to find where the time is being spent,
+  how do we speed the code up?
+- What is parallel computing, and what are the underlying concpets that
+  make it work?
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Learn different approaches to speeding up code."
-
+- Learn different approaches to speeding up code.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
----
 
 In the last chapter we learned how to profile a program to understand
 where the time is being spent.
@@ -335,16 +329,10 @@ available.
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints
-
-- "What techniques  can be used to speed up scalar code?"
-- "How to improve input and output?"
-- "Learn about the difference between multi-core and multi-node programs."
-- "Understand the fundamentals of locks, barriers, and forks."
-- "Practice doing a scaling study."
-
+- What techniques  can be used to speed up scalar code?
+- How to improve input and output?
+- Learn about the difference between multi-core and multi-node programs.
+- Understand the fundamentals of locks, barriers, and forks.
+- Practice doing a scaling study.
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-
-{% include links.md %}
 

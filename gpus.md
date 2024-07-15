@@ -5,21 +5,14 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "What do I have to do differently if my application can use a GPU?"
-
+- What do I have to do differently if my application can use a GPU?
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Learn a little about how GPUs can accelerate some scientific codes"
-- "Understand the basics of compiling and running GPU codes"
-
+- Learn a little about how GPUs can accelerate some scientific codes
+- Understand the basics of compiling and running GPU codes
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
----
 
 ## What is a Graphics Processing Unit and How is it Used in Science?
 
@@ -135,6 +128,9 @@ accelerated with a GPU, they can provide an order of magnitude
 increase in speed over just using CPUs and greatly reduce the
 cost of doing a calculation.
 
+::::::::::::::::::::::::::::::::::::: keypoints
+- Start to be comfortable wtih using GPUs on an HPC system
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Links for additional information
 
@@ -143,13 +139,4 @@ cost of doing a calculation.
 * [CUDA programming documentation]( )
 
 * [AMD GPU specs]( )
-
-::::::::::::::::::::::::::::::::::::: keypoints
-
-- "Start to be comfortable wtih using GPUs on an HPC system"
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-{% include links.md %}
 

@@ -5,21 +5,14 @@ exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "How do I get access to HPC resources?"
-
+- How do I get access to HPC resources?
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Understand what HPC resources are available in the U.S."
-- "Learn how to access these resources for free"
-
+- Understand what HPC resources are available in the U.S.
+- Learn how to access these resources for free.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
----
 
 ## Getting Access to HPC Resources
 
@@ -210,6 +203,9 @@ is that HPC resources are often free for the asking.
 You just need to know where and how to ask, and hopefully
 this module will give you ideas on where to start.
 
+::::::::::::::::::::::::::::::::::::: keypoints
+- There are many HPC resources that are totally free for the asking.
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Links for additional information
 
@@ -221,12 +217,4 @@ this module will give you ideas on where to start.
 * [GCP Services](https://cloud.google.com/free)
 * [Microsoft Azure](https://azure.microsoft.com/en-us/offers/ms-azr-0044p/)
 
-::::::::::::::::::::::::::::::::::::: keypoints
-
-- "There are many HPC resources that are totally free for the asking"
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-{% include links.md %}
 

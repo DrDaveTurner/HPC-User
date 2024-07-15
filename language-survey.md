@@ -5,19 +5,13 @@ exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "What are the strengths and weaknesses of each computer language?"
-
+- What are the strengths and weaknesses of each computer language?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Understand the criteria we will use to evaluate each language."
-
+- Understand the criteria we will use to evaluate each language.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
----
 
 People choose a programming language for a given project for many reasons.
 Sometimes they choose a language because it is the only one they know, or
@@ -105,13 +99,8 @@ and alternative approaches presented.
 
 * capability summary
 
-
 ::::::::::::::::::::::::::::::::::::: keypoints
-
-- "Performance is just one criteria we need to understand when choosing
-   the best language for a given project."
-
+- Performance is just one criteria we need to understand when choosing
+   the best language for a given project.
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-{% include links.md %}
 

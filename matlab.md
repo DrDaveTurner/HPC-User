@@ -5,21 +5,14 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "What are the strengths and weaknesses of the Matlab language?"
-
+- What are the strengths and weaknesses of the Matlab language?
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Understand the performance and parallelization characteristics of Matlab"
-- "Learn the practicallity of using the Matlab compiler on HPC systems"
-
+- Understand the performance and parallelization characteristics of Matlab.
+- Learn the practicallity of using the Matlab compiler on HPC systems.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
----
 
 ## Programming in the Matlab Language
 
@@ -294,6 +287,10 @@ You should however only expect the more basic Matlab codes to run
 with Octave, then you would need to choose to split off into the
 Octave world itself.
 
+::::::::::::::::::::::::::::::::::::: keypoints
+- Learn about the characteristics of the Matlab language.
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ### Links for additional information
 
@@ -302,12 +299,4 @@ Octave world itself.
 * [Matlab Parallel Computing Toolbox](https://www.mathworks.com/products/parallel-computing.html)
 * [Matlab Simulink](https://www.mathworks.com/products/simulink.html)
 * [Matlab Toolboxes and Examples](https://www.mathworks.com/help/thingspeak/matlab-toolbox-access.html)
-
-::::::::::::::::::::::::::::::::::::: keypoints
-
-- "Learn about the characteristics of the Matlab language"
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-{% include links.md %}
 

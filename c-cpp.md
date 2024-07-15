@@ -5,21 +5,14 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
-- "What are the strengths and weaknesses of programming in C and C++?"
-
+- What are the strengths and weaknesses of programming in C and C++?
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
-- "Analyze the merits of the C/C++ language."
-- "Learn how to compile and run C/C++ programs."
-- "Try compiling and running OpenMP and MPI versions."
-
+- Analyze the merits of the C/C++ language.
+- Learn how to compile and run C/C++ programs.
+- Try compiling and running OpenMP and MPI versions.
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
----
 
 ## The C Programming Language
 
@@ -199,15 +192,11 @@ at least understand this as a starting point.
 > {: .solution}
 {: .challenge}
 
-### Links for additional information
-
-* [C tutorial](https://www.guru99.com/c-programming-tutorial.html)
-
 ::::::::::::::::::::::::::::::::::::: keypoints
-
-- "Learn about the characteristics of C/C++."
-
+- Learn about the characteristics of C/C++
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-{% include links.md %}
+### Links for additional information
+
+* [C Tutorial](https://www.guru99.com/c-programming-tutorial.html)
 
