@@ -56,7 +56,6 @@ real	0m0.000s
 user	0m0.000s
 sys	0m0.000s
 ~~~
-{: .language-bash}
 
 The first thing you see is the output of the **pwd** command, which in
 this case is the directory **/Users/daveturner**.
@@ -78,7 +77,6 @@ real	0m0.110s
 user	0m0.006s
 sys	0m0.027s
 ~~~
-{: .language-bash}
 
 When I do this on my iMac, I get a real time of just 0.006 seconds
 because it's really fast to access the local hard disk.
@@ -113,7 +111,6 @@ real	0m5.052s
 user	0m0.001s
 sys	0m0.003s
 ~~~
-{: .language-bash}
 
 In addition to worrying about the clock accuracy, you also need to 
 worry about interferrence from other jobs that may be running on
@@ -187,7 +184,6 @@ fd.close()
 t_output = time.perf_counter() - t_start
 print("The output took ", t_output, " seconds")
 ~~~
-{: .language-python}
 
 Try running this yourself by copying it into a timing.py file.
 When I run this, I see that the loop takes about 30 microseconds on my computer
@@ -228,7 +224,6 @@ t_loop = time.perf_counter() - t_start
 print("The sum took ", t_sum, " seconds")
 print("The loop took ", t_loop, " seconds")
 ~~~
-{: .language-python}
 
 In my computer, the t_sum time is only a bit larger than the 
 t_loop time from before, but remember that this doesn't count
@@ -338,7 +333,6 @@ Job Wall-clock time: 00:01:09
 Memory Utilized: 2.26 GB
 Memory Efficiency: 11.31% of 20.00 GB
 ~~~
-{: .language-bash}
 
 The matrix multiplication job above used 10,000x10,000 matrices and
 took 1 minute 9 seconds.
@@ -357,7 +351,6 @@ MaxRSS
 ----------
   2289.50M
 ~~~
-{: .language-bash}
 
 For a running job you can use the **sstat** command with the job ID number.
 The **sstat** command will dump a lot of information out, so using
