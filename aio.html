@@ -488,7 +488,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Introduction</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -502,12 +502,7 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>“What are the pre-requisits for the HPC User lesson?”</li>
-<li>“What should I expect to learn from these modules?” objectives:</li>
-<li>“Understand what to expect out of the HPC User lesson”
-keypoints:</li>
-<li>“This lesson will help to understand basic concpets affecting
-performance in programming”</li>
+<li>“What should I expect to learn from these modules?”</li>
 </ul>
 </div>
 </div>
@@ -517,9 +512,7 @@ performance in programming”</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Explain how to use markdown with The Carpentries Workbench</li>
-<li>Demonstrate how to include pieces of code, figures, and nested
-challenge blocks</li>
+<li>“Understand what to expect out of the HPC User lesson”</li>
 </ul>
 </div>
 </div>
@@ -561,11 +554,11 @@ operate in an HPC environment.</p>
 <p>The first few chapters concentrate on discussing performance issues
 at the conceptual level with practical examples. <strong>These examples
 are currently given in Python but it is intended to eventually have the
-user choose the language that the examples display in to make it more
-appropriate to teach this to groups primarily interested in R, Matlab,
-or C/C++ too</strong>. As the lesson proceeds these same concepts will
-be used in different ways and with examples in different computer
-languages to help drill them in.</p>
+user and instructor choose the language that the examples display in to
+make it more appropriate to teach this to groups primarily interested in
+R, Matlab, or C/C++ too</strong>. As the lesson proceeds these same
+concepts will be used in different ways and with examples in different
+computer languages to help drill them in.</p>
 <p>The middle third of the lesson is a language survey. Even though most
 scientists may work mainly in a single language, it is important for
 everyone to understand the strengths and weaknesses of alternative
@@ -580,6 +573,21 @@ homework assignments available for those who want to challenge
 themselves outside of the workshop.</p>
 <p>Most sections also have website links at the end which provide a
 means to seek out more information.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“This lesson will help to understand basic concpets affecting
+performance in programming”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -587,12 +595,43 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-profiling-code"><p>Content from <a href="profiling-code.html">Profiling Code for Performance</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/profiling-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“How to measure performance?”</li>
+<li>“How to measure memory usage?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Learn the different methods available to measure time and memory
+usage externally and from within a program.”</li>
+<li>“Understand what parts of a program are important to time.”</li>
+<li>“Learn how to do a scaling study for multi-core and multi-node
+jobs.”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <p>When we talk about the performance of a program, we are always
 interested in how much time it takes to run, but in some cases we also
 need to know how much memory it uses if we’re pushing the limits of our
@@ -892,6 +931,28 @@ job view, so it is only really useful if your job is the only one
 running on a given compute node. However, being able to see the memory
 use over time can be very helpful.</p>
 <p>We will practice these approaches more in the upcoming modules.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“The <strong>time</strong> function can always be used externally to
+measure performance.”</li>
+<li>“Internally there are precise clock routines that can be used to
+measure the performance of each part of a code. These are different for
+each programming language, but the use is always the same.”</li>
+<li>“Scaling studies can help determine how many cores or nodes we can
+efficiently use for a parallel job of a given problem size”</li>
+<li>“Measuring memory use can be done from outside a program, but you
+may also be able to calculate total memory for simple programs.”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -899,12 +960,45 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-performance-concepts"><p>Content from <a href="performance-concepts.html">Performance Concepts</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What does performance mean in programming?”</li>
+<li>“How do I take advantage of optimized libraries?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Understand that what actually goes on in the computer may be much
+more complex than what the user tells it to do”</li>
+<li>“Have a basic understanding of some of the performance issues to be
+aware of”</li>
+<li>“Learn that you don’t have to be an expert programmer to take
+advantage of advanced performance techniques, you just need to be aware
+of how to use libraries optimized by experts.”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <section><h2 class="section-heading" id="conceptual-view">Conceptual View<a class="anchor" aria-label="anchor" href="#conceptual-view"></a>
 <a class="anchor" aria-label="anchor" href="#conceptual-view"></a>
 </h2>
@@ -1124,6 +1218,25 @@ optimal code just means taking advantage of highly optimized libraries
 that experts have written and tuned. So most of us just need to know
 when and where to look for these optimized routines in order to write
 highly optimized code.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“A computer’s view of code is more complex than a user’s view.”</li>
+<li>“It’s important to understand a little about what goes on when code
+actually runs, but you don’t need to be able to program at that
+level”</li>
+<li>“Whenever possible, use code written and optimized by experts
+instead of writing your own version.”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -1131,12 +1244,41 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-parallel-concepts"><p>Content from <a href="parallel-concepts.html">Parallel Computing Concepts</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/parallel-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“Now that we can profile programs to find where the time is being
+spent, how do we speed the code up?”</li>
+<li>“What is parallel computing, and what are the underlying concpets
+that make it work?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Learn different approaches to speeding up code.”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <p>In the last chapter we learned how to profile a program to understand
 where the time is being spent. In thhis section, we will talk more about
 how to improve the performance of different parts of a program. This may
@@ -1424,6 +1566,25 @@ down the job, and this usually gets worse as you spread a job over more
 cores, and especially over more nodes. {: .solution} {: .challenge}</p>
 </blockquote>
 </blockquote>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“What techniques can be used to speed up scalar code?”</li>
+<li>“How to improve input and output?”</li>
+<li>“Learn about the difference between multi-core and multi-node
+programs.”</li>
+<li>“Understand the fundamentals of locks, barriers, and forks.”</li>
+<li>“Practice doing a scaling study.”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -1431,12 +1592,39 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-multi-threaded"><p>Content from <a href="multi-threaded.html">Multi-Threaded Programs</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/multi-threaded.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What is the multi-threaded shared-memory programming model?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Learn about multi-threaded computing and how to use it.”</li>
+<li>“What are the strengths and limitations of this approach?”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <p>Most computer languages have the ability to do multi-threaded
 computing. C/C++ and Fortran use the OpenMP package which is by far the
 most well developed. It uses pragma statements to control the
@@ -1621,6 +1809,23 @@ due to the few computations being done in each pass through the loop. {:
 tutorial</a></li>
 <li><a href="">need link for mclapply()</a></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Multi-theaded computing is powerful and fairly easy to use but only
+works on one compute node.”</li>
+<li>“Understand key factors that can limit the efficient scaling of
+multi-threaded programs.”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -1628,12 +1833,39 @@ any links that you are not going to use.
  -->
 </div></section><section id="aio-message-passing"><p>Content from <a href="message-passing.html">Message-Passing Programs</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/message-passing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What is the distribed-memory programming model?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Learn about message-passing in distributed-memory computing.”</li>
+<li>“What are the strengths and limitations of this approach?”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <section><h2 class="section-heading" id="the-message-passing-paradigm">The Message-Passing Paradigm<a class="anchor" aria-label="anchor" href="#the-message-passing-paradigm"></a>
 <a class="anchor" aria-label="anchor" href="#the-message-passing-paradigm"></a>
 </h2>
@@ -1855,6 +2087,23 @@ guides</a></li>
 <li><a href="https://www.open-mpi.org/doc/" class="external-link">OpenMPI function
 manpages</a></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Distributed-memory computing is very flexible, extremely scalable,
+but more difficult to program.”</li>
+<li>“Understand key factors that can limit the efficient scaling of
+message-passing programs.”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -1863,12 +2112,40 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-language-survey"><p>Content from <a href="language-survey.html">Language Survey</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/language-survey.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What are the strengths and weaknesses of each computer
+language?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Understand the criteria we will use to evaluate each
+language.”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <p>People choose a programming language for a given project for many
 reasons. Sometimes they choose a language because it is the only one
 they know, or because it is the only one their advisor knows. Many
@@ -1950,6 +2227,21 @@ high-performance</p></li>
 performance</p></li>
 <li><p>capability summary</p></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Performance is just one criteria we need to understand when
+choosing the best language for a given project.”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -1957,12 +2249,41 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-c-cpp"><p>Content from <a href="c-cpp.html">C and C++ Languages</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/c-cpp.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What are the strengths and weaknesses of programming in C and
+C++?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Analyze the merits of the C/C++ language.”</li>
+<li>“Learn how to compile and run C/C++ programs.”</li>
+<li>“Try compiling and running OpenMP and MPI versions.”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <section><h2 class="section-heading" id="the-c-programming-language">The C Programming Language<a class="anchor" aria-label="anchor" href="#the-c-programming-language"></a>
 <a class="anchor" aria-label="anchor" href="#the-c-programming-language"></a>
 </h2>
@@ -2136,6 +2457,20 @@ done in a different manner. How do your results compare to these? {:
 <li><a href="https://www.guru99.com/c-programming-tutorial.html" class="external-link">C
 tutorial</a></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Learn about the characteristics of C/C++.”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -2144,12 +2479,39 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-fortran"><p>Content from <a href="fortran.html">The Fortran Language</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/fortran.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What are the strengths and weaknesses of Fortran?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Analyze the merits of Fortran”</li>
+<li>“Learn how to compile andd run a Fortran program”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <section><h2 class="section-heading" id="modern-fortran">Modern Fortran<a class="anchor" aria-label="anchor" href="#modern-fortran"></a>
 <a class="anchor" aria-label="anchor" href="#modern-fortran"></a>
 </h2>
@@ -2264,6 +2626,20 @@ version, and 0.027 seconds for 8 tasks showing better scaling. {:
 wiki</a></li>
 <li><a href="https://fortran-lang.org/learn/" class="external-link">Fortran tutorials</a></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Learn about the characteristics of modern Fortran”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -2272,12 +2648,41 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-python"><p>Content from <a href="python.html">The Python Language</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What are the strengths and weaknesses of programming with
+Python”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Analyze the merits of programming in Python”</li>
+<li>“Learn how to work with virtual environments”</li>
+<li>“Learn about common performance-oriented libraries”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <div class="section level3">
 <h3 id="python-performance">Python performance<a class="anchor" aria-label="anchor" href="#python-performance"></a>
 </h3>
@@ -2557,6 +2962,22 @@ documentations</a></li>
 <li><a href="https://dask.org" class="external-link">Dask</a></li>
 <li><a href="https://numba.pydata.org" class="external-link">Numba</a></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Learn about the characteristics of the Python language”</li>
+<li>“When performance is important always use optimized
+libraries!!!”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -2564,12 +2985,40 @@ any links that you are not going to use.
  -->
 </div></section><section id="aio-r"><p>Content from <a href="r.html">The R Language</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/r.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What are the strengths and weaknesses of the R language?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Analyze the merits of the R Language”</li>
+<li>“Learn what to avoid in R when performance is important”</li>
+<li>“Learn how to parallelize R code”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <section><h2 class="section-heading" id="programming-in-the-r-language">Programming in the R Language<a class="anchor" aria-label="anchor" href="#programming-in-the-r-language"></a>
 <a class="anchor" aria-label="anchor" href="#programming-in-the-r-language"></a>
 </h2>
@@ -2906,6 +3355,20 @@ package</a></p></li>
 <li><p><a href="https://www.rstudio.com" class="external-link">Rstudio</a></p></li>
 <li><p><a href="https://shiny.rstudio.com" class="external-link">Rshiny</a></p></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Learn about the characteristics of the R language”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -2914,12 +3377,41 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-matlab"><p>Content from <a href="matlab.html">The Matlab Language</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/matlab.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What are the strengths and weaknesses of the Matlab language?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Understand the performance and parallelization characteristics of
+Matlab”</li>
+<li>“Learn the practicallity of using the Matlab compiler on HPC
+systems”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <section><h2 class="section-heading" id="programming-in-the-matlab-language">Programming in the Matlab Language<a class="anchor" aria-label="anchor" href="#programming-in-the-matlab-language"></a>
 <a class="anchor" aria-label="anchor" href="#programming-in-the-matlab-language"></a>
 </h2>
@@ -3173,6 +3665,20 @@ Simulink</a></li>
 <li><a href="https://www.mathworks.com/help/thingspeak/matlab-toolbox-access.html" class="external-link">Matlab
 Toolboxes and Examples</a></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Learn about the characteristics of the Matlab language”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -3181,12 +3687,40 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-array-jobs"><p>Content from <a href="array-jobs.html">Array Jobs</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/array-jobs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What do array jobs have to do with high-performance
+computing?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Learn what an array job is in a batch scheduler”</li>
+<li>“Understand what types of science can make use of array jobs”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <div class="section level3">
 <h3 id="array-jobs-using-slurm">Array jobs using Slurm<a class="anchor" aria-label="anchor" href="#array-jobs-using-slurm"></a>
 </h3>
@@ -3274,6 +3808,25 @@ ensure that each job is using the <strong>$SLURM_ARRAY_TASK_ID</strong>
 in the desired manner. Then when you are confident that your script is
 doing what it is supposed to, you are ready to submit the full array
 job.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Array jobs provide an easy way to do large numbers of small
+jobs”</li>
+<li>“Array jobs are another way to do parallel computing, but by running
+lots of small jobs individually”</li>
+<li>“Test your script carefully on a few array IDs before submitting the
+full job”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -3281,12 +3834,41 @@ any links that you are not going to use.
  -->
 </div></section><section id="aio-gpus"><p>Content from <a href="gpus.html">Accelerating Scientific Computing with GPUs</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/gpus.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What do I have to do differently if my application can use a
+GPU?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Learn a little about how GPUs can accelerate some scientific
+codes”</li>
+<li>“Understand the basics of compiling and running GPU codes”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <section><h2 class="section-heading" id="what-is-a-graphics-processing-unit-and-how-is-it-used-in-science">What is a Graphics Processing Unit and How is it Used in
 Science?<a class="anchor" aria-label="anchor" href="#what-is-a-graphics-processing-unit-and-how-is-it-used-in-science"></a>
 <a class="anchor" aria-label="anchor" href="#what-is-a-graphics-processing-unit-and-how-is-it-used-in-science"></a>
@@ -3396,6 +3978,20 @@ cost of doing a calculation.</p>
 <li><p><a href="">CUDA programming documentation</a></p></li>
 <li><p><a href="">AMD GPU specs</a></p></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Start to be comfortable wtih using GPUs on an HPC system”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -3404,12 +4000,40 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-high-throughput-computing"><p>Content from <a href="high-throughput-computing.html">High-Throughput Computing</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/high-throughput-computing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“What is the difference between high-throughput computing and
+cluster computing?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Learn what types of jobs run well on HTC systems”</li>
+<li>“Understand how to submit jobs using OSG”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <section><h2 class="section-heading" id="high-throughput-computing">High-Throughput Computing<a class="anchor" aria-label="anchor" href="#high-throughput-computing"></a>
 <a class="anchor" aria-label="anchor" href="#high-throughput-computing"></a>
 </h2>
@@ -3559,6 +4183,20 @@ typical jobs</a></li>
 <li><a href="https://www.youtube.com/watch?v=oMAvxsFJaw4" class="external-link">HTCondor
 scheduler youtube video</a></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“Explore the basics of HTC computing”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -3567,12 +4205,39 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-hpc-resources"><p>Content from <a href="hpc-resources.html">HPC Resources</a></p>
 <hr>
-<p>Last updated on 2024-07-13 |
+<p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/hpc-resources.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>“How do I get access to HPC resources?”</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>“Understand what HPC resources are available in the U.S.”</li>
+<li>“Learn how to access these resources for free”</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
 <section><h2 class="section-heading" id="getting-access-to-hpc-resources">Getting Access to HPC Resources<a class="anchor" aria-label="anchor" href="#getting-access-to-hpc-resources"></a>
 <a class="anchor" aria-label="anchor" href="#getting-access-to-hpc-resources"></a>
 </h2>
@@ -3768,6 +4433,21 @@ Services</a></p></li>
 <li><p><a href="https://azure.microsoft.com/en-us/offers/ms-azr-0044p/" class="external-link">Microsoft
 Azure</a></p></li>
 </ul>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>“There are many HPC resources that are totally free for the
+asking”</li>
+</ul>
+</div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -3822,8 +4502,8 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/aio.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/aio.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-13",
-  "datePublished": "2024-07-13"
+  "dateModified": "2024-07-15",
+  "datePublished": "2024-07-15"
 }
 
   </script><script>

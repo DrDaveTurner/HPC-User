@@ -197,12 +197,19 @@
                   <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         Summary and Schedule
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#prerequisites">Prerequisites</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -415,21 +422,18 @@ with example codes illustrating the performance concerns of each. Each
 person who completes this module should have a good general overview of
 what each computer language can do and what performance bottlenecks to
 avoid.</p>
-<blockquote>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>Each user must begin with a reasonable knowledge of Linux and at
+<section><h2 class="section-heading" id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+<a class="anchor" aria-label="anchor" href="#prerequisites"></a></h2>
+<hr class="half-width"><p>Each user must begin with a reasonable knowledge of Linux and at
 least one of the languages that this module covers (Python, R, Matlab,
 C/C++, Fortran). The examples in the module can be adjusted to display
 in any of these languages. Each user may also need to know how to run
 jobs in an HPC environment.</p>
-</blockquote>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-      <section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
+</section><section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
           </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 00m
 </td>
@@ -437,11 +441,7 @@ any links that you are not going to use.
  1. <a href="introduction.html">Introduction</a>
 </td>
 <td>
-“What are the pre-requisits for the HPC User lesson?”<br>“What should I
-expect to learn from these modules?”<br>objectives:<br>“Understand
-what to expect out of the HPC User lesson”<br>keypoints:<br>“This
-lesson will help to understand basic concpets affecting performance in
-programming”
+“What should I expect to learn from these modules?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 05m
@@ -450,6 +450,7 @@ programming”
  2. <a href="profiling-code.html">Profiling Code for Performance</a>
 </td>
 <td>
+“How to measure performance?”<br>“How to measure memory usage?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 20m
@@ -458,6 +459,8 @@ programming”
  3. <a href="performance-concepts.html">Performance Concepts</a>
 </td>
 <td>
+“What does performance mean in programming?”<br>“How do I take
+advantage of optimized libraries?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 50m
@@ -466,6 +469,9 @@ programming”
  4. <a href="parallel-concepts.html">Parallel Computing Concepts</a>
 </td>
 <td>
+“Now that we can profile programs to find where the time is being
+spent,<br>how do we speed the code up?”<br>“What is parallel
+computing, and what are the underlying concpets that<br>make it work?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>01h 20m
@@ -474,6 +480,7 @@ programming”
  5. <a href="multi-threaded.html">Multi-Threaded Programs</a>
 </td>
 <td>
+“What is the multi-threaded shared-memory programming model?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>01h 50m
@@ -482,6 +489,7 @@ programming”
  6. <a href="message-passing.html">Message-Passing Programs</a>
 </td>
 <td>
+“What is the distribed-memory programming model?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>02h 20m
@@ -490,6 +498,7 @@ programming”
  7. <a href="language-survey.html">Language Survey</a>
 </td>
 <td>
+“What are the strengths and weaknesses of each computer language?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>02h 25m
@@ -498,6 +507,7 @@ programming”
  8. <a href="c-cpp.html">C and C++ Languages</a>
 </td>
 <td>
+“What are the strengths and weaknesses of programming in C and C++?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>02h 50m
@@ -506,6 +516,7 @@ programming”
  9. <a href="fortran.html">The Fortran Language</a>
 </td>
 <td>
+“What are the strengths and weaknesses of Fortran?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>03h 10m
@@ -514,6 +525,7 @@ programming”
 10. <a href="python.html">The Python Language</a>
 </td>
 <td>
+“What are the strengths and weaknesses of programming with Python”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>03h 35m
@@ -522,6 +534,7 @@ programming”
 11. <a href="r.html">The R Language</a>
 </td>
 <td>
+“What are the strengths and weaknesses of the R language?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>04h 20m
@@ -530,6 +543,7 @@ programming”
 12. <a href="matlab.html">The Matlab Language</a>
 </td>
 <td>
+“What are the strengths and weaknesses of the Matlab language?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>04h 45m
@@ -538,6 +552,7 @@ programming”
 13. <a href="array-jobs.html">Array Jobs</a>
 </td>
 <td>
+“What do array jobs have to do with high-performance computing?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>05h 00m
@@ -546,6 +561,7 @@ programming”
 14. <a href="gpus.html">Accelerating Scientific Computing with GPUs</a>
 </td>
 <td>
+“What do I have to do differently if my application can use a GPU?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>05h 15m
@@ -555,6 +571,8 @@ programming”
 Computing</a>
 </td>
 <td>
+“What is the difference between high-throughput computing and cluster
+computing?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>05h 30m
@@ -563,6 +581,7 @@ Computing</a>
 16. <a href="hpc-resources.html">HPC Resources</a>
 </td>
 <td>
+“How do I get access to HPC resources?”
 </td>
 </tr><tr><td>
 <span class="visually-hidden">Duration: </span>05h 45m
@@ -704,8 +723,8 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/index.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/index.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-13",
-  "datePublished": "2024-07-13"
+  "dateModified": "2024-07-15",
+  "datePublished": "2024-07-15"
 }
 
   </script><script>

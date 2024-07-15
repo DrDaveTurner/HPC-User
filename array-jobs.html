@@ -409,7 +409,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Array Jobs</h1>
-        <p>Last updated on 2024-07-13 |
+        <p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/array-jobs.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -421,7 +421,30 @@
 
         
 
-<div class="section level3">
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>“What do array jobs have to do with high-performance
+computing?”</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>“Learn what an array job is in a batch scheduler”</li>
+<li>“Understand what types of science can make use of array jobs”</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<hr><div class="section level3">
 <h3 id="array-jobs-using-slurm">Array jobs using Slurm<a class="anchor" aria-label="anchor" href="#array-jobs-using-slurm"></a></h3>
 <p>An array job is mostly just like a normal job script in that it has
 arguments at the top prefaced with <strong>#SBATCH</strong> that tell
@@ -505,6 +528,23 @@ ensure that each job is using the <strong>$SLURM_ARRAY_TASK_ID</strong>
 in the desired manner. Then when you are confident that your script is
 doing what it is supposed to, you are ready to submit the full array
 job.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul><li>“Array jobs provide an easy way to do large numbers of small
+jobs”</li>
+<li>“Array jobs are another way to do parallel computing, but by running
+lots of small jobs individually”</li>
+<li>“Test your script carefully on a few array IDs before submitting the
+full job”</li>
+</ul></div>
+</div>
+</div>
 <p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
@@ -572,8 +612,8 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/array-jobs.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/array-jobs.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-13",
-  "datePublished": "2024-07-13"
+  "dateModified": "2024-07-15",
+  "datePublished": "2024-07-15"
 }
 
   </script><script>

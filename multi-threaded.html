@@ -409,7 +409,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Multi-Threaded Programs</h1>
-        <p>Last updated on 2024-07-13 |
+        <p>Last updated on 2024-07-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/multi-threaded.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -421,7 +421,29 @@
 
         
 
-<p>Most computer languages have the ability to do multi-threaded
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul><li>“What is the multi-threaded shared-memory programming model?”</li>
+</ul></div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>“Learn about multi-threaded computing and how to use it.”</li>
+<li>“What are the strengths and limitations of this approach?”</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<hr><p>Most computer languages have the ability to do multi-threaded
 computing. C/C++ and Fortran use the OpenMP package which is by far the
 most well developed. It uses pragma statements to control the
 parallelization of loops. OpenMP is not only extremely efficient, but it
@@ -600,7 +622,22 @@ due to the few computations being done in each pass through the loop. {:
 <li><a href="https://hpc-tutorials.llnl.gov/openmp/" class="external-link">LLNL OpenMP
 tutorial</a></li>
 <li><a href="">need link for mclapply()</a></li>
-</ul><p>{% include links.md %}</p>
+</ul><div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul><li>“Multi-theaded computing is powerful and fairly easy to use but only
+works on one compute node.”</li>
+<li>“Understand key factors that can limit the efficient scaling of
+multi-threaded programs.”</li>
+</ul></div>
+</div>
+</div>
+<p>{% include links.md %}</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -667,8 +704,8 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/multi-threaded.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/multi-threaded.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-13",
-  "datePublished": "2024-07-13"
+  "dateModified": "2024-07-15",
+  "datePublished": "2024-07-15"
 }
 
   </script><script>

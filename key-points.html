@@ -487,22 +487,104 @@
         
         
 <section id="introduction"><h2 class="section-heading"><a href="introduction.html">Introduction</a></h2>
-<hr class="half-width"></section><section id="profiling-code"><h2 class="section-heading"><a href="profiling-code.html">Profiling Code for Performance</a></h2>
-<hr class="half-width"></section><section id="performance-concepts"><h2 class="section-heading"><a href="performance-concepts.html">Performance Concepts</a></h2>
-<hr class="half-width"></section><section id="parallel-concepts"><h2 class="section-heading"><a href="parallel-concepts.html">Parallel Computing Concepts</a></h2>
-<hr class="half-width"></section><section id="multi-threaded"><h2 class="section-heading"><a href="multi-threaded.html">Multi-Threaded Programs</a></h2>
-<hr class="half-width"></section><section id="message-passing"><h2 class="section-heading"><a href="message-passing.html">Message-Passing Programs</a></h2>
-<hr class="half-width"></section><section id="language-survey"><h2 class="section-heading"><a href="language-survey.html">Language Survey</a></h2>
-<hr class="half-width"></section><section id="c-cpp"><h2 class="section-heading"><a href="c-cpp.html">C and C++ Languages</a></h2>
-<hr class="half-width"></section><section id="fortran"><h2 class="section-heading"><a href="fortran.html">The Fortran Language</a></h2>
-<hr class="half-width"></section><section id="python"><h2 class="section-heading"><a href="python.html">The Python Language</a></h2>
-<hr class="half-width"></section><section id="r"><h2 class="section-heading"><a href="r.html">The R Language</a></h2>
-<hr class="half-width"></section><section id="matlab"><h2 class="section-heading"><a href="matlab.html">The Matlab Language</a></h2>
-<hr class="half-width"></section><section id="array-jobs"><h2 class="section-heading"><a href="array-jobs.html">Array Jobs</a></h2>
-<hr class="half-width"></section><section id="gpus"><h2 class="section-heading"><a href="gpus.html">Accelerating Scientific Computing with GPUs</a></h2>
-<hr class="half-width"></section><section id="high-throughput-computing"><h2 class="section-heading"><a href="high-throughput-computing.html">High-Throughput Computing</a></h2>
-<hr class="half-width"></section><section id="hpc-resources"><h2 class="section-heading"><a href="hpc-resources.html">HPC Resources</a></h2>
-<hr class="half-width"></section>
+<hr class="half-width">
+<ul>
+<li>“This lesson will help to understand basic concpets affecting
+performance in programming”</li>
+</ul></section><section id="profiling-code"><h2 class="section-heading"><a href="profiling-code.html">Profiling Code for Performance</a></h2>
+<hr class="half-width">
+<ul>
+<li>“The <strong>time</strong> function can always be used externally to
+measure performance.”</li>
+<li>“Internally there are precise clock routines that can be used to
+measure the performance of each part of a code. These are different for
+each programming language, but the use is always the same.”</li>
+<li>“Scaling studies can help determine how many cores or nodes we can
+efficiently use for a parallel job of a given problem size”</li>
+<li>“Measuring memory use can be done from outside a program, but you
+may also be able to calculate total memory for simple programs.”</li>
+</ul></section><section id="performance-concepts"><h2 class="section-heading"><a href="performance-concepts.html">Performance Concepts</a></h2>
+<hr class="half-width">
+<ul>
+<li>“A computer’s view of code is more complex than a user’s view.”</li>
+<li>“It’s important to understand a little about what goes on when code
+actually runs, but you don’t need to be able to program at that
+level”</li>
+<li>“Whenever possible, use code written and optimized by experts
+instead of writing your own version.”</li>
+</ul></section><section id="parallel-concepts"><h2 class="section-heading"><a href="parallel-concepts.html">Parallel Computing Concepts</a></h2>
+<hr class="half-width">
+<ul>
+<li>“What techniques can be used to speed up scalar code?”</li>
+<li>“How to improve input and output?”</li>
+<li>“Learn about the difference between multi-core and multi-node
+programs.”</li>
+<li>“Understand the fundamentals of locks, barriers, and forks.”</li>
+<li>“Practice doing a scaling study.”</li>
+</ul></section><section id="multi-threaded"><h2 class="section-heading"><a href="multi-threaded.html">Multi-Threaded Programs</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Multi-theaded computing is powerful and fairly easy to use but only
+works on one compute node.”</li>
+<li>“Understand key factors that can limit the efficient scaling of
+multi-threaded programs.”</li>
+</ul></section><section id="message-passing"><h2 class="section-heading"><a href="message-passing.html">Message-Passing Programs</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Distributed-memory computing is very flexible, extremely scalable,
+but more difficult to program.”</li>
+<li>“Understand key factors that can limit the efficient scaling of
+message-passing programs.”</li>
+</ul></section><section id="language-survey"><h2 class="section-heading"><a href="language-survey.html">Language Survey</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Performance is just one criteria we need to understand when
+choosing the best language for a given project.”</li>
+</ul></section><section id="c-cpp"><h2 class="section-heading"><a href="c-cpp.html">C and C++ Languages</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Learn about the characteristics of C/C++.”</li>
+</ul></section><section id="fortran"><h2 class="section-heading"><a href="fortran.html">The Fortran Language</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Learn about the characteristics of modern Fortran”</li>
+</ul></section><section id="python"><h2 class="section-heading"><a href="python.html">The Python Language</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Learn about the characteristics of the Python language”</li>
+<li>“When performance is important always use optimized
+libraries!!!”</li>
+</ul></section><section id="r"><h2 class="section-heading"><a href="r.html">The R Language</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Learn about the characteristics of the R language”</li>
+</ul></section><section id="matlab"><h2 class="section-heading"><a href="matlab.html">The Matlab Language</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Learn about the characteristics of the Matlab language”</li>
+</ul></section><section id="array-jobs"><h2 class="section-heading"><a href="array-jobs.html">Array Jobs</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Array jobs provide an easy way to do large numbers of small
+jobs”</li>
+<li>“Array jobs are another way to do parallel computing, but by running
+lots of small jobs individually”</li>
+<li>“Test your script carefully on a few array IDs before submitting the
+full job”</li>
+</ul></section><section id="gpus"><h2 class="section-heading"><a href="gpus.html">Accelerating Scientific Computing with GPUs</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Start to be comfortable wtih using GPUs on an HPC system”</li>
+</ul></section><section id="high-throughput-computing"><h2 class="section-heading"><a href="high-throughput-computing.html">High-Throughput Computing</a></h2>
+<hr class="half-width">
+<ul>
+<li>“Explore the basics of HTC computing”</li>
+</ul></section><section id="hpc-resources"><h2 class="section-heading"><a href="hpc-resources.html">HPC Resources</a></h2>
+<hr class="half-width">
+<ul>
+<li>“There are many HPC resources that are totally free for the
+asking”</li>
+</ul></section>
 </div>
     </main>
 </div>
@@ -550,8 +632,8 @@
   "url": "https://DrDaveTurner.github.io/HPC-User/key-points.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/key-points.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-13",
-  "datePublished": "2024-07-13"
+  "dateModified": "2024-07-15",
+  "datePublished": "2024-07-15"
 }
 
   </script><script>
