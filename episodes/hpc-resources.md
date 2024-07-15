@@ -2,13 +2,23 @@
 title: "HPC Resources"
 teaching: 15
 exercises: 0
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "How do I get access to HPC resources?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Understand what HPC resources are available in the U.S."
 - "Learn how to access these resources for free"
-keypoints:
-- "There are many HPC resources that are totally free for the asking"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ---
 
 ## Getting Access to HPC Resources
@@ -210,6 +220,12 @@ this module will give you ideas on where to start.
 * [AWS Cloud Services](https://aws.amazon.com/free/)
 * [GCP Services](https://cloud.google.com/free)
 * [Microsoft Azure](https://azure.microsoft.com/en-us/offers/ms-azr-0044p/)
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "There are many HPC resources that are totally free for the asking"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 {% include links.md %}

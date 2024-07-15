@@ -2,16 +2,24 @@
 title: "Multi-Threaded Programs"
 teaching: 20
 exercises: 10
-questions:
-- "What is the multi-threaded shared-memory programming model?"
-objectives:
-- "Learn about multi-threaded computing and how to use it."
-- "What are the strengths and limitations of this approach?"
-keypoints:
-- "Multi-theaded computing is powerful and fairly easy to use but only works on one compute node."
-- "Understand key factors that can limit the efficient scaling of multi-threaded programs."
 ---
 
+:::::::::::::::::::::::::::::::::::::: questions
+
+- "What is the multi-threaded shared-memory programming model?"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- "Learn about multi-threaded computing and how to use it."
+- "What are the strengths and limitations of this approach?"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+---
 
 Most computer languages have the ability to do multi-threaded computing.
 C/C++ and Fortran use the OpenMP package which is by far the most well
@@ -214,6 +222,13 @@ This always leads to terrible scaling and should almost never be done.
 * [github pymp](https://github.com/classner/pymp)
 * [LLNL OpenMP tutorial](https://hpc-tutorials.llnl.gov/openmp/)
 * [need link for mclapply()]()
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Multi-theaded computing is powerful and fairly easy to use but only works on one compute node."
+- "Understand key factors that can limit the efficient scaling of multi-threaded programs."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 {% include links.md %}
 

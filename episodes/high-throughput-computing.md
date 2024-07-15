@@ -2,13 +2,22 @@
 title: "High-Throughput Computing"
 teaching: 15
 exercises: 0
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What is the difference between high-throughput computing and cluster computing?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Learn what types of jobs run well on HTC systems"
 - "Understand how to submit jobs using OSG"
-keypoints:
-- "Explore the basics of HTC computing"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ---
 
 ## High-Throughput Computing
@@ -176,6 +185,12 @@ Aside from that it is similar to running jobs using any other scheduler.
 * [OSG typical jobs](https://support.opensciencegrid.org/support/solutions/articles/5000632058-is-the-open-science-grid-for-you-)
 * [HTCondor scheduler youtube video](https://www.youtube.com/watch?v=oMAvxsFJaw4)
 
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Explore the basics of HTC computing"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 {% include links.md %}
 

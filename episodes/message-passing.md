@@ -2,14 +2,22 @@
 title: "Message-Passing Programs"
 teaching: 20
 exercises: 10
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What is the distribed-memory programming model?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Learn about message-passing in distributed-memory computing."
 - "What are the strengths and limitations of this approach?"
-keypoints:
-- "Distributed-memory computing is very flexible, extremely scalable, but more difficult to program."
-- "Understand key factors that can limit the efficient scaling of message-passing programs."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ---
 
 ## The Message-Passing Paradigm
@@ -251,6 +259,14 @@ it is the only way to go.
 * [LLNL MPI tutorial](https://hpc-tutorials.llnl.gov/mpi/)
 * [MPICH user guides](https://www.mpich.org/documentation/guides/)
 * [OpenMPI function manpages](https://www.open-mpi.org/doc/)
+
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Distributed-memory computing is very flexible, extremely scalable, but more difficult to program."
+- "Understand key factors that can limit the efficient scaling of message-passing programs."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 {% include links.md %}

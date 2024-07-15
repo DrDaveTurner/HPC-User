@@ -2,23 +2,24 @@
 title: "Profiling Code for Performance"
 teaching: 15
 exercises: 0
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "How to measure performance?"
 - "How to measure memory usage?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Learn the different methods available to measure time and memory usage
   externally and from within a program."
 - "Understand what parts of a program are important to time."
 - "Learn how to do a scaling study for multi-core and multi-node jobs."
-keypoints:
-- "The **time** function can always be used externally to measure performance."
-- "Internally there are precise clock routines that can be used to measure 
-  the performance of each part of a code.  These are different for each 
-  programming language, but the use is always the same."
-- "Scaling studies can help determine how many cores or nodes we can efficiently
-  use for a parallel job of a given problem size"
-- "Measuring memory use can be done from outside a program, but you may
-  also be able to calculate total memory for simple programs."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ---
 
 When we talk about the performance of a program, we are always interested
@@ -386,6 +387,19 @@ However, being able to see the memory use over time can be very helpful.
 
 
 We will practice these approaches more in the upcoming modules.
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "The **time** function can always be used externally to measure performance."
+- "Internally there are precise clock routines that can be used to measure 
+  the performance of each part of a code.  These are different for each 
+  programming language, but the use is always the same."
+- "Scaling studies can help determine how many cores or nodes we can efficiently
+  use for a parallel job of a given problem size"
+- "Measuring memory use can be done from outside a program, but you may
+  also be able to calculate total memory for simple programs."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 {% include links.md %}
 

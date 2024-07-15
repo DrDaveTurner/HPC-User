@@ -6,20 +6,14 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions
 
-- "What are the pre-requisits for the HPC User lesson?"
 - "What should I expect to learn from these modules?"
-objectives:
-- "Understand what to expect out of the HPC User lesson"
-keypoints:
-- "This lesson will help to understand basic concpets affecting performance in programming"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain how to use markdown with The Carpentries Workbench
-- Demonstrate how to include pieces of code, figures, and nested challenge blocks
+- "Understand what to expect out of the HPC User lesson"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -64,7 +58,7 @@ to provide a general understanding of how to operate in an HPC environment.
 The first few chapters concentrate on discussing performance issues
 at the conceptual level with practical examples.
 **These examples are currently given in Python but it is intended to
-eventually have the user choose the language that the examples display
+eventually have the user and instructor choose the language that the examples display
 in to make it more appropriate to teach this to groups primarily 
 interested in R, Matlab, or C/C++ too**.
 As the lesson proceeds these same concepts will be used in different
@@ -88,6 +82,12 @@ who want to challenge themselves outside of the workshop.
 
 Most sections also have website links at the end which provide
 a means to seek out more information.
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "This lesson will help to understand basic concpets affecting performance in programming"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 {% include links.md %}

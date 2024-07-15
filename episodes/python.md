@@ -2,15 +2,24 @@
 title: "The Python Language"
 teaching: 15
 exercises: 10
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What are the strengths and weaknesses of programming with Python"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Analyze the merits of programming in Python"
 - "Learn how to work with virtual environments"
 - "Learn about common performance-oriented libraries"
-keypoints:
-- "Learn about the characteristics of the Python language"
-- "When performance is important always use optimized libraries!!!"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ---
 
 ### Python performance
@@ -333,6 +342,14 @@ around the problem.
 * [Scikit]()
 * [Dask](https://dask.org)
 * [Numba](https://numba.pydata.org)
+
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Learn about the characteristics of the Python language"
+- "When performance is important always use optimized libraries!!!"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 {% include links.md %}

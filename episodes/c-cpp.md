@@ -2,14 +2,23 @@
 title: "C and C++ Languages"
 teaching: 15
 exercises: 10
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What are the strengths and weaknesses of programming in C and C++?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Analyze the merits of the C/C++ language."
 - "Learn how to compile and run C/C++ programs."
 - "Try compiling and running OpenMP and MPI versions."
-keypoints:
-- "Learn about the characteristics of C/C++."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ---
 
 ## The C Programming Language
@@ -193,6 +202,12 @@ at least understand this as a starting point.
 ### Links for additional information
 
 * [C tutorial](https://www.guru99.com/c-programming-tutorial.html)
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Learn about the characteristics of C/C++."
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 {% include links.md %}
 

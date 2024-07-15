@@ -2,13 +2,23 @@
 title: "The Matlab Language"
 teaching: 20
 exercises: 5
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What are the strengths and weaknesses of the Matlab language?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Understand the performance and parallelization characteristics of Matlab"
 - "Learn the practicallity of using the Matlab compiler on HPC systems"
-keypoints:
-- "Learn about the characteristics of the Matlab language"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ---
 
 ## Programming in the Matlab Language
@@ -292,6 +302,12 @@ Octave world itself.
 * [Matlab Parallel Computing Toolbox](https://www.mathworks.com/products/parallel-computing.html)
 * [Matlab Simulink](https://www.mathworks.com/products/simulink.html)
 * [Matlab Toolboxes and Examples](https://www.mathworks.com/help/thingspeak/matlab-toolbox-access.html)
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Learn about the characteristics of the Matlab language"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 {% include links.md %}
 

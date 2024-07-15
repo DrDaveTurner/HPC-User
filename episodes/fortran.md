@@ -2,13 +2,22 @@
 title: "The Fortran Language"
 teaching: 15
 exercises: 5
-questions:
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
 - "What are the strengths and weaknesses of Fortran?"
-objectives:
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: objectives
+
 - "Analyze the merits of Fortran"
 - "Learn how to compile andd run a Fortran program"
-keypoints:
-- "Learn about the characteristics of modern Fortran"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ---
 
 ## Modern Fortran
@@ -130,6 +139,12 @@ together to produce the executable.
 
 * [Fortran wiki](https://en.wikipedia.org/wiki/Fortran)
 * [Fortran tutorials](https://fortran-lang.org/learn/)
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- "Learn about the characteristics of modern Fortran"
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 {% include links.md %}
 
