@@ -6,14 +6,14 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions
 
-- "What should I expect to learn from these modules?"
+- What should I expect to learn from these modules?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- "Understand what to expect out of the HPC User lesson"
+- Understand what to expect out of the HPC User lesson
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -21,12 +21,11 @@ exercises: 0
 
 ---
 
-**NOTE - Examples are currently in Python.
+**NOTE** - Examples are currently in Python.
 There will eventually be the ability to choose which language the examples in
 the concepts part of the lesson are shown in, 
 plus at each example the user will be able to
 click on a tab to see the examples in other languages.**
-
 
 ## Overview
 
@@ -51,7 +50,6 @@ who need to be experts at programming in a High-Performance Computing
 environment.
 This lesson will be aimed at giving an overview of performance concepts
 to provide a general understanding of how to operate in an HPC environment.
-
 
 ## Organization
 
@@ -85,7 +83,7 @@ a means to seek out more information.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- "This lesson will help to understand basic concpets affecting performance in programming"
+- This lesson will help to understand basic concpets affecting performance in programming
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
