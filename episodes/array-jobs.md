@@ -53,6 +53,7 @@ echo "Hello from array task ID $SLURM_ARRAY_TASK_ID"
 
 
 :::::::::::::::::::::::::::::::::::::: challenge
+
 ## Submit an array job
 If you have access to an HPC system with Slurm installed,
 submit the **sb.array_test** script from the **code/scripts**
@@ -60,12 +61,13 @@ subdirectory using **sbatch sb.array_test** then look at the
 output.
 You can try writing a script to choose an input filename from
 a list using **$SLURM_ARRAY_TASK_ID** if you would like.
+
 :::::::::::::::::: solution
-## Solution and Analysis
 This will run 3 individual jobs that will show the
 **$SLURM_ARRAY_TASK_ID** to be 1, 3, or 5.
-::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ### Array jobs as parallel computing
