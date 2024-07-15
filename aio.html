@@ -512,7 +512,7 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Understand what to expect out of the HPC User lesson</li>
+<li>Understand what to expect out of the HPC User lesson.</li>
 </ul>
 </div>
 </div>
@@ -582,7 +582,7 @@ means to seek out more information.</p>
 <div class="callout-content">
 <ul>
 <li>This lesson will help to understand basic concpets affecting
-performance in programming</li>
+performance in programming.</li>
 </ul>
 </div>
 </div>
@@ -663,7 +663,6 @@ directory.</p>
 real	0m0.000s
 user	0m0.000s
 sys	0m0.000s</code></pre>
-<p>{: .language-bash}</p>
 <p>The first thing you see is the output of the <strong>pwd</strong>
 command, which in this case is the directory
 <strong>/Users/daveturner</strong>. Then the <strong>time</strong>
@@ -683,7 +682,6 @@ file1 file2 file3
 real	0m0.110s
 user	0m0.006s
 sys	0m0.027s</code></pre>
-<p>{: .language-bash}</p>
 <p>When I do this on my iMac, I get a real time of just 0.006 seconds
 because it’s really fast to access the local hard disk. The test above
 is from a very large cluster computer that has a parallel file server
@@ -709,7 +707,6 @@ you may want to measure multiple times and take an average.</p>
 real	0m5.052s
 user	0m0.001s
 sys	0m0.003s</code></pre>
-<p>{: .language-bash}</p>
 <p>In addition to worrying about the clock accuracy, you also need to
 worry about interferrence from other jobs that may be running on the
 same compute node you are on. The best way to time a real job is to test
@@ -772,7 +769,6 @@ fd.close()
 
 t_output = time.perf_counter() - t_start
 print("The output took ", t_output, " seconds")</code></pre>
-<p>{: .language-python}</p>
 <p>Try running this yourself by copying it into a timing.py file. When I
 run this, I see that the loop takes about 30 microseconds on my computer
 and the output file takes 10 milliseconds. Since both of these are above
@@ -805,7 +801,6 @@ t_loop = time.perf_counter() - t_start
 
 print("The sum took ", t_sum, " seconds")
 print("The loop took ", t_loop, " seconds")</code></pre>
-<p>{: .language-python}</p>
 <p>In my computer, the t_sum time is only a bit larger than the t_loop
 time from before, but remember that this doesn’t count the loop
 overhead. If we look at the t_loop time instead, in my computer it is
@@ -895,7 +890,6 @@ CPU Efficiency: 97.10% of 00:01:09 core-walltime
 Job Wall-clock time: 00:01:09
 Memory Utilized: 2.26 GB
 Memory Efficiency: 11.31% of 20.00 GB</code></pre>
-<p>{: .language-bash}</p>
 <p>The matrix multiplication job above used 10,000x10,000 matrices and
 took 1 minute 9 seconds. We see that in this case it used 2.26 GB of
 memory. One thing to keep in mind is that 1 GB can be calculated in
@@ -908,7 +902,6 @@ if you estimate 1 GB as 10^9 Bytes that works fine.</p>
 MaxRSS
 ----------
   2289.50M</code></pre>
-<p>{: .language-bash}</p>
 <p>For a running job you can use the <strong>sstat</strong> command with
 the job ID number. The <strong>sstat</strong> command will dump a lot of
 information out, so using the <strong>–format=MaxRSS</strong> parameter
@@ -3675,8 +3668,7 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>“What do array jobs have to do with high-performance
-computing?”</li>
+<li>What do array jobs have to do with high-performance computing?</li>
 </ul>
 </div>
 </div>
@@ -3686,8 +3678,8 @@ computing?”</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>“Learn what an array job is in a batch scheduler”</li>
-<li>“Understand what types of science can make use of array jobs”</li>
+<li>Learn what an array job is in a batch scheduler.</li>
+<li>Understand what types of science can make use of array jobs.</li>
 </ul>
 </div>
 </div>
@@ -3715,29 +3707,41 @@ to use it.</p>
 <p>For this job the <strong>$SLURM_ARRAY_TASK_ID</strong> variable will
 be set to 1, 3, or 5. since the script specifies that the task ID starts
 at 1, ends at 5, and steps by 2.</p>
-<pre><code>#!/bin/bash -l
-#SBATCH --job-name=array_test
-#SBATCH --time=0-0:1:00
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --mem=1G
-#SBATCH --array=1-5:2
-
-hostname
-echo "Hello from array task ID $SLURM_ARRAY_TASK_ID"</code></pre>
-<p>{: .language-bash}</p>
-<blockquote>
-<h2 id="submit-an-array-job">Submit an array job</h2>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#SBATCH --job-name=array_test</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#SBATCH --time=0-0:1:00</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=1</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#SBATCH --mem=1G</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#SBATCH --array=1-5:2</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">hostname</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Hello from array task ID </span><span class="va">$SLURM_ARRAY_TASK_ID</span><span class="st">"</span></span></code></pre>
+</div>
+<div id="submit-an-array-job" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="submit-an-array-job" class="callout-inner">
+<h3 class="callout-title">Submit an array job<a class="anchor" aria-label="anchor" href="#submit-an-array-job"></a>
+</h3>
+<div class="callout-content">
 <p>If you have access to an HPC system with Slurm installed, submit the
 <strong>sb.array_test</strong> script from the
 <strong>code/scripts</strong> subdirectory using <strong>sbatch
 sb.array_test</strong> then look at the output. You can try writing a
 script to choose an input filename from a list using <strong><span class="math inline">\(SLURM_ARRAY_TASK_ID** if you would like.
-&gt; ## Solution and Analysis
+:::::::::::::::::: solution
+## Solution and Analysis
 This will run 3 individual jobs that will show the
-**\)</span>SLURM_ARRAY_TASK_ID</strong> to be 1, 3, or 5. {: .solution}
-{: .challenge}</p>
-</blockquote>
+**\)</span>SLURM_ARRAY_TASK_ID</strong> to be 1, 3, or 5.</p>
+</div>
+</div>
+</div>
+<p>::::::::::::::::::::::::::::::::::::::</p>
 </div>
 <div class="section level3">
 <h3 id="array-jobs-as-parallel-computing">Array jobs as parallel computing<a class="anchor" aria-label="anchor" href="#array-jobs-as-parallel-computing"></a>
@@ -3790,12 +3794,12 @@ job.</p>
 </h3>
 <div class="callout-content">
 <ul>
-<li>“Array jobs provide an easy way to do large numbers of small
-jobs”</li>
-<li>“Array jobs are another way to do parallel computing, but by running
-lots of small jobs individually”</li>
-<li>“Test your script carefully on a few array IDs before submitting the
-full job”</li>
+<li>Array jobs provide an easy way to do large numbers of small
+jobs.</li>
+<li>Array jobs are another way to do parallel computing, but by running
+lots of small jobs individually.</li>
+<li>Test your script carefully on a few array IDs before submitting the
+full job.</li>
 </ul>
 </div>
 </div>

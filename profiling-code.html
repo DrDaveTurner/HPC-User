@@ -490,7 +490,6 @@ directory.</p>
 real	0m0.000s
 user	0m0.000s
 sys	0m0.000s</code></pre>
-<p>{: .language-bash}</p>
 <p>The first thing you see is the output of the <strong>pwd</strong>
 command, which in this case is the directory
 <strong>/Users/daveturner</strong>. Then the <strong>time</strong>
@@ -510,7 +509,6 @@ file1 file2 file3
 real	0m0.110s
 user	0m0.006s
 sys	0m0.027s</code></pre>
-<p>{: .language-bash}</p>
 <p>When I do this on my iMac, I get a real time of just 0.006 seconds
 because it’s really fast to access the local hard disk. The test above
 is from a very large cluster computer that has a parallel file server
@@ -536,7 +534,6 @@ you may want to measure multiple times and take an average.</p>
 real	0m5.052s
 user	0m0.001s
 sys	0m0.003s</code></pre>
-<p>{: .language-bash}</p>
 <p>In addition to worrying about the clock accuracy, you also need to
 worry about interferrence from other jobs that may be running on the
 same compute node you are on. The best way to time a real job is to test
@@ -597,7 +594,6 @@ fd.close()
 
 t_output = time.perf_counter() - t_start
 print("The output took ", t_output, " seconds")</code></pre>
-<p>{: .language-python}</p>
 <p>Try running this yourself by copying it into a timing.py file. When I
 run this, I see that the loop takes about 30 microseconds on my computer
 and the output file takes 10 milliseconds. Since both of these are above
@@ -630,7 +626,6 @@ t_loop = time.perf_counter() - t_start
 
 print("The sum took ", t_sum, " seconds")
 print("The loop took ", t_loop, " seconds")</code></pre>
-<p>{: .language-python}</p>
 <p>In my computer, the t_sum time is only a bit larger than the t_loop
 time from before, but remember that this doesn’t count the loop
 overhead. If we look at the t_loop time instead, in my computer it is
@@ -714,7 +709,6 @@ CPU Efficiency: 97.10% of 00:01:09 core-walltime
 Job Wall-clock time: 00:01:09
 Memory Utilized: 2.26 GB
 Memory Efficiency: 11.31% of 20.00 GB</code></pre>
-<p>{: .language-bash}</p>
 <p>The matrix multiplication job above used 10,000x10,000 matrices and
 took 1 minute 9 seconds. We see that in this case it used 2.26 GB of
 memory. One thing to keep in mind is that 1 GB can be calculated in
@@ -727,7 +721,6 @@ if you estimate 1 GB as 10^9 Bytes that works fine.</p>
 MaxRSS
 ----------
   2289.50M</code></pre>
-<p>{: .language-bash}</p>
 <p>For a running job you can use the <strong>sstat</strong> command with
 the job ID number. The <strong>sstat</strong> command will dump a lot of
 information out, so using the <strong>–format=MaxRSS</strong> parameter
