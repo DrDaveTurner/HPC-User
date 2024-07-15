@@ -5,21 +5,13 @@ exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-
 - What should I expect to learn from these modules?
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
 - Understand what to expect out of the HPC User lesson
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
-
----
 
 **NOTE** - Examples are currently in Python.
 There will eventually be the ability to choose which language the examples in
@@ -82,11 +74,7 @@ Most sections also have website links at the end which provide
 a means to seek out more information.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
-
 - This lesson will help to understand basic concpets affecting performance in programming
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
-{% include links.md %}
 
