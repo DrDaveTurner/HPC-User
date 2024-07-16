@@ -419,7 +419,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The Matlab Language</h1>
-        <p>Last updated on 2024-07-15 |
+        <p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/matlab.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -618,48 +618,101 @@ single-node multi-process capability of parpool. There are also tools to
 work with clusters of computers, but these are more similar to
 message-passing commands where you manually send and receive data to and
 from remote processes and manually initiate function evaluation.</p>
-<blockquote>
-<h2 id="test-the-performance-of-the-matlab-matrix-multiplication-code.">Test
-the performance of the Matlab matrix multiplication code.</h2>
+<div id="test-the-performance-of-the-matlab-matrix-multiplication-code." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="test-the-performance-of-the-matlab-matrix-multiplication-code." class="callout-inner">
+<h3 class="callout-title">Test the performance of the Matlab matrix multiplication code.<a class="anchor" aria-label="anchor" href="#test-the-performance-of-the-matlab-matrix-multiplication-code."></a>
+</h3>
+<div class="callout-content">
 <p>Test the performance of the <strong>matmult.m</strong> code for a
-matrix size of 1000 and compare to other languages. &gt; ## Solution and
-Analysis For the 1000x1000 matrices, I measure 5 seconds for the serial
-code, 0.7 seconds for the built-in matrix multiply that uses low level
+matrix size of 1000 and compare to other languages.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>For the 1000x1000 matrices, I measure 5 seconds for the serial code,
+0.7 seconds for the built-in matrix multiply that uses low level
 optimized BLAS routines. The parpool multi-process test takes 530
 seconds which is understandably slow since it is doing the matrix
 multiplication in a distributed memory manner without explicitly
 programming it to do this efficiently. The multi-threaded parpool test
 measured in at &gt; 510 seconds which is very disappointing since there
 should be no copying of the matrices at the beginning. It isn’t clear
-what is happening behind the scenes for this to be so slow. {:
-.solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="test-the-performance-of-the-matlab-dot-product-code.">Test the
-performance of the Matlab dot product code.</h2>
+what is happening behind the scenes for this to be so slow.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="test-the-performance-of-the-matlab-dot-product-code." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="test-the-performance-of-the-matlab-dot-product-code." class="callout-inner">
+<h3 class="callout-title">Test the performance of the Matlab dot product code.<a class="anchor" aria-label="anchor" href="#test-the-performance-of-the-matlab-dot-product-code."></a>
+</h3>
+<div class="callout-content">
 <p>Test the performance of the <strong>dot_product.m</strong> code for
-an array size of 100,000,000 and compare to other languages. &gt; ##
-Solution and Analysis I measure serial performance at 0.5 seconds with
-the built in optimized routine at 0.2 seconds on 8 cores for a modest
-speedup. The multi-core parfor loop on the same 8 cores takes 2.1
-seconds while the multi-threaded parfor loop takes a disappointing 0.9
-seconds which is still greater than the serial code. The overhead for
-using these methods is still much larger than the performance gain which
-indicates the parfor method should only really be used for very coarse
-grained algorithms. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores.">Homework:
-Alter the <strong>matmult.m</strong> code to run on multiple nodes and
-multiple cores.</h2>
+an array size of 100,000,000 and compare to other languages.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>I measure serial performance at 0.5 seconds with the built in
+optimized routine at 0.2 seconds on 8 cores for a modest speedup. The
+multi-core parfor loop on the same 8 cores takes 2.1 seconds while the
+multi-threaded parfor loop takes a disappointing 0.9 seconds which is
+still greater than the serial code. The overhead for using these methods
+is still much larger than the performance gain which indicates the
+parfor method should only really be used for very coarse grained
+algorithms.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores." class="callout-inner">
+<h3 class="callout-title">Homework: Alter the <strong>matmult.m</strong>
+code to run on multiple nodes and multiple cores.<a class="anchor" aria-label="anchor" href="#homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores."></a>
+</h3>
+<div class="callout-content">
 <p>Test on multiple compute nodes and compare performance to the serial
 and multi-threaded versions. If you want a real challenge try setting
 the code up to run on a cloud server. And an even bigger challenge would
 be to convert matmult.m to run on Octave’s parallel computing
-environments. &gt; ## Solution and Analysis If you do develop code for
-this, let us know so we can consider including your work for others to
-see. {: .solution} {: .challenge}</p>
-</blockquote>
+environments.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>If you do develop code for this, let us know so we can consider
+including your work for others to see.</p>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a></h2>
 <hr class="half-width"><p>The greatest value of Matlab is the very wide range of professionally
@@ -763,7 +816,7 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/matlab.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/matlab.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-15",
+  "dateModified": "2024-07-16",
   "datePublished": "2024-07-16"
 }
 

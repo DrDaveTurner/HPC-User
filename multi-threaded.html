@@ -409,7 +409,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Multi-Threaded Programs</h1>
-        <p>Last updated on 2024-07-15 |
+        <p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/multi-threaded.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -481,7 +481,7 @@ elements it is responsible for, so all 4 threads are running at the same
 time but operating on different parts of the data. After they have all
 completed their parts, then the master thread sums all for partial sums
 into the dot product and prints it out.</p>
-<figure><img src="fig/multi-threaded-dot-product-0.jpg" alt="Diagram of a shared-memory multi-threaded dot product" class="figure mx-auto d-block"><div class="figcaption">Diagram of a shared-memory multi-threaded dot
+<figure><img src="figs/multi-threaded-dot-product-0.jpg" alt="Shared-memory multi-threaded dot product showing the memory layout of both vectors" class="figure mx-auto d-block"><div class="figcaption">Diagram of a shared-memory multi-threaded dot
 product</div>
 </figure><div class="section level3">
 <h3 id="the-multi-threaded-dot-product-code">The multi-threaded dot product code<a class="anchor" aria-label="anchor" href="#the-multi-threaded-dot-product-code"></a></h3>
@@ -515,53 +515,56 @@ of doing it more explicitly, so in our code we need to create a shared
 array of partial sums and manually sum them together at the end. This is
 just as efficient computationally, it just takes a little extra coding
 but is more explicit.</p>
-<pre><code># Do the dot product between two vectors X and Y then print the result
-# USAGE:  python dot_product_threaded.py 4       to run on 4 threads
-
-import sys
-import time
-import pymp
-
-   # Get and set nthreads from the command line
-
-pymp.config.num_threads = int( sys.argv[1] )
-nthreads = pymp.config.num_threads
-
-N = 100000000      # Do a large enough test to reduce timing variance
-
-x = [ float( i ) for i in range( N ) ]
-y = [ float( i ) for i in range( N ) ]
-
-   # Now initialize a very large dummy array to force X and Y out of all levels of cache
-   #    so that our times are for pulling elements up from main memory.
-
-dummy = [ 0.0 for i in range( 125000000 ) ]  # Initialize 1 GB of memory
-
-   # Now we start our timer and do our calculation using multiple threads
-
-t_start = time.perf_counter()
-
-psum = pymp.shared.array( (nthreads,), dtype='float' )
-for i in range( nthreads ):
-   psum[i] = 0.0
-
-d_prod = 0.0
-with pymp.Parallel( nthreads ) as p:
-   for i in p.range( N ):
-      #d_prod += x[i] * y[i]
-      psum[p.thread_num] += x[i] * y[i]
-
-for i in range( nthreads ):     # Explicitly do the reduction across threads
-   d_prod += psum[i]
-
-t_elapsed = time.perf_counter() - t_start
-
-   # The calculation is done and timer stopped so print out the answer
-
-print('dot product = ', d_prod, 'took ', t_elapsed, ' seconds' );
-print( 2.0*N*1.0e-9 / t_elapsed, ' Gflops (billion floating-point operations per second)')
-print( 2.0*N*8.0/1.0e9, ' GB memory used' )</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Do the dot product between two vectors X and Y then print the result</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># USAGE:  python dot_product_threaded.py 4       to run on 4 threads</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>import sys</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>import time</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>import pymp</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>   <span class="co"># Get and set nthreads from the command line</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>pymp.config.num_threads <span class="ot">=</span> <span class="fu">int</span>( sys.argv[<span class="dv">1</span>] )</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>nthreads <span class="ot">=</span> pymp.config.num_threads</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100000000</span>      <span class="co"># Do a large enough test to reduce timing variance</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>x <span class="ot">=</span> [ <span class="fu">float</span>( i ) <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( N ) ]</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>y <span class="ot">=</span> [ <span class="fu">float</span>( i ) <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( N ) ]</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>   <span class="co"># Now initialize a very large dummy array to force X and Y out of all levels of cache</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>   <span class="co">#    so that our times are for pulling elements up from main memory.</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>dummy <span class="ot">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( <span class="dv">125000000</span> ) ]  <span class="co"># Initialize 1 GB of memory</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>   <span class="co"># Now we start our timer and do our calculation using multiple threads</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>t_start <span class="ot">=</span> <span class="fu">time.perf_counter</span>()</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>psum <span class="ot">=</span> <span class="fu">pymp.shared.array</span>( (nthreads,), <span class="at">dtype=</span><span class="st">'float'</span> )</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( nthreads )<span class="sc">:</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>   psum[i] <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>d_prod <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>with <span class="fu">pymp.Parallel</span>( nthreads ) as p<span class="sc">:</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>   <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">p.range</span>( N )<span class="sc">:</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>      <span class="co">#d_prod += x[i] * y[i]</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>      psum[p.thread_num] <span class="sc">+</span><span class="er">=</span> x[i] <span class="sc">*</span> y[i]</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( nthreads )<span class="sc">:</span>     <span class="co"># Explicitly do the reduction across threads</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>   d_prod <span class="sc">+</span><span class="er">=</span> psum[i]</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>t_elapsed <span class="ot">=</span> <span class="fu">time.perf_counter</span>() <span class="sc">-</span> t_start</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>   <span class="co"># The calculation is done and timer stopped so print out the answer</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'dot product = '</span>, d_prod, <span class="st">'took '</span>, t_elapsed, <span class="st">' seconds'</span> );</span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="fu">print</span>( <span class="fl">2.0</span><span class="sc">*</span>N<span class="sc">*</span><span class="fl">1.0e-9</span> <span class="sc">/</span> t_elapsed, <span class="st">' Gflops (billion floating-point operations per second)'</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="fu">print</span>( <span class="fl">2.0</span><span class="sc">*</span>N<span class="sc">*</span><span class="fl">8.0</span><span class="sc">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
+</div>
 <p>So parallelizing this program really only requires us to change
 around 11 lines of code, and from that we get the benefit of being able
 to apply much greater computing power. We do have some control over how
@@ -596,25 +599,43 @@ something to be aware of.</p>
 mechanisms and/or methods of having part of a loop done by a single
 thread at a time. This always leads to terrible scaling and should
 almost never be done.</p>
-<blockquote>
-<h2 id="scaling-study-of-the-multi-threaded-dot-product-code">Scaling
-Study of the Multi-Threaded Dot Product Code</h2>
+<div id="scaling-study-of-the-multi-threaded-dot-product-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="scaling-study-of-the-multi-threaded-dot-product-code" class="callout-inner">
+<h3 class="callout-title">Scaling Study of the Multi-Threaded Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-multi-threaded-dot-product-code"></a>
+</h3>
+<div class="callout-content">
 <p>Measure the execution time for the dot_product_threaded.py code for
 1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
 and do all runs in the same job. Then calculate the speedup compared to
 the scalar (single-core) run to see how close to ideal the performance
-is. &gt; ## Solution and Analysis For this very simple problem, each
-thread can do its computations totally independently. There is only a
-global sum of all the partial sums at the end, so we would expect the
-scaling to be close to ideal. In my measurements, I saw a 3.1x speedup
-on 4 cores, a 5.3x speedup on 8 cores, and a 7.8x speedup on 16 cores.
-For this problem, there just is so few computations being done in each
-loop iteration, only 2 floating-pont operations, that the loop overhead
-is preventing better scaling. A C version of this code using OpenMP for
-multi-threading runs 170 times faster, but likewise does not scale well
-due to the few computations being done in each pass through the loop. {:
-.solution} {: .challenge}</p>
-</blockquote>
+is.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>For this very simple problem, each thread can do its computations
+totally independently. There is only a global sum of all the partial
+sums at the end, so we would expect the scaling to be close to ideal. In
+my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
+cores, and a 7.8x speedup on 16 cores. For this problem, there just is
+so few computations being done in each loop iteration, only 2
+floating-pont operations, that the loop overhead is preventing better
+scaling. A C version of this code using OpenMP for multi-threading runs
+170 times faster, but likewise does not scale well due to the few
+computations being done in each pass through the loop.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -702,7 +723,7 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/multi-threaded.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/multi-threaded.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-15",
+  "dateModified": "2024-07-16",
   "datePublished": "2024-07-16"
 }
 

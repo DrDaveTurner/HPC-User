@@ -418,7 +418,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>High-Throughput Computing</h1>
-        <p>Last updated on 2024-07-15 |
+        <p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/high-throughput-computing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -526,24 +526,27 @@ of these jobs to submit. If multiple jobs are submitted then the
 environmental variable <strong>$(Process)</strong> will be used in the
 script to differentiate each with that being between zero and the number
 of jobs specified minus one.</p>
-<pre><code>#!/bin/bash -l
-
-output = osg.namd.out
-error = osg.namd.error
-log = osg.namd.log
-
-# Requested resources
-request_cpus = 8
-request_memory = 8 GB
-request_disk = 1 GB
-requirements = Arch == "X86_64" &amp;&amp; HAS_MODULES == True
-
-transfer_input_files = input_files/         # Slash means all files in that directory
-executable = namd2
-arguments = +p8 test.0.namd
-transfer_output_files = output
-queue 1</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a> </span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">output</span> = osg.namd.out</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">error</span> = osg.namd.error</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="ex">log</span> = osg.namd.log</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a> </span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># Requested resources</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="ex">request_cpus</span> = 8</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="ex">request_memory</span> = 8 GB</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="ex">request_disk</span> = 1 GB</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="ex">requirements</span> = Arch == <span class="st">"X86_64"</span> <span class="kw">&amp;&amp;</span> <span class="ex">HAS_MODULES</span> == True</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a> </span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="ex">transfer_input_files</span> = input_files/         <span class="co"># Slash means all files in that directory</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="ex">executable</span> = namd2</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="ex">arguments</span> = +p8 test.0.namd</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="ex">transfer_output_files</span> = output</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="ex">queue</span> 1</span></code></pre>
+</div>
 <p>Most systems will have support for modules, but the
 <strong>HAS_MODULES == True</strong> requirement can mean some systems
 are not supported. Most systems use RHEL7, so specifying that may also
@@ -552,25 +555,35 @@ mainstream OS and modules then you should be fine. Otherwise you likely
 will need to use a container.</p>
 <p>Once you have the script you can submit, monitor, and control the job
 using commands like those below.</p>
-<pre><code>&gt; condor_submit htc_job.sh                   # Submit the condor script to the queue
-&gt; condor_q                                   # Check on the status while in the queue
-&gt; condor_q netid                             # Check status of currently running jobs
-&gt; condor_q 121763                            # Check status of a particular job
-&gt; condor_history 121763                      # Check status of a job that is completed
-&gt; condor_history -long 121763                # Same but report more info
-&gt; condor_rm 121763                           # Remove the job number specified
-&gt; condor_rm daveturner                       # Remove all jobs for the given username</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="op">&gt;</span> condor_submit <span class="ex">htc_job.sh</span>                   <span class="co"># Submit the condor script to the queue</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="op">&gt;</span> condor_q                                   <span class="co"># Check on the status while in the queue</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="op">&gt;</span> condor_q <span class="ex">netid</span>                             <span class="co"># Check status of currently running jobs</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="op">&gt;</span> condor_q <span class="ex">121763</span>                            <span class="co"># Check status of a particular job</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="op">&gt;</span> condor_history <span class="ex">121763</span>                      <span class="co"># Check status of a job that is completed</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="op">&gt;</span> condor_history <span class="ex">-long</span> 121763                <span class="co"># Same but report more info</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="op">&gt;</span> condor_rm <span class="ex">121763</span>                           <span class="co"># Remove the job number specified</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="op">&gt;</span> condor_rm <span class="ex">daveturner</span>                       <span class="co"># Remove all jobs for the given username</span></span></code></pre>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="htc-outside-the-u-s-">HTC Outside the U.S.<a class="anchor" aria-label="anchor" href="#htc-outside-the-u.s."></a>
 <a class="anchor" aria-label="anchor" href="#htc-outside-the-u-s-"></a></h2>
 <hr class="half-width"><p>Need to add info about non-US HTC systems</p>
-<blockquote>
-<h2 id="homework-get-an-osg-account-and-submit-a-test-job.">Homework:
-Get an OSG account and submit a test job.</h2>
+<div id="homework-get-an-osg-account-and-submit-a-test-job." class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="homework-get-an-osg-account-and-submit-a-test-job." class="callout-inner">
+<h3 class="callout-title">Homework: Get an OSG account and submit a test job.<a class="anchor" aria-label="anchor" href="#homework-get-an-osg-account-and-submit-a-test-job."></a>
+</h3>
+<div class="callout-content">
 <p>If you are in the U.S. and want a big challenge, request an OSG
-account and try submitting some small jobs. {: .challenge}</p>
-</blockquote>
+account and try submitting some small jobs.</p>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a></h2>
 <hr class="half-width"><p>High-Throughput Computing is free in the U.S. using the Open Science
@@ -664,7 +677,7 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/high-throughput-computing.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/high-throughput-computing.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-15",
+  "dateModified": "2024-07-16",
   "datePublished": "2024-07-16"
 }
 

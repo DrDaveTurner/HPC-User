@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parallel Computing Concepts</h1>
-        <p>Last updated on 2024-07-15 |
+        <p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/parallel-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -692,16 +692,29 @@ is that conversion process which is slow, so it doesn’t matter how fast
 the underlying file server is in these cases. So if you want to speed up
 IO, think about streaming data in binary form if possible, and if so
 then choose the fastest file server available.</p>
-<blockquote>
-<h2 id="scaling-study-of-the-distributed-memory-dot-product-code">Scaling
-Study of the Distributed-Memory Dot Product Code</h2>
+<div id="scaling-study-of-the-distributed-memory-dot-product-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="scaling-study-of-the-distributed-memory-dot-product-code" class="callout-inner">
+<h3 class="callout-title">Scaling Study of the Distributed-Memory Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-distributed-memory-dot-product-code"></a>
+</h3>
+<div class="callout-content">
 <p>Measure the entire runtime for the dot_product_mpi.py code for 1, 4,
 8, and 16 cores if you are on an HPC system with at least 2 compute
 nodes. You can try different combinations of nodes and cores for each if
 you would like to see the effects of the network (for the 4 cores, try 2
 nodes 2 cores vs 4 nodes 1 core).</p>
-<blockquote>
-<h2 id="solution-and-analysis">Solution and Analysis</h2>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
 end, so we expect the scaling to be close to ideal. In many practical
@@ -710,9 +723,11 @@ data up and send it out to each other node. Real MPI applications also
 usually require communication mixed in with the computational part in
 order to get data where it needs to be. All this communication can slow
 down the job, and this usually gets worse as you spread a job over more
-cores, and especially over more nodes. {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+cores, and especially over more nodes.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -792,7 +807,7 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/parallel-concepts.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/parallel-concepts.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-15",
+  "dateModified": "2024-07-16",
   "datePublished": "2024-07-16"
 }
 

@@ -409,7 +409,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The Python Language</h1>
-        <p>Last updated on 2024-07-15 |
+        <p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -492,13 +492,12 @@ programmer with <strong><span class="citation">@jit</span>(nopython=True,cache=T
 uses the industry standard <strong>LLVM</strong> compiler library, but
 the compilation is not being done once ahead of the runtime as with
 C/C++ and Fortran, it is being done at runtime in what is referred to as
-a <strong>just-in-time</strong> or JIT manner.<br>
-How effective this approach can be will depend on how much the
-compilation can be done in advance of when it is needed, and how much
-optimization it can do on the fly, but there also is the option to save
-the compiled functions so that they don’t need to be recompiled for
-subsequent runs. There are also multi-threading options for
-parallelizing functions.</p>
+a <strong>just-in-time</strong> or JIT manner. How effective this
+approach can be will depend on how much the compilation can be done in
+advance of when it is needed, and how much optimization it can do on the
+fly, but there also is the option to save the compiled functions so that
+they don’t need to be recompiled for subsequent runs. There are also
+multi-threading options for parallelizing functions.</p>
 </div>
 <div class="section level3">
 <h3 id="python-capabilities">Python capabilities<a class="anchor" aria-label="anchor" href="#python-capabilities"></a></h3>
@@ -551,21 +550,27 @@ example of creating one called <strong>env-py-3.7.4</strong> where I
 labled it after the version of Python being used. The dollar sign is the
 command prompt to illustrate how the prompt changes while the virtual
 environment is active.</p>
-<pre><code>$ mkdir -p ~/virtualenvs
-$ cd ~/virtualenvs
-$ virtualenv env-py-3.7.4
-$ source ~/virtualenvs/env-py-3.7.4/bin/activate
-(env-py-3.7.4)$              the prompt is now prefaced with environment name</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/virtualenvs</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> cd ~/virtualenvs</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">$</span> virtualenv env-py-3.7.4</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">$</span> source ~/virtualenvs/env-py-3.7.4/bin/activate</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span>              the prompt is now prefaced with environment name</span></code></pre>
+</div>
 <p>Once activated the prompt will change to show that you are working in
 the <strong>env-py-3.7.4</strong> environment. You can install any
 packages you need, run your python code, then deactivate the environment
 when you are done.</p>
-<pre><code>(env-py-3.7.4)$ pip install numpy scipy
-(env-py-3.7.4)$ python python_code.py
-(env-py-3.7.4)$ deactivate
-$</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> pip install numpy scipy</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> python python_code.py</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> deactivate</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ex">$</span></span></code></pre>
+</div>
 </div>
 <div class="section level3">
 <h3 id="compiling-python">Compiling Python<a class="anchor" aria-label="anchor" href="#compiling-python"></a></h3>
@@ -579,9 +584,12 @@ distribute it as a binary.</p>
 are on. In Linux you can compile code by adding a flag <strong>-m
 py_compile</strong> which will create an executable in a
 <strong><strong>pycach</strong></strong> directory.</p>
-<pre><code>python -m py_compile python_code.py
-mv  __pycache__/python_code.cpython-37.pyc  compiled_python_code.pyc</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> py_compile python_code.py</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">mv</span>  __pycache__/python_code.cpython-37.pyc  compiled_python_code.pyc</span></code></pre>
+</div>
 <p>The executable <strong>compiled_python_code.pyc</strong> will then
 run on systems where Python is not installed and you have no virtual
 environment activated.</p>
@@ -620,89 +628,176 @@ since with MPI each task is a separate copy of the same program. In
 general, the GIL is something to be aware of but packages like
 <strong>pymp</strong> have already done the work of getting around the
 problem.</p>
-<blockquote>
-<h2 id="play-with-the-python-dot-product-examples">Play with the Python
-dot product examples</h2>
+<div id="play-with-the-python-dot-product-examples" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="play-with-the-python-dot-product-examples" class="callout-inner">
+<h3 class="callout-title">Play with the Python dot product examples<a class="anchor" aria-label="anchor" href="#play-with-the-python-dot-product-examples"></a>
+</h3>
+<div class="callout-content">
 <p>Take a look at the Python versions of the dot product code to see how
 they differ from the C and Fortran versions. Also compare the
 <strong>pymp</strong> multi-threaded and <strong>mpi4py</strong>
 message-passing versions to the scalar version to see what changes were
 made. If you haven’t already, run the scalar code and do scaling studies
 with the multi-threaded and message-passing versions to see how they
-compare with versions written in other languages. &gt; ## Solution and
-Analysis While the syntax is different, the code is basically the same
-in each language. Performance is much slower for raw Python code than
-the compiled language. From looking at the same code in various
-languages, which do you think would be easiest to write from scratch? {:
-.solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="compare-the-raw-matrix-multiply-code-to-a-numpy-version">Compare
-the raw matrix multiply code to a <strong>NumPy</strong> version</h2>
+compare with versions written in other languages.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>While the syntax is different, the code is basically the same in each
+language. Performance is much slower for raw Python code than the
+compiled language. From looking at the same code in various languages,
+which do you think would be easiest to write from scratch?</p>
+</div>
+</div>
+</div>
+</div>
+<div id="compare-the-raw-matrix-multiply-code-to-a-numpy-version" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="compare-the-raw-matrix-multiply-code-to-a-numpy-version" class="callout-inner">
+<h3 class="callout-title">Compare the raw matrix multiply code to a
+<strong>NumPy</strong> version<a class="anchor" aria-label="anchor" href="#compare-the-raw-matrix-multiply-code-to-a-numpy-version"></a>
+</h3>
+<div class="callout-content">
 <p>Do a scaling study of the <strong>matmult.py</strong> code for
 various matrix sizes of 10, 100, and 1000. Compare this to the
 <strong>matmult_numpy.py</strong> version to see how much of a
-difference the highly-tuned library function makes. &gt; ## Solution and
-Analysis If you have already run the optimized C version, you may notice
-that the compiled code still beats the optimized <strong>NumPy</strong>
+difference the highly-tuned library function makes.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>If you have already run the optimized C version, you may notice that
+the compiled code still beats the optimized <strong>NumPy</strong>
 routine by 2-4 times in my tests. Using the <strong>NumPy</strong>
 routine closes the performance gap enormously but the C version is still
-better. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="test-the-numba-version-of-the-dot-product-code">Test the
-<strong>Numba</strong> version of the dot product code</h2>
+better.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="test-the-numba-version-of-the-dot-product-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="test-the-numba-version-of-the-dot-product-code" class="callout-inner">
+<h3 class="callout-title">Test the <strong>Numba</strong> version of the
+dot product code<a class="anchor" aria-label="anchor" href="#test-the-numba-version-of-the-dot-product-code"></a>
+</h3>
+<div class="callout-content">
 <p>Do a <strong>pip install numba</strong> then time the
 <strong>dot_product_numba.py</strong> performance and compare to the raw
-code.<br>
-Does the performance change if you cache the compilation by adding
+code. Does the performance change if you cache the compilation by adding
 <strong>cache=True</strong>? You will need to run twice so that the
-second time takes advantage of the cached compilation code. &gt; ##
-Solution and Analysis Notice that in this code we needed to rewrite the
-computationally intensive loops into functions. This does not take much
-effort but does disrupt the program flow somewhat, but if it speeds up
-the runtime it is usually worth it. Unfortunately in the case of the dot
-product the <strong>Numba</strong> version takes 13 seconds compared to
-only 90 milliseconds for the raw code. Adding
-<strong>cache=True</strong> to cache the compiled code does reduce the
-runtime down to 3.7 seconds but this is still substantially worse than
-the original code. There are also warnings about lists being deprecated
-as input arguments in the near future. Switching our algorithm to use
-<strong>NumPy</strong> arrays may be necessary but this also defeats the
-purpose of using <strong>Numba</strong> since <strong>NumPy</strong>
-already has optimized routines for the algorithms we are testing. So in
-short this isn’t a really good test of the capabilities of
-<strong>Numba</strong>, but is a good example of how these things don’t
-always work as hoped, and it illustrates that <strong>Numba</strong>
-does not support all aspects of Python. Forcing the computational parts
-of an algorithm into functions is also detracts from the flow of any
-program, and is definitely not what is considered as the Python way. {:
-.solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="optional-homework---test-the-pi-calculation-program-using-numba">Optional
-Homework - Test the Pi calculation program using
-<strong>Numba</strong>
-</h2>
+second time takes advantage of the cached compilation code.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<p>Notice that in this code we needed to rewrite the computationally
+intensive loops into functions. This does not take much effort but does
+disrupt the program flow somewhat, but if it speeds up the runtime it is
+usually worth it. Unfortunately in the case of the dot product the
+<strong>Numba</strong> version takes 13 seconds compared to only 90
+milliseconds for the raw code. Adding <strong>cache=True</strong> to
+cache the compiled code does reduce the runtime down to 3.7 seconds but
+this is still substantially worse than the original code. There are also
+warnings about lists being deprecated as input arguments in the near
+future. Switching our algorithm to use <strong>NumPy</strong> arrays may
+be necessary but this also defeats the purpose of using
+<strong>Numba</strong> since <strong>NumPy</strong> already has
+optimized routines for the algorithms we are testing. So in short this
+isn’t a really good test of the capabilities of <strong>Numba</strong>,
+but is a good example of how these things don’t always work as hoped,
+and it illustrates that <strong>Numba</strong> does not support all
+aspects of Python. Forcing the computational parts of an algorithm into
+functions is also detracts from the flow of any program, and is
+definitely not what is considered as the Python way.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="optional-homework---test-the-pi-calculation-program-using-numba" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="optional-homework---test-the-pi-calculation-program-using-numba" class="callout-inner">
+<h3 class="callout-title">Optional Homework - Test the Pi calculation
+program using <strong>Numba</strong><a class="anchor" aria-label="anchor" href="#optional-homework---test-the-pi-calculation-program-using-numba"></a>
+</h3>
+<div class="callout-content">
 <p>Write a Python vesion of the Pi calculation program and time raw
 Python code versus <strong>Numba</strong> optimized. If you want to have
 more fun try out <strong>Numba</strong> multi-threading compared to
 <strong>pymp</strong> for this same algorithm. This is a much fairer
 test of the capabilities of <strong>Numba</strong> since we are not
-comparing it to optimized functions in <strong>NumPy</strong>. &gt; ##
-Solution and Analysis If you do this please contribute your code and
-timings. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="optional-exercise---try-compiling-a-python-code">Optional
-Exercise - Try compiling a Python code</h2>
+comparing it to optimized functions in <strong>NumPy</strong>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div class="accordion-body">
+<p>If you do this please contribute your code and timings.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="optional-exercise---try-compiling-a-python-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="optional-exercise---try-compiling-a-python-code" class="callout-inner">
+<h3 class="callout-title">Optional Exercise - Try compiling a Python code<a class="anchor" aria-label="anchor" href="#optional-exercise---try-compiling-a-python-code"></a>
+</h3>
+<div class="callout-content">
 <p>If you have time, try compiling one of the Python test codes supplied
 like <strong>matmult_numpy.py</strong>. Then try running it without an
 active virtual environment meaning that there is no
-<strong>NumPy</strong> library installed. &gt; ## Solution and Analysis
-Once compiled you should be able to run this with a command like:
-<strong>./matmult.pyc 100</strong>. {: .solution} {: .challenge}</p>
-</blockquote>
+<strong>NumPy</strong> library installed.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div class="accordion-body">
+<p>Once compiled you should be able to run this with a command like:
+<strong>./matmult.pyc 100</strong>.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -795,7 +890,7 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/python.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/python.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-15",
+  "dateModified": "2024-07-16",
   "datePublished": "2024-07-16"
 }
 

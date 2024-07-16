@@ -490,7 +490,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Introduction</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 5 minutes</p>
@@ -527,6 +527,8 @@ eventually be the ability to choose which language the examples in the
 concepts part of the lesson are shown in, plus at each example the user
 will be able to click on a tab to see the examples in other
 languages.**</p>
+<p>Q? Do group-tags work across episodes or should I request
+global-tabs?</p>
 <section><h2 class="section-heading" id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 <a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -596,7 +598,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-profiling-code"><p>Content from <a href="profiling-code.html">Profiling Code for Performance</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/profiling-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -661,12 +663,20 @@ determine what number of cores is most efficient to use.</p>
 <strong>time</strong> function at the command prompt. Try timing the
 <strong>pwd</strong> command which prints the current working
 directory.</p>
-<pre><code>time pwd
-/Users/daveturner
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="bu">time</span> pwd</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>/Users/daveturner
 
 real	0m0.000s
 user	0m0.000s
 sys	0m0.000s</code></pre>
+</div>
 <p>The first thing you see is the output of the <strong>pwd</strong>
 command, which in this case is the directory
 <strong>/Users/daveturner</strong>. Then the <strong>time</strong>
@@ -680,12 +690,20 @@ general.</p>
 <p>Below is another example where this time we are timing the
 <strong>ls</strong> function which will list the files in the current
 directory.</p>
-<pre><code>time ls
-file1 file2 file3
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="bu">time</span> ls</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>file1 file2 file3
 
 real	0m0.110s
 user	0m0.006s
 sys	0m0.027s</code></pre>
+</div>
 <p>When I do this on my iMac, I get a real time of just 0.006 seconds
 because it’s really fast to access the local hard disk. The test above
 is from a very large cluster computer that has a parallel file server
@@ -706,11 +724,18 @@ seconds, there was some overhead or inaccuracy in the timnig routine or
 the length of the sleep. This is one thing that you always need to be
 aware of when measuring performance. If you are measuring short things,
 you may want to measure multiple times and take an average.</p>
-<pre><code>time sleep 5
-
-real	0m5.052s
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="bu">time</span> sleep 5</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>real	0m5.052s
 user	0m0.001s
 sys	0m0.003s</code></pre>
+</div>
 <p>In addition to worrying about the clock accuracy, you also need to
 worry about interferrence from other jobs that may be running on the
 same compute node you are on. The best way to time a real job is to test
@@ -750,29 +775,33 @@ of the code.</p>
 the package. Below is an example of using the clock function to measure
 the time it takes to do a loop, then measure the time it takes to dump
 an array out to a file.</p>
-<pre><code>import time
-
-N = 100
-array = [ float(i) for i in range( N ) ]
-
-t_start = time.perf_counter()
-
-sum = 0.0
-for i in range( N ):
-   sum += array[i]
-
-t_loop = time.perf_counter() - t_start
-print("The loop took ", t_loop, " seconds")
-
-t_start = time.perf_counter()
-
-fd = open( "array.out", "w")
-for i in range( N ):
-   fd.write( str(array[i]) + "\n" )
-fd.close()
-
-t_output = time.perf_counter() - t_start
-print("The output took ", t_output, " seconds")</code></pre>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>fd <span class="op">=</span> <span class="bu">open</span>( <span class="st">"array.out"</span>, <span class="st">"w"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>   fd.write( <span class="bu">str</span>(array[i]) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> )</span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>fd.close()</span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
+</div>
 <p>Try running this yourself by copying it into a timing.py file. When I
 run this, I see that the loop takes about 30 microseconds on my computer
 and the output file takes 10 milliseconds. Since both of these are above
@@ -792,19 +821,23 @@ range.</p>
 time a part of something that is in a larger loop, so we need to sum the
 times together. Try changing the timing so that it is inside the
 summation loop instead of outside it to see what happens.</p>
-<pre><code>t_start = time.perf_counter()
-
-sum = 0.0
-t_sum = 0.0
-for i in range( N ):
-   t0 = time.perf_counter()
-   sum += array[i]
-   t_sum += time.perf_counter() - t0
-
-t_loop = time.perf_counter() - t_start
-
-print("The sum took ", t_sum, " seconds")
-print("The loop took ", t_loop, " seconds")</code></pre>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>t_sum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>   t0 <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>   t_sum <span class="op">+=</span> time.perf_counter() <span class="op">-</span> t0</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The sum took "</span>, t_sum, <span class="st">" seconds"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span></code></pre>
+</div>
 <p>In my computer, the t_sum time is only a bit larger than the t_loop
 time from before, but remember that this doesn’t count the loop
 overhead. If we look at the t_loop time instead, in my computer it is
@@ -882,9 +915,15 @@ are on an HPC system with a batch scheduler like Slurm, you can use the
 running job and <strong>seff</strong> to find the maximum memory used
 for a completed job, using the job ID number in both cases to choose the
 job you are interested in.</p>
-<pre><code>seff 5072064
-
-Job ID: 5072064
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">seff</span> 5072064</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Job ID: 5072064
 Cluster: beocat
 User/Group: daveturner/daveturner_users
 State: FAILED (exit code 16)
@@ -894,6 +933,7 @@ CPU Efficiency: 97.10% of 00:01:09 core-walltime
 Job Wall-clock time: 00:01:09
 Memory Utilized: 2.26 GB
 Memory Efficiency: 11.31% of 20.00 GB</code></pre>
+</div>
 <p>The matrix multiplication job above used 10,000x10,000 matrices and
 took 1 minute 9 seconds. We see that in this case it used 2.26 GB of
 memory. One thing to keep in mind is that 1 GB can be calculated in
@@ -901,11 +941,18 @@ different ways. In this case, 1 kB is 1024 Bytes, 1 MB is 1024 x 1024
 Bytes, and 1 GB is 1024 x 1024 x 1024 Bytes. So 3 matrices are 3 x NxN x
 8 / (1024x1024x1024) GB = 2.235 GB, rounded up to 2.26 GB. In general,
 if you estimate 1 GB as 10^9 Bytes that works fine.</p>
-<pre><code>sstat --format=MaxRSS 5072069
-
-MaxRSS
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">sstat</span> <span class="at">--format</span><span class="op">=</span>MaxRSS 5072069</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>MaxRSS
 ----------
   2289.50M</code></pre>
+</div>
 <p>For a running job you can use the <strong>sstat</strong> command with
 the job ID number. The <strong>sstat</strong> command will dump a lot of
 information out, so using the <strong>–format=MaxRSS</strong> parameter
@@ -953,7 +1000,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-performance-concepts"><p>Content from <a href="performance-concepts.html">Performance Concepts</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -1011,7 +1058,7 @@ summing them into D. We loop through all elements of the vectors, each
 time pulling the X and Y element into memory, multiplying them together
 and summing them into D. Then at the end, we push D back down into main
 memory where the program prints the result out to the screen for us.</p>
-<figure><img src="../fig/dot_prod_fig.jpg" alt="Dot product between vectors X and Y" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
+<figure><img src="../figs/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
 </figure><p>This conceptual view of what the computer is doing is all we really
 need to be aware of when we are starting to writing programs. But when
 those programs start taking too long to run on a PC or laptop, then we
@@ -1042,8 +1089,9 @@ likely to be in one of the cache layers where it can be accessed more
 quickly. In the case of our dot product, that means loading the first
 element X1 may take 93-106 ns while the next 7 only take 3 ns since they
 are already in L1 cache.</p>
-<figure><img src="../fig/Memory_Hierarchy.jpg" alt="Memory Hierarchy in a Computer" class="figure mx-auto d-block"><div class="figcaption">Memory Hierarchy in a Computer</div>
-</figure><p>How does this knowledge help us? Performance is more about getting
+<p><img src="../figs/Memory_Hierarchy.jpg" alt="Memory Hierarchy in a Computer" class="figure"> { alt=“Diagram of the memory
+hierarchy in a typical computer” }</p>
+<p>How does this knowledge help us? Performance is more about getting
 data to the processor since most operations are very fast once the data
 is in the registers. If the vector is instead not stored in contiguous
 memory, with each variable in the next memory location, then the
@@ -1055,17 +1103,20 @@ execution time between these two cases.</p>
 <p>Now let’s look at a simple matrix multiplication algorithm which is
 fairly simple to program, but may have very different performance
 depending on how you write the code.</p>
-<figure><img src="../fig/matmult_fig.jpg" alt="Matrix multiplication C = A * B" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
-</figure><p>Once the matrices are initialized, the code to multiply them together
+<p><img src="../figs/matmult_fig.jpg" alt="Matrix multiplication C = A * B" class="figure"> { alt=“Formula and diagram of a
+matrix multiply” }</p>
+<p>Once the matrices are initialized, the code to multiply them together
 is fairly simple.</p>
-<pre><code>N = 100
-for i in range( N ):
-    for j in range( N ):
-        C[i][j] = 0
-        for i in range( N ):
-            C[i][j] += A[i][k] * B[k][j]
-</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>        C[i][j] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>            C[i][j] <span class="op">+=</span> A[i][k] <span class="op">*</span> B[k][j]</span></code></pre>
+</div>
 <p>But if we are concerned about performance, we need to take a better
 look at this code. Python is a row-major language like C/C++, which
 means matrices like this are stored by rows first as in the picture
@@ -1090,11 +1141,14 @@ ourselves, we just need to know that it is in optimized libraries that
 we can call at any time. In the case of Python, there is an optimized
 matrix multiplaction function in the <strong>NumPy</strong> library that
 is easy to use as shown below.</p>
-<pre><code>import numpy as np
-
-N = 100
-C = np.matmult( A, B )</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>C <span class="op">=</span> np.matmult( A, B )</span></code></pre>
+</div>
 <p>So while writing a matrix multiplication code from scratch is not
 difficult, using the optimized function from <strong>NumPy</strong> is
 even easier and guarantees the best performance. To find out how much
@@ -1107,36 +1161,62 @@ time which is very slow. Show algorithm to illustrate complexity.</p>
 <p>Good news is that in HPC, often the hard work is already done for
 you, you just need to know to make use of someone elses hard work. –&gt;
 Use optimized libraries when at all possible.</p>
-<blockquote>
-<h2 id="measuring-cache-line-effects">Measuring Cache Line Effects</h2>
+<div id="measuring-cache-line-effects" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="measuring-cache-line-effects" class="callout-inner">
+<h3 class="callout-title">Measuring Cache Line Effects<a class="anchor" aria-label="anchor" href="#measuring-cache-line-effects"></a>
+</h3>
+<div class="callout-content">
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
 queue that at least ensures the code is being run on an isolated
 processing core. Then run the dot_product_sparse.py code in the same
 manner for comparison. How much faster is the first code where the
-vectors are stored in contiguous memory? How much faster should it be?
-&gt; ## Solution and Analysis Is the time difference what we expected?
-When I ran this on a new Intel processor that did not have any other
-jobs running, I measured 180 milliseconds for the contiguous memory case
-and 1230 milliseconds for the sparse case, resulting in a 6.9-times
-speedup by keeping the vector in contiguous memory. Since a cache line
-is 64 Bytes and each element is 8 bytes, when the first element is
-loaded the next 7 are brought into L1 cache essentially for free since
-they are in contiguous memory. Therefore we expect it to take 100 ns to
-load 8 elements of X, then 100 ns to load 8 elements of Y, then only a
-few ns to get each element into the registers and do the computations.
-For the sparse vectors, it should take 8 times as long since each load
-will take 100 ns. If you didn’t see an 8-times speedup, don’t worry. The
-cache system is actually even more complicated than this picture. Also
-remember that you may be sharing parts of the processor with others. The
-main thing to learn here is that if you take advantage of the cache line
-by keeping the vectors in contiguous memory, your code will run faster.
-{: .solution} {: .challenge}</p>
-</blockquote>
+vectors are stored in contiguous memory? How much faster should it
+be?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
 <blockquote>
-<h2 id="time-different-matrix-multiplication-methods">Time Different
-Matrix Multiplication Methods</h2>
+<p>Is the time difference what we expected? When I ran this on a new
+Intel processor that did not have any other jobs running, I measured 180
+milliseconds for the contiguous memory case and 1230 milliseconds for
+the sparse case, resulting in a 6.9-times speedup by keeping the vector
+in contiguous memory. Since a cache line is 64 Bytes and each element is
+8 bytes, when the first element is loaded the next 7 are brought into L1
+cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take 100 ns to load 8 elements of X, then 100
+ns to load 8 elements of Y, then only a few ns to get each element into
+the registers and do the computations. For the sparse vectors, it should
+take 8 times as long since each load will take 100 ns. If you didn’t see
+an 8-times speedup, don’t worry. The cache system is actually even more
+complicated than this picture. Also remember that you may be sharing
+parts of the processor with others. The main thing to learn here is that
+if you take advantage of the cache line by keeping the vectors in
+contiguous memory, your code will run faster.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="time-different-matrix-multiplication-methods" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="time-different-matrix-multiplication-methods" class="callout-inner">
+<h3 class="callout-title">Time Different Matrix Multiplication Methods<a class="anchor" aria-label="anchor" href="#time-different-matrix-multiplication-methods"></a>
+</h3>
+<div class="callout-content">
 <p>There are 2 separate codes supplied to perform the same matrix
 multiplication for a given matrix size, matmult.py is raw Python code
 and matmult_numpy.py uses the highly optimized
@@ -1149,36 +1229,54 @@ size as an argument, so you run using <strong>python matmult.py
 <strong>numpy</strong> function. You should run this through a batch
 scheduler if at all possible since numpy will grab any cores it can, and
 for a fair comparison we want to test out only the single-core
-performance. &gt; ## Solution and Analysis For the 10x10 matrix size
-there are 3 matrices having 100 elements each needing 8 bytes storage,
-so storing all 3 matrices requires only 2.4 kB of memory. Everything
-fits entirely in L1 cache, so the block optimized algorithm from
-<strong>NumPy</strong> isn’t really needed. For the 100x100 matrix size,
-240 kB is needed to store all 3 matrices so they will fit entirely in L2
-cache, but not L1 cache. We therefore expect a significant improvement
-by using the optimized <strong>np.matmult()</strong> function. For the
-1000x1000 matrix size, we need 24 MB to store all 3 matrices so it will
-reside in L3 cache. The <strong>np.matmult()</strong> function should
-speed up this run by substantially more. The optimization of the
-<strong>NumPy</strong> routine however goes far beyond just block
-optimizing the algorithm so that it reuses data in L1 cache though.
-There are also computational optimizations that allow for many
-multiply-add operations to occur in the same clock cycle, which is
-called vectorization. My measurements on a modern Intel processor more
-of a performance benefit for larger matrix sizes. For 1000x1000
-matrices, the raw Python code was very slow at 6.5 MFlops (Million
-floating-point operations per second). All the optimizations in the
-<strong>NumPy</strong> code brought the performance up to 15.4 GFlops,
-or a whopping 2354 times faster. Raw Python code is fairly slow in
-itself because it is interpretted and not compiled like C/C++/Fortran
-code, clearly you can do very well if you learn to use the heavily
-optimized library routines. C is still faster than Python, with raw C
-code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine reaching
-91 GFlops. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="advanced-exercise---transpose-b-to-cache-line-optimize-it">Advanced
-Exercise - Transpose B to cache-line optimize it</h2>
+performance.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>For the 10x10 matrix size there are 3 matrices having 100 elements
+each needing 8 bytes storage, so storing all 3 matrices requires only
+2.4 kB of memory. Everything fits entirely in L1 cache, so the block
+optimized algorithm from <strong>NumPy</strong> isn’t really needed. For
+the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache. We therefore
+expect a significant improvement by using the optimized
+<strong>np.matmult()</strong> function. For the 1000x1000 matrix size,
+we need 24 MB to store all 3 matrices so it will reside in L3 cache. The
+<strong>np.matmult()</strong> function should speed up this run by
+substantially more. The optimization of the <strong>NumPy</strong>
+routine however goes far beyond just block optimizing the algorithm so
+that it reuses data in L1 cache though. There are also computational
+optimizations that allow for many multiply-add operations to occur in
+the same clock cycle, which is called vectorization. My measurements on
+a modern Intel processor more of a performance benefit for larger matrix
+sizes. For 1000x1000 matrices, the raw Python code was very slow at 6.5
+MFlops (Million floating-point operations per second). All the
+optimizations in the <strong>NumPy</strong> code brought the performance
+up to 15.4 GFlops, or a whopping 2354 times faster. Raw Python code is
+fairly slow in itself because it is interpretted and not compiled like
+C/C++/Fortran code, clearly you can do very well if you learn to use the
+heavily optimized library routines. C is still faster than Python, with
+raw C code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine
+reaching 91 GFlops.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="advanced-exercise---transpose-b-to-cache-line-optimize-it" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="advanced-exercise---transpose-b-to-cache-line-optimize-it" class="callout-inner">
+<h3 class="callout-title">Advanced Exercise - Transpose B to cache-line optimize it<a class="anchor" aria-label="anchor" href="#advanced-exercise---transpose-b-to-cache-line-optimize-it"></a>
+</h3>
+<div class="callout-content">
 <p>As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
 memory, as we learned from the dot product example. Unfortunately,
@@ -1189,13 +1287,26 @@ this wasn’t available one thing we’d consider is to transpose the B
 matrix so that it is stored in column-major format before doing the
 matrix multiplication. If you’re up for a challenge, try programming
 this up to see if it improves the performance compared to the original
-Python code. &gt; ## Solution and Analysys There are a great many levels
-of optimization that can be done to the matrix multiplication algorithm.
-Transposing B should improve the performance some. For a more complete
-overview of what is done in the <strong>np.matmult()</strong> algorithm
-and others like it, follow the link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a> {:
-.solution} {: .challenge}</p>
-</blockquote>
+Python code.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<p>There are a great many levels of optimization that can be done to the
+matrix multiplication algorithm. Transposing B should improve the
+performance some. For a more complete overview of what is done in the
+<strong>np.matmult()</strong> algorithm and others like it, follow the
+link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a></p>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
@@ -1236,7 +1347,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-parallel-concepts"><p>Content from <a href="parallel-concepts.html">Parallel Computing Concepts</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/parallel-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -1537,16 +1648,29 @@ is that conversion process which is slow, so it doesn’t matter how fast
 the underlying file server is in these cases. So if you want to speed up
 IO, think about streaming data in binary form if possible, and if so
 then choose the fastest file server available.</p>
-<blockquote>
-<h2 id="scaling-study-of-the-distributed-memory-dot-product-code">Scaling
-Study of the Distributed-Memory Dot Product Code</h2>
+<div id="scaling-study-of-the-distributed-memory-dot-product-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="scaling-study-of-the-distributed-memory-dot-product-code" class="callout-inner">
+<h3 class="callout-title">Scaling Study of the Distributed-Memory Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-distributed-memory-dot-product-code"></a>
+</h3>
+<div class="callout-content">
 <p>Measure the entire runtime for the dot_product_mpi.py code for 1, 4,
 8, and 16 cores if you are on an HPC system with at least 2 compute
 nodes. You can try different combinations of nodes and cores for each if
 you would like to see the effects of the network (for the 4 cores, try 2
 nodes 2 cores vs 4 nodes 1 core).</p>
-<blockquote>
-<h2 id="solution-and-analysis">Solution and Analysis</h2>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
 end, so we expect the scaling to be close to ideal. In many practical
@@ -1555,9 +1679,11 @@ data up and send it out to each other node. Real MPI applications also
 usually require communication mixed in with the computational part in
 order to get data where it needs to be. All this communication can slow
 down the job, and this usually gets worse as you spread a job over more
-cores, and especially over more nodes. {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+cores, and especially over more nodes.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1583,7 +1709,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-multi-threaded"><p>Content from <a href="multi-threaded.html">Multi-Threaded Programs</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/multi-threaded.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -1654,7 +1780,7 @@ elements it is responsible for, so all 4 threads are running at the same
 time but operating on different parts of the data. After they have all
 completed their parts, then the master thread sums all for partial sums
 into the dot product and prints it out.</p>
-<figure><img src="../fig/multi-threaded-dot-product-0.jpg" alt="Diagram of a shared-memory multi-threaded dot product" class="figure mx-auto d-block"><div class="figcaption">Diagram of a shared-memory multi-threaded dot
+<figure><img src="../figs/multi-threaded-dot-product-0.jpg" alt="Shared-memory multi-threaded dot product showing the memory layout of both vectors" class="figure mx-auto d-block"><div class="figcaption">Diagram of a shared-memory multi-threaded dot
 product</div>
 </figure><div class="section level3">
 <h3 id="the-multi-threaded-dot-product-code">The multi-threaded dot product code<a class="anchor" aria-label="anchor" href="#the-multi-threaded-dot-product-code"></a>
@@ -1689,53 +1815,56 @@ of doing it more explicitly, so in our code we need to create a shared
 array of partial sums and manually sum them together at the end. This is
 just as efficient computationally, it just takes a little extra coding
 but is more explicit.</p>
-<pre><code># Do the dot product between two vectors X and Y then print the result
-# USAGE:  python dot_product_threaded.py 4       to run on 4 threads
-
-import sys
-import time
-import pymp
-
-   # Get and set nthreads from the command line
-
-pymp.config.num_threads = int( sys.argv[1] )
-nthreads = pymp.config.num_threads
-
-N = 100000000      # Do a large enough test to reduce timing variance
-
-x = [ float( i ) for i in range( N ) ]
-y = [ float( i ) for i in range( N ) ]
-
-   # Now initialize a very large dummy array to force X and Y out of all levels of cache
-   #    so that our times are for pulling elements up from main memory.
-
-dummy = [ 0.0 for i in range( 125000000 ) ]  # Initialize 1 GB of memory
-
-   # Now we start our timer and do our calculation using multiple threads
-
-t_start = time.perf_counter()
-
-psum = pymp.shared.array( (nthreads,), dtype='float' )
-for i in range( nthreads ):
-   psum[i] = 0.0
-
-d_prod = 0.0
-with pymp.Parallel( nthreads ) as p:
-   for i in p.range( N ):
-      #d_prod += x[i] * y[i]
-      psum[p.thread_num] += x[i] * y[i]
-
-for i in range( nthreads ):     # Explicitly do the reduction across threads
-   d_prod += psum[i]
-
-t_elapsed = time.perf_counter() - t_start
-
-   # The calculation is done and timer stopped so print out the answer
-
-print('dot product = ', d_prod, 'took ', t_elapsed, ' seconds' );
-print( 2.0*N*1.0e-9 / t_elapsed, ' Gflops (billion floating-point operations per second)')
-print( 2.0*N*8.0/1.0e9, ' GB memory used' )</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Do the dot product between two vectors X and Y then print the result</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># USAGE:  python dot_product_threaded.py 4       to run on 4 threads</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>import sys</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>import time</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>import pymp</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>   <span class="co"># Get and set nthreads from the command line</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>pymp.config.num_threads <span class="ot">=</span> <span class="fu">int</span>( sys.argv[<span class="dv">1</span>] )</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>nthreads <span class="ot">=</span> pymp.config.num_threads</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100000000</span>      <span class="co"># Do a large enough test to reduce timing variance</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>x <span class="ot">=</span> [ <span class="fu">float</span>( i ) <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( N ) ]</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>y <span class="ot">=</span> [ <span class="fu">float</span>( i ) <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( N ) ]</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>   <span class="co"># Now initialize a very large dummy array to force X and Y out of all levels of cache</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>   <span class="co">#    so that our times are for pulling elements up from main memory.</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>dummy <span class="ot">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( <span class="dv">125000000</span> ) ]  <span class="co"># Initialize 1 GB of memory</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>   <span class="co"># Now we start our timer and do our calculation using multiple threads</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>t_start <span class="ot">=</span> <span class="fu">time.perf_counter</span>()</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>psum <span class="ot">=</span> <span class="fu">pymp.shared.array</span>( (nthreads,), <span class="at">dtype=</span><span class="st">'float'</span> )</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( nthreads )<span class="sc">:</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>   psum[i] <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>d_prod <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>with <span class="fu">pymp.Parallel</span>( nthreads ) as p<span class="sc">:</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>   <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">p.range</span>( N )<span class="sc">:</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>      <span class="co">#d_prod += x[i] * y[i]</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>      psum[p.thread_num] <span class="sc">+</span><span class="er">=</span> x[i] <span class="sc">*</span> y[i]</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( nthreads )<span class="sc">:</span>     <span class="co"># Explicitly do the reduction across threads</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>   d_prod <span class="sc">+</span><span class="er">=</span> psum[i]</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>t_elapsed <span class="ot">=</span> <span class="fu">time.perf_counter</span>() <span class="sc">-</span> t_start</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>   <span class="co"># The calculation is done and timer stopped so print out the answer</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'dot product = '</span>, d_prod, <span class="st">'took '</span>, t_elapsed, <span class="st">' seconds'</span> );</span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="fu">print</span>( <span class="fl">2.0</span><span class="sc">*</span>N<span class="sc">*</span><span class="fl">1.0e-9</span> <span class="sc">/</span> t_elapsed, <span class="st">' Gflops (billion floating-point operations per second)'</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="fu">print</span>( <span class="fl">2.0</span><span class="sc">*</span>N<span class="sc">*</span><span class="fl">8.0</span><span class="sc">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
+</div>
 <p>So parallelizing this program really only requires us to change
 around 11 lines of code, and from that we get the benefit of being able
 to apply much greater computing power. We do have some control over how
@@ -1771,25 +1900,43 @@ something to be aware of.</p>
 mechanisms and/or methods of having part of a loop done by a single
 thread at a time. This always leads to terrible scaling and should
 almost never be done.</p>
-<blockquote>
-<h2 id="scaling-study-of-the-multi-threaded-dot-product-code">Scaling
-Study of the Multi-Threaded Dot Product Code</h2>
+<div id="scaling-study-of-the-multi-threaded-dot-product-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="scaling-study-of-the-multi-threaded-dot-product-code" class="callout-inner">
+<h3 class="callout-title">Scaling Study of the Multi-Threaded Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-multi-threaded-dot-product-code"></a>
+</h3>
+<div class="callout-content">
 <p>Measure the execution time for the dot_product_threaded.py code for
 1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
 and do all runs in the same job. Then calculate the speedup compared to
 the scalar (single-core) run to see how close to ideal the performance
-is. &gt; ## Solution and Analysis For this very simple problem, each
-thread can do its computations totally independently. There is only a
-global sum of all the partial sums at the end, so we would expect the
-scaling to be close to ideal. In my measurements, I saw a 3.1x speedup
-on 4 cores, a 5.3x speedup on 8 cores, and a 7.8x speedup on 16 cores.
-For this problem, there just is so few computations being done in each
-loop iteration, only 2 floating-pont operations, that the loop overhead
-is preventing better scaling. A C version of this code using OpenMP for
-multi-threading runs 170 times faster, but likewise does not scale well
-due to the few computations being done in each pass through the loop. {:
-.solution} {: .challenge}</p>
-</blockquote>
+is.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>For this very simple problem, each thread can do its computations
+totally independently. There is only a global sum of all the partial
+sums at the end, so we would expect the scaling to be close to ideal. In
+my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
+cores, and a 7.8x speedup on 16 cores. For this problem, there just is
+so few computations being done in each loop iteration, only 2
+floating-pont operations, that the loop overhead is preventing better
+scaling. A C version of this code using OpenMP for multi-threading runs
+170 times faster, but likewise does not scale well due to the few
+computations being done in each pass through the loop.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1823,7 +1970,7 @@ any links that you are not going to use.
  -->
 </div></section><section id="aio-message-passing"><p>Content from <a href="message-passing.html">Message-Passing Programs</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/message-passing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -1887,7 +2034,7 @@ running. The jobs will handshake then decide which part of the data each
 is responsible for. After all nodes have calculated their partial sums,
 those will be globally summed across all 8 tasks using the network if
 needed then the program with rank 1 will print out the results.</p>
-<figure><img src="../fig/distributed-memory-dot-product-0.jpg" alt="Diagram of a distributed-memory multi-node dot product on two computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+<figure><img src="../figs/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure><p>In parallel computing, the programmer must decide how to divide the
 data between the processes. In this case, we could have just as easily
@@ -1947,55 +2094,58 @@ responsible for. Then all ranks must participate in a
 end that we only have rank 0 print its results. If we didn’t protect the
 print statements like this, we would get nranks copies of each print
 statement.</p>
-<pre><code># Do the dot product between two vectors X and Y then print the result
-# USAGE:  mpirun -np 4 python dot_product_message_passing.py       to run on 4 tasks
-# pip install mpi4py      in your virtual environment before you run this code
-
-import sys
-import time
-from mpi4py import MPI
-
-   # Get my rank and the number of ranks - (MPI talks about ranks instead of threads)
-
-comm = MPI.COMM_WORLD       # Handshake with other ranks
-nranks = comm.Get_size()    # The number of ranks (threads)
-myrank = comm.Get_rank()    # Which rank am I ( 0 .. nranks-1 )
-
-N = 100000000      # Do a large enough test to reduce timing variance
-N_elements = int( N/nranks )
-
-if ( N % nranks != 0 ):
-   print("Please use an even number of ranks")
-   exit
-
-x = [ float( myrank + i*nranks ) for i in range( N_elements ) ]
-y = [ float( myrank + i*nranks ) for i in range( N_elements ) ]
-
-   # Now initialize a very large dummy array to force X and Y out of all levels of cache
-   #    so that our times are for pulling elements up from main memory.
-
-dummy = [ 0.0 for i in range( 125000000 ) ]  # Initialize 1 GB of memory
-
-   # Now we start our timer and do our calculation using multiple threads
-
-comm.barrier()    # Sync all ranks before starting the timer
-t_start = time.perf_counter()
-
-psum = 0.0
-for i in range( N_elements ):
-   psum += x[i] * y[i]
-
-d_prod = comm.reduce( psum, op=MPI.SUM )
-
-t_elapsed = time.perf_counter() - t_start
-
-   # The calculation is done and timer stopped so print out the answer
-
-if ( myrank == 0 ):    # Only rank 0 will print results
-   print('dot product = ', d_prod, 'took ', t_elapsed, ' seconds on ', nranks, ' ranks' );
-   print( 2.0*N*1.0e-9 / t_elapsed, ' Gflops (billion floating-point operations per second)')
-   print( 2.0*N*8.0/1.0e9, ' GB memory used' )</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Do the dot product between two vectors X and Y then print the result</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># USAGE:  mpirun -np 4 python dot_product_message_passing.py       to run on 4 tasks</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># pip install mpi4py      in your virtual environment before you run this code</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="im">from</span> mpi4py <span class="im">import</span> MPI</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>   <span class="co"># Get my rank and the number of ranks - (MPI talks about ranks instead of threads)</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>comm <span class="op">=</span> MPI.COMM_WORLD       <span class="co"># Handshake with other ranks</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>nranks <span class="op">=</span> comm.Get_size()    <span class="co"># The number of ranks (threads)</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>myrank <span class="op">=</span> comm.Get_rank()    <span class="co"># Which rank am I ( 0 .. nranks-1 )</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100000000</span>      <span class="co"># Do a large enough test to reduce timing variance</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>N_elements <span class="op">=</span> <span class="bu">int</span>( N<span class="op">/</span>nranks )</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="cf">if</span> ( N <span class="op">%</span> nranks <span class="op">!=</span> <span class="dv">0</span> ):</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>   <span class="bu">print</span>(<span class="st">"Please use an even number of ranks"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>   exit</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>x <span class="op">=</span> [ <span class="bu">float</span>( myrank <span class="op">+</span> i<span class="op">*</span>nranks ) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N_elements ) ]</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>y <span class="op">=</span> [ <span class="bu">float</span>( myrank <span class="op">+</span> i<span class="op">*</span>nranks ) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N_elements ) ]</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>   <span class="co"># Now initialize a very large dummy array to force X and Y out of all levels of cache</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>   <span class="co">#    so that our times are for pulling elements up from main memory.</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>dummy <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( <span class="dv">125000000</span> ) ]  <span class="co"># Initialize 1 GB of memory</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>   <span class="co"># Now we start our timer and do our calculation using multiple threads</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>comm.barrier()    <span class="co"># Sync all ranks before starting the timer</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>psum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N_elements ):</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>   psum <span class="op">+=</span> x[i] <span class="op">*</span> y[i]</span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>d_prod <span class="op">=</span> comm.<span class="bu">reduce</span>( psum, op<span class="op">=</span>MPI.SUM )</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>t_elapsed <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a>   <span class="co"># The calculation is done and timer stopped so print out the answer</span></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="cf">if</span> ( myrank <span class="op">==</span> <span class="dv">0</span> ):    <span class="co"># Only rank 0 will print results</span></span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>   <span class="bu">print</span>(<span class="st">'dot product = '</span>, d_prod, <span class="st">'took '</span>, t_elapsed, <span class="st">' seconds on '</span>, nranks, <span class="st">' ranks'</span> )<span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>   <span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">1.0e-9</span> <span class="op">/</span> t_elapsed, <span class="st">' Gflops (billion floating-point operations per second)'</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>   <span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
+</div>
 <p>We see from all this that parallelizing a program using
 message-passing requires more work. This is especially true in more
 complex programs where often you need to read input in on rank 0 and
@@ -2042,15 +2192,30 @@ request that your job be run on just one switch by using
 programming is definitely more complex than the multi-threaded approach.
 But if you really need to apply more computing power to your job, it is
 the only way to go.</p>
-<blockquote>
-<h2 id="scaling-study-of-the-distributed-memory-dot-product-code">Scaling
-Study of the Distributed-Memory Dot Product Code</h2>
+<div id="scaling-study-of-the-distributed-memory-dot-product-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="scaling-study-of-the-distributed-memory-dot-product-code" class="callout-inner">
+<h3 class="callout-title">Scaling Study of the Distributed-Memory Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-distributed-memory-dot-product-code"></a>
+</h3>
+<div class="callout-content">
 <p>Measure the execution time for the dot_product_message_passing.py
 code for 1, 4, 8, and 16 cores if you are on an HPC system with at least
 2 compute nodes. You can try different combinations of nodes and cores
 for each if you would like to see the effects of the network (for the 4
-core test, try 2 nodes 2 cores vs 4 nodes 1 core). &gt; ## Solution and
-Analysis In this code we initialize the vectors locally so there is no
+core test, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
 end, so we expect the scaling to be close to ideal. In my tests I
 measured the single core run at 18.2 seconds, the 4 core run at 4.9
@@ -2061,9 +2226,11 @@ all close to ideal which is great. The inefficiency in the
 multi-threaded code comes from there being too little work in each loop
 when the parallelization comes in the loop overhead, while for the
 message-passing code there is no difference in the loop overhead, it’s
-just the added global summation after the loop. {: .solution} {:
-.challenge}</p>
-</blockquote>
+just the added global summation after the loop.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2236,7 +2403,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-c-cpp"><p>Content from <a href="c-cpp.html">C and C++ Languages</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/c-cpp.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
@@ -2346,8 +2513,11 @@ represent a single floating-point operation or a triply-nested loop if
 the operands are both matrices. Memory and computations are simply less
 explicit in C++ by design, and that can make it more difficult to
 identify where performance issues may lie.</p>
-<pre><code><span><span class="va">C</span> <span class="op">=</span> <span class="va">A</span> <span class="op">*</span> <span class="va">B</span>;</span></code></pre>
-<p>{: .language-c}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">*</span> B<span class="op">;</span></span></code></pre>
+</div>
 </section><section><h2 class="section-heading" id="cc-compilers">C/C++ Compilers<a class="anchor" aria-label="anchor" href="#cc-compilers"></a>
 <a class="anchor" aria-label="anchor" href="#cc-compilers"></a>
 </h2>
@@ -2401,9 +2571,14 @@ approach it is good to at least understand this as a starting point.</p>
 <li>make</li>
 <li>make install</li>
 </ul>
-<blockquote>
-<h2 id="practice-compiling-and-running-c-codes">Practice compiling and
-running C codes</h2>
+<div id="practice-compiling-and-running-c-codes" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="practice-compiling-and-running-c-codes" class="callout-inner">
+<h3 class="callout-title">Practice compiling and running C codes<a class="anchor" aria-label="anchor" href="#practice-compiling-and-running-c-codes"></a>
+</h3>
+<div class="callout-content">
 <p>The most common compiler for C is the Gnu C Compiler
 <strong>gcc</strong>. This may be available by default on your system,
 so try <strong>gcc –version</strong> to check. If not then you’ll need
@@ -2426,17 +2601,29 @@ cores.</p>
 <p>If you have an MPI package installed, try compiiling the
 message-passing version using <strong>mpicc -g -O3 -o dot_product_c_mpi
 dot_product_c_mpi.c</strong> and running some tests with <strong>mpirun
--np 4 dot_product_c_mpi</strong> for example. &gt; ## Solution and
-Analysis On a modern Intel system the raw scalar code ran in 0.14
-seconds as did the single-threaded OpenMP and single-task MPI runs. The
-test on 4 threads took 0.06 seconds which is quite a bit off the 4x
-speedup we are looking for. This again is due to how little work is
-being done during each pass through the loop compared to the loop
-overhead. The MPI test on 4 tasks is better at 0.047 seconds and is a
-little faster at 0.034 seconds on 8 tasks since the parallelization is
-done in a different manner. How do your results compare to these? {:
-.solution} {: .challenge}</p>
-</blockquote>
+-np 4 dot_product_c_mpi</strong> for example.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>On a modern Intel system the raw scalar code ran in 0.14 seconds as
+did the single-threaded OpenMP and single-task MPI runs. The test on 4
+threads took 0.06 seconds which is quite a bit off the 4x speedup we are
+looking for. This again is due to how little work is being done during
+each pass through the loop compared to the loop overhead. The MPI test
+on 4 tasks is better at 0.047 seconds and is a little faster at 0.034
+seconds on 8 tasks since the parallelization is done in a different
+manner. How do your results compare to these?</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2465,7 +2652,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-fortran"><p>Content from <a href="fortran.html">The Fortran Language</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/fortran.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 20 minutes</p>
@@ -2574,9 +2761,14 @@ have a <strong>Makefile</strong> handle everything. The
 <strong>Makefile</strong> provides the logic to compile only the parts
 of an application code base that have changed, then link everything
 together to produce the executable.</p>
-<blockquote>
-<h2 id="practice-compiling-and-running-fortran-codes">Practice compiling
-and running Fortran codes</h2>
+<div id="practice-compiling-and-running-fortran-codes" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="practice-compiling-and-running-fortran-codes" class="callout-inner">
+<h3 class="callout-title">Practice compiling and running Fortran codes<a class="anchor" aria-label="anchor" href="#practice-compiling-and-running-fortran-codes"></a>
+</h3>
+<div class="callout-content">
 <p>Try compiling the <strong>dot_product_fortran.f90</strong> code with
 the <strong>gfortran</strong> compiler, then try with
 <strong>ifort</strong> if you have access to it. Do the same with the
@@ -2589,8 +2781,18 @@ running the MPI version <strong>dot_product_fortran_mpi.f90</strong>
 using <strong>mpifort</strong>. Once you have compiled these codes
 manually take a look at the <strong>Makefile</strong>. This contains all
 the commands necessary to compile all the codes above with a single
-command <strong>make all_fortran</strong>. &gt; ## Solution and Analysis
-Each computer system may be set up differently with regard to what
+command <strong>make all_fortran</strong>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>Each computer system may be set up differently with regard to what
 compilers are available and how they need to be accessed. You may need
 to contact your administrator for help if you are unsure whether you
 have the Intel compiler suite installed, and how to access an MPI
@@ -2600,9 +2802,11 @@ using 1 thread and the MPI version using 1 task. OpenMP using 4 threads
 took 0.063 seconds which is a little more than twice as fast and then
 performance flattened out for more threads. The MPI version using 4
 tasks took 0.05 seconds which is slightly better than the OpenMP
-version, and 0.027 seconds for 8 tasks showing better scaling. {:
-.solution} {: .challenge}</p>
-</blockquote>
+version, and 0.027 seconds for 8 tasks showing better scaling.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2633,7 +2837,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-python"><p>Content from <a href="python.html">The Python Language</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
@@ -2714,13 +2918,12 @@ programmer with <strong><span class="citation">@jit</span>(nopython=True,cache=T
 uses the industry standard <strong>LLVM</strong> compiler library, but
 the compilation is not being done once ahead of the runtime as with
 C/C++ and Fortran, it is being done at runtime in what is referred to as
-a <strong>just-in-time</strong> or JIT manner.<br>
-How effective this approach can be will depend on how much the
-compilation can be done in advance of when it is needed, and how much
-optimization it can do on the fly, but there also is the option to save
-the compiled functions so that they don’t need to be recompiled for
-subsequent runs. There are also multi-threading options for
-parallelizing functions.</p>
+a <strong>just-in-time</strong> or JIT manner. How effective this
+approach can be will depend on how much the compilation can be done in
+advance of when it is needed, and how much optimization it can do on the
+fly, but there also is the option to save the compiled functions so that
+they don’t need to be recompiled for subsequent runs. There are also
+multi-threading options for parallelizing functions.</p>
 </div>
 <div class="section level3">
 <h3 id="python-capabilities">Python capabilities<a class="anchor" aria-label="anchor" href="#python-capabilities"></a>
@@ -2776,21 +2979,27 @@ example of creating one called <strong>env-py-3.7.4</strong> where I
 labled it after the version of Python being used. The dollar sign is the
 command prompt to illustrate how the prompt changes while the virtual
 environment is active.</p>
-<pre><code>$ mkdir -p ~/virtualenvs
-$ cd ~/virtualenvs
-$ virtualenv env-py-3.7.4
-$ source ~/virtualenvs/env-py-3.7.4/bin/activate
-(env-py-3.7.4)$              the prompt is now prefaced with environment name</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/virtualenvs</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> cd ~/virtualenvs</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">$</span> virtualenv env-py-3.7.4</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">$</span> source ~/virtualenvs/env-py-3.7.4/bin/activate</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span>              the prompt is now prefaced with environment name</span></code></pre>
+</div>
 <p>Once activated the prompt will change to show that you are working in
 the <strong>env-py-3.7.4</strong> environment. You can install any
 packages you need, run your python code, then deactivate the environment
 when you are done.</p>
-<pre><code>(env-py-3.7.4)$ pip install numpy scipy
-(env-py-3.7.4)$ python python_code.py
-(env-py-3.7.4)$ deactivate
-$</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> pip install numpy scipy</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> python python_code.py</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> deactivate</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ex">$</span></span></code></pre>
+</div>
 </div>
 <div class="section level3">
 <h3 id="compiling-python">Compiling Python<a class="anchor" aria-label="anchor" href="#compiling-python"></a>
@@ -2805,9 +3014,12 @@ distribute it as a binary.</p>
 are on. In Linux you can compile code by adding a flag <strong>-m
 py_compile</strong> which will create an executable in a
 <strong><strong>pycach</strong></strong> directory.</p>
-<pre><code>python -m py_compile python_code.py
-mv  __pycache__/python_code.cpython-37.pyc  compiled_python_code.pyc</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> py_compile python_code.py</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">mv</span>  __pycache__/python_code.cpython-37.pyc  compiled_python_code.pyc</span></code></pre>
+</div>
 <p>The executable <strong>compiled_python_code.pyc</strong> will then
 run on systems where Python is not installed and you have no virtual
 environment activated.</p>
@@ -2847,89 +3059,176 @@ since with MPI each task is a separate copy of the same program. In
 general, the GIL is something to be aware of but packages like
 <strong>pymp</strong> have already done the work of getting around the
 problem.</p>
-<blockquote>
-<h2 id="play-with-the-python-dot-product-examples">Play with the Python
-dot product examples</h2>
+<div id="play-with-the-python-dot-product-examples" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="play-with-the-python-dot-product-examples" class="callout-inner">
+<h3 class="callout-title">Play with the Python dot product examples<a class="anchor" aria-label="anchor" href="#play-with-the-python-dot-product-examples"></a>
+</h3>
+<div class="callout-content">
 <p>Take a look at the Python versions of the dot product code to see how
 they differ from the C and Fortran versions. Also compare the
 <strong>pymp</strong> multi-threaded and <strong>mpi4py</strong>
 message-passing versions to the scalar version to see what changes were
 made. If you haven’t already, run the scalar code and do scaling studies
 with the multi-threaded and message-passing versions to see how they
-compare with versions written in other languages. &gt; ## Solution and
-Analysis While the syntax is different, the code is basically the same
-in each language. Performance is much slower for raw Python code than
-the compiled language. From looking at the same code in various
-languages, which do you think would be easiest to write from scratch? {:
-.solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="compare-the-raw-matrix-multiply-code-to-a-numpy-version">Compare
-the raw matrix multiply code to a <strong>NumPy</strong> version</h2>
+compare with versions written in other languages.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>While the syntax is different, the code is basically the same in each
+language. Performance is much slower for raw Python code than the
+compiled language. From looking at the same code in various languages,
+which do you think would be easiest to write from scratch?</p>
+</div>
+</div>
+</div>
+</div>
+<div id="compare-the-raw-matrix-multiply-code-to-a-numpy-version" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="compare-the-raw-matrix-multiply-code-to-a-numpy-version" class="callout-inner">
+<h3 class="callout-title">Compare the raw matrix multiply code to a
+<strong>NumPy</strong> version<a class="anchor" aria-label="anchor" href="#compare-the-raw-matrix-multiply-code-to-a-numpy-version"></a>
+</h3>
+<div class="callout-content">
 <p>Do a scaling study of the <strong>matmult.py</strong> code for
 various matrix sizes of 10, 100, and 1000. Compare this to the
 <strong>matmult_numpy.py</strong> version to see how much of a
-difference the highly-tuned library function makes. &gt; ## Solution and
-Analysis If you have already run the optimized C version, you may notice
-that the compiled code still beats the optimized <strong>NumPy</strong>
+difference the highly-tuned library function makes.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>If you have already run the optimized C version, you may notice that
+the compiled code still beats the optimized <strong>NumPy</strong>
 routine by 2-4 times in my tests. Using the <strong>NumPy</strong>
 routine closes the performance gap enormously but the C version is still
-better. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="test-the-numba-version-of-the-dot-product-code">Test the
-<strong>Numba</strong> version of the dot product code</h2>
+better.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="test-the-numba-version-of-the-dot-product-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="test-the-numba-version-of-the-dot-product-code" class="callout-inner">
+<h3 class="callout-title">Test the <strong>Numba</strong> version of the
+dot product code<a class="anchor" aria-label="anchor" href="#test-the-numba-version-of-the-dot-product-code"></a>
+</h3>
+<div class="callout-content">
 <p>Do a <strong>pip install numba</strong> then time the
 <strong>dot_product_numba.py</strong> performance and compare to the raw
-code.<br>
-Does the performance change if you cache the compilation by adding
+code. Does the performance change if you cache the compilation by adding
 <strong>cache=True</strong>? You will need to run twice so that the
-second time takes advantage of the cached compilation code. &gt; ##
-Solution and Analysis Notice that in this code we needed to rewrite the
-computationally intensive loops into functions. This does not take much
-effort but does disrupt the program flow somewhat, but if it speeds up
-the runtime it is usually worth it. Unfortunately in the case of the dot
-product the <strong>Numba</strong> version takes 13 seconds compared to
-only 90 milliseconds for the raw code. Adding
-<strong>cache=True</strong> to cache the compiled code does reduce the
-runtime down to 3.7 seconds but this is still substantially worse than
-the original code. There are also warnings about lists being deprecated
-as input arguments in the near future. Switching our algorithm to use
-<strong>NumPy</strong> arrays may be necessary but this also defeats the
-purpose of using <strong>Numba</strong> since <strong>NumPy</strong>
-already has optimized routines for the algorithms we are testing. So in
-short this isn’t a really good test of the capabilities of
-<strong>Numba</strong>, but is a good example of how these things don’t
-always work as hoped, and it illustrates that <strong>Numba</strong>
-does not support all aspects of Python. Forcing the computational parts
-of an algorithm into functions is also detracts from the flow of any
-program, and is definitely not what is considered as the Python way. {:
-.solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="optional-homework---test-the-pi-calculation-program-using-numba">Optional
-Homework - Test the Pi calculation program using
-<strong>Numba</strong>
-</h2>
+second time takes advantage of the cached compilation code.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<p>Notice that in this code we needed to rewrite the computationally
+intensive loops into functions. This does not take much effort but does
+disrupt the program flow somewhat, but if it speeds up the runtime it is
+usually worth it. Unfortunately in the case of the dot product the
+<strong>Numba</strong> version takes 13 seconds compared to only 90
+milliseconds for the raw code. Adding <strong>cache=True</strong> to
+cache the compiled code does reduce the runtime down to 3.7 seconds but
+this is still substantially worse than the original code. There are also
+warnings about lists being deprecated as input arguments in the near
+future. Switching our algorithm to use <strong>NumPy</strong> arrays may
+be necessary but this also defeats the purpose of using
+<strong>Numba</strong> since <strong>NumPy</strong> already has
+optimized routines for the algorithms we are testing. So in short this
+isn’t a really good test of the capabilities of <strong>Numba</strong>,
+but is a good example of how these things don’t always work as hoped,
+and it illustrates that <strong>Numba</strong> does not support all
+aspects of Python. Forcing the computational parts of an algorithm into
+functions is also detracts from the flow of any program, and is
+definitely not what is considered as the Python way.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="optional-homework---test-the-pi-calculation-program-using-numba" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="optional-homework---test-the-pi-calculation-program-using-numba" class="callout-inner">
+<h3 class="callout-title">Optional Homework - Test the Pi calculation
+program using <strong>Numba</strong><a class="anchor" aria-label="anchor" href="#optional-homework---test-the-pi-calculation-program-using-numba"></a>
+</h3>
+<div class="callout-content">
 <p>Write a Python vesion of the Pi calculation program and time raw
 Python code versus <strong>Numba</strong> optimized. If you want to have
 more fun try out <strong>Numba</strong> multi-threading compared to
 <strong>pymp</strong> for this same algorithm. This is a much fairer
 test of the capabilities of <strong>Numba</strong> since we are not
-comparing it to optimized functions in <strong>NumPy</strong>. &gt; ##
-Solution and Analysis If you do this please contribute your code and
-timings. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="optional-exercise---try-compiling-a-python-code">Optional
-Exercise - Try compiling a Python code</h2>
+comparing it to optimized functions in <strong>NumPy</strong>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div class="accordion-body">
+<p>If you do this please contribute your code and timings.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="optional-exercise---try-compiling-a-python-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="optional-exercise---try-compiling-a-python-code" class="callout-inner">
+<h3 class="callout-title">Optional Exercise - Try compiling a Python code<a class="anchor" aria-label="anchor" href="#optional-exercise---try-compiling-a-python-code"></a>
+</h3>
+<div class="callout-content">
 <p>If you have time, try compiling one of the Python test codes supplied
 like <strong>matmult_numpy.py</strong>. Then try running it without an
 active virtual environment meaning that there is no
-<strong>NumPy</strong> library installed. &gt; ## Solution and Analysis
-Once compiled you should be able to run this with a command like:
-<strong>./matmult.pyc 100</strong>. {: .solution} {: .challenge}</p>
-</blockquote>
+<strong>NumPy</strong> library installed.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div class="accordion-body">
+<p>Once compiled you should be able to run this with a command like:
+<strong>./matmult.pyc 100</strong>.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2968,7 +3267,7 @@ any links that you are not going to use.
  -->
 </div></section><section id="aio-r"><p>Content from <a href="r.html">The R Language</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/r.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 45 minutes</p>
@@ -3219,80 +3518,168 @@ many times over so it should in general be avoided. If you do try this,
 make sure to check the performance for both options as this choice can
 drastically effect the efficiency of the resulting parallel
 implementation.</p>
-<blockquote>
-<h2 id="compare-raw-and-optimized-performance-of-matmult.r">Compare raw
-and optimized performance of matmult.R</h2>
+<div id="compare-raw-and-optimized-performance-of-matmult.r" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="compare-raw-and-optimized-performance-of-matmult.r" class="callout-inner">
+<h3 class="callout-title">Compare raw and optimized performance of matmult.R<a class="anchor" aria-label="anchor" href="#compare-raw-and-optimized-performance-of-matmult.r"></a>
+</h3>
+<div class="callout-content">
 <p>Run matmult.R for matrix sizes 100 and 1000 to compare the
 performance of a raw loop to the built-in matrix multiplication
-function. Also compare these numbers to other languages. &gt; ##
-Solution and Analysis I measured 500 seconds for the raw loop in R and
-0.10 seconds for the optimized built-in matrix multiplication function.
-Be aware that the built-in function may use all the cores it has access
-to, so this may not be a fair comparison unless you submit a batch
-scheduler job with only 1 core allocated. Python for comparison took 300
-seconds for raw loops and 0.13 seconds for the <strong>numpy</strong>
-optimized routine, but a larger run for size 10,000 had
-<strong>numpy</strong> at 46 seconds compared to <strong>R</strong> at
-72 seconds. So in general, R and Python are similar in speed for both
-raw and optimized code, but Python is a little faster. {: .solution} {:
-.challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases.">Profile
-the run time for using rbind() as the number of rows in the data frame
-increases.</h2>
+function. Also compare these numbers to other languages.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
+optimized built-in matrix multiplication function. Be aware that the
+built-in function may use all the cores it has access to, so this may
+not be a fair comparison unless you submit a batch scheduler job with
+only 1 core allocated. Python for comparison took 300 seconds for raw
+loops and 0.13 seconds for the <strong>numpy</strong> optimized routine,
+but a larger run for size 10,000 had <strong>numpy</strong> at 46
+seconds compared to <strong>R</strong> at 72 seconds. So in general, R
+and Python are similar in speed for both raw and optimized code, but
+Python is a little faster.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases." class="callout-inner">
+<h3 class="callout-title">Profile the run time for using rbind() as the number of rows in the data frame increases.<a class="anchor" aria-label="anchor" href="#profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases."></a>
+</h3>
+<div class="callout-content">
 <p>Time runs of <strong>rbind.R</strong> for 10, 100, 1000, and 10000
-rows. &gt; ## Solution and Analysis While rbind() is convenient and
-works well for small data frames, the time to add rows begins to
-increase exponentially for data frames around 10,000 rows. I measured 1
-second for 1000 rows, 48 seconds for 10,000 rows, and 5100 seconds for
-100,000 rows. <strong>rbind()</strong> works well for small data frames,
-but it is very inefficient when you scale up to larger data sets of over
-10,000 rows. This is because R copies the entire data frame over each
-time it adds a new row. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="investigate-the-data-table-performance.">Investigate the data
-table performance.</h2>
+rows.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>While rbind() is convenient and works well for small data frames, the
+time to add rows begins to increase exponentially for data frames around
+10,000 rows. I measured 1 second for 1000 rows, 48 seconds for 10,000
+rows, and 5100 seconds for 100,000 rows. <strong>rbind()</strong> works
+well for small data frames, but it is very inefficient when you scale up
+to larger data sets of over 10,000 rows. This is because R copies the
+entire data frame over each time it adds a new row.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="investigate-the-data-table-performance." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="investigate-the-data-table-performance." class="callout-inner">
+<h3 class="callout-title">Investigate the data table performance.<a class="anchor" aria-label="anchor" href="#investigate-the-data-table-performance."></a>
+</h3>
+<div class="callout-content">
 <p>Test the <strong>datatable.R</strong> code for 100, 1000, and 10000
-rows and compare to the rbind() results. &gt; ## Solution and Analysis
-For 1,000 rows I measured 0.12 seconds for a data table set() compared
-to 5.4 seconds for a data table assignment and 1.1 second for a data
-frame rbind(). For 10,000 rows the performance really starts to differ
-with 0.53 seconds for a data table set() compared to 50 seconds for a
-data table assignment and 48 seconds for a data frame rbind(). For a
-large test of 100,000 rows the data table set() still only took 5
+rows and compare to the rbind() results.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>For 1,000 rows I measured 0.12 seconds for a data table set()
+compared to 5.4 seconds for a data table assignment and 1.1 second for a
+data frame rbind(). For 10,000 rows the performance really starts to
+differ with 0.53 seconds for a data table set() compared to 50 seconds
+for a data table assignment and 48 seconds for a data frame rbind(). For
+a large test of 100,000 rows the data table set() still only took 5
 seconds while the data table assignment took 485 seconds and the data
 frame rbind() took 5100 seconds, or 1000x longer. This again shows that
 while data frames can be convenient, when you scale up to larger sizes
-you have to use data tables and the set() function. {: .solution} {:
-.challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv.">Test
-the <strong>fread.R</strong> code to see the speedup of the
-<strong>fread()</strong> function from the optimized
+you have to use data tables and the set() function.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv." class="callout-inner">
+<h3 class="callout-title">Test the <strong>fread.R</strong> code to see
+the speedup of the <strong>fread()</strong> function from the optimized
 <strong>data.table</strong> package compared to the standard
-<strong>read.csv()</strong>.</h2>
+<strong>read.csv()</strong>.<a class="anchor" aria-label="anchor" href="#test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv."></a>
+</h3>
+<div class="callout-content">
 <p>Time runs of <strong>fread.R</strong> for 10,000 rows, 100,000 rows,
-and 1,000,000 rows. &gt; ## Solution and Analysis For 10,000 rows I saw
-similar results for each function, but for 100,000 rows
-<strong>fread()</strong> was 10 times faster than
+and 1,000,000 rows.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
+<p>For 10,000 rows I saw similar results for each function, but for
+100,000 rows <strong>fread()</strong> was 10 times faster than
 <strong>read.csv()</strong> and for 1,000,000 rows it was 100 times
 faster. This is another example illustrating when to avoid the core R
 functionality and use the external add-on packages to achieve
-performance in your code. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program">Advanced
-Homework - Use the <strong>pdbMPI</strong> package to code and run a
-parallel Hello World program</h2>
+performance in your code.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program" class="callout-inner">
+<h3 class="callout-title">Advanced Homework - Use the
+<strong>pdbMPI</strong> package to code and run a parallel Hello World
+program<a class="anchor" aria-label="anchor" href="#advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program"></a>
+</h3>
+<div class="callout-content">
 <p>For those who want a challenge, follow the <strong>pdbMPI</strong>
 link at the end of this lesson an write, run, and test the Hello World
-program. &gt; ## Solution and Analysis I would love to have a
-pdbMPI-based matrix multiply code available for people to look at and
-test if anyone finds one. {: .solution} {: .challenge}</p>
-</blockquote>
+program.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div class="accordion-body">
+<p>I would love to have a pdbMPI-based matrix multiply code available
+for people to look at and test if anyone finds one.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a>
@@ -3359,7 +3746,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-matlab"><p>Content from <a href="matlab.html">The Matlab Language</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/matlab.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
@@ -3571,48 +3958,101 @@ single-node multi-process capability of parpool. There are also tools to
 work with clusters of computers, but these are more similar to
 message-passing commands where you manually send and receive data to and
 from remote processes and manually initiate function evaluation.</p>
-<blockquote>
-<h2 id="test-the-performance-of-the-matlab-matrix-multiplication-code.">Test
-the performance of the Matlab matrix multiplication code.</h2>
+<div id="test-the-performance-of-the-matlab-matrix-multiplication-code." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="test-the-performance-of-the-matlab-matrix-multiplication-code." class="callout-inner">
+<h3 class="callout-title">Test the performance of the Matlab matrix multiplication code.<a class="anchor" aria-label="anchor" href="#test-the-performance-of-the-matlab-matrix-multiplication-code."></a>
+</h3>
+<div class="callout-content">
 <p>Test the performance of the <strong>matmult.m</strong> code for a
-matrix size of 1000 and compare to other languages. &gt; ## Solution and
-Analysis For the 1000x1000 matrices, I measure 5 seconds for the serial
-code, 0.7 seconds for the built-in matrix multiply that uses low level
+matrix size of 1000 and compare to other languages.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>For the 1000x1000 matrices, I measure 5 seconds for the serial code,
+0.7 seconds for the built-in matrix multiply that uses low level
 optimized BLAS routines. The parpool multi-process test takes 530
 seconds which is understandably slow since it is doing the matrix
 multiplication in a distributed memory manner without explicitly
 programming it to do this efficiently. The multi-threaded parpool test
 measured in at &gt; 510 seconds which is very disappointing since there
 should be no copying of the matrices at the beginning. It isn’t clear
-what is happening behind the scenes for this to be so slow. {:
-.solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="test-the-performance-of-the-matlab-dot-product-code.">Test the
-performance of the Matlab dot product code.</h2>
+what is happening behind the scenes for this to be so slow.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="test-the-performance-of-the-matlab-dot-product-code." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="test-the-performance-of-the-matlab-dot-product-code." class="callout-inner">
+<h3 class="callout-title">Test the performance of the Matlab dot product code.<a class="anchor" aria-label="anchor" href="#test-the-performance-of-the-matlab-dot-product-code."></a>
+</h3>
+<div class="callout-content">
 <p>Test the performance of the <strong>dot_product.m</strong> code for
-an array size of 100,000,000 and compare to other languages. &gt; ##
-Solution and Analysis I measure serial performance at 0.5 seconds with
-the built in optimized routine at 0.2 seconds on 8 cores for a modest
-speedup. The multi-core parfor loop on the same 8 cores takes 2.1
-seconds while the multi-threaded parfor loop takes a disappointing 0.9
-seconds which is still greater than the serial code. The overhead for
-using these methods is still much larger than the performance gain which
-indicates the parfor method should only really be used for very coarse
-grained algorithms. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores.">Homework:
-Alter the <strong>matmult.m</strong> code to run on multiple nodes and
-multiple cores.</h2>
+an array size of 100,000,000 and compare to other languages.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>I measure serial performance at 0.5 seconds with the built in
+optimized routine at 0.2 seconds on 8 cores for a modest speedup. The
+multi-core parfor loop on the same 8 cores takes 2.1 seconds while the
+multi-threaded parfor loop takes a disappointing 0.9 seconds which is
+still greater than the serial code. The overhead for using these methods
+is still much larger than the performance gain which indicates the
+parfor method should only really be used for very coarse grained
+algorithms.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores." class="callout-inner">
+<h3 class="callout-title">Homework: Alter the <strong>matmult.m</strong>
+code to run on multiple nodes and multiple cores.<a class="anchor" aria-label="anchor" href="#homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores."></a>
+</h3>
+<div class="callout-content">
 <p>Test on multiple compute nodes and compare performance to the serial
 and multi-threaded versions. If you want a real challenge try setting
 the code up to run on a cloud server. And an even bigger challenge would
 be to convert matmult.m to run on Octave’s parallel computing
-environments. &gt; ## Solution and Analysis If you do develop code for
-this, let us know so we can consider including your work for others to
-see. {: .solution} {: .challenge}</p>
-</blockquote>
+environments.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>If you do develop code for this, let us know so we can consider
+including your work for others to see.</p>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
@@ -3758,7 +4198,7 @@ script to choose an input filename from a list using
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>This will run 3 individual jobs that will show the
 <strong>$SLURM_ARRAY_TASK_ID</strong> to be 1, 3, or 5.</p>
@@ -3834,7 +4274,7 @@ any links that you are not going to use.
  -->
 </div></section><section id="aio-gpus"><p>Content from <a href="gpus.html">Accelerating Scientific Computing with GPUs</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/gpus.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -3945,19 +4385,37 @@ on how each system is set up so you will need to refer to the user
 documentations. On our HPC cluster at Kansas State University the
 request for one NVIDIA RTX 3090 would be
 <strong>–gres=gpu:geforce_rtx_3090:1</strong>.</p>
-<blockquote>
-<h2 id="run-a-simple-gpu-job-if-you-have-access-to-an-hpc-system-with-gpus">Run
-a simple GPU job if you have access to an HPC system with GPUs</h2>
+<div id="run-a-simple-gpu-job-if-you-have-access-to-an-hpc-system-with-gpus" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="run-a-simple-gpu-job-if-you-have-access-to-an-hpc-system-with-gpus" class="callout-inner">
+<h3 class="callout-title">Run a simple GPU job if you have access to an HPC system with GPUs<a class="anchor" aria-label="anchor" href="#run-a-simple-gpu-job-if-you-have-access-to-an-hpc-system-with-gpus"></a>
+</h3>
+<div class="callout-content">
 <p>Compile and run the hello_from_gpu.cu CUDA program. You may need to
 load a module to gain access to the <strong>nvcc</strong> compiler.
 There is an <strong>sb.hello_from_gpu</strong> Slurm batch script to
-submit the job. &gt; ## Solution and Analysis The goal is just to start
-getting you comfortable with compiling and submitting GPU jobs. Use
-<strong>nvcc hello_gpu.cu -o hello_from_gpu</strong> to compile. If you
-have Slurm on your HPC system you can submit the job with <strong>sbatch
-sb.hello_gpu</strong> but you may need to add a partition. {: .solution}
-{: .challenge}</p>
-</blockquote>
+submit the job.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>The goal is just to start getting you comfortable with compiling and
+submitting GPU jobs. Use <strong>nvcc hello_gpu.cu -o
+hello_from_gpu</strong> to compile. If you have Slurm on your HPC system
+you can submit the job with <strong>sbatch sb.hello_gpu</strong> but you
+may need to add a partition.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a>
@@ -3999,7 +4457,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-high-throughput-computing"><p>Content from <a href="high-throughput-computing.html">High-Throughput Computing</a></p>
 <hr>
-<p>Last updated on 2024-07-15 |
+<p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/high-throughput-computing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -4111,24 +4569,27 @@ of these jobs to submit. If multiple jobs are submitted then the
 environmental variable <strong>$(Process)</strong> will be used in the
 script to differentiate each with that being between zero and the number
 of jobs specified minus one.</p>
-<pre><code>#!/bin/bash -l
-
-output = osg.namd.out
-error = osg.namd.error
-log = osg.namd.log
-
-# Requested resources
-request_cpus = 8
-request_memory = 8 GB
-request_disk = 1 GB
-requirements = Arch == "X86_64" &amp;&amp; HAS_MODULES == True
-
-transfer_input_files = input_files/         # Slash means all files in that directory
-executable = namd2
-arguments = +p8 test.0.namd
-transfer_output_files = output
-queue 1</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#!/bin/bash -l</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a> </span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">output</span> = osg.namd.out</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">error</span> = osg.namd.error</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="ex">log</span> = osg.namd.log</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a> </span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># Requested resources</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="ex">request_cpus</span> = 8</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="ex">request_memory</span> = 8 GB</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="ex">request_disk</span> = 1 GB</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="ex">requirements</span> = Arch == <span class="st">"X86_64"</span> <span class="kw">&amp;&amp;</span> <span class="ex">HAS_MODULES</span> == True</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a> </span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="ex">transfer_input_files</span> = input_files/         <span class="co"># Slash means all files in that directory</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="ex">executable</span> = namd2</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="ex">arguments</span> = +p8 test.0.namd</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="ex">transfer_output_files</span> = output</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="ex">queue</span> 1</span></code></pre>
+</div>
 <p>Most systems will have support for modules, but the
 <strong>HAS_MODULES == True</strong> requirement can mean some systems
 are not supported. Most systems use RHEL7, so specifying that may also
@@ -4137,27 +4598,37 @@ mainstream OS and modules then you should be fine. Otherwise you likely
 will need to use a container.</p>
 <p>Once you have the script you can submit, monitor, and control the job
 using commands like those below.</p>
-<pre><code>&gt; condor_submit htc_job.sh                   # Submit the condor script to the queue
-&gt; condor_q                                   # Check on the status while in the queue
-&gt; condor_q netid                             # Check status of currently running jobs
-&gt; condor_q 121763                            # Check status of a particular job
-&gt; condor_history 121763                      # Check status of a job that is completed
-&gt; condor_history -long 121763                # Same but report more info
-&gt; condor_rm 121763                           # Remove the job number specified
-&gt; condor_rm daveturner                       # Remove all jobs for the given username</code></pre>
-<p>{: .language-bash}</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="op">&gt;</span> condor_submit <span class="ex">htc_job.sh</span>                   <span class="co"># Submit the condor script to the queue</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="op">&gt;</span> condor_q                                   <span class="co"># Check on the status while in the queue</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="op">&gt;</span> condor_q <span class="ex">netid</span>                             <span class="co"># Check status of currently running jobs</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="op">&gt;</span> condor_q <span class="ex">121763</span>                            <span class="co"># Check status of a particular job</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="op">&gt;</span> condor_history <span class="ex">121763</span>                      <span class="co"># Check status of a job that is completed</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="op">&gt;</span> condor_history <span class="ex">-long</span> 121763                <span class="co"># Same but report more info</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="op">&gt;</span> condor_rm <span class="ex">121763</span>                           <span class="co"># Remove the job number specified</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="op">&gt;</span> condor_rm <span class="ex">daveturner</span>                       <span class="co"># Remove all jobs for the given username</span></span></code></pre>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="htc-outside-the-u-s-">HTC Outside the U.S.<a class="anchor" aria-label="anchor" href="#htc-outside-the-u.s."></a>
 <a class="anchor" aria-label="anchor" href="#htc-outside-the-u-s-"></a>
 </h2>
 <hr class="half-width">
 <p>Need to add info about non-US HTC systems</p>
-<blockquote>
-<h2 id="homework-get-an-osg-account-and-submit-a-test-job.">Homework:
-Get an OSG account and submit a test job.</h2>
+<div id="homework-get-an-osg-account-and-submit-a-test-job." class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="homework-get-an-osg-account-and-submit-a-test-job." class="callout-inner">
+<h3 class="callout-title">Homework: Get an OSG account and submit a test job.<a class="anchor" aria-label="anchor" href="#homework-get-an-osg-account-and-submit-a-test-job."></a>
+</h3>
+<div class="callout-content">
 <p>If you are in the U.S. and want a big challenge, request an OSG
-account and try submitting some small jobs. {: .challenge}</p>
-</blockquote>
+account and try submitting some small jobs.</p>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>

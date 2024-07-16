@@ -418,7 +418,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Performance Concepts</h1>
-        <p>Last updated on 2024-07-15 |
+        <p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -475,7 +475,7 @@ summing them into D. We loop through all elements of the vectors, each
 time pulling the X and Y element into memory, multiplying them together
 and summing them into D. Then at the end, we push D back down into main
 memory where the program prints the result out to the screen for us.</p>
-<figure><img src="fig/dot_prod_fig.jpg" alt="Dot product between vectors X and Y" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
+<figure><img src="figs/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
 </figure><p>This conceptual view of what the computer is doing is all we really
 need to be aware of when we are starting to writing programs. But when
 those programs start taking too long to run on a PC or laptop, then we
@@ -504,8 +504,9 @@ likely to be in one of the cache layers where it can be accessed more
 quickly. In the case of our dot product, that means loading the first
 element X1 may take 93-106 ns while the next 7 only take 3 ns since they
 are already in L1 cache.</p>
-<figure><img src="fig/Memory_Hierarchy.jpg" alt="Memory Hierarchy in a Computer" class="figure mx-auto d-block"><div class="figcaption">Memory Hierarchy in a Computer</div>
-</figure><p>How does this knowledge help us? Performance is more about getting
+<p><img src="figs/Memory_Hierarchy.jpg" alt="Memory Hierarchy in a Computer" class="figure"> { alt=“Diagram of the memory
+hierarchy in a typical computer” }</p>
+<p>How does this knowledge help us? Performance is more about getting
 data to the processor since most operations are very fast once the data
 is in the registers. If the vector is instead not stored in contiguous
 memory, with each variable in the next memory location, then the
@@ -517,17 +518,20 @@ execution time between these two cases.</p>
 <p>Now let’s look at a simple matrix multiplication algorithm which is
 fairly simple to program, but may have very different performance
 depending on how you write the code.</p>
-<figure><img src="fig/matmult_fig.jpg" alt="Matrix multiplication C = A * B" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
-</figure><p>Once the matrices are initialized, the code to multiply them together
+<p><img src="figs/matmult_fig.jpg" alt="Matrix multiplication C = A * B" class="figure"> { alt=“Formula and diagram of a
+matrix multiply” }</p>
+<p>Once the matrices are initialized, the code to multiply them together
 is fairly simple.</p>
-<pre><code>N = 100
-for i in range( N ):
-    for j in range( N ):
-        C[i][j] = 0
-        for i in range( N ):
-            C[i][j] += A[i][k] * B[k][j]
-</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>        C[i][j] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>            C[i][j] <span class="op">+=</span> A[i][k] <span class="op">*</span> B[k][j]</span></code></pre>
+</div>
 <p>But if we are concerned about performance, we need to take a better
 look at this code. Python is a row-major language like C/C++, which
 means matrices like this are stored by rows first as in the picture
@@ -552,11 +556,14 @@ ourselves, we just need to know that it is in optimized libraries that
 we can call at any time. In the case of Python, there is an optimized
 matrix multiplaction function in the <strong>NumPy</strong> library that
 is easy to use as shown below.</p>
-<pre><code>import numpy as np
-
-N = 100
-C = np.matmult( A, B )</code></pre>
-<p>{: .language-python}</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>C <span class="op">=</span> np.matmult( A, B )</span></code></pre>
+</div>
 <p>So while writing a matrix multiplication code from scratch is not
 difficult, using the optimized function from <strong>NumPy</strong> is
 even easier and guarantees the best performance. To find out how much
@@ -569,36 +576,62 @@ time which is very slow. Show algorithm to illustrate complexity.</p>
 <p>Good news is that in HPC, often the hard work is already done for
 you, you just need to know to make use of someone elses hard work. –&gt;
 Use optimized libraries when at all possible.</p>
-<blockquote>
-<h2 id="measuring-cache-line-effects">Measuring Cache Line Effects</h2>
+<div id="measuring-cache-line-effects" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="measuring-cache-line-effects" class="callout-inner">
+<h3 class="callout-title">Measuring Cache Line Effects<a class="anchor" aria-label="anchor" href="#measuring-cache-line-effects"></a>
+</h3>
+<div class="callout-content">
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
 queue that at least ensures the code is being run on an isolated
 processing core. Then run the dot_product_sparse.py code in the same
 manner for comparison. How much faster is the first code where the
-vectors are stored in contiguous memory? How much faster should it be?
-&gt; ## Solution and Analysis Is the time difference what we expected?
-When I ran this on a new Intel processor that did not have any other
-jobs running, I measured 180 milliseconds for the contiguous memory case
-and 1230 milliseconds for the sparse case, resulting in a 6.9-times
-speedup by keeping the vector in contiguous memory. Since a cache line
-is 64 Bytes and each element is 8 bytes, when the first element is
-loaded the next 7 are brought into L1 cache essentially for free since
-they are in contiguous memory. Therefore we expect it to take 100 ns to
-load 8 elements of X, then 100 ns to load 8 elements of Y, then only a
-few ns to get each element into the registers and do the computations.
-For the sparse vectors, it should take 8 times as long since each load
-will take 100 ns. If you didn’t see an 8-times speedup, don’t worry. The
-cache system is actually even more complicated than this picture. Also
-remember that you may be sharing parts of the processor with others. The
-main thing to learn here is that if you take advantage of the cache line
-by keeping the vectors in contiguous memory, your code will run faster.
-{: .solution} {: .challenge}</p>
-</blockquote>
+vectors are stored in contiguous memory? How much faster should it
+be?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
 <blockquote>
-<h2 id="time-different-matrix-multiplication-methods">Time Different
-Matrix Multiplication Methods</h2>
+<p>Is the time difference what we expected? When I ran this on a new
+Intel processor that did not have any other jobs running, I measured 180
+milliseconds for the contiguous memory case and 1230 milliseconds for
+the sparse case, resulting in a 6.9-times speedup by keeping the vector
+in contiguous memory. Since a cache line is 64 Bytes and each element is
+8 bytes, when the first element is loaded the next 7 are brought into L1
+cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take 100 ns to load 8 elements of X, then 100
+ns to load 8 elements of Y, then only a few ns to get each element into
+the registers and do the computations. For the sparse vectors, it should
+take 8 times as long since each load will take 100 ns. If you didn’t see
+an 8-times speedup, don’t worry. The cache system is actually even more
+complicated than this picture. Also remember that you may be sharing
+parts of the processor with others. The main thing to learn here is that
+if you take advantage of the cache line by keeping the vectors in
+contiguous memory, your code will run faster.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="time-different-matrix-multiplication-methods" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="time-different-matrix-multiplication-methods" class="callout-inner">
+<h3 class="callout-title">Time Different Matrix Multiplication Methods<a class="anchor" aria-label="anchor" href="#time-different-matrix-multiplication-methods"></a>
+</h3>
+<div class="callout-content">
 <p>There are 2 separate codes supplied to perform the same matrix
 multiplication for a given matrix size, matmult.py is raw Python code
 and matmult_numpy.py uses the highly optimized
@@ -611,36 +644,54 @@ size as an argument, so you run using <strong>python matmult.py
 <strong>numpy</strong> function. You should run this through a batch
 scheduler if at all possible since numpy will grab any cores it can, and
 for a fair comparison we want to test out only the single-core
-performance. &gt; ## Solution and Analysis For the 10x10 matrix size
-there are 3 matrices having 100 elements each needing 8 bytes storage,
-so storing all 3 matrices requires only 2.4 kB of memory. Everything
-fits entirely in L1 cache, so the block optimized algorithm from
-<strong>NumPy</strong> isn’t really needed. For the 100x100 matrix size,
-240 kB is needed to store all 3 matrices so they will fit entirely in L2
-cache, but not L1 cache. We therefore expect a significant improvement
-by using the optimized <strong>np.matmult()</strong> function. For the
-1000x1000 matrix size, we need 24 MB to store all 3 matrices so it will
-reside in L3 cache. The <strong>np.matmult()</strong> function should
-speed up this run by substantially more. The optimization of the
-<strong>NumPy</strong> routine however goes far beyond just block
-optimizing the algorithm so that it reuses data in L1 cache though.
-There are also computational optimizations that allow for many
-multiply-add operations to occur in the same clock cycle, which is
-called vectorization. My measurements on a modern Intel processor more
-of a performance benefit for larger matrix sizes. For 1000x1000
-matrices, the raw Python code was very slow at 6.5 MFlops (Million
-floating-point operations per second). All the optimizations in the
-<strong>NumPy</strong> code brought the performance up to 15.4 GFlops,
-or a whopping 2354 times faster. Raw Python code is fairly slow in
-itself because it is interpretted and not compiled like C/C++/Fortran
-code, clearly you can do very well if you learn to use the heavily
-optimized library routines. C is still faster than Python, with raw C
-code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine reaching
-91 GFlops. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="advanced-exercise---transpose-b-to-cache-line-optimize-it">Advanced
-Exercise - Transpose B to cache-line optimize it</h2>
+performance.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>For the 10x10 matrix size there are 3 matrices having 100 elements
+each needing 8 bytes storage, so storing all 3 matrices requires only
+2.4 kB of memory. Everything fits entirely in L1 cache, so the block
+optimized algorithm from <strong>NumPy</strong> isn’t really needed. For
+the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache. We therefore
+expect a significant improvement by using the optimized
+<strong>np.matmult()</strong> function. For the 1000x1000 matrix size,
+we need 24 MB to store all 3 matrices so it will reside in L3 cache. The
+<strong>np.matmult()</strong> function should speed up this run by
+substantially more. The optimization of the <strong>NumPy</strong>
+routine however goes far beyond just block optimizing the algorithm so
+that it reuses data in L1 cache though. There are also computational
+optimizations that allow for many multiply-add operations to occur in
+the same clock cycle, which is called vectorization. My measurements on
+a modern Intel processor more of a performance benefit for larger matrix
+sizes. For 1000x1000 matrices, the raw Python code was very slow at 6.5
+MFlops (Million floating-point operations per second). All the
+optimizations in the <strong>NumPy</strong> code brought the performance
+up to 15.4 GFlops, or a whopping 2354 times faster. Raw Python code is
+fairly slow in itself because it is interpretted and not compiled like
+C/C++/Fortran code, clearly you can do very well if you learn to use the
+heavily optimized library routines. C is still faster than Python, with
+raw C code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine
+reaching 91 GFlops.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="advanced-exercise---transpose-b-to-cache-line-optimize-it" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="advanced-exercise---transpose-b-to-cache-line-optimize-it" class="callout-inner">
+<h3 class="callout-title">Advanced Exercise - Transpose B to cache-line optimize it<a class="anchor" aria-label="anchor" href="#advanced-exercise---transpose-b-to-cache-line-optimize-it"></a>
+</h3>
+<div class="callout-content">
 <p>As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
 memory, as we learned from the dot product example. Unfortunately,
@@ -651,13 +702,26 @@ this wasn’t available one thing we’d consider is to transpose the B
 matrix so that it is stored in column-major format before doing the
 matrix multiplication. If you’re up for a challenge, try programming
 this up to see if it improves the performance compared to the original
-Python code. &gt; ## Solution and Analysys There are a great many levels
-of optimization that can be done to the matrix multiplication algorithm.
-Transposing B should improve the performance some. For a more complete
-overview of what is done in the <strong>np.matmult()</strong> algorithm
-and others like it, follow the link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a> {:
-.solution} {: .challenge}</p>
-</blockquote>
+Python code.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<p>There are a great many levels of optimization that can be done to the
+matrix multiplication algorithm. Transposing B should improve the
+performance some. For a more complete overview of what is done in the
+<strong>np.matmult()</strong> algorithm and others like it, follow the
+link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a></p>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a></h2>
 <hr class="half-width"><p>When it starts taking longer to run a given program, we need to start
@@ -750,7 +814,7 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/performance-concepts.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/performance-concepts.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-15",
+  "dateModified": "2024-07-16",
   "datePublished": "2024-07-16"
 }
 

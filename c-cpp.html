@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>C and C++ Languages</h1>
-        <p>Last updated on 2024-07-15 |
+        <p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/c-cpp.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -527,8 +527,11 @@ represent a single floating-point operation or a triply-nested loop if
 the operands are both matrices. Memory and computations are simply less
 explicit in C++ by design, and that can make it more difficult to
 identify where performance issues may lie.</p>
-<pre><code><span><span class="va">C</span> <span class="op">=</span> <span class="va">A</span> <span class="op">*</span> <span class="va">B</span>;</span></code></pre>
-<p>{: .language-c}</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">*</span> B<span class="op">;</span></span></code></pre>
+</div>
 </section><section><h2 class="section-heading" id="cc-compilers">C/C++ Compilers<a class="anchor" aria-label="anchor" href="#cc-compilers"></a>
 <a class="anchor" aria-label="anchor" href="#cc-compilers"></a></h2>
 <hr class="half-width"><p>Unlike interpretted languages like Python, R, and Matlab, you have to
@@ -574,9 +577,14 @@ approach it is good to at least understand this as a starting point.</p>
 <ul><li>./configure –prefix=/path/to/installation/directory</li>
 <li>make</li>
 <li>make install</li>
-</ul><blockquote>
-<h2 id="practice-compiling-and-running-c-codes">Practice compiling and
-running C codes</h2>
+</ul><div id="practice-compiling-and-running-c-codes" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="practice-compiling-and-running-c-codes" class="callout-inner">
+<h3 class="callout-title">Practice compiling and running C codes<a class="anchor" aria-label="anchor" href="#practice-compiling-and-running-c-codes"></a>
+</h3>
+<div class="callout-content">
 <p>The most common compiler for C is the Gnu C Compiler
 <strong>gcc</strong>. This may be available by default on your system,
 so try <strong>gcc –version</strong> to check. If not then you’ll need
@@ -599,17 +607,29 @@ cores.</p>
 <p>If you have an MPI package installed, try compiiling the
 message-passing version using <strong>mpicc -g -O3 -o dot_product_c_mpi
 dot_product_c_mpi.c</strong> and running some tests with <strong>mpirun
--np 4 dot_product_c_mpi</strong> for example. &gt; ## Solution and
-Analysis On a modern Intel system the raw scalar code ran in 0.14
-seconds as did the single-threaded OpenMP and single-task MPI runs. The
-test on 4 threads took 0.06 seconds which is quite a bit off the 4x
-speedup we are looking for. This again is due to how little work is
-being done during each pass through the loop compared to the loop
-overhead. The MPI test on 4 tasks is better at 0.047 seconds and is a
-little faster at 0.034 seconds on 8 tasks since the parallelization is
-done in a different manner. How do your results compare to these? {:
-.solution} {: .challenge}</p>
-</blockquote>
+-np 4 dot_product_c_mpi</strong> for example.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>On a modern Intel system the raw scalar code ran in 0.14 seconds as
+did the single-threaded OpenMP and single-task MPI runs. The test on 4
+threads took 0.06 seconds which is quite a bit off the 4x speedup we are
+looking for. This again is due to how little work is being done during
+each pass through the loop compared to the loop overhead. The MPI test
+on 4 tasks is better at 0.047 seconds and is a little faster at 0.034
+seconds on 8 tasks since the parallelization is done in a different
+manner. How do your results compare to these?</p>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -688,7 +708,7 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/c-cpp.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/c-cpp.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-15",
+  "dateModified": "2024-07-16",
   "datePublished": "2024-07-16"
 }
 

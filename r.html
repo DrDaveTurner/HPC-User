@@ -419,7 +419,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The R Language</h1>
-        <p>Last updated on 2024-07-15 |
+        <p>Last updated on 2024-07-16 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/r.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -662,80 +662,168 @@ many times over so it should in general be avoided. If you do try this,
 make sure to check the performance for both options as this choice can
 drastically effect the efficiency of the resulting parallel
 implementation.</p>
-<blockquote>
-<h2 id="compare-raw-and-optimized-performance-of-matmult.r">Compare raw
-and optimized performance of matmult.R</h2>
+<div id="compare-raw-and-optimized-performance-of-matmult.r" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="compare-raw-and-optimized-performance-of-matmult.r" class="callout-inner">
+<h3 class="callout-title">Compare raw and optimized performance of matmult.R<a class="anchor" aria-label="anchor" href="#compare-raw-and-optimized-performance-of-matmult.r"></a>
+</h3>
+<div class="callout-content">
 <p>Run matmult.R for matrix sizes 100 and 1000 to compare the
 performance of a raw loop to the built-in matrix multiplication
-function. Also compare these numbers to other languages. &gt; ##
-Solution and Analysis I measured 500 seconds for the raw loop in R and
-0.10 seconds for the optimized built-in matrix multiplication function.
-Be aware that the built-in function may use all the cores it has access
-to, so this may not be a fair comparison unless you submit a batch
-scheduler job with only 1 core allocated. Python for comparison took 300
-seconds for raw loops and 0.13 seconds for the <strong>numpy</strong>
-optimized routine, but a larger run for size 10,000 had
-<strong>numpy</strong> at 46 seconds compared to <strong>R</strong> at
-72 seconds. So in general, R and Python are similar in speed for both
-raw and optimized code, but Python is a little faster. {: .solution} {:
-.challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases.">Profile
-the run time for using rbind() as the number of rows in the data frame
-increases.</h2>
+function. Also compare these numbers to other languages.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
+optimized built-in matrix multiplication function. Be aware that the
+built-in function may use all the cores it has access to, so this may
+not be a fair comparison unless you submit a batch scheduler job with
+only 1 core allocated. Python for comparison took 300 seconds for raw
+loops and 0.13 seconds for the <strong>numpy</strong> optimized routine,
+but a larger run for size 10,000 had <strong>numpy</strong> at 46
+seconds compared to <strong>R</strong> at 72 seconds. So in general, R
+and Python are similar in speed for both raw and optimized code, but
+Python is a little faster.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases." class="callout-inner">
+<h3 class="callout-title">Profile the run time for using rbind() as the number of rows in the data frame increases.<a class="anchor" aria-label="anchor" href="#profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases."></a>
+</h3>
+<div class="callout-content">
 <p>Time runs of <strong>rbind.R</strong> for 10, 100, 1000, and 10000
-rows. &gt; ## Solution and Analysis While rbind() is convenient and
-works well for small data frames, the time to add rows begins to
-increase exponentially for data frames around 10,000 rows. I measured 1
-second for 1000 rows, 48 seconds for 10,000 rows, and 5100 seconds for
-100,000 rows. <strong>rbind()</strong> works well for small data frames,
-but it is very inefficient when you scale up to larger data sets of over
-10,000 rows. This is because R copies the entire data frame over each
-time it adds a new row. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="investigate-the-data-table-performance.">Investigate the data
-table performance.</h2>
+rows.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>While rbind() is convenient and works well for small data frames, the
+time to add rows begins to increase exponentially for data frames around
+10,000 rows. I measured 1 second for 1000 rows, 48 seconds for 10,000
+rows, and 5100 seconds for 100,000 rows. <strong>rbind()</strong> works
+well for small data frames, but it is very inefficient when you scale up
+to larger data sets of over 10,000 rows. This is because R copies the
+entire data frame over each time it adds a new row.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="investigate-the-data-table-performance." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="investigate-the-data-table-performance." class="callout-inner">
+<h3 class="callout-title">Investigate the data table performance.<a class="anchor" aria-label="anchor" href="#investigate-the-data-table-performance."></a>
+</h3>
+<div class="callout-content">
 <p>Test the <strong>datatable.R</strong> code for 100, 1000, and 10000
-rows and compare to the rbind() results. &gt; ## Solution and Analysis
-For 1,000 rows I measured 0.12 seconds for a data table set() compared
-to 5.4 seconds for a data table assignment and 1.1 second for a data
-frame rbind(). For 10,000 rows the performance really starts to differ
-with 0.53 seconds for a data table set() compared to 50 seconds for a
-data table assignment and 48 seconds for a data frame rbind(). For a
-large test of 100,000 rows the data table set() still only took 5
+rows and compare to the rbind() results.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>For 1,000 rows I measured 0.12 seconds for a data table set()
+compared to 5.4 seconds for a data table assignment and 1.1 second for a
+data frame rbind(). For 10,000 rows the performance really starts to
+differ with 0.53 seconds for a data table set() compared to 50 seconds
+for a data table assignment and 48 seconds for a data frame rbind(). For
+a large test of 100,000 rows the data table set() still only took 5
 seconds while the data table assignment took 485 seconds and the data
 frame rbind() took 5100 seconds, or 1000x longer. This again shows that
 while data frames can be convenient, when you scale up to larger sizes
-you have to use data tables and the set() function. {: .solution} {:
-.challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv.">Test
-the <strong>fread.R</strong> code to see the speedup of the
-<strong>fread()</strong> function from the optimized
+you have to use data tables and the set() function.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv." class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv." class="callout-inner">
+<h3 class="callout-title">Test the <strong>fread.R</strong> code to see
+the speedup of the <strong>fread()</strong> function from the optimized
 <strong>data.table</strong> package compared to the standard
-<strong>read.csv()</strong>.</h2>
+<strong>read.csv()</strong>.<a class="anchor" aria-label="anchor" href="#test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv."></a>
+</h3>
+<div class="callout-content">
 <p>Time runs of <strong>fread.R</strong> for 10,000 rows, 100,000 rows,
-and 1,000,000 rows. &gt; ## Solution and Analysis For 10,000 rows I saw
-similar results for each function, but for 100,000 rows
-<strong>fread()</strong> was 10 times faster than
+and 1,000,000 rows.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
+<p>For 10,000 rows I saw similar results for each function, but for
+100,000 rows <strong>fread()</strong> was 10 times faster than
 <strong>read.csv()</strong> and for 1,000,000 rows it was 100 times
 faster. This is another example illustrating when to avoid the core R
 functionality and use the external add-on packages to achieve
-performance in your code. {: .solution} {: .challenge}</p>
-</blockquote>
-<blockquote>
-<h2 id="advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program">Advanced
-Homework - Use the <strong>pdbMPI</strong> package to code and run a
-parallel Hello World program</h2>
+performance in your code.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program" class="callout-inner">
+<h3 class="callout-title">Advanced Homework - Use the
+<strong>pdbMPI</strong> package to code and run a parallel Hello World
+program<a class="anchor" aria-label="anchor" href="#advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program"></a>
+</h3>
+<div class="callout-content">
 <p>For those who want a challenge, follow the <strong>pdbMPI</strong>
 link at the end of this lesson an write, run, and test the Hello World
-program. &gt; ## Solution and Analysis I would love to have a
-pdbMPI-based matrix multiply code available for people to look at and
-test if anyone finds one. {: .solution} {: .challenge}</p>
-</blockquote>
+program.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div class="accordion-body">
+<p>I would love to have a pdbMPI-based matrix multiply code available
+for people to look at and test if anyone finds one.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a></h2>
@@ -850,7 +938,7 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/r.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/r.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-15",
+  "dateModified": "2024-07-16",
   "datePublished": "2024-07-16"
 }
 
