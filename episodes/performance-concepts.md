@@ -41,7 +41,7 @@ Y element into memory, multiplying them together and summing them into D.
 Then at the end, we push D back down into main memory where the program
 prints the result out to the screen for us.
 
-![Dot product between vectors X and Y](figs/dot_prod_fig.jpg ){ alt="Dot product formula" }
+![Dot product between vectors X and Y](fig/dot_prod_fig.jpg ){ alt="Dot product formula" }
 
 This conceptual view of what the computer is doing is all we really
 need to be aware of when we are starting to writing programs.
@@ -75,7 +75,7 @@ In the case of our dot product, that means loading the first element
 X1 may take 93-106 ns while the next 7 only take 3 ns since they are
 already in L1 cache.
 
-  ![Memory Hierarchy in a Computer](figs/Memory_Hierarchy.jpg) { alt="Diagram of the memory hierarchy in a typical computer" }
+![Memory Hierarchy in a Computer](fig/Memory_Hierarchy.jpg){ alt="Diagram of the memory hierarchy in a typical computer" }
 
 How does this knowledge help us?
 Performance is more about getting data to the processor since most
@@ -93,7 +93,7 @@ Now let's look at a simple matrix multiplication algorithm which
 is fairly simple to program, but may have very different performance
 depending on how you write the code.
 
-![Matrix multiplication C = A * B](figs/matmult_fig.jpg ) { alt="Formula and diagram of a matrix multiply" }
+![Matrix multiplication C = A * B](fig/matmult_fig.jpg ){ alt="Formula and diagram of a matrix multiply" }
 
 Once the matrices are initialized, the code to multiply them together
 is fairly simple.
