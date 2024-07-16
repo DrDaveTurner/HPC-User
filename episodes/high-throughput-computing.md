@@ -106,7 +106,7 @@ to submit.  If multiple jobs are submitted then the environmental
 variable **$(Process)** will be used in the script to differentiate each
 with that being between zero and the number of jobs specified minus one.
 
-~~~
+```bash
 #!/bin/bash -l
  
 output = osg.namd.out
@@ -124,8 +124,7 @@ executable = namd2
 arguments = +p8 test.0.namd
 transfer_output_files = output
 queue 1
-~~~
-{: .language-bash}
+```
 
 Most systems will have support for modules, but the **HAS_MODULES == True** 
 requirement can mean some systems are not supported.
@@ -137,7 +136,7 @@ to use a container.
 Once you have the script you can submit, monitor, and
 control the job using commands like those below.
 
-~~~
+```bash
 > condor_submit htc_job.sh                   # Submit the condor script to the queue
 > condor_q                                   # Check on the status while in the queue
 > condor_q netid                             # Check status of currently running jobs
@@ -146,20 +145,20 @@ control the job using commands like those below.
 > condor_history -long 121763                # Same but report more info
 > condor_rm 121763                           # Remove the job number specified
 > condor_rm daveturner                       # Remove all jobs for the given username
-~~~
-{: .language-bash}
-
+```
 
 
 ## HTC Outside the U.S.
 
 Need to add info about non-US HTC systems
 
+:::::::::::::::::::::::::::::::::::::: challenge
 
-> ## Homework: Get an OSG account and submit a test job.
-> If you are in the U.S. and want a big challenge, request an OSG account and
-> try submitting some small jobs.
-{: .challenge}
+## Homework: Get an OSG account and submit a test job.
+If you are in the U.S. and want a big challenge, request an OSG account and
+try submitting some small jobs.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Summary
 

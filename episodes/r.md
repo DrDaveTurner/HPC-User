@@ -267,82 +267,106 @@ as this choice can drastically effect the efficiency
 of the resulting parallel implementation.
 
 
+:::::::::::::::::::::::::::::::::::::: challenge
 
-> ## Compare raw and optimized performance of matmult.R
-> Run matmult.R for matrix sizes 100 and 1000 to compare
-> the performance of a raw loop to the built-in matrix
-> multiplication function.  Also compare these numbers
-> to other languages.
->  > ## Solution and Analysis
-> I measured 500 seconds for the raw loop in R and
-> 0.10 seconds for the optimized built-in matrix multiplication function.
-> Be aware that the built-in function may use all the cores it
-> has access to, so this may not be a fair comparison unless you submit
-> a batch scheduler job with only 1 core allocated.
-> Python for comparison took 300 seconds for raw loops and 0.13 seconds
-> for the **numpy** optimized routine, but a larger run for 
-> size 10,000 had **numpy** at 46 seconds compared to **R** at 72 seconds.
-> So in general, R and Python are similar in speed for both raw and
-> optimized code, but Python is a little faster.
-> {: .solution}
-{: .challenge}
+## Compare raw and optimized performance of matmult.R
+Run matmult.R for matrix sizes 100 and 1000 to compare
+the performance of a raw loop to the built-in matrix
+multiplication function.  Also compare these numbers
+to other languages.
 
+:::::::::::::::::: solution
 
-> ## Profile the run time for using rbind() as the number of rows in the data frame increases.
-> Time runs of **rbind.R** for 10, 100, 1000, and 10000 rows.
->  > ## Solution and Analysis
-> While rbind() is convenient and works well for small data frames,
-> the time to add rows begins to increase exponentially for data frames
-> around 10,000 rows.  I measured 1 second for 1000 rows, 48 seconds for 10,000
-> rows, and 5100 seconds for 100,000 rows.
-> **rbind()** works well for small data frames, but it is very inefficient
-> when you scale up to larger data sets of over 10,000 rows.
-> This is because R copies the entire data frame over each time it adds
-> a new row.
-> {: .solution}
-{: .challenge}
+I measured 500 seconds for the raw loop in R and
+0.10 seconds for the optimized built-in matrix multiplication function.
+Be aware that the built-in function may use all the cores it
+has access to, so this may not be a fair comparison unless you submit
+a batch scheduler job with only 1 core allocated.
+Python for comparison took 300 seconds for raw loops and 0.13 seconds
+for the **numpy** optimized routine, but a larger run for 
+size 10,000 had **numpy** at 46 seconds compared to **R** at 72 seconds.
+So in general, R and Python are similar in speed for both raw and
+optimized code, but Python is a little faster.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-> ## Investigate the data table performance.
-> Test the **datatable.R** code for 100, 1000, and 10000 rows and compare to the rbind() results.
->  > ## Solution and Analysis
-> For 1,000 rows I measured 0.12 seconds for a data table set()
-> compared to 5.4 seconds for a data table assignment and 1.1 second
-> for a data frame rbind().
-> For 10,000 rows the performance really starts to differ with
-> 0.53 seconds for a data table set() compared to 50 seconds for a data
-> table assignment and 48 seconds for a data frame rbind().
-> For a large test of 100,000 rows the data table set() still only
-> took 5 seconds while the data table assignment took 485 seconds and
-> the data frame rbind() took 5100 seconds, or 1000x longer.
-> This again shows that while data frames can be convenient, when 
-> you scale up to larger sizes you have to use data tables and the
-> set() function.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Profile the run time for using rbind() as the number of rows in the data frame increases.
+Time runs of **rbind.R** for 10, 100, 1000, and 10000 rows.
+
+:::::::::::::::::: solution
+
+While rbind() is convenient and works well for small data frames,
+the time to add rows begins to increase exponentially for data frames
+around 10,000 rows.  I measured 1 second for 1000 rows, 48 seconds for 10,000
+rows, and 5100 seconds for 100,000 rows.
+**rbind()** works well for small data frames, but it is very inefficient
+when you scale up to larger data sets of over 10,000 rows.
+This is because R copies the entire data frame over each time it adds
+a new row.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-> ## Test the **fread.R** code to see the speedup of the **fread()** function from the optimized **data.table** package compared to the standard **read.csv()**.
-> Time runs of **fread.R** for 10,000 rows, 100,000 rows, and 1,000,000 rows.
->  > ## Solution and Analysis
-> For 10,000 rows I saw similar results for each function, but for 
-> 100,000 rows **fread()** was 10 times faster than **read.csv()**
-> and for 1,000,000 rows it was 100 times faster.
-> This is another example illustrating when to avoid the core
-> R functionality and use the external add-on packages to achieve performance
-> in your code.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Investigate the data table performance.
+Test the **datatable.R** code for 100, 1000, and 10000 rows and compare to the rbind() results.
+
+:::::::::::::::::: solution
+
+For 1,000 rows I measured 0.12 seconds for a data table set()
+compared to 5.4 seconds for a data table assignment and 1.1 second
+for a data frame rbind().
+For 10,000 rows the performance really starts to differ with
+0.53 seconds for a data table set() compared to 50 seconds for a data
+table assignment and 48 seconds for a data frame rbind().
+For a large test of 100,000 rows the data table set() still only
+took 5 seconds while the data table assignment took 485 seconds and
+the data frame rbind() took 5100 seconds, or 1000x longer.
+This again shows that while data frames can be convenient, when 
+you scale up to larger sizes you have to use data tables and the
+set() function.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-> ## Advanced Homework - Use the **pdbMPI** package to code and run a parallel Hello World program
-> For those who want a challenge, follow the **pdbMPI** link at the
-> end of this lesson an write, run, and test the Hello World program.
->  > ## Solution and Analysis
-> I would love to have a pdbMPI-based matrix multiply code available
-> for people to look at and test if anyone finds one.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Test the **fread.R** code to see the speedup of the **fread()** function from the optimized **data.table** package compared to the standard **read.csv()**.
+Time runs of **fread.R** for 10,000 rows, 100,000 rows, and 1,000,000 rows.
+
+:::::::::::::::::: solution
+
+For 10,000 rows I saw similar results for each function, but for 
+100,000 rows **fread()** was 10 times faster than **read.csv()**
+and for 1,000,000 rows it was 100 times faster.
+This is another example illustrating when to avoid the core
+R functionality and use the external add-on packages to achieve performance
+in your code.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Advanced Homework - Use the **pdbMPI** package to code and run a parallel Hello World program
+For those who want a challenge, follow the **pdbMPI** link at the
+end of this lesson an write, run, and test the Hello World program.
+
+:::::::::::::::::: solution
+
+I would love to have a pdbMPI-based matrix multiply code available
+for people to look at and test if anyone finds one.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ## Summary

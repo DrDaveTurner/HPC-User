@@ -58,7 +58,7 @@ at the same time but operating on different parts of the data.
 After they have all completed their parts, then the master thread
 sums all for partial sums into the dot product and prints it out.
 
-![Diagram of a shared-memory multi-threaded dot product](../fig/multi-threaded-dot-product-0.jpg )
+![Diagram of a shared-memory multi-threaded dot product](figs/multi-threaded-dot-product-0.jpg ){ alt="Shared-memory multi-threaded dot product showing the memory layout of both vectors"}
 
 ### The multi-threaded dot product code
 
@@ -97,7 +97,7 @@ to create a shared array of partial sums and manually sum them together
 at the end.  This is just as efficient computationally, it just takes a
 little extra coding but is more explicit.
 
-~~~
+```r
 # Do the dot product between two vectors X and Y then print the result
 # USAGE:  python dot_product_threaded.py 4       to run on 4 threads
 
@@ -144,8 +144,7 @@ t_elapsed = time.perf_counter() - t_start
 print('dot product = ', d_prod, 'took ', t_elapsed, ' seconds' );
 print( 2.0*N*1.0e-9 / t_elapsed, ' Gflops (billion floating-point operations per second)')
 print( 2.0*N*8.0/1.0e9, ' GB memory used' )
-~~~
-{: .language-python}
+```
 
 So parallelizing this program really only requires us to change around 11 lines
 of code, and from that we get the benefit of being able to apply much greater
@@ -186,29 +185,33 @@ Multi-threading packages like OpenMP and pymp provide locking mechanisms and/or
 methods of having part of a loop done by a single thread at a time.
 This always leads to terrible scaling and should almost never be done.
 
+:::::::::::::::::::::::::::::::::::::: challenge
 
-> ## Scaling Study of the Multi-Threaded Dot Product Code
->
-> Measure the execution time for the dot_product_threaded.py code
-> for 1, 4, 8, and 16 cores.  If possible, use a job script
-> requesting 16 cores and do all runs in the same job.
-> Then calculate the speedup compared to the scalar (single-core)
-> run to see how close to ideal the performance is.
->  > ## Solution and Analysis
-> For this very simple problem, each thread can do its computations
-> totally independently.  There is only a global sum of all the
-> partial sums at the end, so we would expect the scaling to be
-> close to ideal.
-> In my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x
-> speedup on 8 cores, and a 7.8x speedup on 16 cores.
-> For this problem, there just is so few computations being done
-> in each loop iteration, only 2 floating-pont operations, that the
-> loop overhead is preventing better scaling.
-> A C version of this code using OpenMP for multi-threading runs
-> 170 times faster, but likewise does not scale well due to the
-> few computations being done in each pass through the loop.
-> {: .solution}
-{: .challenge}
+## Scaling Study of the Multi-Threaded Dot Product Code
+Measure the execution time for the dot_product_threaded.py code
+for 1, 4, 8, and 16 cores.  If possible, use a job script
+requesting 16 cores and do all runs in the same job.
+Then calculate the speedup compared to the scalar (single-core)
+run to see how close to ideal the performance is.
+
+:::::::::::::::::: solution
+
+For this very simple problem, each thread can do its computations
+totally independently.  There is only a global sum of all the
+partial sums at the end, so we would expect the scaling to be
+close to ideal.
+In my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x
+speedup on 8 cores, and a 7.8x speedup on 16 cores.
+For this problem, there just is so few computations being done
+in each loop iteration, only 2 floating-pont operations, that the
+loop overhead is preventing better scaling.
+A C version of this code using OpenMP for multi-threading runs
+170 times faster, but likewise does not scale well due to the
+few computations being done in each pass through the loop.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 - Multi-theaded computing is powerful and fairly easy to use but only works on one compute node.

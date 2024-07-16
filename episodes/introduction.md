@@ -19,6 +19,8 @@ the concepts part of the lesson are shown in,
 plus at each example the user will be able to
 click on a tab to see the examples in other languages.**
 
+Q? Do group-tags work across episodes or should I request global-tabs?
+
 ## Overview
 
 In doing computational science it is very common to start a project by

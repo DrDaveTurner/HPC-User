@@ -300,32 +300,34 @@ form if possible, and if so then choose the fastest file server
 available.
 
 
+:::::::::::::::::::::::::::::::::::::: challenge
 
-> ## Scaling Study of the Distributed-Memory Dot Product Code
->
-> Measure the entire runtime for the dot_product_mpi.py code
-> for 1, 4, 8, and 16 cores if you are on an HPC system with
-> at least 2 compute nodes. 
-> You can try different combinations of nodes and cores for
-> each if you would like to see the effects of the network
-> (for the 4 cores, try 2 nodes 2 cores vs 4 nodes 1 core).
-> 
->  > ## Solution and Analysis
-> In this code we initialize the vectors locally so there
-> is no communication involved.
-> The only communication is the global sum at the end, so
-> we expect the scaling to be close to ideal.
-> In many practical MPI codes, we would need to read data 
-> into one of the ranks, divide the data up and send it
-> out to each other node.
-> Real MPI applications also usually require communication
-> mixed in with the computational part in order to get data
-> where it needs to be.
-> All this communication can slow down the job, and this
-> usually gets worse as you spread a job over more cores,
-> and especially over more nodes.
-> {: .solution}
-{: .challenge}
+## Scaling Study of the Distributed-Memory Dot Product Code
+Measure the entire runtime for the dot_product_mpi.py code
+for 1, 4, 8, and 16 cores if you are on an HPC system with
+at least 2 compute nodes. 
+You can try different combinations of nodes and cores for
+each if you would like to see the effects of the network
+(for the 4 cores, try 2 nodes 2 cores vs 4 nodes 1 core).
+
+:::::::::::::::::: solution
+
+In this code we initialize the vectors locally so there
+is no communication involved.
+The only communication is the global sum at the end, so
+we expect the scaling to be close to ideal.
+In many practical MPI codes, we would need to read data 
+into one of the ranks, divide the data up and send it
+out to each other node.
+Real MPI applications also usually require communication
+mixed in with the computational part in order to get data
+where it needs to be.
+All this communication can slow down the job, and this
+usually gets worse as you spread a job over more cores,
+and especially over more nodes.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints

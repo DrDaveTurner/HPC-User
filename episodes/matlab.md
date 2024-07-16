@@ -215,53 +215,66 @@ you manually send and receive data to and from remote processes
 and manually initiate function evaluation.
 
 
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Test the performance of the Matlab matrix multiplication code.
+Test the performance of the **matmult.m** code for a matrix size of 
+1000 and compare to other languages.
+
+:::::::::::::::::: solution
+
+For the 1000x1000 matrices, I measure 5 seconds for the serial code,
+0.7 seconds for the built-in matrix multiply that uses low level
+optimized BLAS routines.  The parpool multi-process test takes
+530 seconds which is understandably slow since it is doing the
+matrix multiplication in a distributed memory manner without
+explicitly programming it to do this efficiently.
+The multi-threaded parpool test measured in at > 510 seconds
+which is very disappointing since there should be no copying of the
+matrices at the beginning.  It isn't clear what is happening behind
+the scenes for this to be so slow.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-> ## Test the performance of the Matlab matrix multiplication code.
-> Test the performance of the **matmult.m** code for a matrix size of 
-> 1000 and compare to other languages.
->  > ## Solution and Analysis
-> For the 1000x1000 matrices, I measure 5 seconds for the serial code,
-> 0.7 seconds for the built-in matrix multiply that uses low level
-> optimized BLAS routines.  The parpool multi-process test takes
-> 530 seconds which is understandably slow since it is doing the
-> matrix multiplication in a distributed memory manner without
-> explicitly programming it to do this efficiently.
-> The multi-threaded parpool test measured in at > 510 seconds
-> which is very disappointing since there should be no copying of the
-> matrices at the beginning.  It isn't clear what is happening behind
-> the scenes for this to be so slow.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
 
-> ## Test the performance of the Matlab dot product code.
-> Test the performance of the **dot_product.m** code for an array size of 
-> 100,000,000 and compare to other languages.
->  > ## Solution and Analysis
-> I measure serial performance at 0.5 seconds with the built in optimized
-> routine at 0.2 seconds on 8 cores for a modest speedup.
-> The multi-core parfor loop on the same 8 cores takes 2.1 seconds while
-> the multi-threaded parfor loop takes a disappointing 0.9 seconds which
-> is still greater than the serial code.
-> The overhead for using these methods is still much larger than the
-> performance gain which indicates the parfor method should only really
-> be used for very coarse grained algorithms.
-> {: .solution}
-{: .challenge}
+## Test the performance of the Matlab dot product code.
+Test the performance of the **dot_product.m** code for an array size of 
+100,000,000 and compare to other languages.
+
+:::::::::::::::::: solution
+
+I measure serial performance at 0.5 seconds with the built in optimized
+routine at 0.2 seconds on 8 cores for a modest speedup.
+The multi-core parfor loop on the same 8 cores takes 2.1 seconds while
+the multi-threaded parfor loop takes a disappointing 0.9 seconds which
+is still greater than the serial code.
+The overhead for using these methods is still much larger than the
+performance gain which indicates the parfor method should only really
+be used for very coarse grained algorithms.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-> ## Homework:  Alter the **matmult.m** code to run on multiple nodes and multiple cores.
-> Test on multiple compute nodes and compare performance to the serial and
-> multi-threaded versions.
-> If you want a real challenge try setting the code up to run on a cloud server.
-> And an even bigger challenge would be to convert matmult.m to run on Octave's
-> parallel computing environments.
->  > ## Solution and Analysis
-> If you do develop code for this, let us know so we can consider including
-> your work for others to see.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
 
+## Homework:  Alter the **matmult.m** code to run on multiple nodes and multiple cores.
+Test on multiple compute nodes and compare performance to the serial and
+multi-threaded versions.
+If you want a real challenge try setting the code up to run on a cloud server.
+And an even bigger challenge would be to convert matmult.m to run on Octave's
+parallel computing environments.
+
+:::::::::::::::::: solution
+
+If you do develop code for this, let us know so we can consider including
+your work for others to see.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ## Summary
