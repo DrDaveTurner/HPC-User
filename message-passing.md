@@ -50,7 +50,7 @@ After all nodes have calculated their partial sums, those will be
 globally summed across all 8 tasks using the network if needed
 then the program with rank 1 will print out the results.
 
-![Diagram of a distributed-memory multi-node dot product on two computers](figs/distributed-memory-dot-product-0.jpg ){alt="Distributed-memory dot product shsowing the layout of both vectors on both computers"}
+![Diagram of a distributed-memory multi-node dot product on two computers](fig/distributed-memory-dot-product-0.jpg ){alt="Distributed-memory dot product shsowing the layout of both vectors on both computers"}
 
 In parallel computing, the programmer must decide how to divide the data
 between the processes.
