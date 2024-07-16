@@ -103,20 +103,23 @@ user documentations.  On our HPC cluster at Kansas State University
 the request for one NVIDIA RTX 3090 would be
 **--gres=gpu:geforce_rtx_3090:1**.
 
+:::::::::::::::::::::::::::::::::::::: challenge
 
-> ## Run a simple GPU job if you have access to an HPC system with GPUs
-> Compile and run the hello_from_gpu.cu CUDA program.
-> You may need to load a module to gain access to the **nvcc** compiler.
-> There is an **sb.hello_from_gpu** Slurm batch script to submit the job.
->  > ## Solution and Analysis
-> The goal is just to start getting you comfortable with
-> compiling and submitting GPU jobs.
-> Use **nvcc hello_gpu.cu -o hello_from_gpu** to compile.
-> If you have Slurm on your HPC system you can submit the
-> job with **sbatch sb.hello_gpu** but you may need to add a partition.
-> {: .solution}
-{: .challenge}
+## Run a simple GPU job if you have access to an HPC system with GPUs
+Compile and run the hello_from_gpu.cu CUDA program.
+You may need to load a module to gain access to the **nvcc** compiler.
+There is an **sb.hello_from_gpu** Slurm batch script to submit the job.
 
+:::::::::::::::::: solution
+
+The goal is just to start getting you comfortable with
+compiling and submitting GPU jobs.
+Use **nvcc hello_gpu.cu -o hello_from_gpu** to compile.
+If you have Slurm on your HPC system you can submit the
+job with **sbatch sb.hello_gpu** but you may need to add a partition.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Summary
 

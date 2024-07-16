@@ -50,7 +50,7 @@ After all nodes have calculated their partial sums, those will be
 globally summed across all 8 tasks using the network if needed
 then the program with rank 1 will print out the results.
 
-![Diagram of a distributed-memory multi-node dot product on two computers](../fig/distributed-memory-dot-product-0.jpg )
+![Diagram of a distributed-memory multi-node dot product on two computers](figs/distributed-memory-dot-product-0.jpg ){alt="Distributed-memory dot product shsowing the layout of both vectors on both computers"}
 
 In parallel computing, the programmer must decide how to divide the data
 between the processes.
@@ -114,7 +114,7 @@ Notice at the end that we only have rank 0 print its results.
 If we didn't protect the print statements like this, we would get
 nranks copies of each print statement.
 
-~~~
+```python
 # Do the dot product between two vectors X and Y then print the result
 # USAGE:  mpirun -np 4 python dot_product_message_passing.py       to run on 4 tasks
 # pip install mpi4py      in your virtual environment before you run this code
@@ -163,8 +163,7 @@ if ( myrank == 0 ):    # Only rank 0 will print results
    print('dot product = ', d_prod, 'took ', t_elapsed, ' seconds on ', nranks, ' ranks' );
    print( 2.0*N*1.0e-9 / t_elapsed, ' Gflops (billion floating-point operations per second)')
    print( 2.0*N*8.0/1.0e9, ' GB memory used' )
-~~~
-{: .language-python}
+```
 
 We see from all this that parallelizing a program using message-passing
 requires more work.  This is especially true in more complex programs
@@ -220,32 +219,37 @@ But if you really need to apply more computing power to your job,
 it is the only way to go.
 
 
-> ## Scaling Study of the Distributed-Memory Dot Product Code
->
-> Measure the execution time for the dot_product_message_passing.py code
-> for 1, 4, 8, and 16 cores if you are on an HPC system with
-> at least 2 compute nodes.
-> You can try different combinations of nodes and cores for
-> each if you would like to see the effects of the network
-> (for the 4 core test, try 2 nodes 2 cores vs 4 nodes 1 core).
->  > ## Solution and Analysis
-> In this code we initialize the vectors locally so there
-> is no communication involved.
-> The only communication is the global sum at the end, so
-> we expect the scaling to be close to ideal.
-> In my tests I measured the single core run at 18.2 seconds,
-> the 4 core run at 4.9 seconds for a 3.7 times speedup,
-> the 8 core run at 2.3 seconds for a 7.9 times speedup,
-> the 16 core run at 1.5 seconds for a 12 times speedup,
-> and the 32 core run at 0.73 seconds for a 25 times speedup.
-> Theses are all close to ideal which is great.
-> The inefficiency in the multi-threaded code comes from there
-> being too little work in each loop when the parallelization
-> comes in the loop overhead, while for the message-passing
-> code there is no difference in the loop overhead, it's just
-> the added global summation after the loop.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Scaling Study of the Distributed-Memory Dot Product Code
+Measure the execution time for the dot_product_message_passing.py code
+for 1, 4, 8, and 16 cores if you are on an HPC system with
+at least 2 compute nodes.
+You can try different combinations of nodes and cores for
+each if you would like to see the effects of the network
+(for the 4 core test, try 2 nodes 2 cores vs 4 nodes 1 core).
+
+:::::::::::::::::: solution
+
+In this code we initialize the vectors locally so there
+is no communication involved.
+The only communication is the global sum at the end, so
+we expect the scaling to be close to ideal.
+In my tests I measured the single core run at 18.2 seconds,
+the 4 core run at 4.9 seconds for a 3.7 times speedup,
+the 8 core run at 2.3 seconds for a 7.9 times speedup,
+the 16 core run at 1.5 seconds for a 12 times speedup,
+and the 32 core run at 0.73 seconds for a 25 times speedup.
+Theses are all close to ideal which is great.
+The inefficiency in the multi-threaded code comes from there
+being too little work in each loop when the parallelization
+comes in the loop overhead, while for the message-passing
+code there is no difference in the loop overhead, it's just
+the added global summation after the loop.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 - Distributed-memory computing is very flexible, extremely scalable, but more difficult to program.

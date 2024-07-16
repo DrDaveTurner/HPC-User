@@ -48,14 +48,16 @@ Let's start with a few simple examples of using the **time** function
 at the command prompt.
 Try timing the **pwd** command which prints the current working directory.
 
-~~~
+```bash
 time pwd
+```
+```output
 /Users/daveturner
 
 real	0m0.000s
 user	0m0.000s
 sys	0m0.000s
-~~~
+```
 
 The first thing you see is the output of the **pwd** command, which in
 this case is the directory **/Users/daveturner**.
@@ -69,14 +71,16 @@ measuring execution times that are greater than a second in general.
 Below is another example where this time we are timing the **ls** function
 which will list the files in the current directory.
 
-~~~
+```bash
 time ls
+```
+```output
 file1 file2 file3
 
 real	0m0.110s
 user	0m0.006s
 sys	0m0.027s
-~~~
+```
 
 When I do this on my iMac, I get a real time of just 0.006 seconds
 because it's really fast to access the local hard disk.
@@ -104,13 +108,14 @@ performance.
 If you are measuring short things, you may want to measure multiple
 times and take an average.
 
-~~~
+```bash
 time sleep 5
-
+```
+```output
 real	0m5.052s
 user	0m0.001s
 sys	0m0.003s
-~~~
+```
 
 In addition to worrying about the clock accuracy, you also need to 
 worry about interferrence from other jobs that may be running on
@@ -159,7 +164,7 @@ Below is an example of using the clock function to measure the
 time it takes to do a loop, then measure the time it takes to
 dump an array out to a file.
 
-~~~
+```python
 import time
 
 N = 100
@@ -183,7 +188,7 @@ fd.close()
 
 t_output = time.perf_counter() - t_start
 print("The output took ", t_output, " seconds")
-~~~
+```
 
 Try running this yourself by copying it into a timing.py file.
 When I run this, I see that the loop takes about 30 microseconds on my computer
@@ -209,7 +214,7 @@ loop, so we need to sum the times together.
 Try changing the timing so that it is inside the summation
 loop instead of outside it to see what happens.
 
-~~~
+```python
 t_start = time.perf_counter()
 
 sum = 0.0
@@ -223,7 +228,7 @@ t_loop = time.perf_counter() - t_start
 
 print("The sum took ", t_sum, " seconds")
 print("The loop took ", t_loop, " seconds")
-~~~
+```
 
 In my computer, the t_sum time is only a bit larger than the 
 t_loop time from before, but remember that this doesn't count
@@ -319,9 +324,10 @@ for a running job and **seff** to find the maximum memory used
 for a completed job, using the job ID number in both cases to choose
 the job you are interested in.
 
-~~~
+```bash
 seff 5072064
-
+```
+```output
 Job ID: 5072064
 Cluster: beocat
 User/Group: daveturner/daveturner_users
@@ -332,7 +338,7 @@ CPU Efficiency: 97.10% of 00:01:09 core-walltime
 Job Wall-clock time: 00:01:09
 Memory Utilized: 2.26 GB
 Memory Efficiency: 11.31% of 20.00 GB
-~~~
+```
 
 The matrix multiplication job above used 10,000x10,000 matrices and
 took 1 minute 9 seconds.
@@ -344,13 +350,14 @@ So 3 matrices are 3 x NxN x 8 / (1024x1024x1024) GB = 2.235 GB,
 rounded up to 2.26 GB.
 In general, if you estimate 1 GB as 10^9 Bytes that works fine.
 
-~~~
+```bash
 sstat --format=MaxRSS 5072069
-
+```
+```output
 MaxRSS
 ----------
   2289.50M
-~~~
+```
 
 For a running job you can use the **sstat** command with the job ID number.
 The **sstat** command will dump a lot of information out, so using

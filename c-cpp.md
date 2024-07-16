@@ -94,10 +94,9 @@ Memory and computations are simply less explicit in C++ by design,
 and that can make it more difficult to identify where performance
 issues may lie.
 
-~~~
+```c
 C = A * B;
-~~~
-{: .language-c}
+```
 
 ## C/C++ Compilers
 
@@ -151,46 +150,52 @@ at least understand this as a starting point.
 * make
 * make install
 
-> ## Practice compiling and running C codes
->
-> The most common compiler for C is the Gnu C Compiler **gcc**.
-> This may be available by default on your system, so try
-> **gcc --version** to check.  If not then you'll need to figure out
-> how to gain access to it.  You can also try the Intel C Compiler
-> **icc** if you have it available on your system.
-> 
-> Try compiling the **dot_product_c.c** file using 
-> **gcc -g -O3 -o dot_product_c dot_product_c.c** which tells the
-> compiler to use optimization level 3 and create the executable 
-> dot_product_c from the source code dot_product_c.c.
-> Once compiled you can run this using **./dot_product_c** or
-> submit a job to the batch queue.
-> Try also to compile with **icc** if it is available.
->
-> Next try to compile the OpenMP multi-threaded version.  You will
-> need to tell it to access the OpenMP library using a 
-> **-fopenmp** flag for the **gcc** compiler or **-openmp** for **icc**.
-> Try a few runs with different numbers of threads to get
-> comfortable with running on multiple cores.
->
-> If you have an MPI package installed, try compiiling the
-> message-passing version using
-> **mpicc -g -O3 -o dot_product_c_mpi dot_product_c_mpi.c**
-> and running some tests with **mpirun -np 4 dot_product_c_mpi**
-> for example.
->  > ## Solution and Analysis
-> On a modern Intel system the raw scalar code ran in 0.14 seconds
-> as did the single-threaded OpenMP and single-task MPI runs.
-> The test on 4 threads took 0.06 seconds which is quite a bit off
-> the 4x speedup we are looking for.  This again is due to how little
-> work is being done during each pass through the loop compared to the
-> loop overhead.
-> The MPI test on 4 tasks is better at 0.047 seconds and is a little
-> faster at 0.034 seconds on 8 tasks since the parallelization is
-> done in a different manner.
-> How do your results compare to these?
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Practice compiling and running C codes
+
+The most common compiler for C is the Gnu C Compiler **gcc**.
+This may be available by default on your system, so try
+**gcc --version** to check.  If not then you'll need to figure out
+how to gain access to it.  You can also try the Intel C Compiler
+**icc** if you have it available on your system.
+
+Try compiling the **dot_product_c.c** file using 
+**gcc -g -O3 -o dot_product_c dot_product_c.c** which tells the
+compiler to use optimization level 3 and create the executable 
+dot_product_c from the source code dot_product_c.c.
+Once compiled you can run this using **./dot_product_c** or
+submit a job to the batch queue.
+Try also to compile with **icc** if it is available.
+
+Next try to compile the OpenMP multi-threaded version.  You will
+need to tell it to access the OpenMP library using a 
+**-fopenmp** flag for the **gcc** compiler or **-openmp** for **icc**.
+Try a few runs with different numbers of threads to get
+comfortable with running on multiple cores.
+
+If you have an MPI package installed, try compiiling the
+message-passing version using
+**mpicc -g -O3 -o dot_product_c_mpi dot_product_c_mpi.c**
+and running some tests with **mpirun -np 4 dot_product_c_mpi**
+for example.
+
+:::::::::::::::::: solution
+
+On a modern Intel system the raw scalar code ran in 0.14 seconds
+as did the single-threaded OpenMP and single-task MPI runs.
+The test on 4 threads took 0.06 seconds which is quite a bit off
+the 4x speedup we are looking for.  This again is due to how little
+work is being done during each pass through the loop compared to the
+loop overhead.
+The MPI test on 4 tasks is better at 0.047 seconds and is a little
+faster at 0.034 seconds on 8 tasks since the parallelization is
+done in a different manner.
+How do your results compare to these?
+
+:::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 - Learn about the characteristics of C/C++

@@ -69,7 +69,7 @@ This uses the industry standard **LLVM** compiler library,
 but the compilation is not being done
 once ahead of the runtime as with C/C++ and Fortran, it is being
 done at runtime in what is referred to as a __just-in-time__
-or JIT manner.  
+or JIT manner.
 How effective this approach can be will depend on how much the
 compilation can be done in advance of when it is needed, and how
 much optimization it can do on the fly, but there also is the
@@ -144,27 +144,25 @@ where I labled it after the version of Python being used.
 The dollar sign is the command prompt to illustrate how the prompt
 changes while the virtual environment is active.
 
-~~~
+```bash
 $ mkdir -p ~/virtualenvs
 $ cd ~/virtualenvs
 $ virtualenv env-py-3.7.4
 $ source ~/virtualenvs/env-py-3.7.4/bin/activate
 (env-py-3.7.4)$              the prompt is now prefaced with environment name
-~~~
-{: .language-bash}
+```
 
 Once activated the prompt will change to show that you are
 working in the **env-py-3.7.4** environment.
 You can install any packages you need, run your python code,
 then deactivate the environment when you are done.
 
-~~~
+```bash
 (env-py-3.7.4)$ pip install numpy scipy
 (env-py-3.7.4)$ python python_code.py
 (env-py-3.7.4)$ deactivate
 $
-~~~
-{: .language-bash}
+```
 
 
 ### Compiling Python
@@ -182,11 +180,10 @@ system you are on.  In Linux you can compile code by
 adding a flag **-m py_compile** which will create an
 executable in a **__pycach__** directory.
 
-~~~
+```bash
 python -m py_compile python_code.py
 mv  __pycache__/python_code.cpython-37.pyc  compiled_python_code.pyc
-~~~
-{: .language-bash}
+```
 
 The executable **compiled_python_code.pyc** will then run on
 systems where Python is not installed and you have no virtual
@@ -236,99 +233,129 @@ but packages like **pymp** have already done the work of getting
 around the problem.
 
 
-> ## Play with the Python dot product examples
-> Take a look at the Python versions of the dot product code
-> to see how they differ from the C and Fortran versions.
-> Also compare the **pymp** multi-threaded and **mpi4py**
-> message-passing versions to the scalar version to see what
-> changes were made.
-> If you haven't already, run the scalar code and do scaling
-> studies with the multi-threaded and message-passing versions
-> to see how they compare with versions written in  other languages.
->  > ## Solution and Analysis
-> While the syntax is different, the code is basically the same in
-> each language.  Performance is much slower for raw Python code
-> than the compiled language.
-> From looking at the same code in various languages, which do you
-> think would be easiest to write from scratch?
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Play with the Python dot product examples
+Take a look at the Python versions of the dot product code
+to see how they differ from the C and Fortran versions.
+Also compare the **pymp** multi-threaded and **mpi4py**
+message-passing versions to the scalar version to see what
+changes were made.
+If you haven't already, run the scalar code and do scaling
+studies with the multi-threaded and message-passing versions
+to see how they compare with versions written in  other languages.
+
+:::::::::::::::::: solution
+
+While the syntax is different, the code is basically the same in
+each language.  Performance is much slower for raw Python code
+than the compiled language.
+From looking at the same code in various languages, which do you
+think would be easiest to write from scratch?
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-> ## Compare the raw matrix multiply code to a **NumPy** version
-> Do a scaling study of the **matmult.py** code for various
-> matrix sizes of 10, 100, and 1000.  Compare this to the
-> **matmult_numpy.py** version to see how much of a difference the 
-> highly-tuned library function makes.
->  > ## Solution and Analysis
-> If you have already run the optimized C version, you may notice
-> that the compiled code still beats the optimized **NumPy** routine
-> by 2-4 times in my tests.
-> Using the **NumPy** routine closes the performance gap enormously
-> but the C version is still better.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
 
-> ## Test the **Numba** version of the dot product code
-> Do a **pip install numba** then
-> time the **dot_product_numba.py** performance and compare to 
-> the raw code.  
-> Does the performance change if you cache the compilation by
-> adding **cache=True**?
-> You will need to run twice so that the second time takes advantage
-> of the cached compilation code.
->  > ## Solution and Analysis
-> Notice that in this code we needed to rewrite the 
-> computationally intensive loops into functions.
-> This does not take much effort but does disrupt the program flow
-> somewhat, but if it speeds up the runtime it is usually worth it.
-> Unfortunately in the case of the dot product the **Numba** version
-> takes 13 seconds compared to only 90 milliseconds for the raw code.
-> Adding **cache=True** to cache the compiled code does reduce the
-> runtime down to 3.7 seconds but this is still substantially worse
-> than the original code.
-> There are also warnings about lists being deprecated as input 
-> arguments in the near future. 
-> Switching our algorithm to use **NumPy** arrays
-> may be necessary but this also defeats the purpose of using **Numba**
-> since **NumPy** already has optimized routines for the algorithms
-> we are testing.  So in short this isn't a really good test
-> of the capabilities of **Numba**, but is a good example of how these
-> things don't always work as hoped, and it illustrates that **Numba**
-> does not support all aspects of Python.
-> Forcing the computational parts of an algorithm into functions is
-> also detracts from the flow of any program, and is definitely not 
-> what is considered as the Python way.
-> {: .solution}
-{: .challenge}
+## Compare the raw matrix multiply code to a **NumPy** version
+Do a scaling study of the **matmult.py** code for various
+matrix sizes of 10, 100, and 1000.  Compare this to the
+**matmult_numpy.py** version to see how much of a difference the 
+highly-tuned library function makes.
 
-> ## Optional Homework - Test the Pi calculation program using **Numba**
-> Write a Python vesion of the Pi calculation program and time
-> raw Python code versus **Numba** optimized.
-> If you want to have more fun try out **Numba** multi-threading
-> compared to **pymp** for this same algorithm.
-> This is a much fairer test of the capabilities of **Numba** since we
-> are not comparing it to optimized functions in **NumPy**.
->  > ## Solution and Analysis
-> If you do this please contribute your code and timings.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::: solution
 
-> ## Optional Exercise - Try compiling a Python code
-> If you have time, try compiling one of the Python test codes 
-> supplied like **matmult_numpy.py**.  Then try running it without
-> an active virtual environment meaning that there is no **NumPy**
-> library installed.
->  > ## Solution and Analysis
-> Once compiled you should be able to run this with a command like:
-> **./matmult.pyc 100**.
-> {: .solution}
-{: .challenge}
+If you have already run the optimized C version, you may notice
+that the compiled code still beats the optimized **NumPy** routine
+by 2-4 times in my tests.
+Using the **NumPy** routine closes the performance gap enormously
+but the C version is still better.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Test the **Numba** version of the dot product code
+Do a **pip install numba** then
+time the **dot_product_numba.py** performance and compare to 
+the raw code.
+Does the performance change if you cache the compilation by
+adding **cache=True**?
+You will need to run twice so that the second time takes advantage
+of the cached compilation code.
+
+:::::::::::::::::: solution
+
+Notice that in this code we needed to rewrite the 
+computationally intensive loops into functions.
+This does not take much effort but does disrupt the program flow
+somewhat, but if it speeds up the runtime it is usually worth it.
+Unfortunately in the case of the dot product the **Numba** version
+takes 13 seconds compared to only 90 milliseconds for the raw code.
+Adding **cache=True** to cache the compiled code does reduce the
+runtime down to 3.7 seconds but this is still substantially worse
+than the original code.
+There are also warnings about lists being deprecated as input 
+arguments in the near future. 
+Switching our algorithm to use **NumPy** arrays
+may be necessary but this also defeats the purpose of using **Numba**
+since **NumPy** already has optimized routines for the algorithms
+we are testing.  So in short this isn't a really good test
+of the capabilities of **Numba**, but is a good example of how these
+things don't always work as hoped, and it illustrates that **Numba**
+does not support all aspects of Python.
+Forcing the computational parts of an algorithm into functions is
+also detracts from the flow of any program, and is definitely not 
+what is considered as the Python way.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Optional Homework - Test the Pi calculation program using **Numba**
+Write a Python vesion of the Pi calculation program and time
+raw Python code versus **Numba** optimized.
+If you want to have more fun try out **Numba** multi-threading
+compared to **pymp** for this same algorithm.
+This is a much fairer test of the capabilities of **Numba** since we
+are not comparing it to optimized functions in **NumPy**.
+
+:::::::::::::::::: solution
+
+If you do this please contribute your code and timings.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Optional Exercise - Try compiling a Python code
+If you have time, try compiling one of the Python test codes 
+supplied like **matmult_numpy.py**.  Then try running it without
+an active virtual environment meaning that there is no **NumPy**
+library installed.
+
+:::::::::::::::::: solution
+
+Once compiled you should be able to run this with a command like:
+**./matmult.pyc 100**.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 - Learn about the characteristics of the Python language.
 - When performance is important always use optimized libraries!!!
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ### Links for additional information
 

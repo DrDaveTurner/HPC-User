@@ -98,35 +98,42 @@ an application code base that have changed, then link everything
 together to produce the executable.
 
 
-> ## Practice compiling and running Fortran codes
-> Try compiling the **dot_product_fortran.f90** code with the **gfortran**
-> compiler, then try with **ifort** if you have access to it.
-> Do the same with the optimized code **dot_product_fortran_opt.f90**
-> to see the difference that the built-in **dot_product( x, y )** function
-> can have.
-> You can then compile the OpenMP version **dot_product_fortran_openmp.f90**
-> and do a scaling study, and if you 
-> are on a system with MPI installed then try compiling and running
-> the MPI version **dot_product_fortran_mpi.f90** using **mpifort**.
-> Once you have compiled these codes manually take a look at the
-> **Makefile**.  This contains all the commands necessary to compile all the
-> codes above with a single command **make all_fortran**.
->  > ## Solution and Analysis
-> Each computer system may be set up differently with regard to what
-> compilers are available and how they need to be accessed.
-> You may need to contact your administrator for help if you are unsure
-> whether you have the Intel compiler suite installed, and how
-> to access an MPI package if avaiable.
-> In my tests on a modern Intel system the raw Fortran code and optimized
-> both took 0.14 seconds as did the OpenMP using 1 thread and the
-> MPI version using 1 task.
-> OpenMP using 4 threads took 0.063 seconds which is a little more than
-> twice as fast and then performance flattened out for more threads.
-> The MPI version using 4 tasks took 0.05 seconds which is slightly better
-> than the OpenMP version, and 0.027 seconds for 8 tasks showing better
-> scaling.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Practice compiling and running Fortran codes
+Try compiling the **dot_product_fortran.f90** code with the **gfortran**
+compiler, then try with **ifort** if you have access to it.
+Do the same with the optimized code **dot_product_fortran_opt.f90**
+to see the difference that the built-in **dot_product( x, y )** function
+can have.
+You can then compile the OpenMP version **dot_product_fortran_openmp.f90**
+and do a scaling study, and if you 
+are on a system with MPI installed then try compiling and running
+the MPI version **dot_product_fortran_mpi.f90** using **mpifort**.
+Once you have compiled these codes manually take a look at the
+**Makefile**.  This contains all the commands necessary to compile all the
+codes above with a single command **make all_fortran**.
+
+:::::::::::::::::: solution
+
+Each computer system may be set up differently with regard to what
+compilers are available and how they need to be accessed.
+You may need to contact your administrator for help if you are unsure
+whether you have the Intel compiler suite installed, and how
+to access an MPI package if avaiable.
+In my tests on a modern Intel system the raw Fortran code and optimized
+both took 0.14 seconds as did the OpenMP using 1 thread and the
+MPI version using 1 task.
+OpenMP using 4 threads took 0.063 seconds which is a little more than
+twice as fast and then performance flattened out for more threads.
+The MPI version using 4 tasks took 0.05 seconds which is slightly better
+than the OpenMP version, and 0.027 seconds for 8 tasks showing better
+scaling.
+
+:::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 - Learn about the characteristics of modern Fortran

@@ -41,7 +41,7 @@ Y element into memory, multiplying them together and summing them into D.
 Then at the end, we push D back down into main memory where the program
 prints the result out to the screen for us.
 
-![Dot product between vectors X and Y](../fig/dot_prod_fig.jpg )
+![Dot product between vectors X and Y](figs/dot_prod_fig.jpg ){ alt="Dot product formula" }
 
 This conceptual view of what the computer is doing is all we really
 need to be aware of when we are starting to writing programs.
@@ -75,7 +75,7 @@ In the case of our dot product, that means loading the first element
 X1 may take 93-106 ns while the next 7 only take 3 ns since they are
 already in L1 cache.
 
-  ![Memory Hierarchy in a Computer](../fig/Memory_Hierarchy.jpg)
+  ![Memory Hierarchy in a Computer](figs/Memory_Hierarchy.jpg) { alt="Diagram of the memory hierarchy in a typical computer" }
 
 How does this knowledge help us?
 Performance is more about getting data to the processor since most
@@ -93,12 +93,12 @@ Now let's look at a simple matrix multiplication algorithm which
 is fairly simple to program, but may have very different performance
 depending on how you write the code.
 
-![Matrix multiplication C = A * B](../fig/matmult_fig.jpg )
+![Matrix multiplication C = A * B](figs/matmult_fig.jpg ) { alt="Formula and diagram of a matrix multiply" }
 
 Once the matrices are initialized, the code to multiply them together
 is fairly simple.
 
-~~~
+```python
 N = 100
 for i in range( N ):
     for j in range( N ):
@@ -106,8 +106,7 @@ for i in range( N ):
         for i in range( N ):
             C[i][j] += A[i][k] * B[k][j]
 
-~~~
-{: .language-python}
+```
 
 But if we are concerned about performance, we need to take a better
 look at this code.
@@ -140,13 +139,12 @@ In the case of Python, there is an optimized matrix multiplaction function
 in the **NumPy** library that is easy to use as shown below.
 
 
-~~~
+```python
 import numpy as np
 
 N = 100
 C = np.matmult( A, B )
-~~~
-{: .language-python}
+```
 
 So while writing a matrix multiplication code from scratch is not
 difficult, using the optimized function from **NumPy** is even 
@@ -154,9 +152,6 @@ easier and guarantees the best performance.
 To find out how much difference there is in performance, you will need to
 try for yourself by measuring the execution time for a few different
 matrix sizes in the exercise below.
-
-
-
 
 
 
@@ -170,19 +165,23 @@ Good news is that in HPC, often the hard work is already done for you,
      you just need to know to make use of someone elses hard work.
   --> Use optimized libraries when at all possible.
 
-> ## Measuring Cache Line Effects
->
-> Run the dot_product.py code several times to get an average 
-> execution time for a dot product between two vectors of 
-> 1 million elements each.  Try to run them on an isolated system
-> if possible, or through a batch queue that at least ensures the
-> code is being run on an isolated processing core.
-> Then run the dot_product_sparse.py code in the same manner for
-> comparison.
-> How much faster is the first code where the vectors are stored
-> in contiguous memory?
-> How much faster should it be?
->  > ## Solution and Analysis
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Measuring Cache Line Effects
+Run the dot_product.py code several times to get an average 
+execution time for a dot product between two vectors of 
+1 million elements each.  Try to run them on an isolated system
+if possible, or through a batch queue that at least ensures the
+code is being run on an isolated processing core.
+Then run the dot_product_sparse.py code in the same manner for
+comparison.
+How much faster is the first code where the vectors are stored
+in contiguous memory?
+How much faster should it be?
+
+:::::::::::::::::: solution
+
 > Is the time difference what we expected?
 > When I ran this on a new Intel processor that did not have 
 > any other jobs running, I measured 180 milliseconds for the
@@ -204,78 +203,90 @@ Good news is that in HPC, often the hard work is already done for you,
 > The main thing to learn here is that if you take advantage of 
 > the cache line by keeping the vectors in contiguous memory, your
 > code will run faster.
-> {: .solution}
-{: .challenge}
 
-> ## Time Different Matrix Multiplication Methods
->
-> There are 2 separate codes supplied to perform the same matrix multiplication
-> for a given matrix size, matmult.py is raw Python code and matmult_numpy.py
-> uses the highly optimized **np.matmult()** function.
-> Both programs take the matrix size as an argument, so you run using
-> **python matmult.py 100** for example to measure the performance
-> for multiplying two 100x100 matrices.
-> Measure the performance for each method on 
-> a small 10x10 matrix, an intermediate sized 100x100 matrix, and
-> a large 1000x1000 matrix to see how each is 
-> affected by the optimized **numpy** function.
-> You should run this through a batch scheduler if at all possible
-> since numpy will grab any cores it can, and for a fair comparison
-> we want to test out only the single-core performance.
->  > ## Solution and Analysis
-> For the 10x10 matrix size there are 3 matrices having 100 elements each
-> needing 8 bytes storage, so storing all 3 matrices requires only 2.4 kB
-> of memory.  Everything fits entirely in L1 cache, so the block optimized
-> algorithm from **NumPy** isn't really needed.
-> For the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
-> they will fit entirely in L2 cache, but not L1 cache.
-> We therefore expect a significant improvement by using the 
-> optimized **np.matmult()** function.
-> For the 1000x1000 matrix size, we need 24 MB to store all 3 matrices so
-> it will reside in L3 cache.  The **np.matmult()** function should 
-> speed up this run by substantially more.
-> The optimization of the **NumPy** routine however goes far beyond just
-> block optimizing the algorithm so that it reuses data in L1 cache though.
-> There are also computational optimizations that allow for many 
-> multiply-add operations to occur in the same clock cycle, which is called
-> vectorization.
-> My measurements on a modern Intel processor more of a performance
-> benefit for larger matrix sizes.
-> For 1000x1000 matrices, the raw Python code was very slow at
-> 6.5 MFlops (Million floating-point operations per second).
-> All the optimizations in the **NumPy** code brought the performance
-> up to 15.4 GFlops, or a whopping 2354 times faster.
-> Raw Python code is fairly slow in itself because it is interpretted
-> and not compiled like C/C++/Fortran code, clearly you can do very
-> well if you learn to use the heavily optimized library routines.
-> C is still faster than Python, with raw C code reaching 1.6 GFlops
-> and the optimized CBLAS DGEMM routine reaching 91 GFlops.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
-> ## Advanced Exercise - Transpose B to cache-line optimize it
->
-> As k is incremented in the innermost loop, elements of A are being
-> brought into cache efficiently since they are stored in contiguous
-> memory, as we learned from the dot product example.  Unfortunately,
-> elements of B are not since they will be sparse, separated by N-1
-> elements each time.
-> While we already know that we can simply use the numpy routine
-> **np.matmult()** to optimize the code, if this wasn't available
-> one thing we'd consider is to transpose the B matrix so that it is
-> stored in column-major format before doing the matrix multiplication.
-> If you're up for a challenge, try programming this up to see if it
-> improves the performance compared to the original Python code.
->  > ## Solution and Analysys
-> There are a great many levels of optimization that can be done
-> to the matrix multiplication algorithm.
-> Transposing B should improve the performance some.
-> For a more complete overview of what is done in the
-> **np.matmult()** algorithm and others like it, follow
-> the link:
-> https://en.algorithmica.org/hpc/algorithms/matmul/
-> {: .solution}
-{: .challenge}
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Time Different Matrix Multiplication Methods
+There are 2 separate codes supplied to perform the same matrix multiplication
+for a given matrix size, matmult.py is raw Python code and matmult_numpy.py
+uses the highly optimized **np.matmult()** function.
+Both programs take the matrix size as an argument, so you run using
+**python matmult.py 100** for example to measure the performance
+for multiplying two 100x100 matrices.
+Measure the performance for each method on 
+a small 10x10 matrix, an intermediate sized 100x100 matrix, and
+a large 1000x1000 matrix to see how each is 
+affected by the optimized **numpy** function.
+You should run this through a batch scheduler if at all possible
+since numpy will grab any cores it can, and for a fair comparison
+we want to test out only the single-core performance.
+
+:::::::::::::::::: solution
+
+For the 10x10 matrix size there are 3 matrices having 100 elements each
+needing 8 bytes storage, so storing all 3 matrices requires only 2.4 kB
+of memory.  Everything fits entirely in L1 cache, so the block optimized
+algorithm from **NumPy** isn't really needed.
+For the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache.
+We therefore expect a significant improvement by using the 
+optimized **np.matmult()** function.
+For the 1000x1000 matrix size, we need 24 MB to store all 3 matrices so
+it will reside in L3 cache.  The **np.matmult()** function should 
+speed up this run by substantially more.
+The optimization of the **NumPy** routine however goes far beyond just
+block optimizing the algorithm so that it reuses data in L1 cache though.
+There are also computational optimizations that allow for many 
+multiply-add operations to occur in the same clock cycle, which is called
+vectorization.
+My measurements on a modern Intel processor more of a performance
+benefit for larger matrix sizes.
+For 1000x1000 matrices, the raw Python code was very slow at
+6.5 MFlops (Million floating-point operations per second).
+All the optimizations in the **NumPy** code brought the performance
+up to 15.4 GFlops, or a whopping 2354 times faster.
+Raw Python code is fairly slow in itself because it is interpretted
+and not compiled like C/C++/Fortran code, clearly you can do very
+well if you learn to use the heavily optimized library routines.
+C is still faster than Python, with raw C code reaching 1.6 GFlops
+and the optimized CBLAS DGEMM routine reaching 91 GFlops.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Advanced Exercise - Transpose B to cache-line optimize it
+As k is incremented in the innermost loop, elements of A are being
+brought into cache efficiently since they are stored in contiguous
+memory, as we learned from the dot product example.  Unfortunately,
+elements of B are not since they will be sparse, separated by N-1
+elements each time.
+While we already know that we can simply use the numpy routine
+**np.matmult()** to optimize the code, if this wasn't available
+one thing we'd consider is to transpose the B matrix so that it is
+stored in column-major format before doing the matrix multiplication.
+If you're up for a challenge, try programming this up to see if it
+improves the performance compared to the original Python code.
+
+:::::::::::::::::: solution
+
+There are a great many levels of optimization that can be done
+to the matrix multiplication algorithm.
+Transposing B should improve the performance some.
+For a more complete overview of what is done in the
+**np.matmult()** algorithm and others like it, follow
+the link:
+https://en.algorithmica.org/hpc/algorithms/matmul/
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Summary
 
