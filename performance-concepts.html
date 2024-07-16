@@ -475,7 +475,7 @@ summing them into D. We loop through all elements of the vectors, each
 time pulling the X and Y element into memory, multiplying them together
 and summing them into D. Then at the end, we push D back down into main
 memory where the program prints the result out to the screen for us.</p>
-<figure><img src="figs/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
+<figure><img src="fig/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
 </figure><p>This conceptual view of what the computer is doing is all we really
 need to be aware of when we are starting to writing programs. But when
 those programs start taking too long to run on a PC or laptop, then we
@@ -504,9 +504,8 @@ likely to be in one of the cache layers where it can be accessed more
 quickly. In the case of our dot product, that means loading the first
 element X1 may take 93-106 ns while the next 7 only take 3 ns since they
 are already in L1 cache.</p>
-<p><img src="figs/Memory_Hierarchy.jpg" alt="Memory Hierarchy in a Computer" class="figure"> { alt=“Diagram of the memory
-hierarchy in a typical computer” }</p>
-<p>How does this knowledge help us? Performance is more about getting
+<figure><img src="fig/Memory_Hierarchy.jpg" alt="Diagram of the memory hierarchy in a typical computer" class="figure mx-auto d-block"><div class="figcaption">Memory Hierarchy in a Computer</div>
+</figure><p>How does this knowledge help us? Performance is more about getting
 data to the processor since most operations are very fast once the data
 is in the registers. If the vector is instead not stored in contiguous
 memory, with each variable in the next memory location, then the
@@ -518,9 +517,8 @@ execution time between these two cases.</p>
 <p>Now let’s look at a simple matrix multiplication algorithm which is
 fairly simple to program, but may have very different performance
 depending on how you write the code.</p>
-<p><img src="figs/matmult_fig.jpg" alt="Matrix multiplication C = A * B" class="figure"> { alt=“Formula and diagram of a
-matrix multiply” }</p>
-<p>Once the matrices are initialized, the code to multiply them together
+<figure><img src="fig/matmult_fig.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
+</figure><p>Once the matrices are initialized, the code to multiply them together
 is fairly simple.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>

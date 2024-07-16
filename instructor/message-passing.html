@@ -481,7 +481,7 @@ running. The jobs will handshake then decide which part of the data each
 is responsible for. After all nodes have calculated their partial sums,
 those will be globally summed across all 8 tasks using the network if
 needed then the program with rank 1 will print out the results.</p>
-<figure><img src="../figs/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+<figure><img src="../fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure><p>In parallel computing, the programmer must decide how to divide the
 data between the processes. In this case, we could have just as easily
