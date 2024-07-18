@@ -97,7 +97,7 @@ to create a shared array of partial sums and manually sum them together
 at the end.  This is just as efficient computationally, it just takes a
 little extra coding but is more explicit.
 
-```r
+```python
 # Do the dot product between two vectors X and Y then print the result
 # USAGE:  python dot_product_threaded.py 4       to run on 4 threads
 
