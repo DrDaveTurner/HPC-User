@@ -22,10 +22,10 @@ do and what performance bottlenecks to avoid.
 
 Each user must begin with a reasonable knowledge of Linux and at least one
 of the languages that this module covers (Python, R, Matlab, C/C++, Fortran).
-The examples in the module can be adjusted to display in any
+The examples in the first part of this module are in Python but will
+eventually be adjustable to display in any
 of these languages.  Each user may also need to know how to run
 jobs in an HPC environment.
 
 
-[workbench]: https://carpentries.github.io/sandpaper-docs
 
