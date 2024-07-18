@@ -592,10 +592,6 @@ performance in programming.</li>
 </div>
 </div>
 </div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </section></section><section id="aio-profiling-code"><p>Content from <a href="profiling-code.html">Profiling Code for Performance</a></p>
 <hr>
 <p>Last updated on 2024-07-16 |
@@ -994,10 +990,6 @@ also be able to calculate total memory for simple programs.</li>
 </div>
 </div>
 </div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </section></section><section id="aio-performance-concepts"><p>Content from <a href="performance-concepts.html">Performance Concepts</a></p>
 <hr>
 <p>Last updated on 2024-07-16 |
@@ -1183,7 +1175,7 @@ be?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <blockquote>
 <p>Is the time difference what we expected? When I ran this on a new
@@ -1236,7 +1228,7 @@ performance.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>For the 10x10 matrix size there are 3 matrices having 100 elements
 each needing 8 bytes storage, so storing all 3 matrices requires only
@@ -1294,7 +1286,7 @@ Python code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
@@ -1339,10 +1331,6 @@ of writing your own version.</li>
 </div>
 </div>
 </div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </section></section><section id="aio-parallel-concepts"><p>Content from <a href="parallel-concepts.html">Parallel Computing Concepts</a></p>
 <hr>
 <p>Last updated on 2024-07-16 |
@@ -1667,7 +1655,7 @@ nodes 2 cores vs 4 nodes 1 core).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -1701,13 +1689,9 @@ programs.</li>
 </div>
 </div>
 </div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </section></section><section id="aio-multi-threaded"><p>Content from <a href="multi-threaded.html">Multi-Threaded Programs</a></p>
 <hr>
-<p>Last updated on 2024-07-16 |
+<p>Last updated on 2024-07-18 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/multi-threaded.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -1814,54 +1798,54 @@ array of partial sums and manually sum them together at the end. This is
 just as efficient computationally, it just takes a little extra coding
 but is more explicit.</p>
 <div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Do the dot product between two vectors X and Y then print the result</span></span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Do the dot product between two vectors X and Y then print the result</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># USAGE:  python dot_product_threaded.py 4       to run on 4 threads</span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>import sys</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>import time</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>import pymp</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">import</span> pymp</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>   <span class="co"># Get and set nthreads from the command line</span></span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>pymp.config.num_threads <span class="ot">=</span> <span class="fu">int</span>( sys.argv[<span class="dv">1</span>] )</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>nthreads <span class="ot">=</span> pymp.config.num_threads</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>pymp.config.num_threads <span class="op">=</span> <span class="bu">int</span>( sys.argv[<span class="dv">1</span>] )</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>nthreads <span class="op">=</span> pymp.config.num_threads</span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100000000</span>      <span class="co"># Do a large enough test to reduce timing variance</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100000000</span>      <span class="co"># Do a large enough test to reduce timing variance</span></span>
 <span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>x <span class="ot">=</span> [ <span class="fu">float</span>( i ) <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( N ) ]</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>y <span class="ot">=</span> [ <span class="fu">float</span>( i ) <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( N ) ]</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>x <span class="op">=</span> [ <span class="bu">float</span>( i ) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>y <span class="op">=</span> [ <span class="bu">float</span>( i ) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
 <span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>   <span class="co"># Now initialize a very large dummy array to force X and Y out of all levels of cache</span></span>
 <span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>   <span class="co">#    so that our times are for pulling elements up from main memory.</span></span>
 <span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>dummy <span class="ot">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( <span class="dv">125000000</span> ) ]  <span class="co"># Initialize 1 GB of memory</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>dummy <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( <span class="dv">125000000</span> ) ]  <span class="co"># Initialize 1 GB of memory</span></span>
 <span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>   <span class="co"># Now we start our timer and do our calculation using multiple threads</span></span>
 <span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>t_start <span class="ot">=</span> <span class="fu">time.perf_counter</span>()</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
 <span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>psum <span class="ot">=</span> <span class="fu">pymp.shared.array</span>( (nthreads,), <span class="at">dtype=</span><span class="st">'float'</span> )</span>
-<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( nthreads )<span class="sc">:</span></span>
-<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>   psum[i] <span class="ot">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>psum <span class="op">=</span> pymp.shared.array( (nthreads,), dtype<span class="op">=</span><span class="st">'float'</span> )</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( nthreads ):</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>   psum[i] <span class="op">=</span> <span class="fl">0.0</span></span>
 <span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>d_prod <span class="ot">=</span> <span class="fl">0.0</span></span>
-<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>with <span class="fu">pymp.Parallel</span>( nthreads ) as p<span class="sc">:</span></span>
-<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>   <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">p.range</span>( N )<span class="sc">:</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>d_prod <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="cf">with</span> pymp.Parallel( nthreads ) <span class="im">as</span> p:</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>   <span class="cf">for</span> i <span class="kw">in</span> p.<span class="bu">range</span>( N ):</span>
 <span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>      <span class="co">#d_prod += x[i] * y[i]</span></span>
-<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>      psum[p.thread_num] <span class="sc">+</span><span class="er">=</span> x[i] <span class="sc">*</span> y[i]</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>      psum[p.thread_num] <span class="op">+=</span> x[i] <span class="op">*</span> y[i]</span>
 <span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>( nthreads )<span class="sc">:</span>     <span class="co"># Explicitly do the reduction across threads</span></span>
-<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>   d_prod <span class="sc">+</span><span class="er">=</span> psum[i]</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( nthreads ):     <span class="co"># Explicitly do the reduction across threads</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>   d_prod <span class="op">+=</span> psum[i]</span>
 <span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>t_elapsed <span class="ot">=</span> <span class="fu">time.perf_counter</span>() <span class="sc">-</span> t_start</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>t_elapsed <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
 <span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a></span>
 <span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>   <span class="co"># The calculation is done and timer stopped so print out the answer</span></span>
 <span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'dot product = '</span>, d_prod, <span class="st">'took '</span>, t_elapsed, <span class="st">' seconds'</span> );</span>
-<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="fu">print</span>( <span class="fl">2.0</span><span class="sc">*</span>N<span class="sc">*</span><span class="fl">1.0e-9</span> <span class="sc">/</span> t_elapsed, <span class="st">' Gflops (billion floating-point operations per second)'</span>)</span>
-<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="fu">print</span>( <span class="fl">2.0</span><span class="sc">*</span>N<span class="sc">*</span><span class="fl">8.0</span><span class="sc">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'dot product = '</span>, d_prod, <span class="st">'took '</span>, t_elapsed, <span class="st">' seconds'</span> )<span class="op">;</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">1.0e-9</span> <span class="op">/</span> t_elapsed, <span class="st">' Gflops (billion floating-point operations per second)'</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
 </div>
 <p>So parallelizing this program really only requires us to change
 around 11 lines of code, and from that we get the benefit of being able
@@ -1919,7 +1903,7 @@ is.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>For this very simple problem, each thread can do its computations
 totally independently. There is only a global sum of all the partial
@@ -1962,10 +1946,6 @@ multi-threaded programs.</li>
 tutorial</a></li>
 <li><a href="">need link for mclapply()</a></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div></section><section id="aio-message-passing"><p>Content from <a href="message-passing.html">Message-Passing Programs</a></p>
 <hr>
 <p>Last updated on 2024-07-16 |
@@ -2211,7 +2191,7 @@ core test, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -2259,10 +2239,6 @@ guides</a></li>
 <li><a href="https://www.open-mpi.org/doc/" class="external-link">OpenMPI function
 manpages</a></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div>
 </section></section><section id="aio-language-survey"><p>Content from <a href="language-survey.html">Language Survey</a></p>
 <hr>
@@ -2395,10 +2371,6 @@ the best language for a given project.</li>
 </div>
 </div>
 </div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </section></section><section id="aio-c-cpp"><p>Content from <a href="c-cpp.html">C and C++ Languages</a></p>
 <hr>
 <p>Last updated on 2024-07-16 |
@@ -2608,7 +2580,7 @@ dot_product_c_mpi.c</strong> and running some tests with <strong>mpirun
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>On a modern Intel system the raw scalar code ran in 0.14 seconds as
 did the single-threaded OpenMP and single-task MPI runs. The test on 4
@@ -2643,10 +2615,6 @@ manner. How do your results compare to these?</p>
 <li><a href="https://www.guru99.com/c-programming-tutorial.html" class="external-link">C
 Tutorial</a></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div>
 </section></section><section id="aio-fortran"><p>Content from <a href="fortran.html">The Fortran Language</a></p>
 <hr>
@@ -2788,7 +2756,7 @@ command <strong>make all_fortran</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Each computer system may be set up differently with regard to what
 compilers are available and how they need to be accessed. You may need
@@ -2828,10 +2796,6 @@ version, and 0.027 seconds for 8 tasks showing better scaling.</p>
 wiki</a></li>
 <li><a href="https://fortran-lang.org/learn/" class="external-link">Fortran tutorials</a></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div>
 </section></section><section id="aio-python"><p>Content from <a href="python.html">The Python Language</a></p>
 <hr>
@@ -3259,10 +3223,6 @@ documentations</a></li>
 <li><a href="https://dask.org" class="external-link">Dask</a></li>
 <li><a href="https://numba.pydata.org" class="external-link">Numba</a></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div></section><section id="aio-r"><p>Content from <a href="r.html">The R Language</a></p>
 <hr>
 <p>Last updated on 2024-07-16 |
@@ -3535,7 +3495,7 @@ function. Also compare these numbers to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
 optimized built-in matrix multiplication function. Be aware that the
@@ -3569,7 +3529,7 @@ rows.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>While rbind() is convenient and works well for small data frames, the
 time to add rows begins to increase exponentially for data frames around
@@ -3600,7 +3560,7 @@ rows and compare to the rbind() results.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>For 1,000 rows I measured 0.12 seconds for a data table set()
 compared to 5.4 seconds for a data table assignment and 1.1 second for a
@@ -3637,7 +3597,7 @@ and 1,000,000 rows.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>For 10,000 rows I saw similar results for each function, but for
 100,000 rows <strong>fread()</strong> was 10 times faster than
@@ -3670,7 +3630,7 @@ program.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>I would love to have a pdbMPI-based matrix multiply code available
 for people to look at and test if anyone finds one.</p>
@@ -3737,10 +3697,6 @@ package</a></p></li>
 <li><p><a href="https://www.rstudio.com" class="external-link">Rstudio</a></p></li>
 <li><p><a href="https://shiny.rstudio.com" class="external-link">Rshiny</a></p></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div>
 </section></section><section id="aio-matlab"><p>Content from <a href="matlab.html">The Matlab Language</a></p>
 <hr>
@@ -4099,10 +4055,6 @@ Simulink</a></li>
 <li><a href="https://www.mathworks.com/help/thingspeak/matlab-toolbox-access.html" class="external-link">Matlab
 Toolboxes and Examples</a></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div>
 </section></section><section id="aio-array-jobs"><p>Content from <a href="array-jobs.html">Array Jobs</a></p>
 <hr>
@@ -4266,10 +4218,6 @@ full job.</li>
 </div>
 </div>
 </div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div></section><section id="aio-gpus"><p>Content from <a href="gpus.html">Accelerating Scientific Computing with GPUs</a></p>
 <hr>
 <p>Last updated on 2024-07-16 |
@@ -4448,10 +4396,6 @@ cost of doing a calculation.</p>
 <li><p><a href="">CUDA programming documentation</a></p></li>
 <li><p><a href="">AMD GPU specs</a></p></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div>
 </section></section><section id="aio-high-throughput-computing"><p>Content from <a href="high-throughput-computing.html">High-Throughput Computing</a></p>
 <hr>
@@ -4665,10 +4609,6 @@ typical jobs</a></li>
 <li><a href="https://www.youtube.com/watch?v=oMAvxsFJaw4" class="external-link">HTCondor
 scheduler youtube video</a></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div>
 </section></section><section id="aio-hpc-resources"><p>Content from <a href="hpc-resources.html">HPC Resources</a></p>
 <hr>
@@ -4915,10 +4855,6 @@ Services</a></p></li>
 <li><p><a href="https://azure.microsoft.com/en-us/offers/ms-azr-0044p/" class="external-link">Microsoft
 Azure</a></p></li>
 </ul>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
 </div>
 </section></section>
 </div>
@@ -4968,8 +4904,8 @@ any links that you are not going to use.
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/aio.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/aio.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-16",
-  "datePublished": "2024-07-16"
+  "dateModified": "2024-07-18",
+  "datePublished": "2024-07-18"
 }
 
   </script><script>
