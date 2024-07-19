@@ -19,7 +19,23 @@ the concepts part of the lesson are shown in,
 plus at each example the user will be able to
 click on a tab to see the examples in other languages.**
 
-Q? Do group-tags work across episodes or should I request global-tabs?
+**Q?** - Do group-tags work across episodes or should I request global-tabs?
+
+:::::::::::::::: group-tabs
+
+### Windows
+
+Don't use CloudStrike
+
+### MacOS
+
+Doesn't use CloudStrike
+
+### Linux
+
+Doesn't use CloudStrike
+
+::::::::::::::::::::
 
 ## Overview
 
