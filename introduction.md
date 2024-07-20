@@ -21,7 +21,7 @@ click on a tab to see the examples in other languages.**
 
 **Q?** - Do group-tags work across episodes or should I request global-tabs?
 
-:::::::::::::::: group-tabs
+:::::::::::::::: group-tab
 
 ### Windows
 
