@@ -51,7 +51,7 @@ prints the result out to the screen for us.
 
 Need fig/dot_prod_fig-1-N.jpg
 
-### C/Cpp
+### C
 
 ![Dot product between vectors X and Y](fig/dot_prod_fig.jpg ){ alt="Dot product formula" }
 
@@ -125,7 +125,7 @@ depending on how you write the code.
 
 Need fig/matmult_fig-1-N.jpg.
 
-### C/Cpp
+### C
 
 ![Matrix multiplication C = A * B](fig/matmult_fig.jpg ){ alt="Formula and diagram of a matrix multiply" }
 
@@ -160,7 +160,7 @@ for i in range( N ):
 
 Not implemented yet.
 
-### C/Cpp
+### C
 
 Not implemented yet.
 
@@ -219,7 +219,7 @@ C = np.matmult( A, B )
 
 Not implemented yet.
 
-### C/Cpp
+### C
 
 Not implemented yet.
 
@@ -241,6 +241,7 @@ try for yourself by measuring the execution time for a few different
 matrix sizes in the exercise below.
 
 
+**NOTES**
 
 memory access patterns - row major vs column major for matrices
 
@@ -256,6 +257,7 @@ Good news is that in HPC, often the hard work is already done for you,
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Measuring Cache Line Effects
+
 Run the dot_product.py code several times to get an average 
 execution time for a dot product between two vectors of 
 1 million elements each.  Try to run them on an isolated system
@@ -269,27 +271,27 @@ How much faster should it be?
 
 :::::::::::::::::: solution
 
-> Is the time difference what we expected?
-> When I ran this on a new Intel processor that did not have 
-> any other jobs running, I measured 180 milliseconds for the
-> contiguous memory case and 1230 milliseconds for the sparse
-> case, resulting in a 6.9-times speedup by keeping the vector
-> in contiguous memory.
-> Since a cache line is 64 Bytes and each element is 8 bytes,
-> when the first element is loaded the next 7 are brought into
-> L1 cache essentially for free since they are in contiguous memory.
-> Therefore we expect it to take 100 ns to load 8 elements of X,
-> then 100 ns to load 8 elements of Y, then only a few ns to get
-> each element into the registers and do the computations.
-> For the sparse vectors, it should take 8 times as long since
-> each load will take 100 ns.
-> If you didn't see an 8-times speedup, don't worry.
-> The cache system is actually even more complicated than this picture.
-> Also remember that you may be sharing parts of the processor
-> with others.
-> The main thing to learn here is that if you take advantage of 
-> the cache line by keeping the vectors in contiguous memory, your
-> code will run faster.
+Is the time difference what we expected?
+When I ran this on a new Intel processor that did not have 
+any other jobs running, I measured 180 milliseconds for the
+contiguous memory case and 1230 milliseconds for the sparse
+case, resulting in a 6.9-times speedup by keeping the vector
+in contiguous memory.
+Since a cache line is 64 Bytes and each element is 8 bytes,
+when the first element is loaded the next 7 are brought into
+L1 cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take 100 ns to load 8 elements of X,
+then 100 ns to load 8 elements of Y, then only a few ns to get
+each element into the registers and do the computations.
+For the sparse vectors, it should take 8 times as long since
+each load will take 100 ns.
+If you didn't see an 8-times speedup, don't worry.
+The cache system is actually even more complicated than this picture.
+Also remember that you may be sharing parts of the processor
+with others.
+The main thing to learn here is that if you take advantage of 
+the cache line by keeping the vectors in contiguous memory, your
+code will run faster.
 
 :::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -298,6 +300,7 @@ How much faster should it be?
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Time Different Matrix Multiplication Methods
+
 There are 2 separate codes supplied to perform the same matrix multiplication
 for a given matrix size, matmult.py is raw Python code and matmult_numpy.py
 uses the highly optimized **np.matmult()** function.
@@ -349,6 +352,7 @@ and the optimized CBLAS DGEMM routine reaching 91 GFlops.
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Advanced Exercise - Transpose B to cache-line optimize it
+
 As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
 memory, as we learned from the dot product example.  Unfortunately,
