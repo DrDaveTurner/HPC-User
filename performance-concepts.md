@@ -41,7 +41,29 @@ Y element into memory, multiplying them together and summing them into D.
 Then at the end, we push D back down into main memory where the program
 prints the result out to the screen for us.
 
+:::::::::::::::: group-tab
+
+### Python
+
 ![Dot product between vectors X and Y](fig/dot_prod_fig.jpg ){ alt="Dot product formula" }
+
+### R
+
+Need fig/dot_prod_fig-1-N.jpg
+
+### C/C++
+
+![Dot product between vectors X and Y](fig/dot_prod_fig.jpg ){ alt="Dot product formula" }
+
+### Fortran
+
+Need fig/dot_prod_fig-1-N.jpg
+
+### Matlab
+
+Need fig/dot_prod_fig-1-N.jpg
+
+::::::::::::::::::::::::::
 
 This conceptual view of what the computer is doing is all we really
 need to be aware of when we are starting to writing programs.
@@ -93,10 +115,36 @@ Now let's look at a simple matrix multiplication algorithm which
 is fairly simple to program, but may have very different performance
 depending on how you write the code.
 
+:::::::::::::::: group-tab
+
+### Python
+
 ![Matrix multiplication C = A * B](fig/matmult_fig.jpg ){ alt="Formula and diagram of a matrix multiply" }
+
+### R
+
+Need fig/matmult_fig-1-N.jpg.
+
+### C/C++
+
+![Matrix multiplication C = A * B](fig/matmult_fig.jpg ){ alt="Formula and diagram of a matrix multiply" }
+
+### Fortran
+
+Need fig/matmult_fig-1-N.jpg.
+
+### Matlab
+
+Need fig/matmult_fig-1-N.jpg.
+
+::::::::::::::::::::::::::
 
 Once the matrices are initialized, the code to multiply them together
 is fairly simple.
+
+:::::::::::::::: group-tab
+
+### Python
 
 ```python
 N = 100
@@ -107,6 +155,24 @@ for i in range( N ):
             C[i][j] += A[i][k] * B[k][j]
 
 ```
+
+### R
+
+Not implemented yet.
+
+### C/C++
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::::::::
 
 But if we are concerned about performance, we need to take a better
 look at this code.
@@ -138,6 +204,9 @@ we can call at any time.
 In the case of Python, there is an optimized matrix multiplaction function
 in the **NumPy** library that is easy to use as shown below.
 
+:::::::::::::::: group-tab
+
+### Python
 
 ```python
 import numpy as np
@@ -145,6 +214,24 @@ import numpy as np
 N = 100
 C = np.matmult( A, B )
 ```
+
+### R
+
+Not implemented yet.
+
+### C/C++
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::::::::
 
 So while writing a matrix multiplication code from scratch is not
 difficult, using the optimized function from **NumPy** is even 
