@@ -51,7 +51,7 @@ prints the result out to the screen for us.
 
 Need fig/dot_prod_fig-1-N.jpg
 
-### C/C++
+### C/Cpp
 
 ![Dot product between vectors X and Y](fig/dot_prod_fig.jpg ){ alt="Dot product formula" }
 
@@ -125,7 +125,7 @@ depending on how you write the code.
 
 Need fig/matmult_fig-1-N.jpg.
 
-### C/C++
+### C/Cpp
 
 ![Matrix multiplication C = A * B](fig/matmult_fig.jpg ){ alt="Formula and diagram of a matrix multiply" }
 
@@ -160,7 +160,7 @@ for i in range( N ):
 
 Not implemented yet.
 
-### C/C++
+### C/Cpp
 
 Not implemented yet.
 
@@ -219,7 +219,7 @@ C = np.matmult( A, B )
 
 Not implemented yet.
 
-### C/C++
+### C/Cpp
 
 Not implemented yet.
 

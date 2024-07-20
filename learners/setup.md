@@ -79,7 +79,7 @@ Show program examples and diagrams in sections 2-6 in Python.
 
 Not implemented yet.
 
-### C/C++
+### C/Cpp
 
 Not implemented yet.
 
