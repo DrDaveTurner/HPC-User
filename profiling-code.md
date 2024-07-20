@@ -82,7 +82,7 @@ user	0m0.006s
 sys	0m0.027s
 ```
 
-When I do this on my iMac, I get a real time of just 0.006 seconds
+When I do this on my Mac, I get a real time of just 0.006 seconds
 because it's really fast to access the local hard disk.
 The test above is from a very large cluster computer that has
 a parallel file server with 1 Petabyte of storage 
@@ -164,6 +164,10 @@ Below is an example of using the clock function to measure the
 time it takes to do a loop, then measure the time it takes to
 dump an array out to a file.
 
+:::::::::::::::: group-tab
+
+### Python
+
 ```python
 import time
 
@@ -189,6 +193,23 @@ fd.close()
 t_output = time.perf_counter() - t_start
 print("The output took ", t_output, " seconds")
 ```
+### R
+
+Not implemented yet.
+
+### C/C++
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::
 
 Try running this yourself by copying it into a timing.py file.
 When I run this, I see that the loop takes about 30 microseconds on my computer

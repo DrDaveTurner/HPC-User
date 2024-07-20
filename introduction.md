@@ -13,30 +13,6 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-**NOTE** - Examples are currently in Python.
-There will eventually be the ability to choose which language the examples in
-the concepts part of the lesson are shown in, 
-plus at each example the user will be able to
-click on a tab to see the examples in other languages.**
-
-**Q?** - Do group-tags work across episodes or should I request global-tabs?
-
-:::::::::::::::: group-tab
-
-### Windows
-
-Don't use CloudStrike
-
-### MacOS
-
-Doesn't use CloudStrike
-
-### Linux
-
-Doesn't use CloudStrike
-
-::::::::::::::::::::
-
 ## Overview
 
 In doing computational science it is very common to start a project by
