@@ -29,7 +29,7 @@ you laptop or desktop and transfer them to the Linux system instead.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::: group-tabs
+:::::::::::::::: group-tab
 
 ### Windows
 
