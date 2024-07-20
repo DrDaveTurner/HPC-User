@@ -22,10 +22,10 @@ Linyx system or SuperComputer.
 You will need to use the directions below to access that system using
 a terminal window so you can use the command line interface.
 You will also need to transfer the code files to the Linux system, again
-by following the directions for you operating system below.
-Once they are copied over, you may edit them on the Linux side with
-vim or nano, or if you are more comfortable you can edit the files on
-you laptop or desktop and transfer them to the Linux system instead.
+by following the directions for your operating system below.
+Once the code files are copied over, you may edit them on the Linux side with
+vim or nano, or if you are more comfortable you may edit the code files on
+your laptop or desktop and transfer them to the Linux system instead.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -43,12 +43,53 @@ to the Linux system.
 ### MacOS
 
 Use Terminal.app or iTerm2.app.  You will ssh into the Linux system that
-your instructor provides information for.
+your instructor provides information for.  You can edit your files on 
+the Linux system with vim or nano, or if you have a different editor
+on your Mac system you may edit the code files there and scp them
+over to the Linux system each time.
 
 ### Linux
 
 Use Terminal and ssh into the Linux system that your instructor provide 
-information for.
+information for.  You can edit your files on 
+the Linux HPC system with vim or nano, or if you have a different editor
+on your Linux laptop or desktop you may edit the code files there and scp them
+over to the Linux system each time.
+
+::::::::::::::::::::
+
+### Programming Language for Example Code
+
+Your instructor will direct you to click on the tab of a particular
+programming language below.  This will select the language for all
+example codes and diagrams for the first few chapters of this workshop.
+As you go through each lesson, you may always click on the other tabs
+to see how each code is implemented in the different programming
+languages.
+
+**NOTE** - Examples are currently only available in Python.
+
+:::::::::::::::: group-tab
+
+### Python
+
+Show program examples and diagrams in sections 2-6 in Python.
+
+### R
+
+Not implemented yet.
+
+### C/C++
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
 
 ::::::::::::::::::::
 
