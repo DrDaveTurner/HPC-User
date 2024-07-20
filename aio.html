@@ -519,43 +519,6 @@
 </div>
 </div>
 </div>
-<p><strong>NOTE</strong> - Examples are currently in Python. There will
-eventually be the ability to choose which language the examples in the
-concepts part of the lesson are shown in, plus at each example the user
-will be able to click on a tab to see the examples in other
-languages.**</p>
-<p><strong>Q?</strong> - Do group-tags work across episodes or should I
-request global-tabs?</p>
-<div class="tabs">
-<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
-<button class="nav-link active" id="nav-tab-1-Windows" name="Windows" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Windows" type="button" role="tab" aria-controls="nav-tabpanel-1-Windows" aria-selected="true">
-  <h3 class="tab-header" id="nav-tab-heading-1-Windows">
-  Windows
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-1-MacOS" name="MacOS" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-MacOS" type="button" role="tab" aria-controls="nav-tabpanel-1-MacOS" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-1-MacOS">
-  MacOS
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-1-Linux" name="Linux" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Linux" type="button" role="tab" aria-controls="nav-tabpanel-1-Linux" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-1-Linux">
-  Linux
-  </h3>
-</button>
-</div>
-</nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Windows" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Windows">
-<p>Don’t use CloudStrike</p>
-</div>
-<div id="nav-tabpanel-1-MacOS" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-MacOS">
-<p>Doesn’t use CloudStrike</p>
-</div>
-<div id="nav-tabpanel-1-Linux" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Linux">
-<p>Doesn’t use CloudStrike</p>
-</div>
-</div>
-</div>
 <section><h2 class="section-heading" id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 <a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -621,7 +584,7 @@ performance in programming.</li>
 </div>
 </section></section><section id="aio-profiling-code"><p>Content from <a href="profiling-code.html">Profiling Code for Performance</a></p>
 <hr>
-<p>Last updated on 2024-07-16 |
+<p>Last updated on 2024-07-20 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/profiling-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -726,7 +689,7 @@ real	0m0.110s
 user	0m0.006s
 sys	0m0.027s</code></pre>
 </div>
-<p>When I do this on my iMac, I get a real time of just 0.006 seconds
+<p>When I do this on my Mac, I get a real time of just 0.006 seconds
 because it’s really fast to access the local hard disk. The test above
 is from a very large cluster computer that has a parallel file server
 with 1 Petabyte of storage (1 Petabyte is 1000 Terabytes, and each
@@ -797,6 +760,36 @@ of the code.</p>
 the package. Below is an example of using the clock function to measure
 the time it takes to do a loop, then measure the time it takes to dump
 an array out to a file.</p>
+<div class="tabs">
+<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-1-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-R" type="button" role="tab" aria-controls="nav-tabpanel-1-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-C/C++" name="C/C++" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-C/C++" type="button" role="tab" aria-controls="nav-tabpanel-1-C/C++" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-C/C++">
+  C/C++
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-1-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-1-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-1" class="tab-content">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -823,6 +816,21 @@ an array out to a file.</p>
 <span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
 <span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
 <span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-C/C++" class="tab-pane" aria-labelledby="nav-tab-1-C/C++" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+</div>
 </div>
 <p>Try running this yourself by copying it into a timing.py file. When I
 run this, I see that the loop takes about 30 microseconds on my computer
@@ -1926,7 +1934,7 @@ is.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>For this very simple problem, each thread can do its computations
 totally independently. There is only a global sum of all the partial
@@ -2600,7 +2608,7 @@ dot_product_c_mpi.c</strong> and running some tests with <strong>mpirun
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>On a modern Intel system the raw scalar code ran in 0.14 seconds as
 did the single-threaded OpenMP and single-task MPI runs. The test on 4
@@ -2775,7 +2783,7 @@ command <strong>make all_fortran</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Each computer system may be set up differently with regard to what
 compilers are available and how they need to be accessed. You may need
@@ -3512,7 +3520,7 @@ function. Also compare these numbers to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
 optimized built-in matrix multiplication function. Be aware that the
@@ -3546,7 +3554,7 @@ rows.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>While rbind() is convenient and works well for small data frames, the
 time to add rows begins to increase exponentially for data frames around
@@ -3577,7 +3585,7 @@ rows and compare to the rbind() results.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>For 1,000 rows I measured 0.12 seconds for a data table set()
 compared to 5.4 seconds for a data table assignment and 1.1 second for a
@@ -3614,7 +3622,7 @@ and 1,000,000 rows.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>For 10,000 rows I saw similar results for each function, but for
 100,000 rows <strong>fread()</strong> was 10 times faster than
@@ -3647,7 +3655,7 @@ program.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>I would love to have a pdbMPI-based matrix multiply code available
 for people to look at and test if anyone finds one.</p>
@@ -3946,7 +3954,7 @@ matrix size of 1000 and compare to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>For the 1000x1000 matrices, I measure 5 seconds for the serial code,
 0.7 seconds for the built-in matrix multiply that uses low level
@@ -3979,7 +3987,7 @@ an array size of 100,000,000 and compare to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>I measure serial performance at 0.5 seconds with the built in
 optimized routine at 0.2 seconds on 8 cores for a modest speedup. The
@@ -4015,7 +4023,7 @@ environments.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>If you do develop code for this, let us know so we can consider
 including your work for others to see.</p>
@@ -4365,7 +4373,7 @@ submit the job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The goal is just to start getting you comfortable with compiling and
 submitting GPU jobs. Use <strong>nvcc hello_gpu.cu -o

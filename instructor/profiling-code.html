@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Profiling Code for Performance</h1>
-        <p>Last updated on 2024-07-16 |
+        <p>Last updated on 2024-07-20 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/profiling-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -527,7 +527,7 @@ real	0m0.110s
 user	0m0.006s
 sys	0m0.027s</code></pre>
 </div>
-<p>When I do this on my iMac, I get a real time of just 0.006 seconds
+<p>When I do this on my Mac, I get a real time of just 0.006 seconds
 because it’s really fast to access the local hard disk. The test above
 is from a very large cluster computer that has a parallel file server
 with 1 Petabyte of storage (1 Petabyte is 1000 Terabytes, and each
@@ -596,6 +596,36 @@ of the code.</p>
 the package. Below is an example of using the clock function to measure
 the time it takes to do a loop, then measure the time it takes to dump
 an array out to a file.</p>
+<div class="tabs">
+<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-1-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-R" type="button" role="tab" aria-controls="nav-tabpanel-1-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-C/C++" name="C/C++" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-C/C++" type="button" role="tab" aria-controls="nav-tabpanel-1-C/C++" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-C/C++">
+  C/C++
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-1-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-1-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-1" class="tab-content">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -622,6 +652,21 @@ an array out to a file.</p>
 <span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
 <span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
 <span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-C/C++" class="tab-pane" aria-labelledby="nav-tab-1-C/C++" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+</div>
 </div>
 <p>Try running this yourself by copying it into a timing.py file. When I
 run this, I see that the loop takes about 30 microseconds on my computer
@@ -865,7 +910,7 @@ also be able to calculate total memory for simple programs.</li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/profiling-code.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/profiling-code.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-16",
+  "dateModified": "2024-07-20",
   "datePublished": "2024-07-20"
 }
 
