@@ -29,7 +29,7 @@ your laptop or desktop and transfer them to the Linux system instead.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::: group-tab
+:::::::::::::::: tab
 
 ### Windows
 
@@ -56,7 +56,7 @@ the Linux HPC system with vim or nano, or if you have a different editor
 on your Linux laptop or desktop you may edit the code files there and scp them
 over to the Linux system each time.
 
-::::::::::::::::::::
+::::::::::::::::::::::::::
 
 ### Programming Language for Example Code
 
@@ -91,5 +91,6 @@ Not implemented yet.
 
 Not implemented yet.
 
-::::::::::::::::::::
+::::::::::::::::::::::::::
+
 
