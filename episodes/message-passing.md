@@ -10,7 +10,7 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::: objectives
 - Learn about message-passing in distributed-memory computing.
-- What are the strengths and limitations of this approach?
+- Understand the strengths and limitations of this approach.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -50,7 +50,29 @@ After all nodes have calculated their partial sums, those will be
 globally summed across all 8 tasks using the network if needed
 then the program with rank 1 will print out the results.
 
+:::::::::::::::: group-tab
+
+### Python
+
 ![Diagram of a distributed-memory multi-node dot product on two computers](fig/distributed-memory-dot-product-0.jpg ){alt="Distributed-memory dot product shsowing the layout of both vectors on both computers"}
+
+### R
+
+![Diagram of a distributed-memory multi-node dot product on two computers](fig/distributed-memory-dot-product-1.jpg ){alt="Distributed-memory dot product shsowing the layout of both vectors on both computers"}
+
+### C
+
+![Diagram of a distributed-memory multi-node dot product on two computers](fig/distributed-memory-dot-product-0.jpg ){alt="Distributed-memory dot product shsowing the layout of both vectors on both computers"}
+
+### Fortran
+
+![Diagram of a distributed-memory multi-node dot product on two computers](fig/distributed-memory-dot-product-1.jpg ){alt="Distributed-memory dot product shsowing the layout of both vectors on both computers"}
+
+### Matlab
+
+![Diagram of a distributed-memory multi-node dot product on two computers](fig/distributed-memory-dot-product-1.jpg ){alt="Distributed-memory dot product shsowing the layout of both vectors on both computers"}
+
+::::::::::::::::::::::::::
 
 In parallel computing, the programmer must decide how to divide the data
 between the processes.
@@ -114,6 +136,10 @@ Notice at the end that we only have rank 0 print its results.
 If we didn't protect the print statements like this, we would get
 nranks copies of each print statement.
 
+:::::::::::::::: group-tab
+
+### Python
+
 ```python
 # Do the dot product between two vectors X and Y then print the result
 # USAGE:  mpirun -np 4 python dot_product_message_passing.py       to run on 4 tasks
@@ -164,6 +190,24 @@ if ( myrank == 0 ):    # Only rank 0 will print results
    print( 2.0*N*1.0e-9 / t_elapsed, ' Gflops (billion floating-point operations per second)')
    print( 2.0*N*8.0/1.0e9, ' GB memory used' )
 ```
+
+### R
+
+Not implemented yet.
+
+### C
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::::::::
 
 We see from all this that parallelizing a program using message-passing
 requires more work.  This is especially true in more complex programs
