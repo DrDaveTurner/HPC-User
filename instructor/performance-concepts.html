@@ -764,19 +764,19 @@ Use optimized libraries when at all possible.</p>
   Python
   </h3>
 </button>
-<button class="nav-link" id="nav-tab-5-MeasuringCacheLineEffects" name="MeasuringCacheLineEffects" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-MeasuringCacheLineEffects" type="button" role="tab" aria-controls="nav-tabpanel-5-MeasuringCacheLineEffects" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-5-MeasuringCacheLineEffects">
-  Measuring Cache Line Effects
+<button class="nav-link" id="nav-tab-5-Challenge" name="Challenge" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Challenge" type="button" role="tab" aria-controls="nav-tabpanel-5-Challenge" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-Challenge">
+  Challenge
   </h3>
 </button>
-<button class="nav-link" id="nav-tab-5-TimeDifferentMatrixMultiplicationMethods" name="TimeDifferentMatrixMultiplicationMethods" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-TimeDifferentMatrixMultiplicationMethods" type="button" role="tab" aria-controls="nav-tabpanel-5-TimeDifferentMatrixMultiplicationMethods" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-5-TimeDifferentMatrixMultiplicationMethods">
-  Time Different Matrix Multiplication Methods
+<button class="nav-link" id="nav-tab-5-Challenge" name="Challenge" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Challenge" type="button" role="tab" aria-controls="nav-tabpanel-5-Challenge" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-Challenge">
+  Challenge
   </h3>
 </button>
-<button class="nav-link" id="nav-tab-5-AdvancedExercise-TransposeBtocache-lineoptimizeit" name="AdvancedExercise-TransposeBtocache-lineoptimizeit" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-AdvancedExercise-TransposeBtocache-lineoptimizeit" type="button" role="tab" aria-controls="nav-tabpanel-5-AdvancedExercise-TransposeBtocache-lineoptimizeit" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-5-AdvancedExercise-TransposeBtocache-lineoptimizeit">
-  Advanced Exercise - Transpose B to cache-line optimize it
+<button class="nav-link" id="nav-tab-5-Challenge" name="Challenge" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Challenge" type="button" role="tab" aria-controls="nav-tabpanel-5-Challenge" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-Challenge">
+  Challenge
   </h3>
 </button>
 <button class="nav-link" id="nav-tab-5-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-R" type="button" role="tab" aria-controls="nav-tabpanel-5-R" aria-selected="false">
@@ -807,6 +807,7 @@ Use optimized libraries when at all possible.</p>
 </div>
 </div>
 <div id="nav-tabpanel-5-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-R">
+<p><strong>Measuring Cache Line Effects</strong></p>
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
@@ -816,6 +817,7 @@ manner for comparison. How much faster is the first code where the
 vectors are stored in contiguous memory? How much faster should it
 be?</p>
 <div class="callout-content">
+<p><strong>Measuring Cache Line Effects</strong></p>
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
@@ -826,8 +828,9 @@ vectors are stored in contiguous memory? How much faster should it
 be?</p>
 </div>
 <div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="measuring-cache-line-effects">Measuring Cache Line Effects<a class="anchor" aria-label="anchor" href="#measuring-cache-line-effects"></a></h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
+<p><strong>Measuring Cache Line Effects</strong></p>
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
@@ -838,14 +841,15 @@ vectors are stored in contiguous memory? How much faster should it
 be?</p>
 </div>
 </div>
-<div id="measuring-cache-line-effects" class="callout challenge">
+<div id="challenge1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="measuring-cache-line-effects" class="callout-inner">
-<h3 class="callout-title">Measuring Cache Line Effects<a class="anchor" aria-label="anchor" href="#measuring-cache-line-effects"></a>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge1"></a>
 </h3>
 <div class="callout-content">
+<p><strong>Measuring Cache Line Effects</strong></p>
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
@@ -891,7 +895,7 @@ parts of the processor with others. The main thing to learn here is that
 if you take advantage of the cache line by keeping the vectors in
 contiguous memory, your code will run faster.</p>
 </div>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Is the time difference what we expected? When I ran this on a new
 Intel processor that did not have any other jobs running, I measured 180
@@ -917,7 +921,7 @@ contiguous memory, your code will run faster.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Is the time difference what we expected? When I ran this on a new
 Intel processor that did not have any other jobs running, I measured 180
@@ -943,7 +947,7 @@ contiguous memory, your code will run faster.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Is the time difference what we expected? When I ran this on a new
 Intel processor that did not have any other jobs running, I measured 180
@@ -970,6 +974,7 @@ contiguous memory, your code will run faster.</p>
 </div>
 </div>
 <div id="nav-tabpanel-5-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-C">
+<p><strong>Time Different Matrix Multiplication Methods</strong></p>
 <p>There are 2 separate codes supplied to perform the same matrix
 multiplication for a given matrix size, matmult.py is raw Python code
 and matmult_numpy.py uses the highly optimized
@@ -984,6 +989,7 @@ scheduler if at all possible since numpy will grab any cores it can, and
 for a fair comparison we want to test out only the single-core
 performance.</p>
 <div class="callout-content">
+<p><strong>Time Different Matrix Multiplication Methods</strong></p>
 <p>There are 2 separate codes supplied to perform the same matrix
 multiplication for a given matrix size, matmult.py is raw Python code
 and matmult_numpy.py uses the highly optimized
@@ -999,9 +1005,9 @@ for a fair comparison we want to test out only the single-core
 performance.</p>
 </div>
 <div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="time-different-matrix-multiplication-methods">Time Different Matrix Multiplication
-Methods<a class="anchor" aria-label="anchor" href="#time-different-matrix-multiplication-methods"></a></h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
+<p><strong>Time Different Matrix Multiplication Methods</strong></p>
 <p>There are 2 separate codes supplied to perform the same matrix
 multiplication for a given matrix size, matmult.py is raw Python code
 and matmult_numpy.py uses the highly optimized
@@ -1017,14 +1023,15 @@ for a fair comparison we want to test out only the single-core
 performance.</p>
 </div>
 </div>
-<div id="time-different-matrix-multiplication-methods" class="callout challenge">
+<div id="challenge2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="time-different-matrix-multiplication-methods" class="callout-inner">
-<h3 class="callout-title">Time Different Matrix Multiplication Methods<a class="anchor" aria-label="anchor" href="#time-different-matrix-multiplication-methods"></a>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge2"></a>
 </h3>
 <div class="callout-content">
+<p><strong>Time Different Matrix Multiplication Methods</strong></p>
 <p>There are 2 separate codes supplied to perform the same matrix
 multiplication for a given matrix size, matmult.py is raw Python code
 and matmult_numpy.py uses the highly optimized
@@ -1093,7 +1100,7 @@ heavily optimized library routines. C is still faster than Python, with
 raw C code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine
 reaching 91 GFlops.</p>
 </div>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>For the 10x10 matrix size there are 3 matrices having 100 elements
 each needing 8 bytes storage, so storing all 3 matrices requires only
@@ -1128,7 +1135,7 @@ reaching 91 GFlops.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>For the 10x10 matrix size there are 3 matrices having 100 elements
 each needing 8 bytes storage, so storing all 3 matrices requires only
@@ -1163,7 +1170,7 @@ reaching 91 GFlops.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>For the 10x10 matrix size there are 3 matrices having 100 elements
 each needing 8 bytes storage, so storing all 3 matrices requires only
@@ -1199,6 +1206,8 @@ reaching 91 GFlops.</p>
 </div>
 </div>
 <div id="nav-tabpanel-5-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-Fortran">
+<p><strong>Advanced Exercise - Transpose B to cache-line optimize
+it</strong></p>
 <p>As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
 memory, as we learned from the dot product example. Unfortunately,
@@ -1211,6 +1220,8 @@ matrix multiplication. If you’re up for a challenge, try programming
 this up to see if it improves the performance compared to the original
 Python code.</p>
 <div class="callout-content">
+<p><strong>Advanced Exercise - Transpose B to cache-line optimize
+it</strong></p>
 <p>As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
 memory, as we learned from the dot product example. Unfortunately,
@@ -1224,9 +1235,10 @@ this up to see if it improves the performance compared to the original
 Python code.</p>
 </div>
 <div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="advanced-exercise---transpose-b-to-cache-line-optimize-it">Advanced Exercise - Transpose B to cache-line
-optimize it<a class="anchor" aria-label="anchor" href="#advanced-exercise---transpose-b-to-cache-line-optimize-it"></a></h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
+<p><strong>Advanced Exercise - Transpose B to cache-line optimize
+it</strong></p>
 <p>As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
 memory, as we learned from the dot product example. Unfortunately,
@@ -1240,14 +1252,16 @@ this up to see if it improves the performance compared to the original
 Python code.</p>
 </div>
 </div>
-<div id="advanced-exercise---transpose-b-to-cache-line-optimize-it" class="callout challenge">
+<div id="challenge3" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="advanced-exercise---transpose-b-to-cache-line-optimize-it" class="callout-inner">
-<h3 class="callout-title">Advanced Exercise - Transpose B to cache-line optimize it<a class="anchor" aria-label="anchor" href="#advanced-exercise---transpose-b-to-cache-line-optimize-it"></a>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge3"></a>
 </h3>
 <div class="callout-content">
+<p><strong>Advanced Exercise - Transpose B to cache-line optimize
+it</strong></p>
 <p>As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
 memory, as we learned from the dot product example. Unfortunately,
@@ -1274,7 +1288,7 @@ performance some. For a more complete overview of what is done in the
 <strong>np.matmult()</strong> algorithm and others like it, follow the
 link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a></p>
 </div>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
@@ -1289,7 +1303,7 @@ link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="extern
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
@@ -1304,7 +1318,7 @@ link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="extern
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
