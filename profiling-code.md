@@ -169,6 +169,8 @@ dump an array out to a file.
 ### Python
 
 ```python
+# timing_example.py - Example code showing how to put timing around an IO loop.
+
 import time
 
 N = 100
@@ -211,14 +213,14 @@ Not implemented yet.
 
 ::::::::::::::::::::
 
-Try running this yourself by copying it into a timing.py file.
+Try running this yourself by copying it into a timing_example.py file.
 When I run this, I see that the loop takes about 30 microseconds on my computer
 and the output file takes 10 milliseconds.
 Since both of these are above the nanosecond range, we can be confident
 that the timing routine is accurately measuring each.
 
 Let's see what we can learn by playing around with it some more.
-When I run this with **time python timing.py**, I see a real time
+When I run this with **time python timing_example.py**, I see a real time
 of 100 milliseconds even though the loop time and output time 
 combined are only about a half millisecond.
 The initialization time is not measured but shouldn't be more than
@@ -229,17 +231,24 @@ we may also be seeing the lack of accuracy of the external **time**
 function when it comes to measuring things down in the millisecond
 range.
 
-Now lets change the timing.py program itself.
+Now lets change the timing_example.py program itself.
 Sometimes we need to time a part of something that is in a larger
 loop, so we need to sum the times together.
 Try changing the timing so that it is inside the summation
 loop instead of outside it to see what happens.
+You can do this by uncommenting the timing and printing functions
+in the timing_example.py file.
 
 :::::::::::::::: group-tab
 
 ### Python
 
 ```python
+import time
+
+N = 100
+array = [ float(i) for i in range( N ) ]
+
 t_start = time.perf_counter()
 
 sum = 0.0
@@ -253,6 +262,16 @@ t_loop = time.perf_counter() - t_start
 
 print("The sum took ", t_sum, " seconds")
 print("The loop took ", t_loop, " seconds")
+
+t_start = time.perf_counter()
+
+fd = open( "array.out", "w")
+for i in range( N ):
+   fd.write( str(array[i]) + "\n" )
+fd.close()
+
+t_output = time.perf_counter() - t_start
+print("The output took ", t_output, " seconds")
 ```
 ### R
 

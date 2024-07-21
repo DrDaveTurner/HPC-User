@@ -254,6 +254,10 @@ Good news is that in HPC, often the hard work is already done for you,
   --> Use optimized libraries when at all possible.
 
 
+:::::::::::::::: group-tab
+
+### Python
+
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Measuring Cache Line Effects
@@ -377,6 +381,24 @@ https://en.algorithmica.org/hpc/algorithms/matmul/
 
 :::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+### R
+
+Not implemented yet.
+
+### C
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::::::::
 
 
 ## Summary

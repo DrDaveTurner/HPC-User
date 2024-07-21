@@ -10,7 +10,7 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::: objectives
 - Learn about multi-threaded computing and how to use it.
-- What are the strengths and limitations of this approach?
+- Understand the strengths and limitations of this approach.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -97,6 +97,9 @@ to create a shared array of partial sums and manually sum them together
 at the end.  This is just as efficient computationally, it just takes a
 little extra coding but is more explicit.
 
+:::::::::::::::: group-tab
+
+### Python
 ```python
 # Do the dot product between two vectors X and Y then print the result
 # USAGE:  python dot_product_threaded.py 4       to run on 4 threads
@@ -145,6 +148,24 @@ print('dot product = ', d_prod, 'took ', t_elapsed, ' seconds' );
 print( 2.0*N*1.0e-9 / t_elapsed, ' Gflops (billion floating-point operations per second)')
 print( 2.0*N*8.0/1.0e9, ' GB memory used' )
 ```
+
+### R
+
+Not implemented yet.
+
+### C
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::::::::
 
 So parallelizing this program really only requires us to change around 11 lines
 of code, and from that we get the benefit of being able to apply much greater
