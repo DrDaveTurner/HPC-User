@@ -587,7 +587,7 @@ performance in programming.</li>
 </div>
 </section></section><section id="aio-profiling-code"><p>Content from <a href="profiling-code.html">Profiling Code for Performance</a></p>
 <hr>
-<p>Last updated on 2024-07-20 |
+<p>Last updated on 2024-07-21 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/profiling-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -793,57 +793,59 @@ an array out to a file.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> time</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># timing_example.py - Example code showing how to put timing around an IO loop.</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span>
 <span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>fd <span class="op">=</span> <span class="bu">open</span>( <span class="st">"array.out"</span>, <span class="st">"w"</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>   fd.write( <span class="bu">str</span>(array[i]) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> )</span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>fd.close()</span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>fd <span class="op">=</span> <span class="bu">open</span>( <span class="st">"array.out"</span>, <span class="st">"w"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>   fd.write( <span class="bu">str</span>(array[i]) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> )</span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>fd.close()</span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C/C++" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C/C++">
+<div id="nav-tabpanel-1-C/C++" class="tab-pane" aria-labelledby="nav-tab-1-C/C++" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
 </div>
-<p>Try running this yourself by copying it into a timing.py file. When I
-run this, I see that the loop takes about 30 microseconds on my computer
-and the output file takes 10 milliseconds. Since both of these are above
-the nanosecond range, we can be confident that the timing routine is
-accurately measuring each.</p>
+<p>Try running this yourself by copying it into a timing_example.py
+file. When I run this, I see that the loop takes about 30 microseconds
+on my computer and the output file takes 10 milliseconds. Since both of
+these are above the nanosecond range, we can be confident that the
+timing routine is accurately measuring each.</p>
 <p>Let’s see what we can learn by playing around with it some more. When
-I run this with <strong>time python timing.py</strong>, I see a real
-time of 100 milliseconds even though the loop time and output time
+I run this with <strong>time python timing_example.py</strong>, I see a
+real time of 100 milliseconds even though the loop time and output time
 combined are only about a half millisecond. The initialization time is
 not measured but shouldn’t be more than the loop time. What all this
 means is that there is some startup time for getting the python program
@@ -851,10 +853,12 @@ running and importing the <strong>time</strong> package, but we may also
 be seeing the lack of accuracy of the external <strong>time</strong>
 function when it comes to measuring things down in the millisecond
 range.</p>
-<p>Now lets change the timing.py program itself. Sometimes we need to
-time a part of something that is in a larger loop, so we need to sum the
-times together. Try changing the timing so that it is inside the
-summation loop instead of outside it to see what happens.</p>
+<p>Now lets change the timing_example.py program itself. Sometimes we
+need to time a part of something that is in a larger loop, so we need to
+sum the times together. Try changing the timing so that it is inside the
+summation loop instead of outside it to see what happens. You can do
+this by uncommenting the timing and printing functions in the
+timing_example.py file.</p>
 <div class="tabs">
 <nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
@@ -884,35 +888,50 @@ summation loop instead of outside it to see what happens.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>t_sum <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>   t0 <span class="op">=</span> time.perf_counter()</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>   t_sum <span class="op">+=</span> time.perf_counter() <span class="op">-</span> t0</span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The sum took "</span>, t_sum, <span class="st">" seconds"</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span></code></pre>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>t_sum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>   t0 <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>   t_sum <span class="op">+=</span> time.perf_counter() <span class="op">-</span> t0</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The sum took "</span>, t_sum, <span class="st">" seconds"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>fd <span class="op">=</span> <span class="bu">open</span>( <span class="st">"array.out"</span>, <span class="st">"w"</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>   fd.write( <span class="bu">str</span>(array[i]) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> )</span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>fd.close()</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C/C++" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C/C++">
+<div id="nav-tabpanel-2-C/C++" class="tab-pane" aria-labelledby="nav-tab-2-C/C++" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1075,7 +1094,7 @@ also be able to calculate total memory for simple programs.</li>
 </div>
 </section></section><section id="aio-performance-concepts"><p>Content from <a href="performance-concepts.html">Performance Concepts</a></p>
 <hr>
-<p>Last updated on 2024-07-20 |
+<p>Last updated on 2024-07-21 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -1162,21 +1181,21 @@ memory where the program prints the result out to the screen for us.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <figure><img src="../fig/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <p>Need fig/dot_prod_fig-1-N.jpg</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
 <figure><img src="../fig/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <p>Need fig/dot_prod_fig-1-N.jpg</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <p>Need fig/dot_prod_fig-1-N.jpg</p>
 </div>
 </div>
@@ -1253,21 +1272,21 @@ depending on how you write the code.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
 <figure><img src="../fig/matmult_fig.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
 </figure>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
 <p>Need fig/matmult_fig-1-N.jpg.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
 <figure><img src="../fig/matmult_fig.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
 </figure>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
 <p>Need fig/matmult_fig-1-N.jpg.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
 <p>Need fig/matmult_fig-1-N.jpg.</p>
 </div>
 </div>
@@ -1303,7 +1322,7 @@ is fairly simple.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-3" class="tab-content">
-<div id="nav-tabpanel-3-Python" class="tab-pane show active" aria-labelledby="nav-tab-3-Python" role="tabpanel">
+<div id="nav-tabpanel-3-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-3-Python">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1315,16 +1334,16 @@ is fairly simple.</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>            C[i][j] <span class="op">+=</span> A[i][k] <span class="op">*</span> B[k][j]</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-3-R" class="tab-pane" aria-labelledby="nav-tab-3-R" role="tabpanel">
+<div id="nav-tabpanel-3-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-C" class="tab-pane" aria-labelledby="nav-tab-3-C" role="tabpanel">
+<div id="nav-tabpanel-3-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-C">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Fortran" class="tab-pane" aria-labelledby="nav-tab-3-Fortran" role="tabpanel">
+<div id="nav-tabpanel-3-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Matlab" class="tab-pane" aria-labelledby="nav-tab-3-Matlab" role="tabpanel">
+<div id="nav-tabpanel-3-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1382,7 +1401,7 @@ is easy to use as shown below.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-4" class="tab-content">
-<div id="nav-tabpanel-4-Python" class="tab-pane show active" aria-labelledby="nav-tab-4-Python" role="tabpanel">
+<div id="nav-tabpanel-4-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-4-Python">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1392,16 +1411,16 @@ is easy to use as shown below.</p>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>C <span class="op">=</span> np.matmult( A, B )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-4-R" class="tab-pane" aria-labelledby="nav-tab-4-R" role="tabpanel">
+<div id="nav-tabpanel-4-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-C" class="tab-pane" aria-labelledby="nav-tab-4-C" role="tabpanel">
+<div id="nav-tabpanel-4-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-C">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-Fortran" class="tab-pane" aria-labelledby="nav-tab-4-Fortran" role="tabpanel">
+<div id="nav-tabpanel-4-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-Matlab" class="tab-pane" aria-labelledby="nav-tab-4-Matlab" role="tabpanel">
+<div id="nav-tabpanel-4-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1419,6 +1438,88 @@ time which is very slow. Show algorithm to illustrate complexity.</p>
 <p>Good news is that in HPC, often the hard work is already done for
 you, you just need to know to make use of someone elses hard work. –&gt;
 Use optimized libraries when at all possible.</p>
+<div class="tabs">
+<nav><div id="nav-tab-5" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-5-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Python" type="button" role="tab" aria-controls="nav-tabpanel-5-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-5-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-MeasuringCacheLineEffects" name="MeasuringCacheLineEffects" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-MeasuringCacheLineEffects" type="button" role="tab" aria-controls="nav-tabpanel-5-MeasuringCacheLineEffects" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-MeasuringCacheLineEffects">
+  Measuring Cache Line Effects
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-TimeDifferentMatrixMultiplicationMethods" name="TimeDifferentMatrixMultiplicationMethods" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-TimeDifferentMatrixMultiplicationMethods" type="button" role="tab" aria-controls="nav-tabpanel-5-TimeDifferentMatrixMultiplicationMethods" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-TimeDifferentMatrixMultiplicationMethods">
+  Time Different Matrix Multiplication Methods
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-AdvancedExercise-TransposeBtocache-lineoptimizeit" name="AdvancedExercise-TransposeBtocache-lineoptimizeit" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-AdvancedExercise-TransposeBtocache-lineoptimizeit" type="button" role="tab" aria-controls="nav-tabpanel-5-AdvancedExercise-TransposeBtocache-lineoptimizeit" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-AdvancedExercise-TransposeBtocache-lineoptimizeit">
+  Advanced Exercise - Transpose B to cache-line optimize it
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-R" type="button" role="tab" aria-controls="nav-tabpanel-5-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-C" type="button" role="tab" aria-controls="nav-tabpanel-5-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-5-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-5-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-5" class="tab-content">
+<div id="nav-tabpanel-5-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-5-Python">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+</div>
+<div id="nav-tabpanel-5-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-R">
+<p>Run the dot_product.py code several times to get an average execution
+time for a dot product between two vectors of 1 million elements each.
+Try to run them on an isolated system if possible, or through a batch
+queue that at least ensures the code is being run on an isolated
+processing core. Then run the dot_product_sparse.py code in the same
+manner for comparison. How much faster is the first code where the
+vectors are stored in contiguous memory? How much faster should it
+be?</p>
+<div class="callout-content">
+<p>Run the dot_product.py code several times to get an average execution
+time for a dot product between two vectors of 1 million elements each.
+Try to run them on an isolated system if possible, or through a batch
+queue that at least ensures the code is being run on an isolated
+processing core. Then run the dot_product_sparse.py code in the same
+manner for comparison. How much faster is the first code where the
+vectors are stored in contiguous memory? How much faster should it
+be?</p>
+</div>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="measuring-cache-line-effects">Measuring Cache Line Effects<a class="anchor" aria-label="anchor" href="#measuring-cache-line-effects"></a>
+</h3>
+<div class="callout-content">
+<p>Run the dot_product.py code several times to get an average execution
+time for a dot product between two vectors of 1 million elements each.
+Try to run them on an isolated system if possible, or through a batch
+queue that at least ensures the code is being run on an isolated
+processing core. Then run the dot_product_sparse.py code in the same
+manner for comparison. How much faster is the first code where the
+vectors are stored in contiguous memory? How much faster should it
+be?</p>
+</div>
+</div>
 <div id="measuring-cache-line-effects" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1438,12 +1539,41 @@ be?</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<p>Is the time difference what we expected? When I ran this on a new
+Intel processor that did not have any other jobs running, I measured 180
+milliseconds for the contiguous memory case and 1230 milliseconds for
+the sparse case, resulting in a 6.9-times speedup by keeping the vector
+in contiguous memory. Since a cache line is 64 Bytes and each element is
+8 bytes, when the first element is loaded the next 7 are brought into L1
+cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take 100 ns to load 8 elements of X, then 100
+ns to load 8 elements of Y, then only a few ns to get each element into
+the registers and do the computations. For the sparse vectors, it should
+take 8 times as long since each load will take 100 ns. If you didn’t see
+an 8-times speedup, don’t worry. The cache system is actually even more
+complicated than this picture. Also remember that you may be sharing
+parts of the processor with others. The main thing to learn here is that
+if you take advantage of the cache line by keeping the vectors in
+contiguous memory, your code will run faster.</p>
+<div class="accordion-body">
+<p>Is the time difference what we expected? When I ran this on a new
+Intel processor that did not have any other jobs running, I measured 180
+milliseconds for the contiguous memory case and 1230 milliseconds for
+the sparse case, resulting in a 6.9-times speedup by keeping the vector
+in contiguous memory. Since a cache line is 64 Bytes and each element is
+8 bytes, when the first element is loaded the next 7 are brought into L1
+cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take 100 ns to load 8 elements of X, then 100
+ns to load 8 elements of Y, then only a few ns to get each element into
+the registers and do the computations. For the sparse vectors, it should
+take 8 times as long since each load will take 100 ns. If you didn’t see
+an 8-times speedup, don’t worry. The cache system is actually even more
+complicated than this picture. Also remember that you may be sharing
+parts of the processor with others. The main thing to learn here is that
+if you take advantage of the cache line by keeping the vectors in
+contiguous memory, your code will run faster.</p>
+</div>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Is the time difference what we expected? When I ran this on a new
 Intel processor that did not have any other jobs running, I measured 180
@@ -1463,6 +1593,111 @@ if you take advantage of the cache line by keeping the vectors in
 contiguous memory, your code will run faster.</p>
 </div>
 </div>
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>Is the time difference what we expected? When I ran this on a new
+Intel processor that did not have any other jobs running, I measured 180
+milliseconds for the contiguous memory case and 1230 milliseconds for
+the sparse case, resulting in a 6.9-times speedup by keeping the vector
+in contiguous memory. Since a cache line is 64 Bytes and each element is
+8 bytes, when the first element is loaded the next 7 are brought into L1
+cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take 100 ns to load 8 elements of X, then 100
+ns to load 8 elements of Y, then only a few ns to get each element into
+the registers and do the computations. For the sparse vectors, it should
+take 8 times as long since each load will take 100 ns. If you didn’t see
+an 8-times speedup, don’t worry. The cache system is actually even more
+complicated than this picture. Also remember that you may be sharing
+parts of the processor with others. The main thing to learn here is that
+if you take advantage of the cache line by keeping the vectors in
+contiguous memory, your code will run faster.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>Is the time difference what we expected? When I ran this on a new
+Intel processor that did not have any other jobs running, I measured 180
+milliseconds for the contiguous memory case and 1230 milliseconds for
+the sparse case, resulting in a 6.9-times speedup by keeping the vector
+in contiguous memory. Since a cache line is 64 Bytes and each element is
+8 bytes, when the first element is loaded the next 7 are brought into L1
+cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take 100 ns to load 8 elements of X, then 100
+ns to load 8 elements of Y, then only a few ns to get each element into
+the registers and do the computations. For the sparse vectors, it should
+take 8 times as long since each load will take 100 ns. If you didn’t see
+an 8-times speedup, don’t worry. The cache system is actually even more
+complicated than this picture. Also remember that you may be sharing
+parts of the processor with others. The main thing to learn here is that
+if you take advantage of the cache line by keeping the vectors in
+contiguous memory, your code will run faster.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+</div>
+<div id="nav-tabpanel-5-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-C">
+<p>There are 2 separate codes supplied to perform the same matrix
+multiplication for a given matrix size, matmult.py is raw Python code
+and matmult_numpy.py uses the highly optimized
+<strong>np.matmult()</strong> function. Both programs take the matrix
+size as an argument, so you run using <strong>python matmult.py
+100</strong> for example to measure the performance for multiplying two
+100x100 matrices. Measure the performance for each method on a small
+10x10 matrix, an intermediate sized 100x100 matrix, and a large
+1000x1000 matrix to see how each is affected by the optimized
+<strong>numpy</strong> function. You should run this through a batch
+scheduler if at all possible since numpy will grab any cores it can, and
+for a fair comparison we want to test out only the single-core
+performance.</p>
+<div class="callout-content">
+<p>There are 2 separate codes supplied to perform the same matrix
+multiplication for a given matrix size, matmult.py is raw Python code
+and matmult_numpy.py uses the highly optimized
+<strong>np.matmult()</strong> function. Both programs take the matrix
+size as an argument, so you run using <strong>python matmult.py
+100</strong> for example to measure the performance for multiplying two
+100x100 matrices. Measure the performance for each method on a small
+10x10 matrix, an intermediate sized 100x100 matrix, and a large
+1000x1000 matrix to see how each is affected by the optimized
+<strong>numpy</strong> function. You should run this through a batch
+scheduler if at all possible since numpy will grab any cores it can, and
+for a fair comparison we want to test out only the single-core
+performance.</p>
+</div>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="time-different-matrix-multiplication-methods">Time Different Matrix Multiplication
+Methods<a class="anchor" aria-label="anchor" href="#time-different-matrix-multiplication-methods"></a>
+</h3>
+<div class="callout-content">
+<p>There are 2 separate codes supplied to perform the same matrix
+multiplication for a given matrix size, matmult.py is raw Python code
+and matmult_numpy.py uses the highly optimized
+<strong>np.matmult()</strong> function. Both programs take the matrix
+size as an argument, so you run using <strong>python matmult.py
+100</strong> for example to measure the performance for multiplying two
+100x100 matrices. Measure the performance for each method on a small
+10x10 matrix, an intermediate sized 100x100 matrix, and a large
+1000x1000 matrix to see how each is affected by the optimized
+<strong>numpy</strong> function. You should run this through a batch
+scheduler if at all possible since numpy will grab any cores it can, and
+for a fair comparison we want to test out only the single-core
+performance.</p>
 </div>
 </div>
 <div id="time-different-matrix-multiplication-methods" class="callout challenge">
@@ -1489,12 +1724,129 @@ performance.</p>
 </div>
 </div>
 </div>
+<p>For the 10x10 matrix size there are 3 matrices having 100 elements
+each needing 8 bytes storage, so storing all 3 matrices requires only
+2.4 kB of memory. Everything fits entirely in L1 cache, so the block
+optimized algorithm from <strong>NumPy</strong> isn’t really needed. For
+the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache. We therefore
+expect a significant improvement by using the optimized
+<strong>np.matmult()</strong> function. For the 1000x1000 matrix size,
+we need 24 MB to store all 3 matrices so it will reside in L3 cache. The
+<strong>np.matmult()</strong> function should speed up this run by
+substantially more. The optimization of the <strong>NumPy</strong>
+routine however goes far beyond just block optimizing the algorithm so
+that it reuses data in L1 cache though. There are also computational
+optimizations that allow for many multiply-add operations to occur in
+the same clock cycle, which is called vectorization. My measurements on
+a modern Intel processor more of a performance benefit for larger matrix
+sizes. For 1000x1000 matrices, the raw Python code was very slow at 6.5
+MFlops (Million floating-point operations per second). All the
+optimizations in the <strong>NumPy</strong> code brought the performance
+up to 15.4 GFlops, or a whopping 2354 times faster. Raw Python code is
+fairly slow in itself because it is interpretted and not compiled like
+C/C++/Fortran code, clearly you can do very well if you learn to use the
+heavily optimized library routines. C is still faster than Python, with
+raw C code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine
+reaching 91 GFlops.</p>
+<div class="accordion-body">
+<p>For the 10x10 matrix size there are 3 matrices having 100 elements
+each needing 8 bytes storage, so storing all 3 matrices requires only
+2.4 kB of memory. Everything fits entirely in L1 cache, so the block
+optimized algorithm from <strong>NumPy</strong> isn’t really needed. For
+the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache. We therefore
+expect a significant improvement by using the optimized
+<strong>np.matmult()</strong> function. For the 1000x1000 matrix size,
+we need 24 MB to store all 3 matrices so it will reside in L3 cache. The
+<strong>np.matmult()</strong> function should speed up this run by
+substantially more. The optimization of the <strong>NumPy</strong>
+routine however goes far beyond just block optimizing the algorithm so
+that it reuses data in L1 cache though. There are also computational
+optimizations that allow for many multiply-add operations to occur in
+the same clock cycle, which is called vectorization. My measurements on
+a modern Intel processor more of a performance benefit for larger matrix
+sizes. For 1000x1000 matrices, the raw Python code was very slow at 6.5
+MFlops (Million floating-point operations per second). All the
+optimizations in the <strong>NumPy</strong> code brought the performance
+up to 15.4 GFlops, or a whopping 2354 times faster. Raw Python code is
+fairly slow in itself because it is interpretted and not compiled like
+C/C++/Fortran code, clearly you can do very well if you learn to use the
+heavily optimized library routines. C is still faster than Python, with
+raw C code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine
+reaching 91 GFlops.</p>
+</div>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>For the 10x10 matrix size there are 3 matrices having 100 elements
+each needing 8 bytes storage, so storing all 3 matrices requires only
+2.4 kB of memory. Everything fits entirely in L1 cache, so the block
+optimized algorithm from <strong>NumPy</strong> isn’t really needed. For
+the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache. We therefore
+expect a significant improvement by using the optimized
+<strong>np.matmult()</strong> function. For the 1000x1000 matrix size,
+we need 24 MB to store all 3 matrices so it will reside in L3 cache. The
+<strong>np.matmult()</strong> function should speed up this run by
+substantially more. The optimization of the <strong>NumPy</strong>
+routine however goes far beyond just block optimizing the algorithm so
+that it reuses data in L1 cache though. There are also computational
+optimizations that allow for many multiply-add operations to occur in
+the same clock cycle, which is called vectorization. My measurements on
+a modern Intel processor more of a performance benefit for larger matrix
+sizes. For 1000x1000 matrices, the raw Python code was very slow at 6.5
+MFlops (Million floating-point operations per second). All the
+optimizations in the <strong>NumPy</strong> code brought the performance
+up to 15.4 GFlops, or a whopping 2354 times faster. Raw Python code is
+fairly slow in itself because it is interpretted and not compiled like
+C/C++/Fortran code, clearly you can do very well if you learn to use the
+heavily optimized library routines. C is still faster than Python, with
+raw C code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine
+reaching 91 GFlops.</p>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>For the 10x10 matrix size there are 3 matrices having 100 elements
+each needing 8 bytes storage, so storing all 3 matrices requires only
+2.4 kB of memory. Everything fits entirely in L1 cache, so the block
+optimized algorithm from <strong>NumPy</strong> isn’t really needed. For
+the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache. We therefore
+expect a significant improvement by using the optimized
+<strong>np.matmult()</strong> function. For the 1000x1000 matrix size,
+we need 24 MB to store all 3 matrices so it will reside in L3 cache. The
+<strong>np.matmult()</strong> function should speed up this run by
+substantially more. The optimization of the <strong>NumPy</strong>
+routine however goes far beyond just block optimizing the algorithm so
+that it reuses data in L1 cache though. There are also computational
+optimizations that allow for many multiply-add operations to occur in
+the same clock cycle, which is called vectorization. My measurements on
+a modern Intel processor more of a performance benefit for larger matrix
+sizes. For 1000x1000 matrices, the raw Python code was very slow at 6.5
+MFlops (Million floating-point operations per second). All the
+optimizations in the <strong>NumPy</strong> code brought the performance
+up to 15.4 GFlops, or a whopping 2354 times faster. Raw Python code is
+fairly slow in itself because it is interpretted and not compiled like
+C/C++/Fortran code, clearly you can do very well if you learn to use the
+heavily optimized library routines. C is still faster than Python, with
+raw C code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine
+reaching 91 GFlops.</p>
+</div>
+</div>
+</div>
 <div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>For the 10x10 matrix size there are 3 matrices having 100 elements
 each needing 8 bytes storage, so storing all 3 matrices requires only
@@ -1525,6 +1877,53 @@ reaching 91 GFlops.</p>
 </div>
 </div>
 </div>
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+</div>
+<div id="nav-tabpanel-5-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-Fortran">
+<p>As k is incremented in the innermost loop, elements of A are being
+brought into cache efficiently since they are stored in contiguous
+memory, as we learned from the dot product example. Unfortunately,
+elements of B are not since they will be sparse, separated by N-1
+elements each time. While we already know that we can simply use the
+numpy routine <strong>np.matmult()</strong> to optimize the code, if
+this wasn’t available one thing we’d consider is to transpose the B
+matrix so that it is stored in column-major format before doing the
+matrix multiplication. If you’re up for a challenge, try programming
+this up to see if it improves the performance compared to the original
+Python code.</p>
+<div class="callout-content">
+<p>As k is incremented in the innermost loop, elements of A are being
+brought into cache efficiently since they are stored in contiguous
+memory, as we learned from the dot product example. Unfortunately,
+elements of B are not since they will be sparse, separated by N-1
+elements each time. While we already know that we can simply use the
+numpy routine <strong>np.matmult()</strong> to optimize the code, if
+this wasn’t available one thing we’d consider is to transpose the B
+matrix so that it is stored in column-major format before doing the
+matrix multiplication. If you’re up for a challenge, try programming
+this up to see if it improves the performance compared to the original
+Python code.</p>
+</div>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="advanced-exercise---transpose-b-to-cache-line-optimize-it">Advanced Exercise - Transpose B to cache-line
+optimize it<a class="anchor" aria-label="anchor" href="#advanced-exercise---transpose-b-to-cache-line-optimize-it"></a>
+</h3>
+<div class="callout-content">
+<p>As k is incremented in the innermost loop, elements of A are being
+brought into cache efficiently since they are stored in contiguous
+memory, as we learned from the dot product example. Unfortunately,
+elements of B are not since they will be sparse, separated by N-1
+elements each time. While we already know that we can simply use the
+numpy routine <strong>np.matmult()</strong> to optimize the code, if
+this wasn’t available one thing we’d consider is to transpose the B
+matrix so that it is stored in column-major format before doing the
+matrix multiplication. If you’re up for a challenge, try programming
+this up to see if it improves the performance compared to the original
+Python code.</p>
+</div>
+</div>
 <div id="advanced-exercise---transpose-b-to-cache-line-optimize-it" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1547,12 +1946,11 @@ Python code.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
-  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
-</button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<p>There are a great many levels of optimization that can be done to the
+matrix multiplication algorithm. Transposing B should improve the
+performance some. For a more complete overview of what is done in the
+<strong>np.matmult()</strong> algorithm and others like it, follow the
+link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a></p>
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
@@ -1560,6 +1958,59 @@ performance some. For a more complete overview of what is done in the
 <strong>np.matmult()</strong> algorithm and others like it, follow the
 link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a></p>
 </div>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>There are a great many levels of optimization that can be done to the
+matrix multiplication algorithm. Transposing B should improve the
+performance some. For a more complete overview of what is done in the
+<strong>np.matmult()</strong> algorithm and others like it, follow the
+link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a></p>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>There are a great many levels of optimization that can be done to the
+matrix multiplication algorithm. Transposing B should improve the
+performance some. For a more complete overview of what is done in the
+<strong>np.matmult()</strong> algorithm and others like it, follow the
+link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a></p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<p>There are a great many levels of optimization that can be done to the
+matrix multiplication algorithm. Transposing B should improve the
+performance some. For a more complete overview of what is done in the
+<strong>np.matmult()</strong> algorithm and others like it, follow the
+link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="nav-tabpanel-5-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-Matlab">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-5-Python" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-Python">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-5-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-R">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-5-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-C">
+<p>Not implemented yet.</p>
 </div>
 </div>
 </div>
@@ -1957,7 +2408,7 @@ programs.</li>
 </div>
 </section></section><section id="aio-multi-threaded"><p>Content from <a href="multi-threaded.html">Multi-Threaded Programs</a></p>
 <hr>
-<p>Last updated on 2024-07-18 |
+<p>Last updated on 2024-07-21 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/multi-threaded.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -1983,7 +2434,7 @@ programs.</li>
 <h3 class="card-title">Objectives</h3>
 <ul>
 <li>Learn about multi-threaded computing and how to use it.</li>
-<li>What are the strengths and limitations of this approach?</li>
+<li>Understand the strengths and limitations of this approach.</li>
 </ul>
 </div>
 </div>
@@ -2063,6 +2514,36 @@ of doing it more explicitly, so in our code we need to create a shared
 array of partial sums and manually sum them together at the end. This is
 just as efficient computationally, it just takes a little extra coding
 but is more explicit.</p>
+<div class="tabs">
+<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-1-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-R" type="button" role="tab" aria-controls="nav-tabpanel-1-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-C" type="button" role="tab" aria-controls="nav-tabpanel-1-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-1-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-1-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-1" class="tab-content">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2112,6 +2593,21 @@ but is more explicit.</p>
 <span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'dot product = '</span>, d_prod, <span class="st">'took '</span>, t_elapsed, <span class="st">' seconds'</span> )<span class="op">;</span></span>
 <span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">1.0e-9</span> <span class="op">/</span> t_elapsed, <span class="st">' Gflops (billion floating-point operations per second)'</span>)</span>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<p>Not implemented yet.</p>
+</div>
+</div>
 </div>
 <p>So parallelizing this program really only requires us to change
 around 11 lines of code, and from that we get the benefit of being able
@@ -2214,7 +2710,7 @@ tutorial</a></li>
 </ul>
 </div></section><section id="aio-message-passing"><p>Content from <a href="message-passing.html">Message-Passing Programs</a></p>
 <hr>
-<p>Last updated on 2024-07-16 |
+<p>Last updated on 2024-07-21 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/message-passing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -2240,7 +2736,7 @@ tutorial</a></li>
 <h3 class="card-title">Objectives</h3>
 <ul>
 <li>Learn about message-passing in distributed-memory computing.</li>
-<li>What are the strengths and limitations of this approach?</li>
+<li>Understand the strengths and limitations of this approach.</li>
 </ul>
 </div>
 </div>
@@ -2278,9 +2774,63 @@ running. The jobs will handshake then decide which part of the data each
 is responsible for. After all nodes have calculated their partial sums,
 those will be globally summed across all 8 tasks using the network if
 needed then the program with rank 1 will print out the results.</p>
+<div class="tabs">
+<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-1-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-R" type="button" role="tab" aria-controls="nav-tabpanel-1-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-C" type="button" role="tab" aria-controls="nav-tabpanel-1-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-1-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-1-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-1" class="tab-content">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <figure><img src="../fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
-</figure><p>In parallel computing, the programmer must decide how to divide the
+</figure>
+</div>
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<figure><img src="../fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+product on two computers</div>
+</figure>
+</div>
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<figure><img src="../fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+product on two computers</div>
+</figure>
+</div>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<figure><img src="../fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+product on two computers</div>
+</figure>
+</div>
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<figure><img src="../fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+product on two computers</div>
+</figure>
+</div>
+</div>
+</div>
+<p>In parallel computing, the programmer must decide how to divide the
 data between the processes. In this case, we could have just as easily
 decided that rank 0 is responsible for the first 1/8th of the elements,
 rank 1 for the next 1/8th, etc. If we were reading in the data and
@@ -2338,6 +2888,36 @@ responsible for. Then all ranks must participate in a
 end that we only have rank 0 print its results. If we didn’t protect the
 print statements like this, we would get nranks copies of each print
 statement.</p>
+<div class="tabs">
+<nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-2-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-R" type="button" role="tab" aria-controls="nav-tabpanel-2-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-C" type="button" role="tab" aria-controls="nav-tabpanel-2-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-2-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-2-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-2" class="tab-content">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2389,6 +2969,21 @@ statement.</p>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>   <span class="bu">print</span>(<span class="st">'dot product = '</span>, d_prod, <span class="st">'took '</span>, t_elapsed, <span class="st">' seconds on '</span>, nranks, <span class="st">' ranks'</span> )<span class="op">;</span></span>
 <span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>   <span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">1.0e-9</span> <span class="op">/</span> t_elapsed, <span class="st">' Gflops (billion floating-point operations per second)'</span>)</span>
 <span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>   <span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+</div>
 </div>
 <p>We see from all this that parallelizing a program using
 message-passing requires more work. This is especially true in more
@@ -2457,7 +3052,7 @@ core test, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -3022,7 +3617,7 @@ command <strong>make all_fortran</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Each computer system may be set up differently with regard to what
 compilers are available and how they need to be accessed. You may need
@@ -3761,7 +4356,7 @@ function. Also compare these numbers to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
 optimized built-in matrix multiplication function. Be aware that the
@@ -3795,7 +4390,7 @@ rows.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>While rbind() is convenient and works well for small data frames, the
 time to add rows begins to increase exponentially for data frames around
@@ -3826,7 +4421,7 @@ rows and compare to the rbind() results.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>For 1,000 rows I measured 0.12 seconds for a data table set()
 compared to 5.4 seconds for a data table assignment and 1.1 second for a
@@ -3863,7 +4458,7 @@ and 1,000,000 rows.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>For 10,000 rows I saw similar results for each function, but for
 100,000 rows <strong>fread()</strong> was 10 times faster than
@@ -3896,7 +4491,7 @@ program.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>I would love to have a pdbMPI-based matrix multiply code available
 for people to look at and test if anyone finds one.</p>
@@ -4196,7 +4791,7 @@ matrix size of 1000 and compare to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>For the 1000x1000 matrices, I measure 5 seconds for the serial code,
 0.7 seconds for the built-in matrix multiply that uses low level
@@ -4229,7 +4824,7 @@ an array size of 100,000,000 and compare to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>I measure serial performance at 0.5 seconds with the built in
 optimized routine at 0.2 seconds on 8 cores for a modest speedup. The
@@ -4265,7 +4860,7 @@ environments.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>If you do develop code for this, let us know so we can consider
 including your work for others to see.</p>
@@ -4414,7 +5009,7 @@ script to choose an input filename from a list using
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>This will run 3 individual jobs that will show the
 <strong>$SLURM_ARRAY_TASK_ID</strong> to be 1, 3, or 5.</p>
@@ -4617,7 +5212,7 @@ submit the job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The goal is just to start getting you comfortable with compiling and
 submitting GPU jobs. Use <strong>nvcc hello_gpu.cu -o
@@ -5170,8 +5765,8 @@ Azure</a></p></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/aio.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/aio.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-20",
-  "datePublished": "2024-07-20"
+  "dateModified": "2024-07-21",
+  "datePublished": "2024-07-21"
 }
 
   </script><script>

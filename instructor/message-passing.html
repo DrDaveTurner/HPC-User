@@ -416,7 +416,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Message-Passing Programs</h1>
-        <p>Last updated on 2024-07-16 |
+        <p>Last updated on 2024-07-21 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/message-passing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -446,7 +446,7 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul><li>Learn about message-passing in distributed-memory computing.</li>
-<li>What are the strengths and limitations of this approach?</li>
+<li>Understand the strengths and limitations of this approach.</li>
 </ul></div>
 </div>
 </div>
@@ -481,9 +481,58 @@ running. The jobs will handshake then decide which part of the data each
 is responsible for. After all nodes have calculated their partial sums,
 those will be globally summed across all 8 tasks using the network if
 needed then the program with rank 1 will print out the results.</p>
+<div class="tabs">
+<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-1-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-R" type="button" role="tab" aria-controls="nav-tabpanel-1-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-C" type="button" role="tab" aria-controls="nav-tabpanel-1-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-1-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-1-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-1" class="tab-content">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <figure><img src="../fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
-</figure><p>In parallel computing, the programmer must decide how to divide the
+</figure></div>
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<figure><img src="../fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+product on two computers</div>
+</figure></div>
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<figure><img src="../fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+product on two computers</div>
+</figure></div>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<figure><img src="../fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+product on two computers</div>
+</figure></div>
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<figure><img src="../fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
+product on two computers</div>
+</figure></div>
+</div>
+</div>
+<p>In parallel computing, the programmer must decide how to divide the
 data between the processes. In this case, we could have just as easily
 decided that rank 0 is responsible for the first 1/8th of the elements,
 rank 1 for the next 1/8th, etc. If we were reading in the data and
@@ -540,6 +589,36 @@ responsible for. Then all ranks must participate in a
 end that we only have rank 0 print its results. If we didn’t protect the
 print statements like this, we would get nranks copies of each print
 statement.</p>
+<div class="tabs">
+<nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-2-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-R" type="button" role="tab" aria-controls="nav-tabpanel-2-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-C" type="button" role="tab" aria-controls="nav-tabpanel-2-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-2-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-2-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-2" class="tab-content">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -591,6 +670,21 @@ statement.</p>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>   <span class="bu">print</span>(<span class="st">'dot product = '</span>, d_prod, <span class="st">'took '</span>, t_elapsed, <span class="st">' seconds on '</span>, nranks, <span class="st">' ranks'</span> )<span class="op">;</span></span>
 <span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>   <span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">1.0e-9</span> <span class="op">/</span> t_elapsed, <span class="st">' Gflops (billion floating-point operations per second)'</span>)</span>
 <span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>   <span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+</div>
 </div>
 <p>We see from all this that parallelizing a program using
 message-passing requires more work. This is especially true in more
@@ -658,7 +752,7 @@ core test, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -760,8 +854,8 @@ manpages</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/message-passing.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/message-passing.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-16",
-  "datePublished": "2024-07-20"
+  "dateModified": "2024-07-21",
+  "datePublished": "2024-07-21"
 }
 
   </script><script>

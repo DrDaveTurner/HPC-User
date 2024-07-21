@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Profiling Code for Performance</h1>
-        <p>Last updated on 2024-07-20 |
+        <p>Last updated on 2024-07-21 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/profiling-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -625,57 +625,59 @@ an array out to a file.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> time</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># timing_example.py - Example code showing how to put timing around an IO loop.</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span>
 <span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>fd <span class="op">=</span> <span class="bu">open</span>( <span class="st">"array.out"</span>, <span class="st">"w"</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>   fd.write( <span class="bu">str</span>(array[i]) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> )</span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>fd.close()</span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>fd <span class="op">=</span> <span class="bu">open</span>( <span class="st">"array.out"</span>, <span class="st">"w"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>   fd.write( <span class="bu">str</span>(array[i]) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> )</span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>fd.close()</span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C/C++" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C/C++">
+<div id="nav-tabpanel-1-C/C++" class="tab-pane" aria-labelledby="nav-tab-1-C/C++" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
 </div>
-<p>Try running this yourself by copying it into a timing.py file. When I
-run this, I see that the loop takes about 30 microseconds on my computer
-and the output file takes 10 milliseconds. Since both of these are above
-the nanosecond range, we can be confident that the timing routine is
-accurately measuring each.</p>
+<p>Try running this yourself by copying it into a timing_example.py
+file. When I run this, I see that the loop takes about 30 microseconds
+on my computer and the output file takes 10 milliseconds. Since both of
+these are above the nanosecond range, we can be confident that the
+timing routine is accurately measuring each.</p>
 <p>Let’s see what we can learn by playing around with it some more. When
-I run this with <strong>time python timing.py</strong>, I see a real
-time of 100 milliseconds even though the loop time and output time
+I run this with <strong>time python timing_example.py</strong>, I see a
+real time of 100 milliseconds even though the loop time and output time
 combined are only about a half millisecond. The initialization time is
 not measured but shouldn’t be more than the loop time. What all this
 means is that there is some startup time for getting the python program
@@ -683,10 +685,12 @@ running and importing the <strong>time</strong> package, but we may also
 be seeing the lack of accuracy of the external <strong>time</strong>
 function when it comes to measuring things down in the millisecond
 range.</p>
-<p>Now lets change the timing.py program itself. Sometimes we need to
-time a part of something that is in a larger loop, so we need to sum the
-times together. Try changing the timing so that it is inside the
-summation loop instead of outside it to see what happens.</p>
+<p>Now lets change the timing_example.py program itself. Sometimes we
+need to time a part of something that is in a larger loop, so we need to
+sum the times together. Try changing the timing so that it is inside the
+summation loop instead of outside it to see what happens. You can do
+this by uncommenting the timing and printing functions in the
+timing_example.py file.</p>
 <div class="tabs">
 <nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
@@ -716,35 +720,50 @@ summation loop instead of outside it to see what happens.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>t_sum <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>   t0 <span class="op">=</span> time.perf_counter()</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>   t_sum <span class="op">+=</span> time.perf_counter() <span class="op">-</span> t0</span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The sum took "</span>, t_sum, <span class="st">" seconds"</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span></code></pre>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>t_sum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>   t0 <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>   t_sum <span class="op">+=</span> time.perf_counter() <span class="op">-</span> t0</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The sum took "</span>, t_sum, <span class="st">" seconds"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>fd <span class="op">=</span> <span class="bu">open</span>( <span class="st">"array.out"</span>, <span class="st">"w"</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>   fd.write( <span class="bu">str</span>(array[i]) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> )</span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>fd.close()</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C/C++" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C/C++">
+<div id="nav-tabpanel-2-C/C++" class="tab-pane" aria-labelledby="nav-tab-2-C/C++" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -955,8 +974,8 @@ also be able to calculate total memory for simple programs.</li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/profiling-code.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/profiling-code.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-20",
-  "datePublished": "2024-07-20"
+  "dateModified": "2024-07-21",
+  "datePublished": "2024-07-21"
 }
 
   </script><script>

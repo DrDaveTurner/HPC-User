@@ -409,7 +409,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Multi-Threaded Programs</h1>
-        <p>Last updated on 2024-07-18 |
+        <p>Last updated on 2024-07-21 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/multi-threaded.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -437,7 +437,7 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul><li>Learn about multi-threaded computing and how to use it.</li>
-<li>What are the strengths and limitations of this approach?</li>
+<li>Understand the strengths and limitations of this approach.</li>
 </ul></div>
 </div>
 </div>
@@ -515,6 +515,36 @@ of doing it more explicitly, so in our code we need to create a shared
 array of partial sums and manually sum them together at the end. This is
 just as efficient computationally, it just takes a little extra coding
 but is more explicit.</p>
+<div class="tabs">
+<nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-1-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-R" type="button" role="tab" aria-controls="nav-tabpanel-1-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-C" type="button" role="tab" aria-controls="nav-tabpanel-1-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-1-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-1-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-1-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-1-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-1" class="tab-content">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -564,6 +594,21 @@ but is more explicit.</p>
 <span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'dot product = '</span>, d_prod, <span class="st">'took '</span>, t_elapsed, <span class="st">' seconds'</span> )<span class="op">;</span></span>
 <span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">1.0e-9</span> <span class="op">/</span> t_elapsed, <span class="st">' Gflops (billion floating-point operations per second)'</span>)</span>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<p>Not implemented yet.</p>
+</div>
+</div>
 </div>
 <p>So parallelizing this program really only requires us to change
 around 11 lines of code, and from that we get the benefit of being able
@@ -720,8 +765,8 @@ tutorial</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/multi-threaded.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/multi-threaded.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-18",
-  "datePublished": "2024-07-20"
+  "dateModified": "2024-07-21",
+  "datePublished": "2024-07-21"
 }
 
   </script><script>
