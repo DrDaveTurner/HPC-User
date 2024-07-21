@@ -260,7 +260,7 @@ Good news is that in HPC, often the hard work is already done for you,
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Measuring Cache Line Effects
+**Measuring Cache Line Effects**
 
 Run the dot_product.py code several times to get an average 
 execution time for a dot product between two vectors of 
@@ -303,7 +303,7 @@ code will run faster.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Time Different Matrix Multiplication Methods
+**Time Different Matrix Multiplication Methods**
 
 There are 2 separate codes supplied to perform the same matrix multiplication
 for a given matrix size, matmult.py is raw Python code and matmult_numpy.py
@@ -355,7 +355,7 @@ and the optimized CBLAS DGEMM routine reaching 91 GFlops.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Advanced Exercise - Transpose B to cache-line optimize it
+**Advanced Exercise - Transpose B to cache-line optimize it**
 
 As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
