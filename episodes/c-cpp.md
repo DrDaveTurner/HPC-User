@@ -180,6 +180,9 @@ message-passing version using
 and running some tests with **mpirun -np 4 dot_product_c_mpi**
 for example.
 
+If you want more practice you may try running the matmult_c.c
+code and the optimized version matmult_cblas.c.
+
 :::::::::::::::::: solution
 
 On a modern Intel system the raw scalar code ran in 0.14 seconds
@@ -196,6 +199,7 @@ How do your results compare to these?
 :::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 - Learn about the characteristics of C/C++

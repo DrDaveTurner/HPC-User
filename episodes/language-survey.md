@@ -97,8 +97,6 @@ and alternative approaches presented.
 * C/C++ and Fortran are compiled languages for high-performance
 * Python, R, and Matlab have some optimized libraries for performance
 
-* capability summary
-
 ::::::::::::::::::::::::::::::::::::: keypoints
 - Performance is just one criteria we need to understand when choosing
    the best language for a given project.
