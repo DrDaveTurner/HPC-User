@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parallel Computing Concepts</h1>
-        <p>Last updated on 2024-07-16 |
+        <p>Last updated on 2024-07-24 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/parallel-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -702,11 +702,11 @@ then choose the fastest file server available.</p>
 <h3 class="callout-title">Scaling Study of the Distributed-Memory Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-distributed-memory-dot-product-code"></a>
 </h3>
 <div class="callout-content">
-<p>Measure the entire runtime for the dot_product_mpi.py code for 1, 4,
-8, and 16 cores if you are on an HPC system with at least 2 compute
-nodes. You can try different combinations of nodes and cores for each if
-you would like to see the effects of the network (for the 4 cores, try 2
-nodes 2 cores vs 4 nodes 1 core).</p>
+<p>Measure the entire runtime for the dot_product_message_passing.py
+code for 1, 4, 8, and 16 cores if you are on an HPC system with at least
+2 compute nodes. You can try different combinations of nodes and cores
+for each if you would like to see the effects of the network (for the 4
+cores, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 </div>
 </div>
 </div>
@@ -715,7 +715,7 @@ nodes 2 cores vs 4 nodes 1 core).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -805,8 +805,8 @@ programs.</li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/parallel-concepts.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/parallel-concepts.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-16",
-  "datePublished": "2024-07-23"
+  "dateModified": "2024-07-24",
+  "datePublished": "2024-07-24"
 }
 
   </script><script>

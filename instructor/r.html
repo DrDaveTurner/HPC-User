@@ -419,7 +419,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The R Language</h1>
-        <p>Last updated on 2024-07-16 |
+        <p>Last updated on 2024-07-24 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/r.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -672,9 +672,10 @@ implementation.</p>
 <h3 class="callout-title">Compare raw and optimized performance of matmult.R<a class="anchor" aria-label="anchor" href="#compare-raw-and-optimized-performance-of-matmult.r"></a>
 </h3>
 <div class="callout-content">
-<p>Run matmult.R for matrix sizes 100 and 1000 to compare the
-performance of a raw loop to the built-in matrix multiplication
-function. Also compare these numbers to other languages.</p>
+<p>Run matmult_loops.R, matmult_foreach.R, and matmult_builtin.R for
+matrix sizes 100 and 1000 to compare the performance of a raw loop to
+the built-in matrix multiplication function. Also compare these numbers
+to other languages.</p>
 </div>
 </div>
 </div>
@@ -699,16 +700,17 @@ Python is a little faster.</p>
 </div>
 </div>
 </div>
-<div id="profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases." class="callout challenge">
+<div id="test-the-scaling-of-the-rbind-function" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases." class="callout-inner">
-<h3 class="callout-title">Profile the run time for using rbind() as the number of rows in the data frame increases.<a class="anchor" aria-label="anchor" href="#profile-the-run-time-for-using-rbind-as-the-number-of-rows-in-the-data-frame-increases."></a>
+<div id="test-the-scaling-of-the-rbind-function" class="callout-inner">
+<h3 class="callout-title">Test the scaling of the rbind() function<a class="anchor" aria-label="anchor" href="#test-the-scaling-of-the-rbind-function"></a>
 </h3>
 <div class="callout-content">
-<p>Time runs of <strong>rbind.R</strong> for 10, 100, 1000, and 10000
-rows.</p>
+<p>Profile the run time for using rbind() as the number of rows in the
+data frame increases. Time runs of <strong>rbind.R</strong> for 10, 100,
+1000, and 10000 rows.</p>
 </div>
 </div>
 </div>
@@ -764,19 +766,19 @@ you have to use data tables and the set() function.</p>
 </div>
 </div>
 </div>
-<div id="test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv." class="callout challenge">
+<div id="test-the-io-performance-in-r." class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv." class="callout-inner">
-<h3 class="callout-title">Test the <strong>fread.R</strong> code to see
-the speedup of the <strong>fread()</strong> function from the optimized
-<strong>data.table</strong> package compared to the standard
-<strong>read.csv()</strong>.<a class="anchor" aria-label="anchor" href="#test-the-fread.r-code-to-see-the-speedup-of-the-fread-function-from-the-optimized-data.table-package-compared-to-the-standard-read.csv."></a>
+<div id="test-the-io-performance-in-r." class="callout-inner">
+<h3 class="callout-title">Test the IO performance in R.<a class="anchor" aria-label="anchor" href="#test-the-io-performance-in-r."></a>
 </h3>
 <div class="callout-content">
-<p>Time runs of <strong>fread.R</strong> for 10,000 rows, 100,000 rows,
-and 1,000,000 rows.</p>
+<p>Test the <strong>fread.R</strong> code to see the speedup of the
+<strong>fread()</strong> function from the optimized
+<strong>data.table</strong> package compared to the standard
+<strong>read.csv()</strong>. Time runs of <strong>fread.R</strong> for
+10,000 rows, 100,000 rows, and 1,000,000 rows.</p>
 </div>
 </div>
 </div>
@@ -937,8 +939,8 @@ package</a></p></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/r.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/r.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-16",
-  "datePublished": "2024-07-23"
+  "dateModified": "2024-07-24",
+  "datePublished": "2024-07-24"
 }
 
   </script><script>
