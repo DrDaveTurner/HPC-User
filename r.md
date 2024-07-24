@@ -270,7 +270,8 @@ of the resulting parallel implementation.
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Compare raw and optimized performance of matmult.R
-Run matmult.R for matrix sizes 100 and 1000 to compare
+Run matmult_loops.R, matmult_foreach.R, and matmult_builtin.R 
+for matrix sizes 100 and 1000 to compare
 the performance of a raw loop to the built-in matrix
 multiplication function.  Also compare these numbers
 to other languages.
@@ -294,7 +295,9 @@ optimized code, but Python is a little faster.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Profile the run time for using rbind() as the number of rows in the data frame increases.
+## Test the scaling of the rbind() function
+
+Profile the run time for using rbind() as the number of rows in the data frame increases.
 Time runs of **rbind.R** for 10, 100, 1000, and 10000 rows.
 
 :::::::::::::::::: solution
@@ -338,7 +341,9 @@ set() function.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Test the **fread.R** code to see the speedup of the **fread()** function from the optimized **data.table** package compared to the standard **read.csv()**.
+## Test the IO performance in R.
+
+Test the **fread.R** code to see the speedup of the **fread()** function from the optimized **data.table** package compared to the standard **read.csv()**.
 Time runs of **fread.R** for 10,000 rows, 100,000 rows, and 1,000,000 rows.
 
 :::::::::::::::::: solution

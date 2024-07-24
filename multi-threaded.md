@@ -63,7 +63,7 @@ sums all for partial sums into the dot product and prints it out.
 ### The multi-threaded dot product code
 
 Let's go through the multi-threaded version of the dot product code
-dot-product-threaded.py below to illustrate the changes that had to be
+dot_product_threaded.py below to illustrate the changes that had to be
 made to the code to parallelize it.
 We should first note that we need to install the **pymp** package into
 our virtual environment by doing **pip install pymp-pypi**.
@@ -235,7 +235,7 @@ few computations being done in each pass through the loop.
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints
-- Multi-theaded computing is powerful and fairly easy to use but only works on one compute node.
+- Multi-threaded computing is powerful and fairly easy to use but only works on one compute node.
 - Understand key factors that can limit the efficient scaling of multi-threaded programs.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -243,5 +243,4 @@ few computations being done in each pass through the loop.
 
 * [github pymp](https://github.com/classner/pymp)
 * [LLNL OpenMP tutorial](https://hpc-tutorials.llnl.gov/openmp/)
-* [need link for mclapply()]()
 

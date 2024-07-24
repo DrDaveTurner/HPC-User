@@ -303,7 +303,7 @@ available.
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Scaling Study of the Distributed-Memory Dot Product Code
-Measure the entire runtime for the dot_product_mpi.py code
+Measure the entire runtime for the dot_product_message_passing.py code
 for 1, 4, 8, and 16 cores if you are on an HPC system with
 at least 2 compute nodes. 
 You can try different combinations of nodes and cores for
