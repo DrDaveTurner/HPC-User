@@ -5,25 +5,25 @@ exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-- What should I expect to learn from these modules?
+- What should I expect to learn from the HPC User module?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- Understand what to expect out of the HPC User lesson.
+- Set the basis for learning about High-Performance Computing in Science.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ## Overview
 
 In doing computational science it is very common to start a project by
-writing code on a laptop or desktop computer.
+writing code on a personal computer.
 Often as the project proceeds we find that we need more computer resources
-to get all the science project done.
-This may come in the form of needing more processing power to get a job
-done in a reasonable time.
-It may mean needing more memory to be able to run larger calculations.
+to complete the science project.
+This may come in the form of needing more processing power 
+to complete the research in a reasonable time.
+It may also mean needing more memory to be able to run larger calculations.
 Or it may just mean needing to do a very large number of smaller jobs
-that would overwhelm a single computer.
+that would overwhelm a single computer system.
 
 In these cases where we need to seek out more computational resources,
 we also need to start understanding the performance aspects of our code.
@@ -44,13 +44,13 @@ at the conceptual level with practical examples.
 **These examples are currently given in Python but it is intended to
 eventually have the user and instructor choose the language that the examples display
 in to make it more appropriate to teach this to groups primarily 
-interested in R, Matlab, or C/C++ too**.
+interested in R, C/C++, Fortran, or Matlab too**.
 As the lesson proceeds these same concepts will be used in different
 ways and with examples in different computer languages to help drill them in.
 
 The middle third of the lesson is a language survey.
-Even though most scientists may work mainly in a single language,
-it is important for everyone to understand the strengths and
+Even though most scientists may work primarily in a single language,
+it is important to understand the strengths and
 weaknesses of alternative languages as well as their own favorite.
 
 The last sections provide overviews of some more advanced topics
