@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Profiling Code for Performance</h1>
-        <p>Last updated on 2024-07-21 |
+        <p>Last updated on 2024-07-25 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/profiling-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -462,21 +462,21 @@ jobs.</li>
 </div>
 <p>When we talk about the performance of a program, we are always
 interested in how much time it takes to run, but in some cases we also
-need to know how much memory it uses if we’re pushing the limits of our
-computer. Even more than that, we often need to know how much time each
-part of the code takes so that we know where to concentrate our efforts
-as we try to improve the peformance of the program. So we need to be
-able to time the entire run, and also internally the each part of the
-code. For parallel codes, we also need to know how efficiently they
-scale as we increase the number of cores or nodes in order to determine
-what resources to request.</p>
+need to know how much memory the program uses if we are pushing the
+limits of our computer. Even more than that, we often need to know how
+much time each part of the code takes so that we know where to
+concentrate our efforts as we try to improve the overall performance of
+the program. So we need to be able to time the entire run, and also
+internally each part of the code. For parallel codes, we also need to
+know how efficiently they scale as we increase the number of cores or
+compute nodes in order to determine what resources to request.</p>
 <section><h2 class="section-heading" id="timing-a-program-externally">Timing a Program Externally<a class="anchor" aria-label="anchor" href="#timing-a-program-externally"></a>
 <a class="anchor" aria-label="anchor" href="#timing-a-program-externally"></a></h2>
 <hr class="half-width"><p>Linux has a <strong>time</strong> function that can proceed any
 command, so this can be used to time the entire job externally even if
 we don’t have access to the source code. This can be used to time a
-short test run in order to estimate the runtime needed for a complete
-run. When we get to talking about parallel computing, or using multiple
+short test run in order to estimate the runtime needed for the complete
+job. When we get to talking about parallel computing, or using multiple
 compute cores to run a single job, the <strong>time</strong> function
 will prove useful for getting the execution time for a job as it depends
 on the number of cores. For example, it is common to test the same job
@@ -502,14 +502,14 @@ sys	0m0.000s</code></pre>
 </div>
 <p>The first thing you see is the output of the <strong>pwd</strong>
 command, which in this case is the directory
-<strong>/Users/daveturner</strong>. Then the <strong>time</strong>
-function prints its output, always as real time, which is what we want,
-then user and system time which we can ignore. This shows that the
-<strong>pwd</strong> command is faster than the clock can measure. This
-is important to note that the <strong>time</strong> command isn’t
-accurate to less than 1 millisecond, so in general we should always make
-sure we’re measuring execution times that are greater than a second in
-general.</p>
+<strong>/Users/daveturner</strong> on my Mac. Then the
+<strong>time</strong> function prints its output, always as real time,
+which is what we want, then user and system time which we can ignore.
+This shows that the <strong>pwd</strong> command is faster than the
+clock can measure. This is important to note that the
+<strong>time</strong> command isn’t accurate to less than 1 millisecond,
+so in general we should always make sure we are measuring execution
+times that are greater than a second in general.</p>
 <p>Below is another example where this time we are timing the
 <strong>ls</strong> function which will list the files in the current
 directory.</p>
@@ -566,7 +566,7 @@ it out on a completely isolated computer. If you are on an HPC system
 with a batch queue, you can always request an entire compute node and
 then just use part of the node you requested, even a single compute
 core. If this is not possible, then try to get the job as isolated as
-possible. Submitting a single-core request to a job queue is one example
+you can. Submitting a single-core request to a job queue is one example
 of this, where you at least are sure that your job is the only one on
 the cores that you requested. Your job will still be sharing the memory
 bus and L3 cache with other jobs. Jobs usually don’t effect each other
@@ -584,13 +584,13 @@ IO to the local disk (usually /tmp).</p>
 <hr class="half-width"><p>Every computer language has multiple <strong>clock()</strong>
 functions that can be used to time sections of the code. The syntax is
 different in each language, but they all work about the same, and there
-is always a very high precision function that is accurate to down
+is always a very high precision function that is accurate down to
 somewhere in the nanosecond range, though I typically don’t trust these
 for measuring less than a microsecond interval. Each of these clock
 functions returns the current time, so to measure the time in an
-interval you need to store the start time, do some calculations, then
-get the end time and subtract the two to get the time used for that part
-of the code.</p>
+interval you need to store the start time, do some calculations or IO,
+then get the end time and subtract the two to get the time used for that
+part of the code.</p>
 <p>In Python since version 3.3, the best timer is in the
 <strong>time</strong> package. To use it, you must start by importing
 the package. Below is an example of using the clock function to measure
@@ -670,11 +670,14 @@ an array out to a file.</p>
 </div>
 </div>
 </div>
-<p>Try running this yourself by copying it into a timing_example.py
-file. When I run this, I see that the loop takes about 30 microseconds
-on my computer and the output file takes 10 milliseconds. Since both of
-these are above the nanosecond range, we can be confident that the
-timing routine is accurately measuring each.</p>
+<p>Try running the <strong>timing_example.py</strong> code yourself. It
+is one of the codes you should have downloaded and unzipped in your HPC
+system, and should be in the <strong>code</strong> directory. You should
+also have the Python environment set up and have done the <strong>pip
+install time</strong>. When I run this, I see that the loop takes about
+30 microseconds on my computer and the output file takes 10
+milliseconds. Since both of these are above the nanosecond range, we can
+be confident that the timing routine is accurately measuring each.</p>
 <p>Let’s see what we can learn by playing around with it some more. When
 I run this with <strong>time python timing_example.py</strong>, I see a
 real time of 100 milliseconds even though the loop time and output time
@@ -685,12 +688,12 @@ running and importing the <strong>time</strong> package, but we may also
 be seeing the lack of accuracy of the external <strong>time</strong>
 function when it comes to measuring things down in the millisecond
 range.</p>
-<p>Now lets change the timing_example.py program itself. Sometimes we
-need to time a part of something that is in a larger loop, so we need to
-sum the times together. Try changing the timing so that it is inside the
-summation loop instead of outside it to see what happens. You can do
-this by uncommenting the timing and printing functions in the
-timing_example.py file.</p>
+<p>Now lets change the <strong>timing_example.py</strong> program
+itself. Sometimes we need to time a part of something that is in a
+larger loop, so we need to sum the times together. Try changing the
+timing so that it is inside the summation loop instead of outside it to
+see what happens. You can do this by uncommenting the timing and
+printing functions in the <strong>timing_example.py</strong> file.</p>
 <div class="tabs">
 <nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
@@ -768,17 +771,18 @@ timing_example.py file.</p>
 </div>
 </div>
 </div>
-<p>In my computer, the t_sum time is only a bit larger than the t_loop
-time from before, but remember that this doesn’t count the loop
-overhead. If we look at the t_loop time instead, in my computer it is
-more than double what it was before. When the clock routine is measuring
-very small intervals each time, it can be intrusive in that it distorts
-the measurement by increasing the runtime of the entire code. It isn’t
+<p>In my computer, the <strong>t_sum</strong> time is only a bit larger
+than the <strong>t_loop</strong> time from before, but remember that
+this doesn’t count the loop overhead. If we look at the
+<strong>t_loop</strong> time instead, in my computer it is more than
+double what it was before. When the clock routine is measuring very
+small intervals each time, it can be intrusive in that it distorts the
+measurement by increasing the runtime of the entire code. It isn’t
 surprising that this is intrusive since we are measuring the time it
 takes to retrieve a single array element and do one addition. The code
 is doing a subtraction and addition itself to calculate the time
-interval itself, so it is probably more surprising that doing the timing
-in this way is not more intrusive.</p>
+interval, so it is probably more surprising that doing the timing in
+this way is not more intrusive.</p>
 </section><section><h2 class="section-heading" id="what-to-time">What to Time<a class="anchor" aria-label="anchor" href="#what-to-time"></a>
 <a class="anchor" aria-label="anchor" href="#what-to-time"></a></h2>
 <hr class="half-width"><p>The goal is to fully profile your code so that you understand where
@@ -800,14 +804,17 @@ processing cores. For this we will do what is called a scaling study
 where we measure the performance of a typical job using different number
 of processing cores. We may for example run on 1 core, then 4, 8, 16,
 and 32 cores to see how efficiently the job scales as we apply more
-processing cores. This is done so that we can understand how many cores
-we can efficiently apply to that job. Do keep in mind that scaling is
-very dependent on the problem size. Larger problems will typically scale
-better to more cores, while smaller problems may be limited to only a
-few cores. The goal is to determine how many cores we can use with
-reasonable efficiency. The same kind of scaling study can also be used
-for multi-node jobs, where we would test the performance on 1 node, 2,
-4, and 8 nodes for example.</p>
+processing power. This is done so that we can understand how many cores
+we can efficiently apply to that job. If we get a 7 times speedup on 8
+cores compared to 1, that less than ideal but still very good. If we
+then see a 9 times speedup using 16 cores, then we’d probably want to
+stick with using just 8 cores on that particular job. Do keep in mind
+that scaling is very dependent on the problem size. Larger problems will
+typically scale better to more cores, while smaller problems may be
+limited to only a few cores. The goal is to determine how many cores we
+can use with reasonable efficiency. The same kind of scaling study can
+also be used for multi-node jobs, where we would test the performance on
+1 node, 2, 4, and 8 nodes for example.</p>
 <p>Problem size is one factor that can affect the scaling efficiency.
 For multi-node jobs, choosing the fastest networking options, and
 ensuring that all compute nodes are on the same network switch can both
@@ -829,7 +836,7 @@ short test run to measure the memory use before submitting the full job.
 This is especially true if you are submitting lots of similar jobs. If
 your job goes over the requested memory, it is most often killed, so you
 want to over estimate the request somewhat, but if you request too much
-it can take much longer to get your job scheduled and result in
+it can take a lot longer to get your job scheduled and result in
 inefficient use of the resources as you will be locking up memory that
 you are not using.</p>
 <p>Measuring the memory usage is more difficult than it should be on
@@ -905,7 +912,8 @@ use over time can be very helpful.</p>
 </h3>
 <div class="callout-content">
 <ul><li>The <strong>time</strong> function can always be used externally to
-measure performance.</li>
+measure performance but has limitted accuracy of around 1
+millisecond.</li>
 <li>Internally there are precise clock routines that can be used to
 measure the performance of each part of a code. These are different for
 each programming language, but the use is always the same.</li>
@@ -974,8 +982,8 @@ also be able to calculate total memory for simple programs.</li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/profiling-code.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/profiling-code.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-21",
-  "datePublished": "2024-07-24"
+  "dateModified": "2024-07-25",
+  "datePublished": "2024-07-25"
 }
 
   </script><script>

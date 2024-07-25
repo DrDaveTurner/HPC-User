@@ -409,7 +409,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The Python Language</h1>
-        <p>Last updated on 2024-07-16 |
+        <p>Last updated on 2024-07-25 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -551,11 +551,10 @@ environment is active.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/virtualenvs</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> cd ~/virtualenvs</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">$</span> virtualenv env-py-3.7.4</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">$</span> source ~/virtualenvs/env-py-3.7.4/bin/activate</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span>              the prompt is now prefaced with environment name</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/virtualenvs</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> ~/virtualenvs</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ve3nv <span class="at">--system-site-packages</span> python-hpc-user</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="bu">source</span> ~/virtualenvs/python-hpc-user/bin/activate</span></code></pre>
 </div>
 <p>Once activated the prompt will change to show that you are working in
 the <strong>env-py-3.7.4</strong> environment. You can install any
@@ -564,9 +563,9 @@ when you are done.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> pip install numpy scipy</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> python python_code.py</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> deactivate</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user$</span> pip install numpy scipy</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user</span><span class="kw">)</span><span class="ex">$</span> python python_code.py</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user</span><span class="kw">)</span><span class="ex">$</span> deactivate</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ex">$</span></span></code></pre>
 </div>
 </div>
@@ -649,7 +648,7 @@ compare with versions written in other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>While the syntax is different, the code is basically the same in each
 language. Performance is much slower for raw Python code than the
@@ -680,7 +679,7 @@ difference the highly-tuned library function makes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>If you have already run the optimized C version, you may notice that
 the compiled code still beats the optimized <strong>NumPy</strong>
@@ -713,7 +712,7 @@ second time takes advantage of the cached compilation code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Notice that in this code we needed to rewrite the computationally
 intensive loops into functions. This does not take much effort but does
@@ -761,7 +760,7 @@ comparing it to optimized functions in <strong>NumPy</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>If you do this please contribute your code and timings.</p>
 </div>
@@ -788,7 +787,7 @@ active virtual environment meaning that there is no
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Once compiled you should be able to run this with a command like:
 <strong>./matmult.pyc 100</strong>.</p>
@@ -885,8 +884,8 @@ documentations</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/python.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/python.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-16",
-  "datePublished": "2024-07-24"
+  "dateModified": "2024-07-25",
+  "datePublished": "2024-07-25"
 }
 
   </script><script>

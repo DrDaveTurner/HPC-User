@@ -488,7 +488,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Introduction</a></p>
 <hr>
-<p>Last updated on 2024-07-20 |
+<p>Last updated on 2024-07-25 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -502,7 +502,7 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>What should I expect to learn from these modules?</li>
+<li>What should I expect to learn from the HPC User module?</li>
 </ul>
 </div>
 </div>
@@ -512,7 +512,8 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Understand what to expect out of the HPC User lesson.</li>
+<li>Set the basis for learning about High-Performance Computing in
+Science.</li>
 </ul>
 </div>
 </div>
@@ -524,13 +525,13 @@
 </h2>
 <hr class="half-width">
 <p>In doing computational science it is very common to start a project
-by writing code on a laptop or desktop computer. Often as the project
-proceeds we find that we need more computer resources to get all the
-science project done. This may come in the form of needing more
-processing power to get a job done in a reasonable time. It may mean
-needing more memory to be able to run larger calculations. Or it may
-just mean needing to do a very large number of smaller jobs that would
-overwhelm a single computer.</p>
+by writing code on a personal computer. Often as the project proceeds we
+find that we need more computer resources to complete the science
+project. This may come in the form of needing more processing power to
+complete the research in a reasonable time. It may also mean needing
+more memory to be able to run larger calculations. Or it may just mean
+needing to do a very large number of smaller jobs that would overwhelm a
+single computer system.</p>
 <p>In these cases where we need to seek out more computational
 resources, we also need to start understanding the performance aspects
 of our code. More power is not always the answer, sometimes writing more
@@ -550,13 +551,13 @@ at the conceptual level with practical examples. <strong>These examples
 are currently given in Python but it is intended to eventually have the
 user and instructor choose the language that the examples display in to
 make it more appropriate to teach this to groups primarily interested in
-R, Matlab, or C/C++ too</strong>. As the lesson proceeds these same
-concepts will be used in different ways and with examples in different
-computer languages to help drill them in.</p>
+R, C/C++, Fortran, or Matlab too</strong>. As the lesson proceeds these
+same concepts will be used in different ways and with examples in
+different computer languages to help drill them in.</p>
 <p>The middle third of the lesson is a language survey. Even though most
-scientists may work mainly in a single language, it is important for
-everyone to understand the strengths and weaknesses of alternative
-languages as well as their own favorite.</p>
+scientists may work primarily in a single language, it is important to
+understand the strengths and weaknesses of alternative languages as well
+as their own favorite.</p>
 <p>The last sections provide overviews of some more advanced topics like
 working with GPUs to accelerate scientific codes. It may be that some of
 this will be skipped by your instructor due to time limitations but it
@@ -584,7 +585,7 @@ performance in programming.</li>
 </div>
 </section></section><section id="aio-profiling-code"><p>Content from <a href="profiling-code.html">Profiling Code for Performance</a></p>
 <hr>
-<p>Last updated on 2024-07-21 |
+<p>Last updated on 2024-07-25 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/profiling-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -622,14 +623,14 @@ jobs.</li>
 </div>
 <p>When we talk about the performance of a program, we are always
 interested in how much time it takes to run, but in some cases we also
-need to know how much memory it uses if we’re pushing the limits of our
-computer. Even more than that, we often need to know how much time each
-part of the code takes so that we know where to concentrate our efforts
-as we try to improve the peformance of the program. So we need to be
-able to time the entire run, and also internally the each part of the
-code. For parallel codes, we also need to know how efficiently they
-scale as we increase the number of cores or nodes in order to determine
-what resources to request.</p>
+need to know how much memory the program uses if we are pushing the
+limits of our computer. Even more than that, we often need to know how
+much time each part of the code takes so that we know where to
+concentrate our efforts as we try to improve the overall performance of
+the program. So we need to be able to time the entire run, and also
+internally each part of the code. For parallel codes, we also need to
+know how efficiently they scale as we increase the number of cores or
+compute nodes in order to determine what resources to request.</p>
 <section><h2 class="section-heading" id="timing-a-program-externally">Timing a Program Externally<a class="anchor" aria-label="anchor" href="#timing-a-program-externally"></a>
 <a class="anchor" aria-label="anchor" href="#timing-a-program-externally"></a>
 </h2>
@@ -637,8 +638,8 @@ what resources to request.</p>
 <p>Linux has a <strong>time</strong> function that can proceed any
 command, so this can be used to time the entire job externally even if
 we don’t have access to the source code. This can be used to time a
-short test run in order to estimate the runtime needed for a complete
-run. When we get to talking about parallel computing, or using multiple
+short test run in order to estimate the runtime needed for the complete
+job. When we get to talking about parallel computing, or using multiple
 compute cores to run a single job, the <strong>time</strong> function
 will prove useful for getting the execution time for a job as it depends
 on the number of cores. For example, it is common to test the same job
@@ -664,14 +665,14 @@ sys	0m0.000s</code></pre>
 </div>
 <p>The first thing you see is the output of the <strong>pwd</strong>
 command, which in this case is the directory
-<strong>/Users/daveturner</strong>. Then the <strong>time</strong>
-function prints its output, always as real time, which is what we want,
-then user and system time which we can ignore. This shows that the
-<strong>pwd</strong> command is faster than the clock can measure. This
-is important to note that the <strong>time</strong> command isn’t
-accurate to less than 1 millisecond, so in general we should always make
-sure we’re measuring execution times that are greater than a second in
-general.</p>
+<strong>/Users/daveturner</strong> on my Mac. Then the
+<strong>time</strong> function prints its output, always as real time,
+which is what we want, then user and system time which we can ignore.
+This shows that the <strong>pwd</strong> command is faster than the
+clock can measure. This is important to note that the
+<strong>time</strong> command isn’t accurate to less than 1 millisecond,
+so in general we should always make sure we are measuring execution
+times that are greater than a second in general.</p>
 <p>Below is another example where this time we are timing the
 <strong>ls</strong> function which will list the files in the current
 directory.</p>
@@ -728,7 +729,7 @@ it out on a completely isolated computer. If you are on an HPC system
 with a batch queue, you can always request an entire compute node and
 then just use part of the node you requested, even a single compute
 core. If this is not possible, then try to get the job as isolated as
-possible. Submitting a single-core request to a job queue is one example
+you can. Submitting a single-core request to a job queue is one example
 of this, where you at least are sure that your job is the only one on
 the cores that you requested. Your job will still be sharing the memory
 bus and L3 cache with other jobs. Jobs usually don’t effect each other
@@ -748,13 +749,13 @@ IO to the local disk (usually /tmp).</p>
 <p>Every computer language has multiple <strong>clock()</strong>
 functions that can be used to time sections of the code. The syntax is
 different in each language, but they all work about the same, and there
-is always a very high precision function that is accurate to down
+is always a very high precision function that is accurate down to
 somewhere in the nanosecond range, though I typically don’t trust these
 for measuring less than a microsecond interval. Each of these clock
 functions returns the current time, so to measure the time in an
-interval you need to store the start time, do some calculations, then
-get the end time and subtract the two to get the time used for that part
-of the code.</p>
+interval you need to store the start time, do some calculations or IO,
+then get the end time and subtract the two to get the time used for that
+part of the code.</p>
 <p>In Python since version 3.3, the best timer is in the
 <strong>time</strong> package. To use it, you must start by importing
 the package. Below is an example of using the clock function to measure
@@ -834,11 +835,14 @@ an array out to a file.</p>
 </div>
 </div>
 </div>
-<p>Try running this yourself by copying it into a timing_example.py
-file. When I run this, I see that the loop takes about 30 microseconds
-on my computer and the output file takes 10 milliseconds. Since both of
-these are above the nanosecond range, we can be confident that the
-timing routine is accurately measuring each.</p>
+<p>Try running the <strong>timing_example.py</strong> code yourself. It
+is one of the codes you should have downloaded and unzipped in your HPC
+system, and should be in the <strong>code</strong> directory. You should
+also have the Python environment set up and have done the <strong>pip
+install time</strong>. When I run this, I see that the loop takes about
+30 microseconds on my computer and the output file takes 10
+milliseconds. Since both of these are above the nanosecond range, we can
+be confident that the timing routine is accurately measuring each.</p>
 <p>Let’s see what we can learn by playing around with it some more. When
 I run this with <strong>time python timing_example.py</strong>, I see a
 real time of 100 milliseconds even though the loop time and output time
@@ -849,12 +853,12 @@ running and importing the <strong>time</strong> package, but we may also
 be seeing the lack of accuracy of the external <strong>time</strong>
 function when it comes to measuring things down in the millisecond
 range.</p>
-<p>Now lets change the timing_example.py program itself. Sometimes we
-need to time a part of something that is in a larger loop, so we need to
-sum the times together. Try changing the timing so that it is inside the
-summation loop instead of outside it to see what happens. You can do
-this by uncommenting the timing and printing functions in the
-timing_example.py file.</p>
+<p>Now lets change the <strong>timing_example.py</strong> program
+itself. Sometimes we need to time a part of something that is in a
+larger loop, so we need to sum the times together. Try changing the
+timing so that it is inside the summation loop instead of outside it to
+see what happens. You can do this by uncommenting the timing and
+printing functions in the <strong>timing_example.py</strong> file.</p>
 <div class="tabs">
 <nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
@@ -932,17 +936,18 @@ timing_example.py file.</p>
 </div>
 </div>
 </div>
-<p>In my computer, the t_sum time is only a bit larger than the t_loop
-time from before, but remember that this doesn’t count the loop
-overhead. If we look at the t_loop time instead, in my computer it is
-more than double what it was before. When the clock routine is measuring
-very small intervals each time, it can be intrusive in that it distorts
-the measurement by increasing the runtime of the entire code. It isn’t
+<p>In my computer, the <strong>t_sum</strong> time is only a bit larger
+than the <strong>t_loop</strong> time from before, but remember that
+this doesn’t count the loop overhead. If we look at the
+<strong>t_loop</strong> time instead, in my computer it is more than
+double what it was before. When the clock routine is measuring very
+small intervals each time, it can be intrusive in that it distorts the
+measurement by increasing the runtime of the entire code. It isn’t
 surprising that this is intrusive since we are measuring the time it
 takes to retrieve a single array element and do one addition. The code
 is doing a subtraction and addition itself to calculate the time
-interval itself, so it is probably more surprising that doing the timing
-in this way is not more intrusive.</p>
+interval, so it is probably more surprising that doing the timing in
+this way is not more intrusive.</p>
 </section><section><h2 class="section-heading" id="what-to-time">What to Time<a class="anchor" aria-label="anchor" href="#what-to-time"></a>
 <a class="anchor" aria-label="anchor" href="#what-to-time"></a>
 </h2>
@@ -968,14 +973,17 @@ processing cores. For this we will do what is called a scaling study
 where we measure the performance of a typical job using different number
 of processing cores. We may for example run on 1 core, then 4, 8, 16,
 and 32 cores to see how efficiently the job scales as we apply more
-processing cores. This is done so that we can understand how many cores
-we can efficiently apply to that job. Do keep in mind that scaling is
-very dependent on the problem size. Larger problems will typically scale
-better to more cores, while smaller problems may be limited to only a
-few cores. The goal is to determine how many cores we can use with
-reasonable efficiency. The same kind of scaling study can also be used
-for multi-node jobs, where we would test the performance on 1 node, 2,
-4, and 8 nodes for example.</p>
+processing power. This is done so that we can understand how many cores
+we can efficiently apply to that job. If we get a 7 times speedup on 8
+cores compared to 1, that less than ideal but still very good. If we
+then see a 9 times speedup using 16 cores, then we’d probably want to
+stick with using just 8 cores on that particular job. Do keep in mind
+that scaling is very dependent on the problem size. Larger problems will
+typically scale better to more cores, while smaller problems may be
+limited to only a few cores. The goal is to determine how many cores we
+can use with reasonable efficiency. The same kind of scaling study can
+also be used for multi-node jobs, where we would test the performance on
+1 node, 2, 4, and 8 nodes for example.</p>
 <p>Problem size is one factor that can affect the scaling efficiency.
 For multi-node jobs, choosing the fastest networking options, and
 ensuring that all compute nodes are on the same network switch can both
@@ -999,7 +1007,7 @@ short test run to measure the memory use before submitting the full job.
 This is especially true if you are submitting lots of similar jobs. If
 your job goes over the requested memory, it is most often killed, so you
 want to over estimate the request somewhat, but if you request too much
-it can take much longer to get your job scheduled and result in
+it can take a lot longer to get your job scheduled and result in
 inefficient use of the resources as you will be locking up memory that
 you are not using.</p>
 <p>Measuring the memory usage is more difficult than it should be on
@@ -1076,7 +1084,8 @@ use over time can be very helpful.</p>
 <div class="callout-content">
 <ul>
 <li>The <strong>time</strong> function can always be used externally to
-measure performance.</li>
+measure performance but has limitted accuracy of around 1
+millisecond.</li>
 <li>Internally there are precise clock routines that can be used to
 measure the performance of each part of a code. These are different for
 each programming language, but the use is always the same.</li>
@@ -1090,7 +1099,7 @@ also be able to calculate total memory for simple programs.</li>
 </div>
 </section></section><section id="aio-performance-concepts"><p>Content from <a href="performance-concepts.html">Performance Concepts</a></p>
 <hr>
-<p>Last updated on 2024-07-21 |
+<p>Last updated on 2024-07-25 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1116,7 +1125,7 @@ also be able to calculate total memory for simple programs.</li>
 <h3 class="card-title">Objectives</h3>
 <ul>
 <li>Understand that what actually goes on in the computer may be much
-more complex than what the user tells it to do.</li>
+more complex than what the user tells the computer to do.</li>
 <li>Have a basic understanding of some of the performance issues to be
 aware of.</li>
 <li>Learn that you don’t have to be an expert programmer to take
@@ -1441,6 +1450,36 @@ Use optimized libraries when at all possible.</p>
 <h3 class="callout-title">Measuring Cache Line Effects<a class="anchor" aria-label="anchor" href="#measuring-cache-line-effects"></a>
 </h3>
 <div class="callout-content">
+<div class="tabs">
+<nav><div id="nav-tab-5" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-5-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Python" type="button" role="tab" aria-controls="nav-tabpanel-5-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-5-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-R" type="button" role="tab" aria-controls="nav-tabpanel-5-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-C" type="button" role="tab" aria-controls="nav-tabpanel-5-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-5-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-5-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-5" class="tab-content">
+<div id="nav-tabpanel-5-Python" class="tab-pane show active" aria-labelledby="nav-tab-5-Python" role="tabpanel">
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
@@ -1450,6 +1489,21 @@ manner for comparison. How much faster is the first code where the
 vectors are stored in contiguous memory? How much faster should it
 be?</p>
 </div>
+<div id="nav-tabpanel-5-R" class="tab-pane" aria-labelledby="nav-tab-5-R" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-5-C" class="tab-pane" aria-labelledby="nav-tab-5-C" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-5-Fortran" class="tab-pane" aria-labelledby="nav-tab-5-Fortran" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-5-Matlab" class="tab-pane" aria-labelledby="nav-tab-5-Matlab" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
@@ -1457,7 +1511,7 @@ be?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Is the time difference what we expected? When I ran this on a new
 Intel processor that did not have any other jobs running, I measured 180
@@ -1508,7 +1562,7 @@ performance.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>For the 10x10 matrix size there are 3 matrices having 100 elements
 each needing 8 bytes storage, so storing all 3 matrices requires only
@@ -1566,7 +1620,7 @@ Python code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
@@ -1934,7 +1988,7 @@ cores, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -2104,7 +2158,7 @@ but is more explicit.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2156,16 +2210,16 @@ but is more explicit.</p>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -2362,27 +2416,27 @@ needed then the program with rank 1 will print out the results.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product shsowing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
@@ -2476,7 +2530,7 @@ statement.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2530,16 +2584,16 @@ statement.</p>
 <span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>   <span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -2611,7 +2665,7 @@ core test, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -2999,7 +3053,7 @@ and the optimized version matmult_cblas.c.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>On a modern Intel system the raw scalar code ran in 0.14 seconds as
 did the single-threaded OpenMP and single-task MPI runs. The test on 4
@@ -3174,7 +3228,7 @@ command <strong>make all_fortran</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Each computer system may be set up differently with regard to what
 compilers are available and how they need to be accessed. You may need
@@ -3217,7 +3271,7 @@ wiki</a></li>
 </div>
 </section></section><section id="aio-python"><p>Content from <a href="python.html">The Python Language</a></p>
 <hr>
-<p>Last updated on 2024-07-16 |
+<p>Last updated on 2024-07-25 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3361,11 +3415,10 @@ environment is active.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/virtualenvs</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> cd ~/virtualenvs</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">$</span> virtualenv env-py-3.7.4</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">$</span> source ~/virtualenvs/env-py-3.7.4/bin/activate</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span>              the prompt is now prefaced with environment name</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/virtualenvs</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> ~/virtualenvs</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ve3nv <span class="at">--system-site-packages</span> python-hpc-user</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="bu">source</span> ~/virtualenvs/python-hpc-user/bin/activate</span></code></pre>
 </div>
 <p>Once activated the prompt will change to show that you are working in
 the <strong>env-py-3.7.4</strong> environment. You can install any
@@ -3374,9 +3427,9 @@ when you are done.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> pip install numpy scipy</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> python python_code.py</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">env-py-3.7.4</span><span class="kw">)</span><span class="ex">$</span> deactivate</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user$</span> pip install numpy scipy</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user</span><span class="kw">)</span><span class="ex">$</span> python python_code.py</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user</span><span class="kw">)</span><span class="ex">$</span> deactivate</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ex">$</span></span></code></pre>
 </div>
 </div>
@@ -3461,7 +3514,7 @@ compare with versions written in other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>While the syntax is different, the code is basically the same in each
 language. Performance is much slower for raw Python code than the
@@ -3492,7 +3545,7 @@ difference the highly-tuned library function makes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>If you have already run the optimized C version, you may notice that
 the compiled code still beats the optimized <strong>NumPy</strong>
@@ -3525,7 +3578,7 @@ second time takes advantage of the cached compilation code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Notice that in this code we needed to rewrite the computationally
 intensive loops into functions. This does not take much effort but does
@@ -3573,7 +3626,7 @@ comparing it to optimized functions in <strong>NumPy</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>If you do this please contribute your code and timings.</p>
 </div>
@@ -3600,7 +3653,7 @@ active virtual environment meaning that there is no
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Once compiled you should be able to run this with a command like:
 <strong>./matmult.pyc 100</strong>.</p>
@@ -5317,8 +5370,8 @@ Azure</a></p></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/aio.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/aio.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-24",
-  "datePublished": "2024-07-24"
+  "dateModified": "2024-07-25",
+  "datePublished": "2024-07-25"
 }
 
   </script><script>

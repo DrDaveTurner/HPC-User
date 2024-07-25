@@ -412,31 +412,32 @@
 
 <p>This is a new lesson built with <a href="https://carpentries.github.io/sandpaper-docs/index.html" class="external-link">The
 Carpentries Workbench</a>.</p>
-<hr><p>The HPC-user Software Carpentry module is aimed at scientists with
+<hr><p>The HPC-user Software Carpentry module is aimed at researchers with
 some background in using scientific computing. This lesson will teach
 scientists to understand and deal with performance issues that arise
-when moving from a PC to a High-Performance Computing (HPC) environment.
-The basic concepts that affect performance are covered in a general
-manner, then a survey of the capabilities and performance of many
-languages commonly used in scientific computations are discussed along
-with example codes illustrating the performance concerns of each. Each
-person who completes this module should have a good general overview of
-what each computer language can do and what performance bottlenecks to
-avoid.</p>
+when moving from a personal computer to a High-Performance Computing
+(HPC) environment (a SuperComputer). The basic concepts that affect
+performance are covered in a general manner, then a survey of the
+capabilities and performance of many languages commonly used in
+scientific computations are discussed along with example codes
+illustrating the performance concerns of each language. Each person who
+completes this module should have a good general overview of what each
+computer language can do and what performance bottlenecks to avoid.</p>
 <section><h2 class="section-heading" id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
 <a class="anchor" aria-label="anchor" href="#prerequisites"></a></h2>
-<hr class="half-width"><p>Each user must begin with a reasonable knowledge of Linux and at
-least one of the languages that this module covers (Python, R, Matlab,
-C/C++, Fortran). The examples in the first part of this module are in
-Python but will eventually be adjustable to display in any of these
-languages. Each user may also need to know how to run jobs in an HPC
-environment.</p>
+<hr class="half-width"><p>Each user must begin with some knowledge of Linux and at least one of
+the languages that this module covers (Python, C/C++, R, Fortran,
+Matlab). The examples in the first part of this module are currently
+only in Python but will eventually be adjustable to display in any of
+these languages. Each user may also need to know how to run jobs in an
+HPC environment. These prerequisites may all be covered by having an HPC
+Unix Shell carpentry module taught right before this one.</p>
 </section><section id="setup"><section><h2 class="section-heading" id="data-sets">Data Sets<a class="anchor" aria-label="anchor" href="#data-sets"></a>
 <a class="anchor" aria-label="anchor" href="#data-sets"></a></h2>
 <hr class="half-width"><!--
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
+cd episodes
+zip -r code.zip code
+cp code.zip data
 --><p>Download the <a href="data/code.zip">code zip file</a> and unzip it
 to your Desktop.</p>
 </section><section><h2 class="section-heading" id="software-setup">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a>
@@ -450,14 +451,14 @@ to your Desktop.</p>
 </h3>
 <div class="callout-content">
 <p>Your instructor should provide you with information on how to access
-a Linyx system or SuperComputer. You will need to use the directions
+a Linux system or SuperComputer. You will need to use the directions
 below to access that system using a terminal window so you can use the
 command line interface. You will also need to transfer the code files to
 the Linux system, again by following the directions for your operating
 system below. Once the code files are copied over, you may edit them on
-the Linux side with vim or nano, or if you are more comfortable you may
-edit the code files on your laptop or desktop and transfer them to the
-Linux system instead.</p>
+the Linux side with <strong>vim</strong> or <strong>nano</strong>, or if
+you are more comfortable you may edit the code files on your personal
+computer and transfer them to the Linux system instead.</p>
 </div>
 </div>
 </div>
@@ -481,25 +482,28 @@ Linux system instead.</p>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
 <div id="nav-tabpanel-1-1" class="tab-pane show active" aria-labelledby="nav-tab-1-1" role="tabpanel">
-<p>You may use PuTTY to ssh into a system that your instructor should
-provide information for. In the long run, the MobaXTerm app can be
-installed and used if desired. It provides the same terminal access as
-PuTTY but also provides a convenient file transfer capability. This is
-especially useful if you are more comfortable editting your files on the
-Windows side then transferring them over to the Linux system.</p>
+<p>You may use PuTTY to ssh into a system for which your instructor
+should provide access information. In the long run, the MobaXTerm app
+can be installed and used if desired. It provides the same terminal
+access as PuTTY but also provides a convenient file transfer capability.
+This is especially useful if you are more comfortable editting your
+files on the Windows side then transferring them over to the Linux
+system.</p>
 </div>
 <div id="nav-tabpanel-1-2" class="tab-pane" aria-labelledby="nav-tab-1-2" role="tabpanel">
-<p>Use Terminal.app or iTerm2.app. You will ssh into the Linux system
-that your instructor provides information for. You can edit your files
-on the Linux system with vim or nano, or if you have a different editor
-on your Mac system you may edit the code files there and scp them over
-to the Linux system each time.</p>
+<p>Use <strong>Terminal.app</strong> or <strong>iTerm2.app</strong>. You
+will ssh into the Linux system for which your instructor should provide
+access information. You can edit your files on the Linux system with
+<strong>vim</strong> or <strong>nano</strong>, or if you have a
+different editor on your Mac system you may edit the code files there
+and <strong>scp</strong> them over to the Linux system each time.</p>
 </div>
 <div id="nav-tabpanel-1-3" class="tab-pane" aria-labelledby="nav-tab-1-3" role="tabpanel">
-<p>Use Terminal and ssh into the Linux system that your instructor
-provide information for. You can edit your files on the Linux HPC system
-with vim or nano, or if you have a different editor on your Linux laptop
-or desktop you may edit the code files there and scp them over to the
+<p>Use a Terminal window and ssh into the Linux system for which your
+instructor should provide access information. You can edit your files on
+the Linux HPC system with <strong>vim</strong> or <strong>nano</strong>,
+or if you have a different editor on your Linux personal computer you
+may edit the code files there and <strong>scp</strong> them over to the
 Linux system each time.</p>
 </div>
 </div>
@@ -544,7 +548,20 @@ Python.</p>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
 <div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
-<p>Show program examples and diagrams in sections 2-6 in Python.</p>
+<p>Show program examples and diagrams in sections 2-6 in Python. You
+will need to set up a virtual environment on the Linux system that your
+instructor provides access to. The generic directions below should
+usualy work.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/virtualenvs</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> ~/virtualenvs</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ve3nv <span class="at">--system-site-packages</span> python-hpc-user</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="bu">source</span> ~/virtualenvs/python-hpc-user/bin/activate</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="ex">pip</span> install numpy</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="ex">pip</span> install time</span></code></pre>
+</div>
 </div>
 <div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <p>Not implemented yet.</p>
@@ -610,8 +627,8 @@ Python.</p>
   "url": "https://DrDaveTurner.github.io/HPC-User/index.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/index.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-24",
-  "datePublished": "2024-07-24"
+  "dateModified": "2024-07-25",
+  "datePublished": "2024-07-25"
 }
 
   </script><script>

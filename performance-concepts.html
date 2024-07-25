@@ -418,7 +418,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Performance Concepts</h1>
-        <p>Last updated on 2024-07-21 |
+        <p>Last updated on 2024-07-25 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -447,7 +447,7 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul><li>Understand that what actually goes on in the computer may be much
-more complex than what the user tells it to do.</li>
+more complex than what the user tells the computer to do.</li>
 <li>Have a basic understanding of some of the performance issues to be
 aware of.</li>
 <li>Learn that you don’t have to be an expert programmer to take
@@ -763,6 +763,36 @@ Use optimized libraries when at all possible.</p>
 <h3 class="callout-title">Measuring Cache Line Effects<a class="anchor" aria-label="anchor" href="#measuring-cache-line-effects"></a>
 </h3>
 <div class="callout-content">
+<div class="tabs">
+<nav><div id="nav-tab-5" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-5-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Python" type="button" role="tab" aria-controls="nav-tabpanel-5-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-5-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-R" type="button" role="tab" aria-controls="nav-tabpanel-5-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-C" type="button" role="tab" aria-controls="nav-tabpanel-5-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-5-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-5-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-5-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-5-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-5-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-5" class="tab-content">
+<div id="nav-tabpanel-5-Python" class="tab-pane show active" aria-labelledby="nav-tab-5-Python" role="tabpanel">
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
@@ -772,6 +802,21 @@ manner for comparison. How much faster is the first code where the
 vectors are stored in contiguous memory? How much faster should it
 be?</p>
 </div>
+<div id="nav-tabpanel-5-R" class="tab-pane" aria-labelledby="nav-tab-5-R" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-5-C" class="tab-pane" aria-labelledby="nav-tab-5-C" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-5-Fortran" class="tab-pane" aria-labelledby="nav-tab-5-Fortran" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-5-Matlab" class="tab-pane" aria-labelledby="nav-tab-5-Matlab" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
@@ -779,7 +824,7 @@ be?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Is the time difference what we expected? When I ran this on a new
 Intel processor that did not have any other jobs running, I measured 180
@@ -830,7 +875,7 @@ performance.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>For the 10x10 matrix size there are 3 matrices having 100 elements
 each needing 8 bytes storage, so storing all 3 matrices requires only
@@ -888,7 +933,7 @@ Python code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
@@ -987,8 +1032,8 @@ of writing your own version.</li>
   "url": "https://DrDaveTurner.github.io/HPC-User/performance-concepts.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/performance-concepts.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-21",
-  "datePublished": "2024-07-24"
+  "dateModified": "2024-07-25",
+  "datePublished": "2024-07-25"
 }
 
   </script><script>
