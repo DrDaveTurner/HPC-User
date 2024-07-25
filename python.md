@@ -145,11 +145,10 @@ The dollar sign is the command prompt to illustrate how the prompt
 changes while the virtual environment is active.
 
 ```bash
-$ mkdir -p ~/virtualenvs
-$ cd ~/virtualenvs
-$ virtualenv env-py-3.7.4
-$ source ~/virtualenvs/env-py-3.7.4/bin/activate
-(env-py-3.7.4)$              the prompt is now prefaced with environment name
+mkdir -p ~/virtualenvs
+cd ~/virtualenvs
+python -m ve3nv --system-site-packages python-hpc-user
+source ~/virtualenvs/python-hpc-user/bin/activate
 ```
 
 Once activated the prompt will change to show that you are
@@ -158,9 +157,9 @@ You can install any packages you need, run your python code,
 then deactivate the environment when you are done.
 
 ```bash
-(env-py-3.7.4)$ pip install numpy scipy
-(env-py-3.7.4)$ python python_code.py
-(env-py-3.7.4)$ deactivate
+(python-hpc-user$ pip install numpy scipy
+(python-hpc-user)$ python python_code.py
+(python-hpc-user)$ deactivate
 $
 ```
 

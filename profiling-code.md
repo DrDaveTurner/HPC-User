@@ -19,14 +19,14 @@ exercises: 0
 
 When we talk about the performance of a program, we are always interested
 in how much time it takes to run, but in some cases we also need to know
-how much memory it uses if we're pushing the limits of our computer.
+how much memory the program uses if we are pushing the limits of our computer.
 Even more than that, we often need to know how much time each part
 of the code takes so that we know where to concentrate our efforts as
-we try to improve the peformance of the program.
-So we need to be able to time the entire run, and also internally the
+we try to improve the overall performance of the program.
+So we need to be able to time the entire run, and also internally
 each part of the code.
 For parallel codes, we also need to know how efficiently they scale
-as we increase the number of cores or nodes in order to determine
+as we increase the number of cores or compute nodes in order to determine
 what resources to request.
 
 ## Timing a Program Externally
@@ -35,7 +35,7 @@ Linux has a **time** function that can proceed any command, so this
 can be used to time the entire job externally even if we don't have
 access to the source code.
 This can be used to time a short test run in order to estimate the
-runtime needed for a complete run.
+runtime needed for the complete job.
 When we get to talking about parallel computing, or using multiple
 compute cores to run a single job, the **time** function will
 prove useful for getting the execution time for a job as it
@@ -60,12 +60,12 @@ sys	0m0.000s
 ```
 
 The first thing you see is the output of the **pwd** command, which in
-this case is the directory **/Users/daveturner**.
+this case is the directory **/Users/daveturner** on my Mac.
 Then the **time** function prints its output, always as real time, which
 is what we want, then user and system time which we can ignore.
 This shows that the **pwd** command is faster than the clock can measure.
 This is important to note that the **time** command isn't accurate to
-less than 1 millisecond, so in general we should always make sure we're
+less than 1 millisecond, so in general we should always make sure we are
 measuring execution times that are greater than a second in general.
 
 Below is another example where this time we are timing the **ls** function
@@ -126,7 +126,7 @@ If you are on an HPC system with a batch queue, you can always
 request an entire compute node and then just use part of the
 node you requested, even a single compute core.
 If this is not possible, then try to get the job as isolated
-as possible.  Submitting a single-core request to a job queue
+as you can.  Submitting a single-core request to a job queue
 is one example of this, where you at least are sure that your
 job is the only one on the cores that you requested.
 Your job will still be sharing the memory bus and L3 cache
@@ -149,12 +149,12 @@ Every computer language has multiple **clock()** functions that can
 be used to time sections of the code.
 The syntax is different in each language, but they all work about
 the same, and there is always a very high precision function that
-is accurate to down somewhere in the nanosecond range, though
+is accurate down to somewhere in the nanosecond range, though
 I typically don't trust these for measuring less than a 
 microsecond interval.
 Each of these clock functions returns the current time, so 
 to measure the time in an interval you need to store the
-start time, do some calculations, then get the end time
+start time, do some calculations or IO, then get the end time
 and subtract the two to get the time used for that part
 of the code.
 
@@ -213,7 +213,11 @@ Not implemented yet.
 
 ::::::::::::::::::::
 
-Try running this yourself by copying it into a timing_example.py file.
+Try running the **timing_example.py** code yourself.
+It is one of the codes you should have downloaded and unzipped
+in your HPC system, and should be in the **code** directory.
+You should also have the Python environment set up and have
+done the **pip install time**.
 When I run this, I see that the loop takes about 30 microseconds on my computer
 and the output file takes 10 milliseconds.
 Since both of these are above the nanosecond range, we can be confident
@@ -231,13 +235,13 @@ we may also be seeing the lack of accuracy of the external **time**
 function when it comes to measuring things down in the millisecond
 range.
 
-Now lets change the timing_example.py program itself.
+Now lets change the **timing_example.py** program itself.
 Sometimes we need to time a part of something that is in a larger
 loop, so we need to sum the times together.
 Try changing the timing so that it is inside the summation
 loop instead of outside it to see what happens.
 You can do this by uncommenting the timing and printing functions
-in the timing_example.py file.
+in the **timing_example.py** file.
 
 :::::::::::::::: group-tab
 
@@ -291,10 +295,10 @@ Not implemented yet.
 
 ::::::::::::::::::::
 
-In my computer, the t_sum time is only a bit larger than the 
-t_loop time from before, but remember that this doesn't count
+In my computer, the **t_sum** time is only a bit larger than the 
+**t_loop** time from before, but remember that this doesn't count
 the loop overhead.
-If we look at the t_loop time instead, in my computer it is more
+If we look at the **t_loop** time instead, in my computer it is more
 than double what it was before.
 When the clock routine is measuring very small intervals each time,
 it can be intrusive in that it distorts the measurement by increasing
@@ -302,7 +306,7 @@ the runtime of the entire code.
 It isn't surprising that this is intrusive since we are measuring the
 time it takes to retrieve a single array element and do one addition.
 The code is doing a subtraction and addition itself to calculate the
-time interval itself, so it is probably more surprising that 
+time interval, so it is probably more surprising that 
 doing the timing in this way is not more intrusive.
 
 ## What to Time
@@ -332,9 +336,13 @@ measure the performance of a typical job using different number
 of processing cores.
 We may for example run on 1 core, then 4, 8, 16, and 32 cores
 to see how efficiently the job scales as we apply more processing
-cores.
+power.
 This is done so that we can understand how many cores we can 
 efficiently apply to that job.
+If we get a 7 times speedup on 8 cores compared to 1, that less
+than ideal but still very good.  If we then see a 9 times speedup
+using 16 cores, then we'd probably want to stick with using
+just 8 cores on that particular job. 
 Do keep in mind that scaling is very dependent on the problem
 size.
 Larger problems will typically scale better to more cores, while
@@ -372,7 +380,7 @@ a short test run to measure the memory use before submitting the
 full job.  This is especially true if you are submitting lots of
 similar jobs.  If your job goes over the requested memory, it is
 most often killed, so you want to over estimate the request 
-somewhat, but if you request too much it can take much longer
+somewhat, but if you request too much it can take a lot longer
 to get your job scheduled and result in inefficient use of
 the resources as you will be locking up memory that you are
 not using.
@@ -445,7 +453,8 @@ However, being able to see the memory use over time can be very helpful.
 We will practice these approaches more in the upcoming modules.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
-- The **time** function can always be used externally to measure performance.
+- The **time** function can always be used externally to measure performance
+  but has limitted accuracy of around 1 millisecond.
 - Internally there are precise clock routines that can be used to measure 
   the performance of each part of a code.  These are different for each 
   programming language, but the use is always the same.

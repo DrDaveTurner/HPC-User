@@ -11,7 +11,7 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::: objectives
 - Understand that what actually goes on in the computer may be much more
-complex than what the user tells it to do.
+complex than what the user tells the computer to do.
 - Have a basic understanding of some of the performance issues to be aware of.
 - Learn that you don't have to be an expert programmer to take advantage of 
 advanced performance techniques, you just need to be aware of how to use libraries
@@ -258,6 +258,10 @@ Good news is that in HPC, often the hard work is already done for you,
 
 ## Measuring Cache Line Effects
 
+:::::::::::::::: group-tab
+
+### Python
+
 Run the dot_product.py code several times to get an average 
 execution time for a dot product between two vectors of 
 1 million elements each.  Try to run them on an isolated system
@@ -268,6 +272,25 @@ comparison.
 How much faster is the first code where the vectors are stored
 in contiguous memory?
 How much faster should it be?
+
+### R
+
+Not implemented yet.
+
+### C
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::::::::
+
 
 :::::::::::::::::: solution
 
