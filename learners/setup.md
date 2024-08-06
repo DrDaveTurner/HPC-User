@@ -18,7 +18,7 @@ Download the [code zip file](data/code.zip) and unzip it to your Desktop.
 ### Details
 
 Your instructor should provide you with information on how to access a
-Linux system or SuperComputer.
+Linux system or Supercomputer.
 You will need to use the directions below to access that system using
 a terminal window so you can use the command line interface.
 You will also need to transfer the code files to the Linux system, again
@@ -37,7 +37,7 @@ You may use PuTTY to ssh into a system for which your instructor should provide
 access information.  In the long run, the MobaXTerm app can be installed and used
 if desired.  It provides the same terminal access as PuTTY but also provides a
 convenient file transfer capability.  This is especially useful if you are more
-comfortable editting your files on the Windows side then transferring them over
+comfortable editing your files on the Windows side then transferring them over
 to the Linux system.
 
 ### MacOS
@@ -76,7 +76,7 @@ languages.
 Show program examples and diagrams in sections 2-6 in Python.
 You will need to set up a virtual environment on the Linux system that
 your instructor provides access to.  The generic directions below should
-usualy work.
+usually work.
 
 ```bash
 mkdir -p ~/virtualenvs

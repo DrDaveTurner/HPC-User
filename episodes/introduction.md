@@ -68,7 +68,7 @@ Most sections also have website links at the end which provide
 a means to seek out more information.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
-- This lesson will help to understand basic concpets affecting performance in programming.
+- This lesson will help to understand basic concepts affecting performance in programming.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

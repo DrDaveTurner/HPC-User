@@ -7,7 +7,7 @@ exercises: 10
 :::::::::::::::::::::::::::::::::::::: questions
 - Now that we can profile programs to find where the time is being spent,
   how do we speed the code up?
-- What is parallel computing, and what are the underlying concpets that
+- What is parallel computing, and what are the underlying concepts that
   make it work?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -18,12 +18,12 @@ exercises: 10
 
 In the last chapter we learned how to profile a program to understand
 where the time is being spent.
-In thhis section, we will talk more about how to improve the
+In this section, we will talk more about how to improve the
 performance of different parts of a program.
 This may involve steering clear of inefficient methods in some
 computer languages, minimizing the operation count, using optimized
-libraries, and applying multiple cores or even multiple nodes to
-speed up the computational part.
+libraries, and applying multiple cores or even multiple compute nodes to
+speed up each computational part.
 Computations can sometimes be sped up enormously using accelerators
 like GPUs (Graphic Processing Units) as well.
 Reducing or eliminating IO can sometimes help, but ensuring that the
@@ -37,14 +37,14 @@ efficient code in general because these are compiled languages.
 In other words, you need to compile the code before executing it,
 and the compilers do very intricate optimizations to ensure the
 resulting executable is highly efficient.
-Interpretive languages like Python, R, and Matlab do some compilation
+Interpretive languages like Python, R, and Matlab only do some compilation
 on the fly.  They are therefore much less optimized, but more convenient
 to run.  We have already learned the importance of using optimized 
 library routines whenever possible, but this is especially true
 for the interpretive languages.
 Some languages also have certain methods that are convenient, but
 very inefficient, and what to avoid and how to get around them will
-be discussed in a later chapter.
+be discussed in later chapters.
 
 One thing that can help in understanding performance is to know
 how much it costs to perform different common math functions.
@@ -52,14 +52,14 @@ We can express the speed of a code in GFlops, or Giga (Billion)
 Floating-point operations per second.
 A floating-point operation involves two operands that are 
 typically 64-bit floats.
-When counting the Flops, we ignore integer arithmatic and comparisons
+When counting the Flops, we ignore integer arithmetic and comparisons
 since those are very fast in relation to the floating-point operations.
-Below is a table of the Flop cost for each operaton.
+Below is a table of the Flop cost for each operation.
 This can be thought of as for example how many operations does it take
 to do a cosine function, since the cosine is done using a math library.
 
-| Function / Operation  | Floating-point opeations |
-|---------- |------|
+| Function / Operation  | Flops count |
+|:----------: |:------:|
 | *  +  -     |   1  |
 |    /      |   4  |
 | square root   |   4  |
@@ -71,18 +71,142 @@ loop where you are dividing by 4.0.  Instead, you reduce the operation
 count by 3 if you multiply by 0.25.  This is not needed in compiled
 languages like C/C++ or Fortran since the compiler does this optimization
 for you, but it can help in the interpretive languages.
-I have also used trigonometric identities to reduce the number of
-trig functions in a program since they are very costly at 6 operations
-each.
+The example below reduces the floating-point operation count by 
+removing the redundant calculation of theta and replacing the expensive
+calculations of the cosine and sine by using an iterative method
+using trigonometric identities.
+
+:::::::::::::::: group-tab
+
+### Python
+
+```python
+# This is just partial code to demonstrate the mechanics of
+#    using Flops minimization to optimize code for performance
+
+    # Define the number of frequencies and zero the array before summation
+
+freq_real = [ 0.0 for i in range( NQ ) ]
+freq_imag = [ 0.0 for i in range( NQ ) ]
+
+    # Sum over each atom in the simulation
+
+for i in range( N_atoms ):
+
+    dx = x[i] - y[i]
+
+        # Sum over the frequencies
+
+    for iq in range( NQ ):
+        theta = 2.0 * PI * dx * iq / NQ
+        freq_real[iq] += cos( theta )
+        freq_imag[iq] += sin( theta )
+```
+### R
+
+Not implemented yet.
+
+### C
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::::::::
+
+:::::::::::::::: group-tab
+
+### Python
+
+```python
+# This is just partial code to demonstrate the mechanics of
+#    using Flops minimization to optimize code for performance
+
+    # Define the number of frequencies and zero the array before summation
+
+freq_real = [ 0.0 for i in range( NQ ) ]
+freq_imag = [ 0.0 for i in range( NQ ) ]
+
+d_theta = 2.0 * PI * dx / NQ
+
+    # Sum over each atom in the simulation
+
+for i in range( N_atoms ):
+
+    dx = x[i] - y[i]
+
+        # Calculate cos/sin of the theta increment and set starting cos/sin values
+
+    cos_d_theta = cos( d_theta )
+    sin_d_theta = sin( d_theta )
+    cos_theta = 1.0
+    sin_theta = 0.0
+
+        # Sum over the frequencies
+
+    for iq in range( NQ ):
+        cos_new = cos_theta * cos_d_theta - sin_theta * sin_d_theta
+        sin_theta = sin_theta * cos_d_theta + cos_theta * cos_d_theta
+        cos_theta = cos_new
+
+        freq_real[iq] += cos_theta
+        freq_imag[iq] += sin_theta
+```
+### R
+
+Not implemented yet.
+
+### C
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::::::::
+
+This is however a very over-simplified picture since it involves just
+analyzing one factor.  In practice, most processors can overlap
+calculations for better speed like in the AVX vector instruction
+sets of the Intel and AMD x86 architectures. 
+
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Flops count
+
+Count the floating-point operations (Flops) in the unoptimized
+and optimized versions of the code above and calculate the
+expected speedup rate.
+
+:::::::::::::::::: solution
+
+The unoptimized code uses N_atoms * ( 1 + 21 * NQ ) Flops.
+The optimized version uses N_atoms * ( 13 + 6 * NQ ) Flops.
+For large NQ the speedup would be around 21/6 or 3.5.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ## Parallelizing Code
 
-It is always good to optimize the scalar code first, but if you still
-need your code to run faster than one option is to use more processing
+It is always good to optimize a scalar code first, but if you still
+need your code to run faster then one option is to use more processing
 power.
-This means using more than one
-computational core with each working on a different part of the data.
+This means using more then one computational core 
+with each core working on a different part of the data.
 The goal is to get a speedup of N times if you are using N cores,
 though often parallel programs will fall short of this ideal.
 
@@ -91,7 +215,7 @@ The first is multi-core or shared-memory programming.
 This is the easiest approach, with a single program running
 but for computationally demanding sections like loops multiple
 threads are used with typically one thread on each computational core.
-In this way, the scalar part of the code does not need to be alterred
+In this way, the scalar part of the code does not need to be altered
 and we only need to put parallelizing commands before each loop
 to tell the computer how to divide the problem up.
 It is called **shared-memory** because all threads operate
@@ -122,15 +246,14 @@ and when data needs to be exchanged the programmer can use
 MPI commands like **MPI_Send()** and **MPI_Recv()**
 to pass blocks of data to other threads.
 This is a very powerful way to program, but it is definitely 
-much more complex too.
+much more complicated too.
 Python has the **mpi4py** package which is a stripped down version
-of MPI, and unfortunately you cannot do multi-node computing
+of MPI, but unfortunately you cannot do multi-node computing
 with R.
-
 
 You will not be taught how to program in these parallel languages
 in this course, but you will be shown how to recognize each type
-of parallel appraoch and how to work with each efficiently.
+of parallel approach and how to work with each efficiently.
 
 
 ## Parallel Computing Concepts
@@ -139,6 +262,8 @@ The syntax for doing parallel processing is different for multi-threaded
 and multi-node programming, and also can vary for each language, but 
 handling multiple threads at the same time always involves some of the
 same basic underlying concepts.
+Understanding the basic concepts underlying these methods will help
+us to understand the functions at the language level themselves.
 
 ### Locks in Programs and File Systems
 
@@ -147,13 +272,15 @@ want to access the same data at the same time.
 If they are all reading the data, this is not a problem.
 However, if even one thread wants to change the data by writing
 to it while other threads may be reading it, this can lead to 
-uncertain results depending on which threads does its read or write
+uncertain results depending on which thread does its read or write
 first.
 This uncertainty must therefore always be avoided, and often it is
 handled by locking memory when a write occurs so that only that one
 thread has access at that time.
 
-The same thing can happen in parallel file servers.
+The same thing can happen in parallel file servers where there are
+multiple paths being exploited to the same data file in order to 
+provide better performance.
 If multiple threads, or even multiple programs, are reading the
 same file or different files in the same directory then everything
 is fine.
@@ -214,7 +341,7 @@ If you look at the loops where the most computational time is being
 spent, what you need to determine is whether each pass through the
 loop is independent of the others, or whether each pass is dependent
 on the results of the previous iteration.
-If each pass through a loop can be done indepently of the others, then
+If each pass through a loop can be done independently of the others, then
 we can do them at the same time.
 This is a simple statement, but it does sometimes take more thinking
 to understand if there are any dependencies involved.
@@ -225,7 +352,7 @@ of those change throughout the loop.
 If you have a program with nested loops, you may need to analyze
 each loop level to see if it is parallelizable.
 Parallelizing the outer loop means that there will be more computations
-for each thread or task, which is called being more coarse grained.
+for each thread or task, which is referred to as being more coarse grained.
 This can lead to much higher efficiencies, but it is not always possible.
 Often it is the inner loop that is easiest to parallelize, and this is
 most often the case with multi-threaded parallelism.
@@ -235,44 +362,49 @@ most often the case with multi-threaded parallelism.
 
 Some programs can be sped up by using a GPU as a computational 
 accelerator.
-A 32-bit GPU is the same as you would buy for a high-end gaming computer,
+A 32-bit GPU is the same as you would buy for a high-end gaming computer
 and can cost $1000-$1500.
-These are great for accelerating 32-bit codes like classical molecular
+These are ideal for accelerating 32-bit codes like classical molecular
 dynamics simulations, and have custom hardware that is great for 
-training neural networks.
+training AI (Artificial Intelligence) neural networks or machine learning
+models.
 The more expensive 64-bit GPUs are never intended for graphics at all.
-They are custom designed for accelerators even though they are still
+They are custom designed as accelerators even though they are still
 called GPUs.
+These currently cost around $11,000 for an NVIDIA A100 and
+around twice that for a newer H100.
 
 Writing a program to run on a GPU is very difficult.
 For NVIDIA GPUs, you use a programming language called CUDA.
 There are many fewer codes optimized for AMD GPUs at this point.
 They are programmed with Hip which can be compiled to run on either
-AMD or NVIDIA GPUs.
+AMD or NVIDIA GPUs.  There are also projects in development to 
+convert native CUDA codes into executables optimized for AMD GPUs.
 
 Running a job with a GPU accelerator is not that difficult.
 If your application can make use of one or more GPUs, there
 will be directions on how to specify the number of GPUs.
 If you are on an HPC system, you can request the number and
-type of GPUs you want for your job.
+type of GPUs you want for each job.
 
 ## Optimizing Input and Output
 
 The first thing to understand about IO (Input and Output) is that it can 
 make a big difference
-as to what type of a file system you are reading or writing to.
+as to what type of a file system you are reading from or writing to.
 Local disk (usually /tmp) is temporary storage and has size restrictions,
 and it isn't as fast as a parallel file server that stripes data across many
 disks at the same time, but it is still sometimes the best to use if others
 are heavily using the main file server and slowing it down.
 As good as parallel file severs are, they also commonly need to lock
 a directory if more than one file is being written at the same time.
-Any locking can slow the performance of a code down emensely and should
+Any locking can slow the performance of a code down immensely and should
 be avoided if at all possible.
 Many HPC systems may have fast scratch space which is temporary storage
+often purged every week or month
 but very large in size.  This is designed for use when you are running
-your job, and may also not suffer from the same locking issues that some
-parallel file servers can.
+your job, and may also not suffer from the same locking issues as on some
+parallel file servers.
 
 On our HPC system at Kansas State University, our fast scratch is
 about ten times as fast as the parallel file server system that our
@@ -281,16 +413,16 @@ So you would think that all you have to do is use fast scratch all the
 time to make your IO ten times faster.
 It actually is the case if you are streaming data in, by which we mean
 reading in data in large chunks that do not need to be converted.
-Files with large strings like genetic information falls into this 
+Files with large strings like genetic information fall into this 
 category since the strings can be hundreds or thousands of characters
 long and the representation in the file is the same as in the program.
-Reading in array of floats or integers from a binary file also can go
+Reading in arrays of floats or integers from binary files also can go
 as fast as the file server allows since the elements are stored in
 binary in both the file and the program.
 
 The problem comes when we want to store numbers for example in a 
 text file so we can see them ourselves.
-When we write them, or read them, the process goes slow since we
+When we write them or read them, the process goes slow since we
 have to convert each number from its binary representation into a
 text string before reading or writing.
 With IO, it is that conversion process which is slow, so it doesn't
@@ -303,7 +435,8 @@ available.
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Scaling Study of the Distributed-Memory Dot Product Code
-Measure the entire runtime for the dot_product_message_passing.py code
+Measure the entire run-time for the dot_product_message_passing code
+for the language you are working with 
 for 1, 4, 8, and 16 cores if you are on an HPC system with
 at least 2 compute nodes. 
 You can try different combinations of nodes and cores for
