@@ -293,6 +293,9 @@ You can try different combinations of nodes and cores for
 each if you would like to see the effects of the network
 (for the 4 core test, try 2 nodes 2 cores vs 4 nodes 1 core).
 
+If you want a more challenging exercise you can **git clone**
+the Python matrix multiply code and test the scaling.
+
 ### R
 
 Not implemented yet.
@@ -300,6 +303,9 @@ Not implemented yet.
 ### C
 
 Not implemented yet.
+
+If you want a more challenging exercise you can **git clone**
+the C matrix multiply code and test the scaling.
 
 ### Fortran
 
