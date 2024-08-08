@@ -18,10 +18,10 @@ exercises: 10
 ### Python performance
 
 Python is a high-level and extremely flexible language that has 
-broad acceptence within the high-performance computing community and more
-broadly with scientific and technical programmers.
+broad acceptance within the high-performance computing community and 
+even more broadly with scientific and technical programmers.
 However, it isn't a performance language in the same manner as 
-the compiled languages of C/C++ and Fortran.
+the compiled languages C/C++ and Fortran.
 It is an interpreted language that executes the code line by line
 while compiled languages optimize larger blocks of code before
 execution.
@@ -29,7 +29,7 @@ At the Department of Energy supercomputing center NERSC Python is
 involved in 25% of the code bases for the complex applications,
 but only accounts for 4% of the CPU time on their systems.
 This means that Python has a high level control role
-while the compiled languages are used to do the performance parts.
+while the compiled languages are used to do the performance computations.
 
 A matrix multiplication algorithm implemented with raw Python code is
 more than a hundred times slower than raw C code that is compiled.
@@ -40,7 +40,7 @@ many others.
 Even these can be slower than their compiled language counterparts
 though, as a **NumPy** matrix multiplication is still 50%-25% the
 speed depending on the matrix size compared to a 
-**BLAS** library **DGEMM** function.
+**BLAS** library **DGEMM** function available for C/C++/Fortran.
 
 While Python is not intended to be a performance language, there
 are very good options available for parallelization.
@@ -77,6 +77,24 @@ option to save the compiled functions so that they don't need
 to be recompiled for subsequent runs.
 There are also multi-threading options for parallelizing functions.
 
+**Parsl** is a parallelization library for Python that very easily
+allows that programmer to define functions as separate apps or
+applications that can be run on different cores or compute nodes.
+This approach is especially useful in expressing multi-step workflows.
+The link below provides more information on this approach.
+
+[Parsl python package](https://github.com/Parsl/parsl)
+
+**memory_profiler** is a Python package that allows easy profiling
+of the memory usage of the code.  If run externally using the 
+**mprof** command it reports the full memory usage of the executable
+which can also be easily plotted.
+You can also add **@profile** statements before functions to provide
+line by line memory profiling to help identify exactly where in your
+code your large memory allocations are occurring.
+The link below provides a more detailed explanation with examples.
+
+[Memory profiling in Python](https://pypi.org/project/memory-profiler/)
 
 ### Python capabilities
 
@@ -91,8 +109,8 @@ All this makes Python a high productivity language enabling
 programmers to produce code more quickly than in many
 lower level, more computationally efficient languages.
 
-Where this language really shines is in the exstensive selection of
-software pacakges that have been developed for the Python
+Where this language really shines is in the extensive selection of
+software packages that have been developed for the Python
 environment.
 Some important examples are the TensorFlow and Scikit packages
 for doing Artificial Intelligence and Machine Learning,
@@ -116,6 +134,10 @@ It can be compiled but not in the same way as C/C++ and Fortran
 where the compiler optimizes whole blocks of code.
 The Python compiler simply packages the code up so
 that it can run independent of Python or any installed packages.
+This means the user running the 'compiled' python executable 
+does not need access to the same version of Python nor any
+virtual environment with the python packages installed since
+everything is packaged up in the executable.
 There will be an exercise at the end of this section
 where you will be able to test this for yourself. 
 
@@ -140,44 +162,39 @@ that fixes everything.
 
 Creating a virtual environment is not very difficult.
 Below is an example of creating one called **env-py-3.7.4**
-where I labled it after the version of Python being used.
-The dollar sign is the command prompt to illustrate how the prompt
-changes while the virtual environment is active.
-
-```bash
-mkdir -p ~/virtualenvs
-cd ~/virtualenvs
-python -m ve3nv --system-site-packages python-hpc-user
-source ~/virtualenvs/python-hpc-user/bin/activate
-```
-
+where I labeled it after the version of Python being used.
 Once activated the prompt will change to show that you are
 working in the **env-py-3.7.4** environment.
 You can install any packages you need, run your python code,
 then deactivate the environment when you are done.
+The dollar sign is the command prompt to illustrate how the prompt
+changes while the virtual environment is active.
 
 ```bash
+$ mkdir -p ~/virtualenvs
+$ cd ~/virtualenvs
+$ python -m venv --system-site-packages python-hpc-user
+$ source ~/virtualenvs/python-hpc-user/bin/activate
 (python-hpc-user$ pip install numpy scipy
 (python-hpc-user)$ python python_code.py
 (python-hpc-user)$ deactivate
 $
 ```
 
-
 ### Compiling Python
 
-Compiling Python code does not do the same type of code block
+Compiling Python code does not do the same type of code loop
 analysis that compiling C/C++ or Fortran does, so there really
 isn't any speedup involved.  It does create a self-contained
-executable that no longer needs to have Python or a matching
-environment available.
-It may therefore be useful when you are done developing the
+executable that no longer needs to have a matching Python version
+or installed package virtual environment available.
+It is therefore most useful when you are done developing the
 code and want to distribute it as a binary.
 
 Compiling Python code does vary depending on the operating
 system you are on.  In Linux you can compile code by
 adding a flag **-m py_compile** which will create an
-executable in a **__pycach__** directory.
+executable in a **__pycache__** directory.
 
 ```bash
 python -m py_compile python_code.py
@@ -229,7 +246,7 @@ The **mpi4py** package for message-passing is not affected
 since with MPI each task is a separate copy of the same
 program.  In general, the GIL is something to be aware of
 but packages like **pymp** have already done the work of getting
-around the problem.
+around the issue.
 
 
 :::::::::::::::::::::::::::::::::::::: challenge
@@ -318,7 +335,7 @@ what is considered as the Python way.
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Optional Homework - Test the Pi calculation program using **Numba**
-Write a Python vesion of the Pi calculation program and time
+Write a Python version of the Pi calculation program and time
 raw Python code versus **Numba** optimized.
 If you want to have more fun try out **Numba** multi-threading
 compared to **pymp** for this same algorithm.
@@ -366,5 +383,6 @@ Once compiled you should be able to run this with a command like:
 * [Scikit]()
 * [Dask](https://dask.org)
 * [Numba](https://numba.pydata.org)
+* [Parsl python package](https://github.com/Parsl/parsl)
 
 
