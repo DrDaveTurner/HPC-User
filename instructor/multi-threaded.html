@@ -653,71 +653,6 @@ something to be aware of.</p>
 algorithm out of multi-threaded operation and back into single-threaded
 operation. This always leads to terrible scaling and should almost never
 be used.</p>
-<div class="tabs">
-<nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
-<button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
-  <h3 class="tab-header" id="nav-tab-heading-2-Python">
-  Python
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-2-ScalingStudyoftheMulti-ThreadedDotProductCode" name="ScalingStudyoftheMulti-ThreadedDotProductCode" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-ScalingStudyoftheMulti-ThreadedDotProductCode" type="button" role="tab" aria-controls="nav-tabpanel-2-ScalingStudyoftheMulti-ThreadedDotProductCode" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-2-ScalingStudyoftheMulti-ThreadedDotProductCode">
-  Scaling Study of the Multi-Threaded Dot Product Code
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-2-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-R" type="button" role="tab" aria-controls="nav-tabpanel-2-R" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-2-R">
-  R
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-2-Challenge" name="Challenge" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Challenge" type="button" role="tab" aria-controls="nav-tabpanel-2-Challenge" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-2-Challenge">
-  Challenge
-  </h3>
-</button>
-</div>
-</nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-</div>
-<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
-<p>Measure the execution time for the dot_product_threaded.py code for
-1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
-and do all runs in the same job. You can look at the job scripts like
-sb.ddot_py in the <strong>code</strong> directory as an example but your
-job script will probably be different. Then calculate the speedup
-compared to the scalar (single-core) run to see how close to ideal the
-performance is.</p>
-<p>If you want, you may also run a scaling study for the
-<strong>matmult.py</strong> code.</p>
-<div class="callout-content">
-<p>Measure the execution time for the dot_product_threaded.py code for
-1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
-and do all runs in the same job. You can look at the job scripts like
-sb.ddot_py in the <strong>code</strong> directory as an example but your
-job script will probably be different. Then calculate the speedup
-compared to the scalar (single-core) run to see how close to ideal the
-performance is.</p>
-<p>If you want, you may also run a scaling study for the
-<strong>matmult.py</strong> code.</p>
-</div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="scaling-study-of-the-multi-threaded-dot-product-code">Scaling Study of the Multi-Threaded Dot
-Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-multi-threaded-dot-product-code"></a></h3>
-<div class="callout-content">
-<p>Measure the execution time for the dot_product_threaded.py code for
-1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
-and do all runs in the same job. You can look at the job scripts like
-sb.ddot_py in the <strong>code</strong> directory as an example but your
-job script will probably be different. Then calculate the speedup
-compared to the scalar (single-core) run to see how close to ideal the
-performance is.</p>
-<p>If you want, you may also run a scaling study for the
-<strong>matmult.py</strong> code.</p>
-</div>
-</div>
 <div id="scaling-study-of-the-multi-threaded-dot-product-code" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -726,6 +661,36 @@ performance is.</p>
 <h3 class="callout-title">Scaling Study of the Multi-Threaded Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-multi-threaded-dot-product-code"></a>
 </h3>
 <div class="callout-content">
+<div class="tabs">
+<nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-2-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-R" type="button" role="tab" aria-controls="nav-tabpanel-2-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-C" type="button" role="tab" aria-controls="nav-tabpanel-2-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-2-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-2-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-2" class="tab-content">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <p>Measure the execution time for the dot_product_threaded.py code for
 1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
 and do all runs in the same job. You can look at the job scripts like
@@ -736,66 +701,20 @@ performance is.</p>
 <p>If you want, you may also run a scaling study for the
 <strong>matmult.py</strong> code.</p>
 </div>
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<p>Not implemented yet.</p>
+</div>
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<p>Not implemented yet.</p>
 </div>
 </div>
-<p>For this very simple problem, each thread can do its computations
-totally independently. There is only a global sum of all the partial
-sums at the end, so we would expect the scaling to be close to ideal. In
-my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
-cores, and a 7.8x speedup on 16 cores. For this problem, there just are
-so few computations being done in each loop iteration, only 2
-floating-point operations, that the loop overhead is preventing better
-scaling. A C/C++ version of this code using OpenMP for multi-threading
-runs 170 times faster because it is a compiled language, but likewise
-does not scale well due to the few computations being done in each pass
-through the loop.</p>
-<div class="accordion-body">
-<p>For this very simple problem, each thread can do its computations
-totally independently. There is only a global sum of all the partial
-sums at the end, so we would expect the scaling to be close to ideal. In
-my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
-cores, and a 7.8x speedup on 16 cores. For this problem, there just are
-so few computations being done in each loop iteration, only 2
-floating-point operations, that the loop overhead is preventing better
-scaling. A C/C++ version of this code using OpenMP for multi-threading
-runs 170 times faster because it is a compiled language, but likewise
-does not scale well due to the few computations being done in each pass
-through the loop.</p>
 </div>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-<p>For this very simple problem, each thread can do its computations
-totally independently. There is only a global sum of all the partial
-sums at the end, so we would expect the scaling to be close to ideal. In
-my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
-cores, and a 7.8x speedup on 16 cores. For this problem, there just are
-so few computations being done in each loop iteration, only 2
-floating-point operations, that the loop overhead is preventing better
-scaling. A C/C++ version of this code using OpenMP for multi-threading
-runs 170 times faster because it is a compiled language, but likewise
-does not scale well due to the few computations being done in each pass
-through the loop.</p>
-</div>
-</div>
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
-  Show me the solution
-  </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-<p>For this very simple problem, each thread can do its computations
-totally independently. There is only a global sum of all the partial
-sums at the end, so we would expect the scaling to be close to ideal. In
-my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
-cores, and a 7.8x speedup on 16 cores. For this problem, there just are
-so few computations being done in each loop iteration, only 2
-floating-point operations, that the loop overhead is preventing better
-scaling. A C/C++ version of this code using OpenMP for multi-threading
-runs 170 times faster because it is a compiled language, but likewise
-does not scale well due to the few computations being done in each pass
-through the loop.</p>
 </div>
 </div>
 </div>
@@ -806,6 +725,36 @@ through the loop.</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
+<div class="tabs">
+<nav><div id="nav-tab-3" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-3-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-3-Python" type="button" role="tab" aria-controls="nav-tabpanel-3-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-3-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-3-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-3-R" type="button" role="tab" aria-controls="nav-tabpanel-3-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-3-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-3-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-3-C" type="button" role="tab" aria-controls="nav-tabpanel-3-C" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-3-C">
+  C
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-3-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-3-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-3-Fortran" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-3-Fortran">
+  Fortran
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-3-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-3-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-3-Matlab" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-3-Matlab">
+  Matlab
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-3" class="tab-content">
+<div id="nav-tabpanel-3-Python" class="tab-pane show active" aria-labelledby="nav-tab-3-Python" role="tabpanel">
 <p>For this very simple problem, each thread can do its computations
 totally independently. There is only a global sum of all the partial
 sums at the end, so we would expect the scaling to be close to ideal. In
@@ -818,39 +767,17 @@ runs 170 times faster because it is a compiled language, but likewise
 does not scale well due to the few computations being done in each pass
 through the loop.</p>
 </div>
+<div id="nav-tabpanel-3-R" class="tab-pane" aria-labelledby="nav-tab-3-R" role="tabpanel">
+<p>Not implemented yet.</p>
 </div>
+<div id="nav-tabpanel-3-C" class="tab-pane" aria-labelledby="nav-tab-3-C" role="tabpanel">
+<p>Not implemented yet.</p>
 </div>
+<div id="nav-tabpanel-3-Fortran" class="tab-pane" aria-labelledby="nav-tab-3-Fortran" role="tabpanel">
+<p>Not implemented yet.</p>
 </div>
-</div>
-<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-</div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
-<p>Not implemented yet. :::::::::::::::::: solution Not implemented
-yet.</p>
-<div class="callout-content">
-<p>Not implemented yet. :::::::::::::::::: solution Not implemented
-yet.</p>
-</div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title">Challenge</h3>
-<div class="callout-content">
-<p>Not implemented yet. :::::::::::::::::: solution Not implemented
-yet.</p>
-</div>
-</div>
-<div id="discussion1" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion1"></a>
-</h3>
-<div class="callout-content">
-<p>Not implemented yet. :::::::::::::::::: solution Not implemented
-yet.</p>
+<div id="nav-tabpanel-3-Matlab" class="tab-pane" aria-labelledby="nav-tab-3-Matlab" role="tabpanel">
+<p>Not implemented yet.</p>
 </div>
 </div>
 </div>
@@ -858,57 +785,6 @@ yet.</p>
 </div>
 </div>
 </div>
-<div class="section level3">
-<h3 id="c-1">C<a class="anchor" aria-label="anchor" href="#c-1"></a></h3>
-<div id="discussion2" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion2"></a>
-</h3>
-<div class="callout-content">
-<p>Not implemented yet. :::::::::::::::::: solution Not implemented
-yet.</p>
-</div>
-</div>
-</div>
-<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
-</div>
-<div class="section level3">
-<h3 id="fortran-1">Fortran<a class="anchor" aria-label="anchor" href="#fortran-1"></a></h3>
-<div id="discussion3" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion3"></a>
-</h3>
-<div class="callout-content">
-<p>Not implemented yet. :::::::::::::::::: solution Not implemented
-yet.</p>
-</div>
-</div>
-</div>
-<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
-</div>
-<div class="section level3">
-<h3 id="matlab-1">Matlab<a class="anchor" aria-label="anchor" href="#matlab-1"></a></h3>
-<div id="discussion4" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion4"></a>
-</h3>
-<div class="callout-content">
-<p>Not implemented yet. :::::::::::::::::: solution Not implemented
-yet.</p>
-</div>
-</div>
-</div>
-<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
-<p>::::::::::::::::::::::::::</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
