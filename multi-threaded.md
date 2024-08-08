@@ -213,13 +213,14 @@ that force loops in the algorithm out of multi-threaded operation and back into
 single-threaded operation.
 This always leads to terrible scaling and should almost never be used.
 
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Scaling Study of the Multi-Threaded Dot Product Code
+
 :::::::::::::::: group-tab
 
 ### Python
 
-:::::::::::::::::::::::::::::::::::::: challenge
-
-## Scaling Study of the Multi-Threaded Dot Product Code
 Measure the execution time for the dot_product_threaded.py code
 for 1, 4, 8, and 16 cores.  If possible, use a job script
 requesting 16 cores and do all runs in the same job.
@@ -232,7 +233,30 @@ run to see how close to ideal the performance is.
 If you want, you may also run a scaling study for the **matmult.py**
 code.
 
+### R
+
+Not implemented yet.
+
+### C
+
+Not implemented yet.
+
+### Fortran
+
+Not implemented yet.
+
+### Matlab
+
+Not implemented yet.
+
+::::::::::::::::::::::::::
+
+
 :::::::::::::::::: solution
+
+:::::::::::::::: group-tab
+
+### Python
 
 For this very simple problem, each thread can do its computations
 totally independently.  There is only a global sum of all the
@@ -248,46 +272,27 @@ A C/C++ version of this code using OpenMP for multi-threading runs
 but likewise does not scale well due to the
 few computations being done in each pass through the loop.
 
-:::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
-
 ### R
 
-:::::::::::::::::::::::::::::::::::::: challenge
 Not implemented yet.
-:::::::::::::::::: solution
-Not implemented yet.
-:::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### C
 
-:::::::::::::::::::::::::::::::::::::: challenge
 Not implemented yet.
-:::::::::::::::::: solution
-Not implemented yet.
-:::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Fortran
 
-:::::::::::::::::::::::::::::::::::::: challenge
 Not implemented yet.
-:::::::::::::::::: solution
-Not implemented yet.
-:::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Matlab
 
-:::::::::::::::::::::::::::::::::::::: challenge
 Not implemented yet.
-:::::::::::::::::: solution
-Not implemented yet.
-:::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints
