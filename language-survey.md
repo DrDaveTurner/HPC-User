@@ -39,13 +39,13 @@ Capability refers to the routines each language has access to like
 all the statistical functions in R, the wide variety of artificial
 intelligence packages programmed in Python, and the mathematical
 toolboxes in Matlab.
-Useability means the ease of programming and the productivity of the
+Usability means the ease of programming and the productivity of the
 programmer.  A low level language like C is incredibly flexible and
 efficient but is more difficult to program and debug so that program
 development takes longer.
 Performance is unimportant for simple calculations but everything
 as we scale up to more complex and computationally costly runs.
-This is why people often start a project in a less efficient language
+This is why people may start a project in a less efficient language
 and end up needing to switch languages when performance begins to
 limit the science that can be done.
 Parallelizability refers to how many compute cores we can apply
@@ -56,7 +56,7 @@ merits in order to choose an effective approach for each
 project we are interested in.
 
 * Capability - Access to the routines and data structures you need
-* Useability - Ease of programming and productivity
+* Usability - Ease of programming and productivity
 * Performance - How fast is the final code going to run?
 * Parallelizability - How many cores or compute nodes can be used?
 
@@ -70,7 +70,7 @@ choose your language for performance reasons even if that means
 putting extra effort into the programming.
 
 In a university environment it is very common to have less
-efficient languages supported such as Python, R, and Matlab.
+efficient languages supported for computations such as Python, R, and Matlab.
 Even though these are far from efficient computationally, they
 are typically easier to program and can provide greater functionality.
 These factors are often more important in cases where you may have
@@ -83,7 +83,7 @@ It is useful to know a little bit about each language
 so you can decide which is best for a given project 
 or even which languages you want to be proficient at for
 your career.
-The next sections will present the stregths and weaknesses of
+The next sections will present the strengths and weaknesses of
 many languages commonly used in scientific computing.
 Some languages have common practices that are performance
 bottlenecks that need to be avoided, so these will be discussed
@@ -91,11 +91,12 @@ and alternative approaches presented.
 
 ## Overview
 
-* C/C++ and Python are row-major languages with arrays starting at 0
-* Fortran, R, and Matlab are column-major languages with arrays starting at 1
+* C/C++ and Python are row-major languages with arrays starting at 0.
+* Fortran, R, and Matlab are column-major languages with arrays starting at 1.
 
-* C/C++ and Fortran are compiled languages for high-performance
-* Python, R, and Matlab have some optimized libraries for performance
+* C/C++ and Fortran are compiled languages for high-performance.
+* Python, R, and Matlab have some optimized libraries to help with performance.
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 - Performance is just one criteria we need to understand when choosing
