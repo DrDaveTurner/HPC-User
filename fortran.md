@@ -9,8 +9,9 @@ exercises: 5
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- Analyze the merits of Fortran
-- Learn how to compile andd run a Fortran program
+- Analyze the merits of Fortran.
+- Learn how to compile and run a Fortran program.
+- Identify source files for different versions of Fortran.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Modern Fortran
@@ -24,12 +25,12 @@ advanced functionality of C++.
 
 Historically people used the f77 or Fortran 77 standard for a long time
 (defined in 1977).  Modern Fortran has made great strides from this old
-code in adding object oriented programming capabilities and a less stringent
-form.
+standard in adding object oriented programming capabilities 
+and a less stringent form.
 Fortran code is identified by the **.f** suffix or **.F** if there are
-pre-processor commands embedded.  You may also see the **.f90**
+pre-processor commands embedded.  You may also see the **.f90** or **.f95**
 suffix to denote that the code adheres to the fluid formatting of the
-Fortran 90 standard defined in 1990.
+Fortran 90 and 95 standard defined in 1990 and 1995 respectively.
 Files with the **.mod** suffix are modules.
 
 All these newer standards have added capabilities similar to C++
@@ -59,7 +60,7 @@ This memory comes from what internally is called the **stack** which
 is a variable defined on each system.  In our cluster at 
 Kansas State University the default stack size as seen by
 doing **ulimit -a** is set to only a little over 8 MB while
-data arrays can easily exceed a GB at times.
+data arrays can easily exceed gigabyte sizes at times.
 When you exceed the stack size, your job crashes with a segfault
 that will not give you any useful information on what went wrong.
 If you think the stack size may be an issue, you can include
@@ -79,7 +80,7 @@ To compile a Fortran MPI code you will use **mpifort**.
 While there are many compilation options for each of these,
 you can general get by with **-O3** level 3 optimization.
 I also strongly suggest always compiling with **-g**.
-This creaates a symbol table so that if your code crashes you
+This creates a symbol table so that if your code crashes you
 at least get the line number where it failed.
 Without this you get a pretty meaningless onslaught of information
 that won't really give you a clue as to the problem.
@@ -87,7 +88,7 @@ Compiling with **-g** should not slow down your code as long as
 you also use **-O3**, and the extra size of the executable should
 not matter.
 
-Compiling source code to get an executable is actually a two step
+Compiling source code to get an executable is again a two step
 process where source code is compiled into binary object files which
 are combined with any libraries needed in the linking stage.
 For simple applications this may all be done in a single step.
@@ -120,7 +121,7 @@ Each computer system may be set up differently with regard to what
 compilers are available and how they need to be accessed.
 You may need to contact your administrator for help if you are unsure
 whether you have the Intel compiler suite installed, and how
-to access an MPI package if avaiable.
+to access an MPI package if available.
 In my tests on a modern Intel system the raw Fortran code and optimized
 both took 0.14 seconds as did the OpenMP using 1 thread and the
 MPI version using 1 task.
