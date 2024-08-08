@@ -17,8 +17,9 @@ exercises: 10
 ## The C Programming Language
 
 C is a very low level language that is extremely flexible and efficient.
-It is the language used to program the Linux operating system.
-But with all this power comes at a price; it is more difficult to debug.
+It is the language used to program the Linux operating system and
+the Python, Matlab, and much of the R languages.
+But all this power comes at a price; it is more difficult to debug.
 
 C files end in **.c** with header files ending in **.h**.
 It is a row-major language meaning that a matrix is stored by rows
@@ -26,7 +27,7 @@ with elements of each row next to each other.
 Arrays are numbered starting with zero same as with Python.
 
 In C, variable types are less strict to allow for greater flexibility,
-but this makes it more difficult for compilers to catch errors before runtime.
+but this makes it more difficult for compilers to catch errors before run time.
 Memory is dynamically allocated in a raw form and assigned with a pointer to the first
 element, but there is little control after that on how the programmer 
 accesses the memory.  If the program tries to write to memory past what is
@@ -43,7 +44,7 @@ BLAS (Basic Linear Algebra Subroutines) libraries, sparse matrix libraries,
 Linear Algebra Package of LaPack and its multi-processor version
 ScaLapack, FFT (Fast Fourier Analysis) routines, and many others.
 
-**OpenMP** is the permier multi-threaded package available for
+**OpenMP** is the premier multi-threaded package available for
 scientific computing.  There are other methods of doing multi-threaded
 computing like **pThreads** that are just as efficient but harder to use.
 **MPI** is likewise developed specifically for C/C++ and Fortran.
@@ -52,13 +53,13 @@ can rival the rich set of functionality that the OpenMPI and MPICH
 packages provide with the full MPI standard.
 
 C doesn't have as much access to statistical package that have been developed
-for R, nor the mathmatical toolboxes of Matlab and the wide variety of
+for R, nor the mathematical toolboxes of Matlab and the wide variety of
 artificial intelligence toolkits of Python.
 But it is unrivaled in power, performance and flexibility.
 
 ## The C++ Language
 
-C++ is a superset of C, meaning that it starts with C and adds
+C++ is a super set of C, meaning that it starts with C and adds
 functionality beyond.
 Since C can be embedded with C++ code you get the best of both
 worlds with access to the low level capabilities of C along
@@ -74,7 +75,7 @@ it is more difficult to track memory usage and computations, both
 of which are very important in understanding performance issues.
 
 In C++ you also have overloaded operators, meaning that a
-multiplication sign can have differnt meaning
+multiplication sign can have different meaning
 depending on the data types it is applied to.  If it is between 2
 scalar variables then a scalar multiplication is done, while the same
 operator between 2 matrices would do a matrix multiplication.
@@ -94,16 +95,16 @@ Memory and computations are simply less explicit in C++ by design,
 and that can make it more difficult to identify where performance
 issues may lie.
 
-```c
+```cpp
 C = A * B;
 ```
 
 ## C/C++ Compilers
 
-Unlike interpretted languages like Python, R, and Matlab, you have
+Unlike interpreted languages like Python, R, and Matlab, you have
 to compile C and C++ code into an executable before running.
-The compiler performs analyzes the code and optimizes it in ways
-that cannot be done on the fly with interpretted languages making
+The compiler analyzes the code and optimizes it in ways
+that cannot be done on the fly with interpreted languages making
 the resulting executable much more efficient.
 
 The most common compilers are the Gnu compiler **gcc** with the
@@ -111,7 +112,7 @@ C++ version **g++** and the exceptional commercial Intel compilers
 **icc** and **icpc**.  There are many compiler options available
 but you can't go wrong using **-g** to generate a symbol table 
 which will provide a line number where the error occurred in case
-of a crash and **-O3** for high level optimiation.
+of a crash and **-O3** for high-level optimization.
 You compile in the OpenMP pragmas using **-fopenmp** for the Gnu
 compiles and **-openmp** for the Intel compilers.
 
@@ -125,7 +126,7 @@ suffix then all those are linked together with any optimization
 libraries to produce the executable.
 
 Large applications may divide the source code into many smaller
-files for organizational reasons.
+source files for organizational reasons.
 A **Makefile** can be developed that has all the logical directions
 to compile a single application with a single **make** command.
 These dependencies have many advantages, such as speeding up the
@@ -174,7 +175,7 @@ need to tell it to access the OpenMP library using a
 Try a few runs with different numbers of threads to get
 comfortable with running on multiple cores.
 
-If you have an MPI package installed, try compiiling the
+If you have an MPI package installed, try compiling the
 message-passing version using
 **mpicc -g -O3 -o dot_product_c_mpi dot_product_c_mpi.c**
 and running some tests with **mpirun -np 4 dot_product_c_mpi**
