@@ -3693,7 +3693,7 @@ and the optimized version matmult_cblas.c.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>On a modern Intel system the raw scalar code ran in 0.14 seconds as
 did the single-threaded OpenMP and single-task MPI runs. The test on 4
@@ -3914,7 +3914,7 @@ wiki</a></li>
 </div>
 </section></section><section id="aio-python"><p>Content from <a href="python.html">The Python Language</a></p>
 <hr>
-<p>Last updated on 2024-07-25 |
+<p>Last updated on 2024-08-08 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
@@ -3953,16 +3953,16 @@ Python?</li>
 <h3 id="python-performance">Python performance<a class="anchor" aria-label="anchor" href="#python-performance"></a>
 </h3>
 <p>Python is a high-level and extremely flexible language that has broad
-acceptence within the high-performance computing community and more
+acceptance within the high-performance computing community and even more
 broadly with scientific and technical programmers. However, it isn’t a
-performance language in the same manner as the compiled languages of
-C/C++ and Fortran. It is an interpreted language that executes the code
-line by line while compiled languages optimize larger blocks of code
-before execution. At the Department of Energy supercomputing center
-NERSC Python is involved in 25% of the code bases for the complex
+performance language in the same manner as the compiled languages C/C++
+and Fortran. It is an interpreted language that executes the code line
+by line while compiled languages optimize larger blocks of code before
+execution. At the Department of Energy supercomputing center NERSC
+Python is involved in 25% of the code bases for the complex
 applications, but only accounts for 4% of the CPU time on their systems.
 This means that Python has a high level control role while the compiled
-languages are used to do the performance parts.</p>
+languages are used to do the performance computations.</p>
 <p>A matrix multiplication algorithm implemented with raw Python code is
 more than a hundred times slower than raw C code that is compiled. You
 can achieve decent performance with Python only when your code uses the
@@ -3971,7 +3971,8 @@ available such as <strong>NumPy</strong> and <strong>SciPy</strong>
 among many others. Even these can be slower than their compiled language
 counterparts though, as a <strong>NumPy</strong> matrix multiplication
 is still 50%-25% the speed depending on the matrix size compared to a
-<strong>BLAS</strong> library <strong>DGEMM</strong> function.</p>
+<strong>BLAS</strong> library <strong>DGEMM</strong> function available
+for C/C++/Fortran.</p>
 <p>While Python is not intended to be a performance language, there are
 very good options available for parallelization. The
 <strong>pymp</strong> library is a multi-threaded package based on a
@@ -4001,6 +4002,23 @@ advance of when it is needed, and how much optimization it can do on the
 fly, but there also is the option to save the compiled functions so that
 they don’t need to be recompiled for subsequent runs. There are also
 multi-threading options for parallelizing functions.</p>
+<p><strong>Parsl</strong> is a parallelization library for Python that
+very easily allows that programmer to define functions as separate apps
+or applications that can be run on different cores or compute nodes.
+This approach is especially useful in expressing multi-step workflows.
+The link below provides more information on this approach.</p>
+<p><a href="https://github.com/Parsl/parsl" class="external-link">Parsl python package</a></p>
+<p><strong>memory_profiler</strong> is a Python package that allows easy
+profiling of the memory usage of the code. If run externally using the
+<strong>mprof</strong> command it reports the full memory usage of the
+executable which can also be easily plotted. You can also add
+<strong><span class="citation">@profile</span></strong> statements
+before functions to provide line by line memory profiling to help
+identify exactly where in your code your large memory allocations are
+occurring. The link below provides a more detailed explanation with
+examples.</p>
+<p><a href="https://pypi.org/project/memory-profiler/" class="external-link">Memory profiling
+in Python</a></p>
 </div>
 <div class="section level3">
 <h3 id="python-capabilities">Python capabilities<a class="anchor" aria-label="anchor" href="#python-capabilities"></a>
@@ -4014,8 +4032,8 @@ and with advantages like dynamic variable typing. All this makes Python
 a high productivity language enabling programmers to produce code more
 quickly than in many lower level, more computationally efficient
 languages.</p>
-<p>Where this language really shines is in the exstensive selection of
-software pacakges that have been developed for the Python environment.
+<p>Where this language really shines is in the extensive selection of
+software packages that have been developed for the Python environment.
 Some important examples are the TensorFlow and Scikit packages for doing
 Artificial Intelligence and Machine Learning, but Python is commonly
 used in fields as diverse as video processing, data mining, game and
@@ -4033,8 +4051,11 @@ opposite of Python and C in both these respects.</p>
 compiled but not in the same way as C/C++ and Fortran where the compiler
 optimizes whole blocks of code. The Python compiler simply packages the
 code up so that it can run independent of Python or any installed
-packages. There will be an exercise at the end of this section where you
-will be able to test this for yourself.</p>
+packages. This means the user running the ‘compiled’ python executable
+does not need access to the same version of Python nor any virtual
+environment with the python packages installed since everything is
+packaged up in the executable. There will be an exercise at the end of
+this section where you will be able to test this for yourself.</p>
 </div>
 <div class="section level3">
 <h3 id="advantages-of-using-a-virtual-environment">Advantages of using a virtual environment<a class="anchor" aria-label="anchor" href="#advantages-of-using-a-virtual-environment"></a>
@@ -4053,48 +4074,43 @@ installing Python software, I’ll advise them to start with a clean
 virtual environment and that fixes everything.</p>
 <p>Creating a virtual environment is not very difficult. Below is an
 example of creating one called <strong>env-py-3.7.4</strong> where I
-labled it after the version of Python being used. The dollar sign is the
-command prompt to illustrate how the prompt changes while the virtual
-environment is active.</p>
+labeled it after the version of Python being used. Once activated the
+prompt will change to show that you are working in the
+<strong>env-py-3.7.4</strong> environment. You can install any packages
+you need, run your python code, then deactivate the environment when you
+are done. The dollar sign is the command prompt to illustrate how the
+prompt changes while the virtual environment is active.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/virtualenvs</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> ~/virtualenvs</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ve3nv <span class="at">--system-site-packages</span> python-hpc-user</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="bu">source</span> ~/virtualenvs/python-hpc-user/bin/activate</span></code></pre>
-</div>
-<p>Once activated the prompt will change to show that you are working in
-the <strong>env-py-3.7.4</strong> environment. You can install any
-packages you need, run your python code, then deactivate the environment
-when you are done.</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user$</span> pip install numpy scipy</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user</span><span class="kw">)</span><span class="ex">$</span> python python_code.py</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user</span><span class="kw">)</span><span class="ex">$</span> deactivate</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ex">$</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/virtualenvs</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> cd ~/virtualenvs</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">$</span> python <span class="at">-m</span> venv <span class="at">--system-site-packages</span> python-hpc-user</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">$</span> source ~/virtualenvs/python-hpc-user/bin/activate</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user$</span> pip install numpy scipy</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user</span><span class="kw">)</span><span class="ex">$</span> python python_code.py</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="kw">(</span><span class="ex">python-hpc-user</span><span class="kw">)</span><span class="ex">$</span> deactivate</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="ex">$</span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
 <h3 id="compiling-python">Compiling Python<a class="anchor" aria-label="anchor" href="#compiling-python"></a>
 </h3>
-<p>Compiling Python code does not do the same type of code block
-analysis that compiling C/C++ or Fortran does, so there really isn’t any
-speedup involved. It does create a self-contained executable that no
-longer needs to have Python or a matching environment available. It may
-therefore be useful when you are done developing the code and want to
-distribute it as a binary.</p>
+<p>Compiling Python code does not do the same type of code loop analysis
+that compiling C/C++ or Fortran does, so there really isn’t any speedup
+involved. It does create a self-contained executable that no longer
+needs to have a matching Python version or installed package virtual
+environment available. It is therefore most useful when you are done
+developing the code and want to distribute it as a binary.</p>
 <p>Compiling Python code does vary depending on the operating system you
 are on. In Linux you can compile code by adding a flag <strong>-m
 py_compile</strong> which will create an executable in a
-<strong><strong>pycach</strong></strong> directory.</p>
-<div class="codewrapper sourceCode" id="cb3">
+<strong><strong>pycache</strong></strong> directory.</p>
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> py_compile python_code.py</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">mv</span>  __pycache__/python_code.cpython-37.pyc  compiled_python_code.pyc</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> py_compile python_code.py</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">mv</span>  __pycache__/python_code.cpython-37.pyc  compiled_python_code.pyc</span></code></pre>
 </div>
 <p>The executable <strong>compiled_python_code.pyc</strong> will then
 run on systems where Python is not installed and you have no virtual
@@ -4134,7 +4150,7 @@ separate processes and therefore each essentially has its own GIL. The
 since with MPI each task is a separate copy of the same program. In
 general, the GIL is something to be aware of but packages like
 <strong>pymp</strong> have already done the work of getting around the
-problem.</p>
+issue.</p>
 <div id="play-with-the-python-dot-product-examples" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -4158,7 +4174,7 @@ compare with versions written in other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>While the syntax is different, the code is basically the same in each
 language. Performance is much slower for raw Python code than the
@@ -4189,7 +4205,7 @@ difference the highly-tuned library function makes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>If you have already run the optimized C version, you may notice that
 the compiled code still beats the optimized <strong>NumPy</strong>
@@ -4222,7 +4238,7 @@ second time takes advantage of the cached compilation code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Notice that in this code we needed to rewrite the computationally
 intensive loops into functions. This does not take much effort but does
@@ -4256,7 +4272,7 @@ definitely not what is considered as the Python way.</p>
 program using <strong>Numba</strong><a class="anchor" aria-label="anchor" href="#optional-homework---test-the-pi-calculation-program-using-numba"></a>
 </h3>
 <div class="callout-content">
-<p>Write a Python vesion of the Pi calculation program and time raw
+<p>Write a Python version of the Pi calculation program and time raw
 Python code versus <strong>Numba</strong> optimized. If you want to have
 more fun try out <strong>Numba</strong> multi-threading compared to
 <strong>pymp</strong> for this same algorithm. This is a much fairer
@@ -4270,7 +4286,7 @@ comparing it to optimized functions in <strong>NumPy</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>If you do this please contribute your code and timings.</p>
 </div>
@@ -4297,7 +4313,7 @@ active virtual environment meaning that there is no
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Once compiled you should be able to run this with a command like:
 <strong>./matmult.pyc 100</strong>.</p>
@@ -4336,6 +4352,8 @@ documentations</a></li>
 <li><a href="">Scikit</a></li>
 <li><a href="https://dask.org" class="external-link">Dask</a></li>
 <li><a href="https://numba.pydata.org" class="external-link">Numba</a></li>
+<li><a href="https://github.com/Parsl/parsl" class="external-link">Parsl python
+package</a></li>
 </ul>
 </div></section><section id="aio-r"><p>Content from <a href="r.html">The R Language</a></p>
 <hr>
@@ -5046,7 +5064,7 @@ matrix size of 1000 and compare to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>For the 1000x1000 matrices, I measure 5 seconds for the serial code,
 0.7 seconds for the built-in matrix multiply that uses low level
@@ -5079,7 +5097,7 @@ an array size of 100,000,000 and compare to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>I measure serial performance at 0.5 seconds with the built in
 optimized routine at 0.2 seconds on 8 cores for a modest speedup. The
@@ -5115,7 +5133,7 @@ environments.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>If you do develop code for this, let us know so we can consider
 including your work for others to see.</p>
@@ -5467,7 +5485,7 @@ submit the job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The goal is just to start getting you comfortable with compiling and
 submitting GPU jobs. Use <strong>nvcc hello_gpu.cu -o
