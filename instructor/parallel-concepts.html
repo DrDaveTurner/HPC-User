@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parallel Computing Concepts</h1>
-        <p>Last updated on 2024-08-06 |
+        <p>Last updated on 2024-08-08 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/parallel-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -687,11 +687,12 @@ rate.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<p>The unoptimized code uses N_atoms * ( 1 + 21 * NQ ) Flops. The
-optimized version uses N_atoms * ( 13 + 6 * NQ ) Flops. For large NQ the
-speedup would be around 21/6 or 3.5.</p>
+<p>The unoptimized code uses <strong>N_atoms * ( 1 + 21 * NQ )
+Flops</strong>. The optimized version uses <strong>N_atoms * ( 13 + 6 *
+NQ ) Flops</strong>. For large NQ the speedup would be around 21/6 or
+<strong>3.5 times</strong>.</p>
 </div>
 </div>
 </div>
@@ -907,7 +908,7 @@ see the effects of the network (for the 4 cores, try 2 nodes 2 cores vs
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -997,8 +998,8 @@ programs.</li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/parallel-concepts.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/parallel-concepts.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-06",
-  "datePublished": "2024-08-06"
+  "dateModified": "2024-08-08",
+  "datePublished": "2024-08-08"
 }
 
   </script><script>

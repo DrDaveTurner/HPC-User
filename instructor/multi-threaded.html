@@ -409,7 +409,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Multi-Threaded Programs</h1>
-        <p>Last updated on 2024-07-24 |
+        <p>Last updated on 2024-08-08 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/multi-threaded.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -448,41 +448,47 @@
 <p>Most computer languages have the ability to do multi-threaded
 computing. C/C++ and Fortran use the OpenMP package which is by far the
 most well developed. It uses pragma statements to control the
-parallelization of loops. OpenMP is not only extremely efficient, but it
-also provides very advanced features offering greater control on how the
-parallelization is to be done, all without encumbering the programmer
-too much. The <strong>pymp</strong> package for Python is a stripped
-down version of OpenMP supporting just the basic functionality. It is an
-actively developed project and is very efficient and relatively easy to
-use as well. R takes a very different approach in doing multi-threading
-using the <strong>mclapply()</strong> function which is a multi-core
-replacement for the <strong>lapply()</strong> function. This operates
-similarly to OpenMP and pymp but uses a very different syntax. It is
-also not nearly as efficient and requires some non-default choices to
-make it more efficient. Matlab also uses a different syntax in its
-Parallel Computing Toolbox where it uses a <strong>parfor</strong>
-command to do a parallel for loop.</p>
-<p>All of these methods behave basically the same by forking extra
-threads when called. Each thread gets its own virtual memory space, but
-most large arrays are not copied during the initialization stage. If any
-thread writes to an array, only then is that array copied to that
-thread’s memory, and only the page of memory that has been changed. This
-is called a <strong>copy-on-write</strong> method and is handled by the
-operating system. Forking is very efficient in this way, only doing the
-work it needs. For Python, this gets around the Global Interface Lock
-which is designed to protect python objects. Unfortunately the Windows
-operating system does not have support for forking so you cannot run
-multi-threaded Python codes like <strong>pymp</strong> on Windows.
-(Modern Windows systems do have the Windows Subsystem for Linux (WSL).
-Does WSL support forking???)</p>
+parallelization of loops so that multiple compute cores work at the same
+time on different parts of the data. OpenMP is not only extremely
+efficient, but it also provides very advanced features offering greater
+control on how the parallelization is to be done, all without
+encumbering the programmer too much. The <strong>pymp</strong> package
+for Python is a stripped down version of OpenMP supporting just the
+basic functionality. It is an actively developed project and is very
+efficient and relatively easy to use as well. R takes a very different
+approach in doing multi-threading using the <strong>mclapply()</strong>
+function which is a multi-core replacement for the
+<strong>lapply()</strong> function. This operates similarly to OpenMP
+and pymp but uses a very different syntax. It is also not nearly as
+efficient and requires some non-default choices to make it more perform
+better. Matlab also uses a different syntax in its Parallel Computing
+Toolbox where it uses a <strong>parfor</strong> command to do a parallel
+<strong>for</strong> loop.</p>
+<p>All of these methods behave basically the same by forking, or
+splitting off, extra compute threads when called. Each thread gets its
+own virtual memory space, meaning most large arrays are not copied
+during the initialization stage. If any thread writes to an array, only
+then is that array copied to that thread’s memory, and only the page of
+memory (4096 Bytes) that has been changed. This is called a
+<strong>copy-on-write</strong> method and is handled by the operating
+system. Forking is very efficient in this way, only doing the work it
+needs. For Python, this gets around the Global Interface Lock which is
+designed to protect python objects. Unfortunately the Windows operating
+system itself does not have support for the <strong>fork</strong>
+function so you cannot run multi-threaded Python codes like
+<strong>pymp</strong> on Windows, at least from the Power Shell.
+However, if you have the Windows Subsystem for Linux (WSL) installed
+this provides a robust Linux system that bypasses Windows and its
+limitations so <strong>pymp</strong> codes can be run in this
+manner.</p>
 <p>The figure below illustrates how multi-threading works on a dot
 product between two vectors. Since the program uses shared-memory, the
 initialization is done entirely on the main thread of processor 1. Then
 each of 4 threads in this example does a partial sum on the vector
 elements it is responsible for, so all 4 threads are running at the same
 time but operating on different parts of the data. After they have all
-completed their parts, then the master thread sums all for partial sums
-into the dot product and prints it out.</p>
+completed their parts of the computation, the master thread sums all the
+partial sums into the dot product and prints it out.</p>
 <figure><img src="../fig/multi-threaded-dot-product-0.jpg" alt="Shared-memory multi-threaded dot product showing the memory layout of both vectors" class="figure mx-auto d-block"><div class="figcaption">Diagram of a shared-memory multi-threaded dot
 product</div>
 </figure><div class="section level3">
@@ -546,7 +552,7 @@ but is more explicit.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -598,16 +604,16 @@ but is more explicit.</p>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -622,7 +628,7 @@ in the figure above. If instead we use <strong>p.xrange(N)</strong> then
 dynamic scheduling will be used where each index will be assigned to the
 next available thread. This can be very useful if the amount of work in
 each pass through the loop varies greatly. Dynamic scheduling can
-produce much more effient results in cases where there is a great load
+produce much more efficient results in cases where there is a great load
 imbalance.</p>
 </div>
 <div class="section level3">
@@ -631,7 +637,7 @@ imbalance.</p>
 code and to determine how many cores to use for a given problem size.
 That last part is important to understand. If there is too little work
 in each iteration of a loop, then loop overhead can limit scaling.
-Larger problem sets usually scale better.</p>
+Calculations on larger data sets usually scale better.</p>
 <p>A loop may be very scalable in itself, but if there is too much time
 spent in the scalar part of the code like initialization, doing the
 reductions, or doing input at the beginning and output at the end, then
@@ -642,10 +648,76 @@ dynamic scheduling is very important.</p>
 packages. Since they do involve the copy-on-write mechanism, they can
 lead to inefficiency in the loop. In general this is minimal but
 something to be aware of.</p>
-<p>Multi-threading packages like OpenMP and pymp provide locking
-mechanisms and/or methods of having part of a loop done by a single
-thread at a time. This always leads to terrible scaling and should
-almost never be done.</p>
+<p>Multi-threading packages like <strong>OpenMP</strong> and
+<strong>pymp</strong> provide mechanisms that force loops in the
+algorithm out of multi-threaded operation and back into single-threaded
+operation. This always leads to terrible scaling and should almost never
+be used.</p>
+<div class="tabs">
+<nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
+<button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
+  <h3 class="tab-header" id="nav-tab-heading-2-Python">
+  Python
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-ScalingStudyoftheMulti-ThreadedDotProductCode" name="ScalingStudyoftheMulti-ThreadedDotProductCode" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-ScalingStudyoftheMulti-ThreadedDotProductCode" type="button" role="tab" aria-controls="nav-tabpanel-2-ScalingStudyoftheMulti-ThreadedDotProductCode" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-ScalingStudyoftheMulti-ThreadedDotProductCode">
+  Scaling Study of the Multi-Threaded Dot Product Code
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-R" type="button" role="tab" aria-controls="nav-tabpanel-2-R" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-R">
+  R
+  </h3>
+</button>
+<button class="nav-link" id="nav-tab-2-Challenge" name="Challenge" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Challenge" type="button" role="tab" aria-controls="nav-tabpanel-2-Challenge" aria-selected="false">
+  <h3 class="tab-header" id="nav-tab-heading-2-Challenge">
+  Challenge
+  </h3>
+</button>
+</div>
+</nav><div id="nav-tabContent-2" class="tab-content">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+</div>
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<p>Measure the execution time for the dot_product_threaded.py code for
+1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
+and do all runs in the same job. You can look at the job scripts like
+sb.ddot_py in the <strong>code</strong> directory as an example but your
+job script will probably be different. Then calculate the speedup
+compared to the scalar (single-core) run to see how close to ideal the
+performance is.</p>
+<p>If you want, you may also run a scaling study for the
+<strong>matmult.py</strong> code.</p>
+<div class="callout-content">
+<p>Measure the execution time for the dot_product_threaded.py code for
+1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
+and do all runs in the same job. You can look at the job scripts like
+sb.ddot_py in the <strong>code</strong> directory as an example but your
+job script will probably be different. Then calculate the speedup
+compared to the scalar (single-core) run to see how close to ideal the
+performance is.</p>
+<p>If you want, you may also run a scaling study for the
+<strong>matmult.py</strong> code.</p>
+</div>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="scaling-study-of-the-multi-threaded-dot-product-code">Scaling Study of the Multi-Threaded Dot
+Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-multi-threaded-dot-product-code"></a></h3>
+<div class="callout-content">
+<p>Measure the execution time for the dot_product_threaded.py code for
+1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
+and do all runs in the same job. You can look at the job scripts like
+sb.ddot_py in the <strong>code</strong> directory as an example but your
+job script will probably be different. Then calculate the speedup
+compared to the scalar (single-core) run to see how close to ideal the
+performance is.</p>
+<p>If you want, you may also run a scaling study for the
+<strong>matmult.py</strong> code.</p>
+</div>
+</div>
 <div id="scaling-study-of-the-multi-threaded-dot-product-code" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -656,9 +728,74 @@ almost never be done.</p>
 <div class="callout-content">
 <p>Measure the execution time for the dot_product_threaded.py code for
 1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
-and do all runs in the same job. Then calculate the speedup compared to
-the scalar (single-core) run to see how close to ideal the performance
-is.</p>
+and do all runs in the same job. You can look at the job scripts like
+sb.ddot_py in the <strong>code</strong> directory as an example but your
+job script will probably be different. Then calculate the speedup
+compared to the scalar (single-core) run to see how close to ideal the
+performance is.</p>
+<p>If you want, you may also run a scaling study for the
+<strong>matmult.py</strong> code.</p>
+</div>
+</div>
+</div>
+<p>For this very simple problem, each thread can do its computations
+totally independently. There is only a global sum of all the partial
+sums at the end, so we would expect the scaling to be close to ideal. In
+my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
+cores, and a 7.8x speedup on 16 cores. For this problem, there just are
+so few computations being done in each loop iteration, only 2
+floating-point operations, that the loop overhead is preventing better
+scaling. A C/C++ version of this code using OpenMP for multi-threading
+runs 170 times faster because it is a compiled language, but likewise
+does not scale well due to the few computations being done in each pass
+through the loop.</p>
+<div class="accordion-body">
+<p>For this very simple problem, each thread can do its computations
+totally independently. There is only a global sum of all the partial
+sums at the end, so we would expect the scaling to be close to ideal. In
+my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
+cores, and a 7.8x speedup on 16 cores. For this problem, there just are
+so few computations being done in each loop iteration, only 2
+floating-point operations, that the loop overhead is preventing better
+scaling. A C/C++ version of this code using OpenMP for multi-threading
+runs 170 times faster because it is a compiled language, but likewise
+does not scale well due to the few computations being done in each pass
+through the loop.</p>
+</div>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>For this very simple problem, each thread can do its computations
+totally independently. There is only a global sum of all the partial
+sums at the end, so we would expect the scaling to be close to ideal. In
+my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
+cores, and a 7.8x speedup on 16 cores. For this problem, there just are
+so few computations being done in each loop iteration, only 2
+floating-point operations, that the loop overhead is preventing better
+scaling. A C/C++ version of this code using OpenMP for multi-threading
+runs 170 times faster because it is a compiled language, but likewise
+does not scale well due to the few computations being done in each pass
+through the loop.</p>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1">
+  Show me the solution
+  </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>For this very simple problem, each thread can do its computations
+totally independently. There is only a global sum of all the partial
+sums at the end, so we would expect the scaling to be close to ideal. In
+my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
+cores, and a 7.8x speedup on 16 cores. For this problem, there just are
+so few computations being done in each loop iteration, only 2
+floating-point operations, that the loop overhead is preventing better
+scaling. A C/C++ version of this code using OpenMP for multi-threading
+runs 170 times faster because it is a compiled language, but likewise
+does not scale well due to the few computations being done in each pass
+through the loop.</p>
 </div>
 </div>
 </div>
@@ -667,22 +804,111 @@ is.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>For this very simple problem, each thread can do its computations
 totally independently. There is only a global sum of all the partial
 sums at the end, so we would expect the scaling to be close to ideal. In
 my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x speedup on 8
-cores, and a 7.8x speedup on 16 cores. For this problem, there just is
+cores, and a 7.8x speedup on 16 cores. For this problem, there just are
 so few computations being done in each loop iteration, only 2
-floating-pont operations, that the loop overhead is preventing better
-scaling. A C version of this code using OpenMP for multi-threading runs
-170 times faster, but likewise does not scale well due to the few
-computations being done in each pass through the loop.</p>
+floating-point operations, that the loop overhead is preventing better
+scaling. A C/C++ version of this code using OpenMP for multi-threading
+runs 170 times faster because it is a compiled language, but likewise
+does not scale well due to the few computations being done in each pass
+through the loop.</p>
 </div>
 </div>
 </div>
 </div>
+</div>
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+</div>
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<p>Not implemented yet. :::::::::::::::::: solution Not implemented
+yet.</p>
+<div class="callout-content">
+<p>Not implemented yet. :::::::::::::::::: solution Not implemented
+yet.</p>
+</div>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Not implemented yet. :::::::::::::::::: solution Not implemented
+yet.</p>
+</div>
+</div>
+<div id="discussion1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion1"></a>
+</h3>
+<div class="callout-content">
+<p>Not implemented yet. :::::::::::::::::: solution Not implemented
+yet.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="c-1">C<a class="anchor" aria-label="anchor" href="#c-1"></a></h3>
+<div id="discussion2" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion2"></a>
+</h3>
+<div class="callout-content">
+<p>Not implemented yet. :::::::::::::::::: solution Not implemented
+yet.</p>
+</div>
+</div>
+</div>
+<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
+</div>
+<div class="section level3">
+<h3 id="fortran-1">Fortran<a class="anchor" aria-label="anchor" href="#fortran-1"></a></h3>
+<div id="discussion3" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion3"></a>
+</h3>
+<div class="callout-content">
+<p>Not implemented yet. :::::::::::::::::: solution Not implemented
+yet.</p>
+</div>
+</div>
+</div>
+<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
+</div>
+<div class="section level3">
+<h3 id="matlab-1">Matlab<a class="anchor" aria-label="anchor" href="#matlab-1"></a></h3>
+<div id="discussion4" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion4"></a>
+</h3>
+<div class="callout-content">
+<p>Not implemented yet. :::::::::::::::::: solution Not implemented
+yet.</p>
+</div>
+</div>
+</div>
+<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<p>::::::::::::::::::::::::::</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -766,8 +992,8 @@ tutorial</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/multi-threaded.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/multi-threaded.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-24",
-  "datePublished": "2024-08-06"
+  "dateModified": "2024-08-08",
+  "datePublished": "2024-08-08"
 }
 
   </script><script>
