@@ -17,7 +17,9 @@ exercises: 10
 Most computer languages have the ability to do multi-threaded computing.
 C/C++ and Fortran use the OpenMP package which is by far the most well
 developed.
-It uses pragma statements to control the parallelization of loops.
+It uses pragma statements to control the parallelization of loops so 
+that multiple compute cores work at the same time on different parts
+of the data.
 OpenMP is not only extremely efficient, but it also provides very advanced
 features offering greater control on how the parallelization is to be done,
 all without encumbering the programmer too much.
@@ -29,25 +31,28 @@ R takes a very different approach in doing multi-threading using the
 **lapply()** function.
 This operates similarly to OpenMP and pymp but uses a very different syntax.
 It is also not nearly as efficient and requires some non-default choices to
-make it more efficient.
+make it more perform better.
 Matlab also uses a different syntax in its Parallel Computing Toolbox
-where it uses a **parfor** command to do a parallel for loop.
+where it uses a **parfor** command to do a parallel **for** loop.
 
-All of these methods behave basically the same by forking extra threads
-when called.
-Each thread gets its own virtual memory space, but most large arrays are
+All of these methods behave basically the same by forking, or splitting off,
+extra compute threads when called.
+Each thread gets its own virtual memory space, meaning most large arrays are
 not copied during the initialization stage.
 If any thread writes to an array, only then is that array copied to that
-thread's memory, and only the page of memory that has been changed.
+thread's memory, and only the page of memory (4096 Bytes) that has been changed.
 This is called a **copy-on-write** method and is handled by the operating
 system.
 Forking is very efficient in this way, only doing the work it needs.
 For Python, this gets around the Global Interface Lock which is designed
 to protect python objects.
-Unfortunately the Windows operating system does not have support for forking
-so you cannot run multi-threaded Python codes like **pymp** on Windows.
-(Modern Windows systems do have the Windows Subsystem for Linux (WSL).
-Does WSL support forking???)
+Unfortunately the Windows operating system itself does not have support for 
+the **fork** function
+so you cannot run multi-threaded Python codes like **pymp** on Windows,
+at least from the Power Shell.
+However, if you have the Windows Subsystem for Linux (WSL) installed this
+provides a robust Linux system that bypasses Windows and its limitations
+so **pymp** codes can be run in this manner.
 
 The figure below illustrates how multi-threading works on a
 dot product between two vectors.  Since the program uses shared-memory,
@@ -55,8 +60,8 @@ the initialization is done entirely on the main thread of processor 1.
 Then each of 4 threads in this example does a partial sum on the
 vector elements it is responsible for, so all 4 threads are running
 at the same time but operating on different parts of the data.
-After they have all completed their parts, then the master thread
-sums all for partial sums into the dot product and prints it out.
+After they have all completed their parts of the computation, the master thread
+sums all the partial sums into the dot product and prints it out.
 
 ![Diagram of a shared-memory multi-threaded dot product](fig/multi-threaded-dot-product-0.jpg ){alt="Shared-memory multi-threaded dot product showing the memory layout of both vectors"}
 
@@ -178,7 +183,7 @@ If instead we use **p.xrange(N)** then dynamic scheduling will be used
 where each index will be assigned to the next available thread.
 This can be very useful if the amount of work in each pass through the loop
 varies greatly.
-Dynamic scheduling can produce much more effient results in cases where there
+Dynamic scheduling can produce much more efficient results in cases where there
 is a great load imbalance.
 
 ### Understanding what can cause inefficient scaling
@@ -187,7 +192,8 @@ A scaling study is designed to expose inefficiencies in a parallel code
 and to determine how many cores to use for a given problem size.
 That last part is important to understand.
 If there is too little work in each iteration of a loop, then loop overhead
-can limit scaling.  Larger problem sets usually scale better.
+can limit scaling.
+Calculations on larger data  sets usually scale better.
 
 A loop may be very scalable in itself, but if there is too much time spent
 in the scalar part of the code like initialization, doing the reductions,
@@ -202,9 +208,14 @@ Since they do involve the copy-on-write mechanism, they can lead to
 inefficiency in the loop.
 In general this is minimal but something to be aware of.
 
-Multi-threading packages like OpenMP and pymp provide locking mechanisms and/or
-methods of having part of a loop done by a single thread at a time.
-This always leads to terrible scaling and should almost never be done.
+Multi-threading packages like **OpenMP** and **pymp** provide mechanisms
+that force loops in the algorithm out of multi-threaded operation and back into 
+single-threaded operation.
+This always leads to terrible scaling and should almost never be used.
+
+:::::::::::::::: group-tab
+
+### Python
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -212,8 +223,14 @@ This always leads to terrible scaling and should almost never be done.
 Measure the execution time for the dot_product_threaded.py code
 for 1, 4, 8, and 16 cores.  If possible, use a job script
 requesting 16 cores and do all runs in the same job.
+You can look at the job scripts like sb.ddot_py in the **code**
+directory as an example but your job script will probably be
+different.
 Then calculate the speedup compared to the scalar (single-core)
 run to see how close to ideal the performance is.
+
+If you want, you may also run a scaling study for the **matmult.py**
+code.
 
 :::::::::::::::::: solution
 
@@ -223,15 +240,54 @@ partial sums at the end, so we would expect the scaling to be
 close to ideal.
 In my measurements, I saw a 3.1x speedup on 4 cores, a 5.3x
 speedup on 8 cores, and a 7.8x speedup on 16 cores.
-For this problem, there just is so few computations being done
-in each loop iteration, only 2 floating-pont operations, that the
+For this problem, there just are so few computations being done
+in each loop iteration, only 2 floating-point operations, that the
 loop overhead is preventing better scaling.
-A C version of this code using OpenMP for multi-threading runs
-170 times faster, but likewise does not scale well due to the
+A C/C++ version of this code using OpenMP for multi-threading runs
+170 times faster because it is a compiled language,
+but likewise does not scale well due to the
 few computations being done in each pass through the loop.
 
 :::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+### R
+
+:::::::::::::::::::::::::::::::::::::: challenge
+Not implemented yet.
+:::::::::::::::::: solution
+Not implemented yet.
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+### C
+
+:::::::::::::::::::::::::::::::::::::: challenge
+Not implemented yet.
+:::::::::::::::::: solution
+Not implemented yet.
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+### Fortran
+
+:::::::::::::::::::::::::::::::::::::: challenge
+Not implemented yet.
+:::::::::::::::::: solution
+Not implemented yet.
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+### Matlab
+
+:::::::::::::::::::::::::::::::::::::: challenge
+Not implemented yet.
+:::::::::::::::::: solution
+Not implemented yet.
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints

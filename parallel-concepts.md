@@ -192,9 +192,9 @@ expected speedup rate.
 
 :::::::::::::::::: solution
 
-The unoptimized code uses N_atoms * ( 1 + 21 * NQ ) Flops.
-The optimized version uses N_atoms * ( 13 + 6 * NQ ) Flops.
-For large NQ the speedup would be around 21/6 or 3.5.
+The unoptimized code uses **N_atoms * ( 1 + 21 * NQ ) Flops**.
+The optimized version uses **N_atoms * ( 13 + 6 * NQ ) Flops**.
+For large NQ the speedup would be around 21/6 or **3.5 times**.
 
 :::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
