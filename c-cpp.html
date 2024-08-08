@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>C and C++ Languages</h1>
-        <p>Last updated on 2024-07-24 |
+        <p>Last updated on 2024-08-08 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/c-cpp.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -459,17 +459,17 @@ C++?</li>
 <section><h2 class="section-heading" id="the-c-programming-language">The C Programming Language<a class="anchor" aria-label="anchor" href="#the-c-programming-language"></a>
 <a class="anchor" aria-label="anchor" href="#the-c-programming-language"></a></h2>
 <hr class="half-width"><p>C is a very low level language that is extremely flexible and
-efficient. It is the language used to program the Linux operating
-system. But with all this power comes at a price; it is more difficult
-to debug.</p>
+efficient. It is the language used to program the Linux operating system
+and the Python, Matlab, and much of the R languages. But all this power
+comes at a price; it is more difficult to debug.</p>
 <p>C files end in <strong>.c</strong> with header files ending in
 <strong>.h</strong>. It is a row-major language meaning that a matrix is
 stored by rows with elements of each row next to each other. Arrays are
 numbered starting with zero same as with Python.</p>
 <p>In C, variable types are less strict to allow for greater
 flexibility, but this makes it more difficult for compilers to catch
-errors before runtime. Memory is dynamically allocated in a raw form and
-assigned with a pointer to the first element, but there is little
+errors before run time. Memory is dynamically allocated in a raw form
+and assigned with a pointer to the first element, but there is little
 control after that on how the programmer accesses the memory. If the
 program tries to write to memory past what is allocated to that array,
 there is no protection to prevent it from happening. So the programmer
@@ -483,7 +483,7 @@ matrix algorithms in the BLAS (Basic Linear Algebra Subroutines)
 libraries, sparse matrix libraries, Linear Algebra Package of LaPack and
 its multi-processor version ScaLapack, FFT (Fast Fourier Analysis)
 routines, and many others.</p>
-<p><strong>OpenMP</strong> is the permier multi-threaded package
+<p><strong>OpenMP</strong> is the premier multi-threaded package
 available for scientific computing. There are other methods of doing
 multi-threaded computing like <strong>pThreads</strong> that are just as
 efficient but harder to use. <strong>MPI</strong> is likewise developed
@@ -492,12 +492,12 @@ down versions implemented, none can rival the rich set of functionality
 that the OpenMPI and MPICH packages provide with the full MPI
 standard.</p>
 <p>C doesn’t have as much access to statistical package that have been
-developed for R, nor the mathmatical toolboxes of Matlab and the wide
+developed for R, nor the mathematical toolboxes of Matlab and the wide
 variety of artificial intelligence toolkits of Python. But it is
 unrivaled in power, performance and flexibility.</p>
 </section><section><h2 class="section-heading" id="the-c-language">The C++ Language<a class="anchor" aria-label="anchor" href="#the-c-language"></a>
 <a class="anchor" aria-label="anchor" href="#the-c-language"></a></h2>
-<hr class="half-width"><p>C++ is a superset of C, meaning that it starts with C and adds
+<hr class="half-width"><p>C++ is a super set of C, meaning that it starts with C and adds
 functionality beyond. Since C can be embedded with C++ code you get the
 best of both worlds with access to the low level capabilities of C along
 with the high level data structures and programming functionality of
@@ -511,7 +511,7 @@ programmer, but hiding this process also means it is more difficult to
 track memory usage and computations, both of which are very important in
 understanding performance issues.</p>
 <p>In C++ you also have overloaded operators, meaning that a
-multiplication sign can have differnt meaning depending on the data
+multiplication sign can have different meaning depending on the data
 types it is applied to. If it is between 2 scalar variables then a
 scalar multiplication is done, while the same operator between 2
 matrices would do a matrix multiplication. This is why C++ is great for
@@ -528,24 +528,24 @@ the operands are both matrices. Memory and computations are simply less
 explicit in C++ by design, and that can make it more difficult to
 identify where performance issues may lie.</p>
 <div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">CPP<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">*</span> B<span class="op">;</span></span></code></pre>
+<pre class="sourceCode cpp" tabindex="0"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">*</span> B<span class="op">;</span></span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="cc-compilers">C/C++ Compilers<a class="anchor" aria-label="anchor" href="#cc-compilers"></a>
 <a class="anchor" aria-label="anchor" href="#cc-compilers"></a></h2>
-<hr class="half-width"><p>Unlike interpretted languages like Python, R, and Matlab, you have to
+<hr class="half-width"><p>Unlike interpreted languages like Python, R, and Matlab, you have to
 compile C and C++ code into an executable before running. The compiler
-performs analyzes the code and optimizes it in ways that cannot be done
-on the fly with interpretted languages making the resulting executable
-much more efficient.</p>
+analyzes the code and optimizes it in ways that cannot be done on the
+fly with interpreted languages making the resulting executable much more
+efficient.</p>
 <p>The most common compilers are the Gnu compiler <strong>gcc</strong>
 with the C++ version <strong>g++</strong> and the exceptional commercial
 Intel compilers <strong>icc</strong> and <strong>icpc</strong>. There
 are many compiler options available but you can’t go wrong using
 <strong>-g</strong> to generate a symbol table which will provide a line
 number where the error occurred in case of a crash and
-<strong>-O3</strong> for high level optimiation. You compile in the
+<strong>-O3</strong> for high-level optimization. You compile in the
 OpenMP pragmas using <strong>-fopenmp</strong> for the Gnu compiles and
 <strong>-openmp</strong> for the Intel compilers.</p>
 </section><section><h2 class="section-heading" id="makefiles-for-compiling">Makefiles for compiling<a class="anchor" aria-label="anchor" href="#makefiles-for-compiling"></a>
@@ -555,14 +555,14 @@ applications it is typically done in one step. Source files get compiled
 into binary object files with a <strong>.o</strong> suffix then all
 those are linked together with any optimization libraries to produce the
 executable.</p>
-<p>Large applications may divide the source code into many smaller files
-for organizational reasons. A <strong>Makefile</strong> can be developed
-that has all the logical directions to compile a single application with
-a single <strong>make</strong> command. These dependencies have many
-advantages, such as speeding up the compilation process by allowing only
-those source files that have changed to be recompiled into new object
-files. You will get a chance to examine a small makefile in the exercise
-at the end of this lesson.</p>
+<p>Large applications may divide the source code into many smaller
+source files for organizational reasons. A <strong>Makefile</strong> can
+be developed that has all the logical directions to compile a single
+application with a single <strong>make</strong> command. These
+dependencies have many advantages, such as speeding up the compilation
+process by allowing only those source files that have changed to be
+recompiled into new object files. You will get a chance to examine a
+small makefile in the exercise at the end of this lesson.</p>
 </section><section><h2 class="section-heading" id="installing-large-software-packages">Installing large software packages<a class="anchor" aria-label="anchor" href="#installing-large-software-packages"></a>
 <a class="anchor" aria-label="anchor" href="#installing-large-software-packages"></a></h2>
 <hr class="half-width"><p>To install any large software package you will need to read the
@@ -604,7 +604,7 @@ to tell it to access the OpenMP library using a
 <strong>-openmp</strong> for <strong>icc</strong>. Try a few runs with
 different numbers of threads to get comfortable with running on multiple
 cores.</p>
-<p>If you have an MPI package installed, try compiiling the
+<p>If you have an MPI package installed, try compiling the
 message-passing version using <strong>mpicc -g -O3 -o dot_product_c_mpi
 dot_product_c_mpi.c</strong> and running some tests with <strong>mpirun
 -np 4 dot_product_c_mpi</strong> for example.</p>
@@ -707,7 +707,7 @@ Tutorial</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/c-cpp.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/c-cpp.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-24",
+  "dateModified": "2024-08-08",
   "datePublished": "2024-08-08"
 }
 
