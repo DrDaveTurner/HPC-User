@@ -10,7 +10,7 @@ exercises: 5
 
 ::::::::::::::::::::::::::::::::::::: objectives
 - Understand the performance and parallelization characteristics of Matlab.
-- Learn the practicallity of using the Matlab compiler on HPC systems.
+- Learn the practicality of using the Matlab compiler on HPC systems.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -23,7 +23,7 @@ money and has licensing restrictions when you use it.
 The more positive aspect is that it is professionally developed and
 maintained with lots of advanced science modules.
 
-The core Matlab code is interpretted which limits its speed but there
+The core Matlab code is interpreted which limits its speed but there
 are lots of highly optimized and parallelized low level operations that
 often lead to very good performance.
 Users can also parallelize code manually using **parfor** loops which
@@ -93,9 +93,9 @@ When we talk about compiling for C/C++ and Fortran, we are talking
 about analyzing a block of code like the body of a loop to optimize
 the code so that it runs faster.
 Matlab and Python both have compilers but neither does this.
-In both cases the compiler packages up the code, interpretter,
+In both cases the compiler packages up the code, interpreter,
 and libraries into an executable that can be run independently.
-The compmiled code therefore does not run any faster.
+The compiled code therefore does not run any faster.
 
 A programmer will always start by developing and running their code
 in raw form which requires checking out a Matlab license.
@@ -149,13 +149,13 @@ that are too large to fit in the memory of a single computer.
 
 ### Parallelizing loops with **parfor**
 
-When iterations of a for loop do not depend on each other,
+When iterations of a **for** loop do not depend on each other,
 the iterations can be spread across multiple processes 
 within the same compute node in a distributed-memory manner,
 multiple threads in a shared-memory approach, 
 or they can be spread across multiple nodes.
-All 3 appraoches are accomplished
-by changing the for loop to a parfor loop.
+All 3 approaches are accomplished
+by changing the **for** loop to a **parfor** loop.
 Computations will be split across multiple cores whether
 they are on the same compute node or multiple nodes.
 This provides a very easy means of parallelizing code and 
@@ -175,14 +175,14 @@ So if you are working with a 1 GB size matrix and want to run
 on a 128 core AMD system you would have to copy and redundantly
 store 128 GB of data at the start.
 
-The multi-threaded appraoch is designed to avoid this redundant
+The multi-threaded approach is designed to avoid this redundant
 memory use by leaving read-only data sets in place rather than
 copying them to each thread.  This holds much greater promise
-cenceptually, but tests with a simple parallel matrix multiplication
+conceptually, but tests with a simple parallel matrix multiplication
 are showing much slower times than expected. 
 Even a parallel dot product which is trivially parallel takes
 longer than the serial version so it is unclear how useful
-even the multi-threaded parfor is in general.
+even the multi-threaded **parfor** is in general.
 
 So while Matlab provides an easy-to-use and flexible parallel programming
 environment with **parfor**, it can suffer greatly when
@@ -193,7 +193,7 @@ using this approach mostly for trivially parallel algorithms
 and smaller data sets and testing very carefully.
 
 **NOTE: Loop iterations are non-deterministic and 
-indicies must be consecutive increasing integers,
+indices must be consecutive increasing integers,
 and there is no nesting of loops allowed.**
 
 
@@ -208,7 +208,7 @@ from those available for Matlab.
 
 There is a **parallel** toolbox that is well developed.
 This provides a local parallel execution environment similar
-to the single-node multi-process capability of parpool.
+to the single-node multi-process capability of **parpool**.
 There are also tools to work with clusters of computers,
 but these are more similar to message-passing commands where
 you manually send and receive data to and from remote processes
@@ -218,7 +218,8 @@ and manually initiate function evaluation.
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Test the performance of the Matlab matrix multiplication code.
-Test the performance of the **matmult.m** code for a matrix size of 
+If you have access to a Matlab license or Octave,
+test the performance of the **matmult.m** code for a matrix size of 
 1000 and compare to other languages.
 
 :::::::::::::::::: solution
@@ -248,8 +249,8 @@ Test the performance of the **dot_product.m** code for an array size of
 
 I measure serial performance at 0.5 seconds with the built in optimized
 routine at 0.2 seconds on 8 cores for a modest speedup.
-The multi-core parfor loop on the same 8 cores takes 2.1 seconds while
-the multi-threaded parfor loop takes a disappointing 0.9 seconds which
+The multi-core **parfor** loop on the same 8 cores takes 2.1 seconds while
+the multi-threaded **parfor** loop takes a disappointing 0.9 seconds which
 is still greater than the serial code.
 The overhead for using these methods is still much larger than the
 performance gain which indicates the parfor method should only really
@@ -283,14 +284,14 @@ The greatest value of Matlab is the very wide range of professionally
 developed and maintained packages that are available in many areas
 of science.
 This comes at a financial cost that often limits how codes can be used,
-but some of this can be circumvented in an HPC environment by using
-the Matlab mcc compiler to create an executable that does not need 
+but some of this can be alleviated in an HPC environment by using
+the Matlab **mcc** compiler to create an executable that does not need 
 a license to run on many compute nodes at once.
 
 Matlab code itself is not that fast, but it uses highly-optimized
-library routines seemlessly whenever possible.
+library routines seamlessly whenever possible.
 Adding parallelism into a code manually is often as easy as changing
-the for loop to a parfor loop, but flexibility and ease of use 
+the **for** loop to a **parfor** loop, but flexibility and ease of use 
 often do not produce efficient code.
 These methods are probably only useful for trivially parallel algorithms.
 

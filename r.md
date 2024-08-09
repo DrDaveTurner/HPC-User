@@ -71,7 +71,7 @@ However, it is very common in scientific codes to want to instead have
 all parallel tasks operate on a shared-memory object like the resulting
 matrix in our matrix multiplication example.
 People in the R community often refer to back-end methods that use 
-a **fork** as shared-memory since the data structures can be referrenced
+a **fork** as shared-memory since the data structures can be referenced
 in place in a shared manner as long as they are not written to.
 This is quite different than what the HPC community refers to as
 shared-memory, where all threads can write to a common data structure
@@ -161,7 +161,7 @@ whole dataframes to files than the line-by-line approaches that
 other languages use.
 Dataframes in R are designed internally to be very flexible to
 enable all of this, but this same design choice makes them
-extemely inneficient from a computational view when working
+extremely inefficient from a computational view when working
 with larger data sets.
 
 The best example of this is the **rbind()** function which is 
@@ -196,7 +196,7 @@ pre-allocate the structure and insert values rather than having
 to constantly rebuild the dataframe structure.
 There will be an exercise at the end of this section that will
 allow you to see the difference in the code and measure the 
-performance of each appraoch.
+performance of each approach.
 
 
 ## Parallelizing R code
@@ -247,7 +247,7 @@ In our matrix multiplication example code we use
 the **mcparallel** back-end and the **bigmemory** package.
 These are designed to work on matrices, but would not work if you
 for example wanted all threads to work on a different data structure
-like a shared-memroy data.table.
+like a shared-memory data.table.
 
 
 ### mclapply() pitfalls
@@ -261,7 +261,7 @@ means that the number of iterations is divided among the available
 cores at the start.  This is highly recommended since if this is
 turned off the system will fork a new process for each iteration,
 do the work, then collapse that fork.  This can be incredibly 
-innefficient since it means copying data structures many times over
+inefficient since it means copying data structures many times over
 so it should in general be avoided.
 If you do try this, make sure to check the performance for both options
 as this choice can drastically effect the efficiency
@@ -398,7 +398,7 @@ to **%dopar%**, but setting up writable shared-memory is difficult
 to impossible.
 Each back-end package has different capabilities and efficiencies
 so it can be difficult to decide which approach is best.
-While it is possible to achieve good performnace with R code,
+While it is possible to achieve good performance with R code,
 much of the work involves programming around the built-in
 capabilities using optimized add-on libraries, and you have
 to understand which of the many packages to utilize.
