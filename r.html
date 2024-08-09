@@ -419,7 +419,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The R Language</h1>
-        <p>Last updated on 2024-07-24 |
+        <p>Last updated on 2024-08-09 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/r.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -438,7 +438,8 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>What are the strengths and weaknesses of the R language?</li>
+<ul><li>What are the strengths and weaknesses of the R programming
+language?</li>
 </ul></div>
 </div>
 </div>
@@ -448,7 +449,7 @@
 <h3 class="card-title">Objectives</h3>
 <ul><li>Analyze the merits of the R Language.</li>
 <li>Learn what to avoid in R when performance is important.</li>
-<li>Learn how to parallelize R code.</li>
+<li>Learn a little about how to parallelize R code.</li>
 </ul></div>
 </div>
 </div>
@@ -459,12 +460,12 @@
 <hr class="half-width"><p>R is a high level programming language with an extremely rich set of
 internal functions and add-on packages for statistical analysis and
 other scientific programming. It is an interpretive language and
-therefore the performance is not great. While there are ways to write R
-code that performs better, it does take more work than in other
+therefore the raw performance is not great. While there are ways to
+write R code that performs better, it does take more work than in other
 languages due to the many performance pitfalls inherent in the language,
-and often you have to use sift through the external packages to find
-ones that work well for your needs. This section will try to identify
-those pitfalls and present higher-performing alternatives.</p>
+and often you have to sift through the the many external packages to
+find ones that work well for your needs. This section will try to
+identify those pitfalls and present higher-performing alternatives.</p>
 <p>R code is identified with the <strong>.R</strong> ending. External
 add-on packages are installed into the user’s base directory under a
 sub-directory also named <strong>R</strong>. These packages can be
@@ -472,8 +473,8 @@ easily installed from the <strong>CRAN</strong> mirrors using commands
 like <strong>install.packages(“data.table”)</strong> then referenced in
 the code with a similar statement like
 <strong>library(data.table)</strong>. The wide range of scientific and
-code packages available in R, and their ease of installation and use,
-are its real strength.</p>
+code packages available in R and their ease of installation and use are
+its real strengths.</p>
 <p>R programs can be run through the Linux command line interface (CLI),
 submitted to batch queues, or run interactively from the CLI or the
 popular graphical user interface Rstudio. The package Rshiny also makes
@@ -552,21 +553,21 @@ performance.</p>
 <h3 id="profiling-function">Profiling function<a class="anchor" aria-label="anchor" href="#profiling-function"></a></h3>
 <p>As with most languages there are many methods that can be used to
 time sections of code in order to understand where time is being spent.
-The best options are to bracket the code of interest with calls like
-<strong>t_start &lt;- proc.time()[[3]]</strong> and <strong>t_end &lt;-
-proc.time()[[3]]</strong> then take the difference. The
+For R the best options are to bracket the code of interest with calls
+like <strong>t_start &lt;- proc.time()[[3]]</strong> and <strong>t_end
+&lt;- proc.time()[[3]]</strong> then take the difference. The
 <strong>proc.time()</strong> function will provide the best clock
 available and the <strong>[[3]]</strong> part takes the elapsed or real
 time that we want. The <strong>system.time()</strong> function can also
 be used which returns the time taken to execute the function put in the
 parentheses. This uses the same <strong>proc.time()</strong> clock but
-may provide a more convenient method is some cases.</p>
+may provide a more convenient method in some cases.</p>
 <p>Another common approach that should be avoided is to use the
 <strong>Sys.time()</strong> function. This similarly reports the time
 between the bracketed code, but it by default auto-adjusts the units to
 the length of the interval. So if your code takes 59 seconds it will
 report 59, but if the same code takes 60 seconds it will auto-adjust to
-minutes and report 1 instead. You can and alway should manually specify
+minutes and report 1 instead. You can and always should manually specify
 the units if you choose to use this function.</p>
 </div>
 <div class="section level3">
@@ -576,25 +577,26 @@ The results from loops or functions are often returned in the form of
 dataframes, and the input and output of data is built more on dumping
 out whole dataframes to files than the line-by-line approaches that
 other languages use. Dataframes in R are designed internally to be very
-flexible to enable all of this, but this same implementation makes them
+flexible to enable all of this, but this same design choice makes them
 extemely inneficient from a computational view when working with larger
 data sets.</p>
 <p>The best example of this is the <strong>rbind()</strong> function
 which is used to build a dataframe. It is very common to build a row of
-data then use <strong>rbind()</strong> to add it to the dataframe, but
-internally R must allocate an entirely new area of memory and copy all
-the existing data over as well as the new data. This is because R is a
-column-major language so elements in a column are stored next to each
-other. If R was row-major then other alternatives would be present like
-having an array pointing to each row in memory.</p>
+data using <strong>cbind()</strong>then use <strong>rbind()</strong> to
+add the row to the dataframe table, but internally R must allocate an
+entirely new area of memory and copy all the existing data over as well
+as the new data. This is because R is a column-major language so
+elements in a column are stored next to each other. If R was row-major
+then other alternatives would be present like having an array pointing
+to each row in memory.</p>
 <p>Having to recopy the entire dataframe each time a row is added is an
 enormous performance penalty. I was approached with an R code and asked
 to optimize and parallelize it since it was going to take a month of
 runtime to complete. We generated a test case that took one hour, and
 after commenting out only the <strong>rbind()</strong> function the
 calculations took only 5 seconds. All the rest of the time was spent
-copying the dataframe data to new memory each time a row was added to
-the bottom.</p>
+copying the dataframe data to newly allocated memory each time a row was
+added to the bottom.</p>
 <p>If the code is building the dataframe just to dump it out to a file,
 then one option is to simply print each row to file. R isn’t really
 designed as well for this so it isn’t always optimal, but often is a
@@ -634,7 +636,8 @@ recommended to use a back-end library based on <strong>fork()</strong>,
 but Windows does not support this functionality so you may need to
 consider other options that fully copy all data structures at the start
 or even a socket-based cluster if you think your code might need to run
-on Windows.</p>
+on Windows. Another option would be to install the Windows Subsystem for
+Linux (WSL) which supports the <strong>fork)</strong> function.</p>
 <p>The basic parallelization model for both approaches is the same, to
 have each pass through the loop executed on different cores with one
 line of data being returned for each iteration in the form of a list or
@@ -655,7 +658,7 @@ to use since you mostly need to supply the number of cores through the
 the parallelization is done. The <strong>mc.preschedule=True</strong>
 argument is the default, and this means that the number of iterations is
 divided among the available cores at the start. This is highly
-recommended since the if this is turned off the system will fork a new
+recommended since if this is turned off the system will fork a new
 process for each iteration, do the work, then collapse that fork. This
 can be incredibly innefficient since it means copying data structures
 many times over so it should in general be avoided. If you do try this,
@@ -864,20 +867,20 @@ correct direction with some of these performance oriented issues.</p>
 </div>
 <div class="section level3">
 <h3 id="links-for-additional-information">Links for additional information<a class="anchor" aria-label="anchor" href="#links-for-additional-information"></a></h3>
-<ul><li><p><a href="https://www.r-project.org/other-docs.html" class="external-link">R
-documentation</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/foreach/vignettes/foreach.html" class="external-link">Foreach
-function</a></p></li>
-<li><p><a href="https://www.rdocumentation.org/packages/parallel/versions/3.4.0/topics/mclapply" class="external-link">mclapply
-function</a></p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="external-link">data.table
-package</a></p></li>
-<li><p><a href="https://github.com/snoweye/pbdMPI" class="external-link">Programming with Big
-Data - MPI package</a></p></li>
-<li><p><a href="https://github.com/RBigData/pbdDMAT" class="external-link">pdbDMAT
-package</a></p></li>
-<li><p><a href="https://www.rstudio.com" class="external-link">Rstudio</a></p></li>
-<li><p><a href="https://shiny.rstudio.com" class="external-link">Rshiny</a></p></li>
+<ul><li><a href="https://www.r-project.org/other-docs.html" class="external-link">R
+documentation</a></li>
+<li><a href="https://cran.r-project.org/web/packages/foreach/vignettes/foreach.html" class="external-link">Foreach
+function</a></li>
+<li><a href="https://www.rdocumentation.org/packages/parallel/versions/3.4.0/topics/mclapply" class="external-link">mclapply
+function</a></li>
+<li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="external-link">data.table
+package</a></li>
+<li><a href="https://github.com/snoweye/pbdMPI" class="external-link">Programming with Big
+Data - MPI package</a></li>
+<li><a href="https://github.com/RBigData/pbdDMAT" class="external-link">pdbDMAT
+package</a></li>
+<li><a href="https://www.rstudio.com" class="external-link">Rstudio</a></li>
+<li><a href="https://shiny.rstudio.com" class="external-link">Rshiny</a></li>
 </ul></div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
@@ -937,8 +940,8 @@ package</a></p></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/r.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/r.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-24",
-  "datePublished": "2024-08-08"
+  "dateModified": "2024-08-09",
+  "datePublished": "2024-08-09"
 }
 
   </script><script>
