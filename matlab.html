@@ -419,7 +419,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The Matlab Language</h1>
-        <p>Last updated on 2024-07-16 |
+        <p>Last updated on 2024-08-09 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/matlab.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -448,7 +448,7 @@
 <h3 class="card-title">Objectives</h3>
 <ul><li>Understand the performance and parallelization characteristics of
 Matlab.</li>
-<li>Learn the practicallity of using the Matlab compiler on HPC
+<li>Learn the practicality of using the Matlab compiler on HPC
 systems.</li>
 </ul></div>
 </div>
@@ -462,7 +462,7 @@ science and mathematics. The obvious drawback of it being commercial
 software is that it costs money and has licensing restrictions when you
 use it. The more positive aspect is that it is professionally developed
 and maintained with lots of advanced science modules.</p>
-<p>The core Matlab code is interpretted which limits its speed but there
+<p>The core Matlab code is interpreted which limits its speed but there
 are lots of highly optimized and parallelized low level operations that
 often lead to very good performance. Users can also parallelize code
 manually using <strong>parfor</strong> loops which are easy to implement
@@ -520,8 +520,8 @@ as costs.</p>
 about analyzing a block of code like the body of a loop to optimize the
 code so that it runs faster. Matlab and Python both have compilers but
 neither does this. In both cases the compiler packages up the code,
-interpretter, and libraries into an executable that can be run
-independently. The compmiled code therefore does not run any faster.</p>
+interpreter, and libraries into an executable that can be run
+independently. The compiled code therefore does not run any faster.</p>
 <p>A programmer will always start by developing and running their code
 in raw form which requires checking out a Matlab license. If you need to
 share your Matlab code with others who do not have access to a Matlab
@@ -568,15 +568,16 @@ large to fit in the memory of a single computer.</p>
 <div class="section level3">
 <h3 id="parallelizing-loops-with-parfor">Parallelizing loops with <strong>parfor</strong>
 <a class="anchor" aria-label="anchor" href="#parallelizing-loops-with-parfor"></a></h3>
-<p>When iterations of a for loop do not depend on each other, the
-iterations can be spread across multiple processes within the same
-compute node in a distributed-memory manner, multiple threads in a
+<p>When iterations of a <strong>for</strong> loop do not depend on each
+other, the iterations can be spread across multiple processes within the
+same compute node in a distributed-memory manner, multiple threads in a
 shared-memory approach, or they can be spread across multiple nodes. All
-3 appraoches are accomplished by changing the for loop to a parfor loop.
-Computations will be split across multiple cores whether they are on the
-same compute node or multiple nodes. This provides a very easy means of
-parallelizing code and the flexibility of running the same code in a
-variety of parallel environments.</p>
+3 approaches are accomplished by changing the <strong>for</strong> loop
+to a <strong>parfor</strong> loop. Computations will be split across
+multiple cores whether they are on the same compute node or multiple
+nodes. This provides a very easy means of parallelizing code and the
+flexibility of running the same code in a variety of parallel
+environments.</p>
 <p>This flexibility comes with a prices though. Distributed-memory
 approaches are often only efficient when the flow of data between
 processes is careful controlled which is not possible here. It often
@@ -587,20 +588,21 @@ which can lead to extra execution time for the communications and much
 extra memory usage. So if you are working with a 1 GB size matrix and
 want to run on a 128 core AMD system you would have to copy and
 redundantly store 128 GB of data at the start.</p>
-<p>The multi-threaded appraoch is designed to avoid this redundant
+<p>The multi-threaded approach is designed to avoid this redundant
 memory use by leaving read-only data sets in place rather than copying
-them to each thread. This holds much greater promise cenceptually, but
+them to each thread. This holds much greater promise conceptually, but
 tests with a simple parallel matrix multiplication are showing much
 slower times than expected. Even a parallel dot product which is
 trivially parallel takes longer than the serial version so it is unclear
-how useful even the multi-threaded parfor is in general.</p>
+how useful even the multi-threaded <strong>parfor</strong> is in
+general.</p>
 <p>So while Matlab provides an easy-to-use and flexible parallel
 programming environment with <strong>parfor</strong>, it can suffer
 greatly when dealing with large data sets and complex algorithms, and
 doesn’t even do all that well on simple algorithms. From these tests so
 far I would recommend using this approach mostly for trivially parallel
 algorithms and smaller data sets and testing very carefully.</p>
-<p><strong>NOTE: Loop iterations are non-deterministic and indicies must
+<p><strong>NOTE: Loop iterations are non-deterministic and indices must
 be consecutive increasing integers, and there is no nesting of loops
 allowed.</strong></p>
 </div>
@@ -614,10 +616,11 @@ available for Octave but these are different from those available for
 Matlab.</p>
 <p>There is a <strong>parallel</strong> toolbox that is well developed.
 This provides a local parallel execution environment similar to the
-single-node multi-process capability of parpool. There are also tools to
-work with clusters of computers, but these are more similar to
-message-passing commands where you manually send and receive data to and
-from remote processes and manually initiate function evaluation.</p>
+single-node multi-process capability of <strong>parpool</strong>. There
+are also tools to work with clusters of computers, but these are more
+similar to message-passing commands where you manually send and receive
+data to and from remote processes and manually initiate function
+evaluation.</p>
 <div id="test-the-performance-of-the-matlab-matrix-multiplication-code." class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -626,8 +629,9 @@ from remote processes and manually initiate function evaluation.</p>
 <h3 class="callout-title">Test the performance of the Matlab matrix multiplication code.<a class="anchor" aria-label="anchor" href="#test-the-performance-of-the-matlab-matrix-multiplication-code."></a>
 </h3>
 <div class="callout-content">
-<p>Test the performance of the <strong>matmult.m</strong> code for a
-matrix size of 1000 and compare to other languages.</p>
+<p>If you have access to a Matlab license or Octave, test the
+performance of the <strong>matmult.m</strong> code for a matrix size of
+1000 and compare to other languages.</p>
 </div>
 </div>
 </div>
@@ -673,12 +677,12 @@ an array size of 100,000,000 and compare to other languages.</p>
 <div class="accordion-body">
 <p>I measure serial performance at 0.5 seconds with the built in
 optimized routine at 0.2 seconds on 8 cores for a modest speedup. The
-multi-core parfor loop on the same 8 cores takes 2.1 seconds while the
-multi-threaded parfor loop takes a disappointing 0.9 seconds which is
-still greater than the serial code. The overhead for using these methods
-is still much larger than the performance gain which indicates the
-parfor method should only really be used for very coarse grained
-algorithms.</p>
+multi-core <strong>parfor</strong> loop on the same 8 cores takes 2.1
+seconds while the multi-threaded <strong>parfor</strong> loop takes a
+disappointing 0.9 seconds which is still greater than the serial code.
+The overhead for using these methods is still much larger than the
+performance gain which indicates the parfor method should only really be
+used for very coarse grained algorithms.</p>
 </div>
 </div>
 </div>
@@ -718,15 +722,15 @@ including your work for others to see.</p>
 <hr class="half-width"><p>The greatest value of Matlab is the very wide range of professionally
 developed and maintained packages that are available in many areas of
 science. This comes at a financial cost that often limits how codes can
-be used, but some of this can be circumvented in an HPC environment by
-using the Matlab mcc compiler to create an executable that does not need
-a license to run on many compute nodes at once.</p>
+be used, but some of this can be alleviated in an HPC environment by
+using the Matlab <strong>mcc</strong> compiler to create an executable
+that does not need a license to run on many compute nodes at once.</p>
 <p>Matlab code itself is not that fast, but it uses highly-optimized
-library routines seemlessly whenever possible. Adding parallelism into a
-code manually is often as easy as changing the for loop to a parfor
-loop, but flexibility and ease of use often do not produce efficient
-code. These methods are probably only useful for trivially parallel
-algorithms.</p>
+library routines seamlessly whenever possible. Adding parallelism into a
+code manually is often as easy as changing the <strong>for</strong> loop
+to a <strong>parfor</strong> loop, but flexibility and ease of use often
+do not produce efficient code. These methods are probably only useful
+for trivially parallel algorithms.</p>
 <p>Octave is a viable option to avoid the cost of Matlab, and has many
 add-on packages of its own as well as parallel computing capabilities.
 You should however only expect the more basic Matlab codes to run with
@@ -813,7 +817,7 @@ Toolboxes and Examples</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/matlab.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/matlab.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-16",
+  "dateModified": "2024-08-09",
   "datePublished": "2024-08-09"
 }
 

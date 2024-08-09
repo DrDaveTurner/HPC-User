@@ -506,7 +506,7 @@ have all parallel tasks operate on a shared-memory object like the
 resulting matrix in our matrix multiplication example. People in the R
 community often refer to back-end methods that use a
 <strong>fork</strong> as shared-memory since the data structures can be
-referrenced in place in a shared manner as long as they are not written
+referenced in place in a shared manner as long as they are not written
 to. This is quite different than what the HPC community refers to as
 shared-memory, where all threads can write to a common data structure
 and it is up to the programmer to ensure that threads don’t obstruct
@@ -580,7 +580,7 @@ dataframes, and the input and output of data is built more on dumping
 out whole dataframes to files than the line-by-line approaches that
 other languages use. Dataframes in R are designed internally to be very
 flexible to enable all of this, but this same design choice makes them
-extemely inneficient from a computational view when working with larger
+extremely inefficient from a computational view when working with larger
 data sets.</p>
 <p>The best example of this is the <strong>rbind()</strong> function
 which is used to build a dataframe. It is very common to build a row of
@@ -609,7 +609,7 @@ but is immensely more efficient than a dataframe since you can
 pre-allocate the structure and insert values rather than having to
 constantly rebuild the dataframe structure. There will be an exercise at
 the end of this section that will allow you to see the difference in the
-code and measure the performance of each appraoch.</p>
+code and measure the performance of each approach.</p>
 </div>
 </section><section><h2 class="section-heading" id="parallelizing-r-code">Parallelizing R code<a class="anchor" aria-label="anchor" href="#parallelizing-r-code"></a>
 <a class="anchor" aria-label="anchor" href="#parallelizing-r-code"></a></h2>
@@ -650,7 +650,7 @@ approach even though it is a very common need. In our matrix
 multiplication example code we use the <strong>mcparallel</strong>
 back-end and the <strong>bigmemory</strong> package. These are designed
 to work on matrices, but would not work if you for example wanted all
-threads to work on a different data structure like a shared-memroy
+threads to work on a different data structure like a shared-memory
 data.table.</p>
 <div class="section level3">
 <h3 id="mclapply-pitfalls">mclapply() pitfalls<a class="anchor" aria-label="anchor" href="#mclapply-pitfalls"></a></h3>
@@ -662,7 +662,7 @@ argument is the default, and this means that the number of iterations is
 divided among the available cores at the start. This is highly
 recommended since if this is turned off the system will fork a new
 process for each iteration, do the work, then collapse that fork. This
-can be incredibly innefficient since it means copying data structures
+can be incredibly inefficient since it means copying data structures
 many times over so it should in general be avoided. If you do try this,
 make sure to check the performance for both options as this choice can
 drastically effect the efficiency of the resulting parallel
@@ -687,7 +687,7 @@ to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
 optimized built-in matrix multiplication function. Be aware that the
@@ -722,7 +722,7 @@ data frame increases. Time runs of <strong>rbind.R</strong> for 10, 100,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>While rbind() is convenient and works well for small data frames, the
 time to add rows begins to increase exponentially for data frames around
@@ -753,7 +753,7 @@ rows and compare to the rbind() results.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>For 1,000 rows I measured 0.12 seconds for a data table set()
 compared to 5.4 seconds for a data table assignment and 1.1 second for a
@@ -790,7 +790,7 @@ you have to use data tables and the set() function.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>For 10,000 rows I saw similar results for each function, but for
 100,000 rows <strong>fread()</strong> was 10 times faster than
@@ -823,7 +823,7 @@ program.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>I would love to have a pdbMPI-based matrix multiply code available
 for people to look at and test if anyone finds one.</p>
@@ -850,7 +850,7 @@ desired number of cores and changing the <strong>%do%</strong> in a
 up writable shared-memory is difficult to impossible. Each back-end
 package has different capabilities and efficiencies so it can be
 difficult to decide which approach is best. While it is possible to
-achieve good performnace with R code, much of the work involves
+achieve good performance with R code, much of the work involves
 programming around the built-in capabilities using optimized add-on
 libraries, and you have to understand which of the many packages to
 utilize. It is hoped that this section can at least steer people in the
