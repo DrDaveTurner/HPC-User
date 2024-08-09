@@ -5,13 +5,13 @@ exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-- What are the strengths and weaknesses of the R language?
+- What are the strengths and weaknesses of the R programming language?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 - Analyze the merits of the R Language.
 - Learn what to avoid in R when performance is important.
-- Learn how to parallelize R code.
+- Learn a little about how to parallelize R code.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
  
@@ -20,11 +20,11 @@ exercises: 15
 R is a high level programming language with an extremely rich
 set of internal functions and add-on packages for statistical
 analysis and other scientific programming.
-It is an interpretive language and therefore the performance
+It is an interpretive language and therefore the raw performance
 is not great.  While there are ways to write R code that performs
 better, it does take more work than in other languages due to the
 many performance pitfalls inherent in the language, and often you
-have to use sift through the external packages to find ones that
+have to sift through the the many external packages to find ones that
 work well for your needs.
 This section will try to
 identify those pitfalls and present higher-performing alternatives.
@@ -35,9 +35,8 @@ sub-directory also named **R**.  These packages can be easily installed
 from the **CRAN** mirrors using commands like
 **install.packages("data.table")** then referenced in the code
 with a similar statement like **library(data.table)**.
-The wide range of scientific and code packages available in R,
-and their ease of installation and use,
-are its real strength.
+The wide range of scientific and code packages available in R
+and their ease of installation and use are its real strengths.
 
 R programs can be run through the Linux command line interface (CLI),
 submitted to batch queues, or run interactively from the 
@@ -132,7 +131,7 @@ are inhibiting performance.
 As with most languages there are many methods that can
 be used to time sections of code in order to understand
 where time is being spent.
-The best options are to bracket the code of interest with
+For R the best options are to bracket the code of interest with
 calls like **t_start <- proc.time()[[3]]** and 
 **t_end <- proc.time()[[3]]** then take the difference.
 The **proc.time()** function will provide the best clock
@@ -141,7 +140,7 @@ time that we want.
 The **system.time()** function can also be used which returns
 the time taken to execute the function put in the parentheses.
 This uses the same **proc.time()** clock but may provide
-a more convenient method is some cases.
+a more convenient method in some cases.
 
   Another common approach that should be avoided is to use
 the **Sys.time()** function.
@@ -149,7 +148,7 @@ This similarly reports the time between the bracketed code,
 but it by default auto-adjusts the units to the length of the
 interval.  So if your code takes 59 seconds it will report
 59, but if the same code takes 60 seconds it will auto-adjust
-to minutes and report 1 instead.  You can and alway should
+to minutes and report 1 instead.  You can and always should
 manually specify the units if you choose to use this function.
 
 
@@ -161,14 +160,14 @@ and the input and output of data is built more on dumping out
 whole dataframes to files than the line-by-line approaches that
 other languages use.
 Dataframes in R are designed internally to be very flexible to
-enable all of this, but this same implementation makes them
+enable all of this, but this same design choice makes them
 extemely inneficient from a computational view when working
 with larger data sets.
 
 The best example of this is the **rbind()** function which is 
 used to build a dataframe.
-It is very common to build a row of data then use **rbind()**
-to add it to the dataframe, but internally R must allocate
+It is very common to build a row of data using **cbind()**then use **rbind()**
+to add the row to the dataframe table, but internally R must allocate
 an entirely new area of memory and copy all the existing data
 over as well as the new data.
 This is because R is a column-major language so elements
@@ -183,7 +182,7 @@ it since it was going to take a month of runtime to complete.
 We generated a test case that took one hour, and after commenting
 out only the **rbind()** function the calculations took only
 5 seconds.  All the rest of the time was spent copying the
-dataframe data to new memory each time a row was added to the bottom.
+dataframe data to newly allocated memory each time a row was added to the bottom.
 
 If the code is building the dataframe just to dump it out to a file,
 then one option is to simply print each row to file.  R isn't really
@@ -233,6 +232,8 @@ functionality so you may need to consider other options
 that fully copy all data structures at the start or even a
 socket-based cluster if you think your code might need to run
 on Windows.
+Another option would be to install the Windows Subsystem for Linux
+(WSL) which supports the **fork)** function.
 
 The basic parallelization model for both approaches is the same, to 
 have each pass through the loop executed on different cores with
@@ -257,7 +258,7 @@ the **mc.cores=** argument.
 There are options to tune the way the parallelization is done.
 The **mc.preschedule=True** argument is the default, and this
 means that the number of iterations is divided among the available
-cores at the start.  This is highly recommended since the if this is
+cores at the start.  This is highly recommended since if this is
 turned off the system will fork a new process for each iteration,
 do the work, then collapse that fork.  This can be incredibly 
 innefficient since it means copying data structures many times over
@@ -417,7 +418,6 @@ issues.
 * [data.table package](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)
 * [Programming with Big Data - MPI package](https://github.com/snoweye/pbdMPI)
 * [pdbDMAT package](https://github.com/RBigData/pbdDMAT)
-
 * [Rstudio](https://www.rstudio.com)
 * [Rshiny](https://shiny.rstudio.com)
 
