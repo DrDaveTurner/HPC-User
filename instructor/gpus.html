@@ -333,8 +333,8 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#what-is-a-graphics-processing-unit-and-how-is-it-used-in-science">What is a Graphics Processing Unit and How is it Used in
-Science?</a></li>
+        <ul><li><a href="#what-is-a-gpu-and-how-is-it-used-to-accelerate-scientific-calculations">What is a GPU and How is it Used to Accelerate Scientific
+Calculations?</a></li>
 <li><a href="#summary">Summary</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
@@ -418,7 +418,7 @@ Science?</a></li>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Accelerating Scientific Computing with GPUs</h1>
-        <p>Last updated on 2024-07-16 |
+        <p>Last updated on 2024-08-12 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/gpus.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -439,7 +439,7 @@ Science?</a></li>
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>What do I have to do differently if my application can use a
+<ul><li>What differences are there in handling an application that can use a
 GPU?</li>
 </ul></div>
 </div>
@@ -449,59 +449,60 @@ GPU?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul><li>Learn a little about how GPUs can accelerate some scientific
-codes</li>
-<li>Understand the basics of compiling and running GPU codes</li>
+codes.</li>
+<li>Understand the basics of compiling and running GPU codes.</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="what-is-a-graphics-processing-unit-and-how-is-it-used-in-science">What is a Graphics Processing Unit and How is it Used in
-Science?<a class="anchor" aria-label="anchor" href="#what-is-a-graphics-processing-unit-and-how-is-it-used-in-science"></a>
-<a class="anchor" aria-label="anchor" href="#what-is-a-graphics-processing-unit-and-how-is-it-used-in-science"></a></h2>
+<section><h2 class="section-heading" id="what-is-a-gpu-and-how-is-it-used-to-accelerate-scientific-calculations">What is a GPU and How is it Used to Accelerate Scientific
+Calculations?<a class="anchor" aria-label="anchor" href="#what-is-a-gpu-and-how-is-it-used-to-accelerate-scientific-calculations"></a>
+<a class="anchor" aria-label="anchor" href="#what-is-a-gpu-and-how-is-it-used-to-accelerate-scientific-calculations"></a></h2>
 <hr class="half-width"><p>We normally think of a Graphics Processing Unit or GPU in terms of
 displaying graphics to a computer monitor. GPU cards are designed with
 many streaming processors that are great at performing lots of similar
-computations. While this makes them great for doing graphics work, it
-also makes them great for accelerating some scientific codes. GPU cards
-can accelerate some scientific codes by an order of magnitude while
-costing much less than what the equivalent CPUs would.</p>
+computations. While this makes them ideal for doing graphics work, it
+also makes them good for running some scientific codes. GPU cards can
+accelerate some scientific codes by an order of magnitude while costing
+much less than what the equivalent CPUs would.</p>
 <p>NVIDIA dominates the GPU accelerating market with both 32-bit or
-consumer grade GPUs like the NVIDIA RTX 3090 that can cost around $1500,
+consumer grade GPUs like the NVIDIA RTX 4090 that can cost around $1500,
 but they also produce 64-bit Tesla cards that have no graphics ports at
 all and are only designed for scientific computing. These include the
-NVIDIA A100 which can cost as much as $11,000 each. Compute nodes can
-have 1-8 GPU cards each, and in some systems the high-end A100s may be
-linked together through an NVLink connection. Otherwise a multi-GPU run
-would need to communication across the PCI bus.</p>
+NVIDIA A100 which can cost as much as $11,000 each or their newest H100
+that can cost twice that. Compute nodes can host 1-8 GPU cards each and
+in some systems the high-end A100s and H100s may be linked together
+through a fast NVLink connection. Otherwise a multi-GPU run would need
+to communication across the PCI bus.</p>
 <p>AMD GPUs can also be used to accelerate scientific jobs and are
 increasingly being found in the fastest supercomputers in the world. The
-code development is still far behind that of the NVIDIA Cuda community
-due to its much later start. AMD has a <strong>Hip</strong> compiler
-that is used to generate code for the AMD GPUs, and it has the benefit
-of being able to compile the same code for NVIDIA GPUs as well. The AMD
-GPU line includes 32-bit GPUs such as the Radeon RX 6000 series and the
-64-bit Radeon Instinct MI100 cards with costs comparable to the NVIDIA
-line.</p>
+code development is still behind that of the NVIDIA CUDA community due
+to its much later entrance into the scientific computing market. AMD has
+a <strong>Hip</strong> compiler that is used to generate code for the
+AMD GPUs, and it has the benefit of being able to compile the same code
+for NVIDIA GPUs as well. The AMD GPU line includes 32-bit GPUs such as
+the Radeon RX 6000 series and the 64-bit Radeon Instinct MI100 cards
+with costs comparable to the NVIDIA line.</p>
 <div class="section level3">
 <h3 id="using-gpus-for-machine-learning">Using GPUs for Machine Learning<a class="anchor" aria-label="anchor" href="#using-gpus-for-machine-learning"></a></h3>
 <p>Artificial Intelligence applications like Machine Learning can be
-done on any CPU or GPU. However, GPUs with Tensor units can do them
-faster and less costly since Tensor units can do more operations per
+done on any CPU or GPU. However, GPUs with tensor units can do them
+faster and less costly since tensor units can do more operations per
 clock cycle, and the lower precision of the results do not matter for
 Machine Learning applications. If your system is going to be primarily
-used for Machine Learning, you’ll want to look at the Tensor units in
+used for Machine Learning, you’ll want to look at the tensor units in
 the GPUs while the memory will limit the size of the system you can work
 with.</p>
-<p>AMD and Intel GPUs do not have Tensor units. NVIDIA offers them in
-their 32-bit RTX GPUs where they can be used in gaming provide an
-inexpensive means of accelerating machine learning algorithms. The
-32-bit NVIDIA RTX 3090 for example offers 328 Tensor cores along with
-10496 CUDA cores with a maximum of 24 GB of memory. The 64-bit NVIDIA
-A100 offers 432 Tensor cores along with 6912 CUDA cores for high-end
-computing and up to 80 GB of memory. These A100s can also be combined
-with the NVLink connection so that an 8xA100 GPU cluster can look to the
-user like a single GPU with 640 GB of memory.</p>
+<p>AMD and Intel GPUs do not have tensor units. NVIDIA offers tensor
+units in their 32-bit RTX GPUs providing an inexpensive means of
+accelerating machine learning algorithms. The 32-bit NVIDIA RTX 3090 for
+example offers 328 Tensor cores along with 10496 CUDA cores with a
+maximum of 24 GB of memory. The 64-bit NVIDIA A100 offers 432 Tensor
+cores along with 6912 CUDA cores for high-end computing and 40 GB or 80
+GB of memory. These A100s can also be combined with the NVLink
+connection so that an 8xA100 GPU cluster can look to the user like a
+single GPU with 640 GB of memory.</p>
 </div>
 <div class="section level3">
 <h3 id="profiling-gpu-code">Profiling GPU code<a class="anchor" aria-label="anchor" href="#profiling-gpu-code"></a></h3>
@@ -509,9 +510,9 @@ user like a single GPU with 640 GB of memory.</p>
 is running on the CPU and half on the GPU. From outside the program, if
 a user can ssh into the compute node then running
 <strong>nvidia-smi</strong> provides a snapshot of the GPU utilization
-and memory usage. In the job script the <strong>nvprof</strong> function
-can be used in place of the <strong>time</strong> function to give
-profile information for various functions of the job.</p>
+and GPU memory usage. In the job script the <strong>nvprof</strong>
+function can be used in place of the <strong>time</strong> function to
+give profile information for various functions of the job.</p>
 </div>
 <div class="section level3">
 <h3 id="compiling-and-running-gpu-jobs">Compiling and running GPU jobs<a class="anchor" aria-label="anchor" href="#compiling-and-running-gpu-jobs"></a></h3>
@@ -561,12 +562,12 @@ may need to add a partition.</p>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 <a class="anchor" aria-label="anchor" href="#summary"></a></h2>
-<hr class="half-width"><p>GPUs are difficult to program, so for most scientists you will only
-want to know how to run codes when GPUs are involved and not how to
-program them yourself. If you are lucky enough to have an algorithm that
-someone has accelerated with a GPU, they can provide an order of
-magnitude increase in speed over just using CPUs and greatly reduce the
-cost of doing a calculation.</p>
+<hr class="half-width"><p>GPUs are more difficult to program, so for most scientists you will
+only want to know how to run codes when GPUs are involved and not how to
+program them yourself. If you are fortunate enough to have an algorithm
+that someone has accelerated with a GPU, GPUs can often provide an order
+of magnitude increase in speed over just using CPUs and greatly reduce
+the cost of doing a calculation.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -575,16 +576,22 @@ cost of doing a calculation.</p>
 <h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
 </h3>
 <div class="callout-content">
-<ul><li>Start to be comfortable wtih using GPUs on an HPC system</li>
+<ul><li>Start to become comfortable with using GPUs on an HPC system.</li>
 </ul></div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="links-for-additional-information">Links for additional information<a class="anchor" aria-label="anchor" href="#links-for-additional-information"></a></h3>
-<ul><li><p><a href="">NVIDIA GPU specs</a></p></li>
-<li><p><a href="">Tensor Unit explanation</a></p></li>
-<li><p><a href="">CUDA programming documentation</a></p></li>
-<li><p><a href="">AMD GPU specs</a></p></li>
+<ul><li><a href="https://en.wikipedia.org/wiki/Tensor_Processing_Unit" class="external-link">GPU
+Tensor Unit explanation</a></li>
+<li><a href="https://docs.nvidia.com/cuda/" class="external-link">NVIDIA CUDA programming
+documentation</a></li>
+<li><a href="https://rocm.docs.amd.com/projects/HIP/en/latest/" class="external-link">AMD Hip
+programming documentation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units" class="external-link">NVIDIA
+GPU specs</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units" class="external-link">AMD
+GPU specs</a></li>
 </ul></div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
@@ -644,7 +651,7 @@ cost of doing a calculation.</p>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/gpus.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/gpus.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-16",
+  "dateModified": "2024-08-12",
   "datePublished": "2024-08-12"
 }
 
