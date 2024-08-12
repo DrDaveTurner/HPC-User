@@ -418,7 +418,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>High-Throughput Computing</h1>
-        <p>Last updated on 2024-07-16 |
+        <p>Last updated on 2024-08-12 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/high-throughput-computing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -459,49 +459,50 @@ computing?</li>
 <a class="anchor" aria-label="anchor" href="#high-throughput-computing"></a></h2>
 <hr class="half-width"><p>A typical HPC system today is a cluster computer made of one or more
 head nodes and many compute nodes tied together with a common file
-server and having a batch scheduler to decide where jobs run. Some of
+server and having a batch scheduler to control where jobs run. Some of
 the largest supercomputers in the world are similar conceptually to a
 cluster computer but have more custom designed circuit boards as nodes
 and may be packaged up and racked in a different manner than cluster
 systems that use more off-the-shelf components.</p>
 <p>A High-Throughput Computer (HTC) system is designed to run very large
-numbers of small jobs and is often made up of many HPC systems seperated
+numbers of small jobs and is often made up of many HPC systems separated
 geographically. In the U.S. the main example is the Open Science Grid
 (OSG) which is open for use to anyone associated with a U.S. university
 or national laboratory. Time is given away freely on a first-come
-first-served basis, and computer resources are donated by various
+first-served basis and computer resources are donated by various
 institutions. Since HTC is geared toward running large numbers of
 smaller jobs, the jobs fit well into the spare nooks and crannies of
 most HPC systems and these systems are set up to kill any OSG job when
 the host institute needs those resources back. In this way the HTC jobs
-run invisibly on the over 100 HPC sites spread across the U.S. offerring
+run invisibly on the over 100 HPC sites spread across the U.S. offering
 free computing to any who need to run small jobs while greatly enhancing
-the usage of each HPC system.</p>
+the usage of each HPC system by using the spare CPU cycles that would
+otherwise go wasted.</p>
 <div class="section level3">
 <h3 id="large-numbers-of-small-jobs">Large numbers of small jobs<a class="anchor" aria-label="anchor" href="#large-numbers-of-small-jobs"></a></h3>
 <p>One of the first examples of HTC was the SETI program where
 individual PC users could donate their CPU cycles to the project to
-searching through large quantities of data to try to find signals that
-might common from intelligent life. This problem is ideal for HTC since
-it can be broken up into large numbers of small jobs, and any job that
-did not return an answer in a given period was just thrown away and
-rerun on another system.</p>
+search through large quantities of data to try to find signals that
+might come from intelligent life. This problem is ideal for HTC since it
+can be broken up into large numbers of small jobs, and any job that did
+not return an answer in a given period was just thrown away and rerun on
+another system.</p>
 <p>OSG has the ability to run a wide variety of jobs including large
 memory and GPU runs, but it is much more difficult than running the
 simple small jobs that it was designed for. The OSG guidelines for the
-typical job are 1-8 cores, upto 40 GB memory and 10 GB IO, and upto 20
+typical job are 1-8 cores, up to 40 GB memory and 10 GB IO, and up to 20
 hours run-time.</p>
 <p>The most important aspect of working with HTC systems is that the
-jobs be self-contained as much as possible, and be able to run on any OS
-and use mainstream modules. This is essential since each job may be run
-on a wide range of HPC environments. Executables that are dynamically
-linked can work if you request the matching resources by specifying
-things like acceptable CPU architectures. Statically linked executables
-will always work. Containers take more effort to set up but are ideal
-for HTC since all executables, modules, and environmental variables are
-set within the container. Running on multiple nodes using MPI is
-possible but difficult usually requiring containers with the MPI
-connections specified externally.</p>
+jobs be self-contained as much as possible, and be able to run on any
+operating system and use mainstream modules. This is essential since
+each job may be run on a wide range of HPC environments. Executables
+that are dynamically linked can work if you request the matching
+resources by specifying things like acceptable CPU architectures.
+Statically linked executables will always work. Containers take more
+effort to set up but are ideal for HTC since all executables, modules,
+and environmental variables are set within the container. Running on
+multiple nodes using MPI is possible but difficult usually requiring
+containers with the MPI connections specified externally.</p>
 </div>
 <div class="section level3">
 <h3 id="using-osg">Using OSG<a class="anchor" aria-label="anchor" href="#using-osg"></a></h3>
@@ -514,13 +515,13 @@ at the end of this lesson.</p>
 </div>
 <div class="section level3">
 <h3 id="working-with-the-htcondor-scheduler">Working with the HTCondor scheduler<a class="anchor" aria-label="anchor" href="#working-with-the-htcondor-scheduler"></a></h3>
-<p>Submitting jobs to the HTCondor for scheduling on any of the hundreds
-of remote systems available is similar to using any scheduler, except
-for the notes above on the job not relying on modules and libraries that
-may not be available or labeled the same everywhere. Below is an example
-job script to run the stand-alone executable <strong>namd2</strong>.
-Note that the X64_64 CPU architecture is specified. The script requests
-1 GB of disk for this job and directs that all files from the directory
+<p>Submitting jobs to HTCondor for scheduling on any of the hundreds of
+remote systems available is similar to using any scheduler, except for
+the notes above on the job not relying on modules and libraries that may
+not be available or labeled the same everywhere. Below is an example job
+script to run the stand-alone executable <strong>namd2</strong>. Note
+that the X64_64 CPU architecture is specified. The script requests 1 GB
+of disk for this job and directs that all files from the directory
 <strong>input_files</strong> be transferred along with the job at the
 start, and all files in <strong>output</strong> be transferred back at
 the end. The <strong>queue 1</strong> command then specifies the number
@@ -552,9 +553,9 @@ of jobs specified minus one.</p>
 <p>Most systems will have support for modules, but the
 <strong>HAS_MODULES == True</strong> requirement can mean some systems
 are not supported. Most systems use RHEL7, so specifying that may also
-rule out use of RHEL6 and RHEL8 systems. In general, if you use
-mainstream OS and modules then you should be fine. Otherwise you likely
-will need to use a container.</p>
+rule out use of RHEL6 and RHEL8 systems. In general, if you use a
+mainstream operating system and modules then you should be fine.
+Otherwise you likely will need to use a container.</p>
 <p>Once you have the script you can submit, monitor, and control the job
 using commands like those below.</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -676,7 +677,7 @@ scheduler youtube video</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/high-throughput-computing.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/high-throughput-computing.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-07-16",
+  "dateModified": "2024-08-12",
   "datePublished": "2024-08-12"
 }
 
