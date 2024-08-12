@@ -16,7 +16,7 @@ exercises: 0
 
 ## Getting Access to HPC Resources
 
-It is very typical to start a project on a laptop or desktop
+It is very typical to start a project on a personal
 computer only to find that you need more performance either
 as computing power or memory.
 The next step may be to run your code on a more powerful
@@ -30,7 +30,7 @@ If you are in a university or laboratory environment the first
 place to look is your local supercomputing center if you have one.
 While many provide priority access to the compute resources to those
 that provide research funds, most also have some means of providing
-significant resources to users that don't provide financial support.
+significant resources to users that can't provide financial support.
 Many university cluster computers work on the **condo** model where
 scientific groups can purchase compute nodes that they have full priority
 on, but in return for the university managing those compute nodes
@@ -49,11 +49,11 @@ the state can use.
 
 There are many national supercomputing centers in the U.S.
 that receive federal funding from the National Science Foundation (NSF)
-and Department of Energy (DOE).
+and Department of Energy (DoE).
 These supercomputers can cost $10-$100 million or above and have capacities
 now over 1 exa-flops (billion billion floating-point operations per second).
 When these are funded, part of the compute cycles are designated for
-access to scientists not directly associated with those isntitutions.
+access to scientists not directly associated with those institutions.
 
 Account and allocation requests as well as access is handled through
 user portals.  Most of these remote systems have startup accounts
@@ -63,8 +63,7 @@ Getting access is as easy as knowing where and how to ask.
 
 #### The ACCESS portal to remote NSF supercomputers
 
-The XSEDE portal is going to be the ACCESS portal as of
-September 1 of 2022.
+The ACCESS portal is formerly known as XSEDE.
 The link below is where to go to request an account and allocation,
 submit a proposal, and find documentation and support.
 There are a very wide variety of supercomputing systems available
@@ -108,7 +107,7 @@ some of the systems available (last updated August of 2022).
 **24 GPU compute nodes**
 
 * 2 x Intel Gold Cascade 6248 --> 40 cores
-* 8 x nVidia Tesla v100 32 GB sxm2 GPU cards
+* 8 x NVIDIA Tesla v100 32 GB sxm2 GPU cards
 * 512 GB memory
 * 7.68 TB NVMe SSD
 * Mellanox HDR 200 Gbps network
@@ -129,7 +128,7 @@ some of the systems available (last updated August of 2022).
 **52 GPU nodes**
 
 * 2 x Intel Xeon 6248 --> 40 cores
-* 4 x nVidia Tesla v100 GPU cards
+* 4 x NVIDIA Tesla v100 GPU cards
 * 384 GB memory
 
 **Cluster-wide capabilities**
@@ -137,23 +136,6 @@ some of the systems available (last updated August of 2022).
 * 12 PetaByte Lustre file system
 * 7 PetaByte CEPH object store
 * 56 Gbps bi-directional HDR InfiniBand network
-
-
-### Stampede2 at the Texas Advanced Computing Center (TACC)
-
-**4200 KNL nodes**
-
-* Intel Xeon Phi 7250 Knights Landing processor
-* 68 cores with 4 threads per core --> 272 threads
-* 96 GB memory + 16 GB high-speed MCDRAM memory
-
-**1736 SKX compute nodes**
-
-* 2 x Intel Xeon Platinum 8160 Skylake processors --> 48 cores
-* Hyper-threading runs 2 threads per core so it looks like 96 cores
-* 196 GB memory
-
-**The network is 100 Gbps OmniPath with a fat tree network**
 
 
 ## National Energy Research Scientific Computing Center (NERSC)
@@ -164,7 +146,7 @@ of Energy (DoE) supercomputers are managed through NERSC with the
 website link at the end of this module.
 Many DoE supercomputers can be accessed by scientists in universities
 and laboratories, but the process is more involved.
-Access is still free, but you typically need to write a propasal
+Access is still free, but you typically need to write a proposal
 for significant node-hours and fully justify that the science
 you intend to do is important and fits within the DoE mission,
 and demonstrate that your code will use the requested resources
@@ -178,6 +160,21 @@ Computing (HTC) covered in the previous chapter may be ideal
 for you.  OSG access is fairly easy for users in the U.S.
 and provides virtually unlimited access.
 
+## National Research Platform (NRP)
+
+The NRP is a partnership of over 50 institutions led
+by UC San Diego supported in large part by NSF.
+The Nautilus system is a HyperCluster for running containerized
+big data applications using kubernetes for the container management.
+This is a distributed set of compute nodes similar to OSG but applications
+must specifically be self-contained and are guaranteed isolated access
+to the resources allocated.
+
+While kubernetes is more difficult for the average user, this system
+provides access to much more powerful computing including very high-end GPUs.
+The compute nodes are mainly GPU-based and research is aimed at
+Machine Learning codes.
+
 
 ## Cloud Computing
 
@@ -187,11 +184,10 @@ Most cloud computing vendors do give small amounts of access away
 for free on a trial basis for those that want to experiment.
 The amount is very minimal in the context of running an HPC job.
 
-Google Cloud Platform (GCP) offers $300 credit to new custormers
-for example.  Amazon Web Services (AWS) offers several free trial
-plans with $750 credits.
-Microsoft Azure offers a $200 credit for 30 days for eligible
-new customers.
+As of August of 2024,
+Google Cloud Platform (GCP) offered $300 credit to new customers for example.
+Amazon Web Services (AWS) offered several free trial plans with $750 credits.
+Microsoft Azure offers a $200 credit for 30 days for eligible new customers.
 
 
 ## Summary
@@ -209,10 +205,10 @@ this module will give you ideas on where to start.
 
 ### Links for additional information
 
-* [ACCESS Portal]( )
+* [ACCESS Portal](https://access-ci.org)
 * [NERSC Portal](https://nersc.gov/)
 * [OSG Consortium](https://osg-htc.org)
-
+* [NRP National Research Platform](https://nationalresearchplatform.org)
 * [AWS Cloud Services](https://aws.amazon.com/free/)
 * [GCP Services](https://cloud.google.com/free)
 * [Microsoft Azure](https://azure.microsoft.com/en-us/offers/ms-azr-0044p/)
