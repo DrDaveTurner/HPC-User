@@ -18,7 +18,7 @@ exercises: 0
 
 A typical HPC system today is a cluster computer made of one or
 more head nodes and many compute nodes tied together with a common
-file server and having a batch scheduler to decide where jobs run.
+file server and having a batch scheduler to control where jobs run.
 Some of the largest supercomputers in the world are similar conceptually
 to a cluster computer but have more custom designed circuit boards as
 nodes and may be packaged up and racked in a different manner than
@@ -26,28 +26,29 @@ cluster systems that use more off-the-shelf components.
 
 A High-Throughput Computer (HTC) system is designed to run very
 large numbers of small jobs and is often made up of many HPC
-systems seperated geographically.
+systems separated geographically.
 In the U.S. the main example is the Open Science Grid (OSG)
 which is open for use to anyone associated with a U.S. university
 or national laboratory.
-Time is given away freely on a first-come first-served basis,
+Time is given away freely on a first-come first-served basis
 and computer resources are donated by various institutions.
 Since HTC is geared toward running large numbers of smaller jobs,
 the jobs fit well into the spare nooks and crannies of most
 HPC systems and these systems are set up to kill any OSG job
 when the host institute needs those resources back.
 In this way the HTC jobs run invisibly on the over 100 HPC sites
-spread across the U.S. offerring free computing to any who
+spread across the U.S. offering free computing to any who
 need to run small jobs while greatly enhancing the usage
-of each HPC system.
+of each HPC system by using the spare CPU cycles that would
+otherwise go wasted.
 
 
 ### Large numbers of small jobs
 
 One of the first examples of HTC was the SETI program
 where individual PC users could donate their CPU cycles
-to the project to searching through large quantities of
-data to try to find signals that might common from 
+to the project to search through large quantities of
+data to try to find signals that might come from 
 intelligent life.  This problem is ideal for HTC since
 it can be broken up into large numbers of small jobs, and
 any job that did not return an answer in a given period was
@@ -57,11 +58,11 @@ OSG has the ability to run a wide variety of jobs including
 large memory and GPU runs, but it is much more difficult than
 running the simple small jobs that it was designed for.
 The OSG guidelines for the typical job are 
-1-8 cores, upto 40 GB memory and 10 GB IO, and upto 20 hours run-time.
+1-8 cores, up to 40 GB memory and 10 GB IO, and up to 20 hours run-time.
 
 The most important aspect of working with HTC systems is that the jobs
 be self-contained as much as possible, and be able to run on 
-any OS and use mainstream modules.
+any operating system and use mainstream modules.
 This is essential since each job may be run on a wide range of
 HPC environments.
 Executables that are dynamically linked can work if you request the
@@ -89,7 +90,7 @@ at the end of this lesson.
 
 ### Working with the HTCondor scheduler
 
-Submitting jobs to the HTCondor for scheduling on any of the 
+Submitting jobs to HTCondor for scheduling on any of the 
 hundreds of remote systems available is similar to using any
 scheduler, except for the notes above on the job not relying on
 modules and libraries that may not be available or labeled the same
@@ -129,9 +130,9 @@ queue 1
 Most systems will have support for modules, but the **HAS_MODULES == True** 
 requirement can mean some systems are not supported.
 Most systems use RHEL7, so specifying that may also rule out use
-of RHEL6 and RHEL8 systems.  In general, if you use mainstream OS and
-modules then you should be fine.  Otherwise you likely will need
-to use a container.
+of RHEL6 and RHEL8 systems.  In general, if you use a mainstream 
+operating system and modules then you should be fine.
+Otherwise you likely will need to use a container.
 
 Once you have the script you can submit, monitor, and
 control the job using commands like those below.
