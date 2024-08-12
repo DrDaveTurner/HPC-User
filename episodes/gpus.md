@@ -5,7 +5,7 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
-- What differences are there in handling an application that can use a GPU?
+- What differences are there in handling applications that can use a GPU?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
@@ -14,7 +14,7 @@ exercises: 5
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## What is a GPU and How is it Used to Accelerate Scientific Calculations?
+## How to use a GPU to Accelerate Scientific Calculations?
 
 We normally think of a Graphics Processing Unit or GPU in terms of
 displaying graphics to a computer monitor.
@@ -140,8 +140,8 @@ cost of doing a calculation.
 
 * [GPU Tensor Unit explanation](https://en.wikipedia.org/wiki/Tensor_Processing_Unit)
 * [NVIDIA CUDA programming documentation](https://docs.nvidia.com/cuda/)
-* [AMD Hip programming documentation](https://rocm.docs.amd.com/projects/HIP/en/latest/)
 * [NVIDIA GPU specs](https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units)
+* [AMD Hip programming documentation](https://rocm.docs.amd.com/projects/HIP/en/latest/)
 * [AMD GPU specs](https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units)
 
 
