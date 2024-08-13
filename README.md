@@ -3,6 +3,7 @@
 This is a new lesson built with [The Carpentries Workbench][workbench]. 
 
 [HPC-User github repository](https://github.com/DrDaveTurner/HPC-User)
+
 [HPC-User website](https://drdaveturner.github.io/HPC-User/instructor/index.html)
 
 The HPC-user Software Carpentry module is aimed at researchers with
