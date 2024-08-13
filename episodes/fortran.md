@@ -14,6 +14,14 @@ exercises: 5
 - Identify source files for different versions of Fortran.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::: instructor
+
+This Fortran section can certainly be skipped if time is limited.
+If so, I'd suggest at least saying a few lines from the first
+paragraph below.
+
+:::::::::::::::::::::
+
 ## Modern Fortran
 
 Fortran is one of the oldest computer languages used for scientific computing.

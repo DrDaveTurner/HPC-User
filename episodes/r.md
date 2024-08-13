@@ -342,7 +342,7 @@ set() function.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Test the IO performance in R.
+## Optional Homework - Test the IO performance in R.
 
 Test the **fread.R** code to see the speedup of the **fread()** function from the optimized **data.table** package compared to the standard **read.csv()**.
 Time runs of **fread.R** for 10,000 rows, 100,000 rows, and 1,000,000 rows.

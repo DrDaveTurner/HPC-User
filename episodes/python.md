@@ -295,7 +295,24 @@ but the C version is still better.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Test the **Numba** version of the dot product code
+## Optional Exercise - Try compiling a Python code
+If you have time, try compiling one of the Python test codes 
+supplied like **matmult_numpy.py**.  Then try running it without
+an active virtual environment meaning that there is no **NumPy**
+library installed.
+
+:::::::::::::::::: solution
+
+Once compiled you should be able to run this with a command like:
+**./matmult.pyc 100**.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Optional Homework - Test the **Numba** version of the dot product code
 Do a **pip install numba** then
 time the **dot_product_numba.py** performance and compare to 
 the raw code.
@@ -349,22 +366,6 @@ If you do this please contribute your code and timings.
 :::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
-:::::::::::::::::::::::::::::::::::::: challenge
-
-## Optional Exercise - Try compiling a Python code
-If you have time, try compiling one of the Python test codes 
-supplied like **matmult_numpy.py**.  Then try running it without
-an active virtual environment meaning that there is no **NumPy**
-library installed.
-
-:::::::::::::::::: solution
-
-Once compiled you should be able to run this with a command like:
-**./matmult.pyc 100**.
-
-:::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints

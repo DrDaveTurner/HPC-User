@@ -358,7 +358,7 @@ Often it is the inner loop that is easiest to parallelize, and this is
 most often the case with multi-threaded parallelism.
 
 
-## Using Accelerators like GPUs (Graphical Processing Units)
+## Using Accelerators like GPUs
 
 Some programs can be sped up by using a GPU as a computational 
 accelerator.

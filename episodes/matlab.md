@@ -262,7 +262,7 @@ be used for very coarse grained algorithms.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Homework:  Alter the **matmult.m** code to run on multiple nodes and multiple cores.
+## Optional Homework:  Alter the **matmult.m** code to run on multiple nodes and multiple cores.
 Test on multiple compute nodes and compare performance to the serial and
 multi-threaded versions.
 If you want a real challenge try setting the code up to run on a cloud server.
