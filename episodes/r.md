@@ -5,13 +5,17 @@ exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What are the strengths and weaknesses of the R programming language?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Analyze the merits of the R Language.
 - Learn what to avoid in R when performance is important.
 - Learn a little about how to parallelize R code.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
  

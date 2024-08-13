@@ -5,13 +5,17 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What are the strengths and weaknesses of programming in C and C++?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Analyze the merits of the C/C++ language.
 - Learn how to compile and run C/C++ programs.
 - Try compiling and running OpenMP and MPI versions.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## The C Programming Language

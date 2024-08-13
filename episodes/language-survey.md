@@ -5,11 +5,15 @@ exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What are the strengths and weaknesses of each computer language?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Understand the criteria we will use to evaluate each language.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

@@ -5,12 +5,16 @@ exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What is the difference between high-throughput computing and cluster computing?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Learn what types of jobs run well on HTC systems.
 - Understand how to submit jobs using OSG.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

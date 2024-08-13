@@ -5,12 +5,16 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What differences are there in handling applications that can use a GPU?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Learn a little about how GPUs can accelerate some scientific codes.
 - Understand the basics of compiling and running GPU codes.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

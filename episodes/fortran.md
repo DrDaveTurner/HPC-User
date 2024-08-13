@@ -5,13 +5,17 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What are the strengths and weaknesses of Fortran?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Analyze the merits of Fortran.
 - Learn how to compile and run a Fortran program.
 - Identify source files for different versions of Fortran.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::: instructor

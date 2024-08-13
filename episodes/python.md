@@ -5,13 +5,17 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What are the strengths and weaknesses of programming with Python?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Analyze the merits of programming in Python.
 - Learn how to work with virtual environments.
 - Learn about common performance-oriented libraries.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

@@ -5,12 +5,16 @@ exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - How do I get access to HPC resources?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Understand what HPC resources are available in the U.S.
 - Learn how to access these resources for free.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

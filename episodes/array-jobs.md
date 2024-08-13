@@ -5,12 +5,16 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What do array jobs have to do with high-performance computing?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Learn what an array job is in a batch scheduler.
 - Understand what types of science can make use of array jobs.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Array jobs using Slurm

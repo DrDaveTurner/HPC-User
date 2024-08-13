@@ -5,14 +5,18 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - Now that we can profile programs to find where the time is being spent,
   how do we speed the code up?
 - What is parallel computing, and what are the underlying concepts that
   make it work?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Learn different approaches to speeding up code.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
