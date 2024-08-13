@@ -246,7 +246,7 @@
         <ul><li><a href="#optimizing-scalar-code">Optimizing Scalar Code</a></li>
 <li><a href="#parallelizing-code">Parallelizing Code</a></li>
 <li><a href="#parallel-computing-concepts">Parallel Computing Concepts</a></li>
-<li><a href="#using-accelerators-like-gpus-graphical-processing-units">Using Accelerators like GPUs (Graphical Processing Units)</a></li>
+<li><a href="#using-accelerators-like-gpus">Using Accelerators like GPUs</a></li>
 <li><a href="#optimizing-input-and-output">Optimizing Input and Output</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parallel Computing Concepts</h1>
-        <p>Last updated on 2024-08-08 |
+        <p>Last updated on 2024-08-13 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/parallel-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -687,7 +687,7 @@ rate.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The unoptimized code uses <strong>N_atoms * ( 1 + 21 * NQ )
 Flops</strong>. The optimized version uses <strong>N_atoms * ( 13 + 6 *
@@ -828,8 +828,8 @@ higher efficiencies, but it is not always possible. Often it is the
 inner loop that is easiest to parallelize, and this is most often the
 case with multi-threaded parallelism.</p>
 </div>
-</section><section><h2 class="section-heading" id="using-accelerators-like-gpus-graphical-processing-units">Using Accelerators like GPUs (Graphical Processing Units)<a class="anchor" aria-label="anchor" href="#using-accelerators-like-gpus-graphical-processing-units"></a>
-<a class="anchor" aria-label="anchor" href="#using-accelerators-like-gpus-graphical-processing-units"></a></h2>
+</section><section><h2 class="section-heading" id="using-accelerators-like-gpus">Using Accelerators like GPUs<a class="anchor" aria-label="anchor" href="#using-accelerators-like-gpus"></a>
+<a class="anchor" aria-label="anchor" href="#using-accelerators-like-gpus"></a></h2>
 <hr class="half-width"><p>Some programs can be sped up by using a GPU as a computational
 accelerator. A 32-bit GPU is the same as you would buy for a high-end
 gaming computer and can cost $1000-$1500. These are ideal for
@@ -908,7 +908,7 @@ see the effects of the network (for the 4 cores, try 2 nodes 2 cores vs
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -998,7 +998,7 @@ programs.</li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/parallel-concepts.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/parallel-concepts.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-08",
+  "dateModified": "2024-08-13",
   "datePublished": "2024-08-13"
 }
 

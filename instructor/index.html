@@ -425,12 +425,40 @@ computer language can do and what performance bottlenecks to avoid.</p>
 <section><h2 class="section-heading" id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
 <a class="anchor" aria-label="anchor" href="#prerequisites"></a></h2>
 <hr class="half-width"><p>Each user must begin with some knowledge of Linux and at least one of
-the languages that this module covers (Python, C/C++, R, Fortran,
+the languages that this module covers (Python, R, C/C++, Fortran,
 Matlab). The examples in the first part of this module are currently
 only in Python but will eventually be adjustable to display in any of
 these languages. Each user may also need to know how to run jobs in an
 HPC environment. These prerequisites may all be covered by having an HPC
 Unix Shell carpentry module taught right before this one.</p>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div class="accordion-body">
+<p>If there is no preceeding HPC Unix Shell module presented then there
+should be a more in depth discussion of what an HPC system is and how it
+is used.</p>
+<ul><li>One or more head nodes where you log in and do code setup.</li>
+<li>Many compute nodes where the jobs actually get run, each having
+multiple cores.</li>
+<li>The Linux operating system with a command line interface (CLI).</li>
+<li>Possibly a more graphical interface like OnDemand.</li>
+<li>A batch queue system that scheduled jobs to compute nodes.</li>
+<li>A common file system available on all head nodes and compute
+nodes.</li>
+<li>Possibly some GPU cards for accelerating some scientific codes.</li>
+<li>A module system for loading compilers and scientific
+applications.</li>
+</ul><p>The user logs into a head node, edits code, input files, and job
+scripts, then submits the job script to the batch queue where it gets
+scheduled to run on the compute nodes when there is space available.</p>
+</div>
+</div>
+</div>
+</div>
 </section><section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
           </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 00m
@@ -613,8 +641,8 @@ Finish
 cd episodes
 zip -r code.zip code
 cp code.zip data
---><p>Download the <a href="../data/code.zip">code zip file</a> and unzip it
-to your Desktop.</p>
+--><p>Download the <a href="../data/code.zip">code examples zip file</a> and
+unzip it to your Desktop.</p>
 </section><section><h2 class="section-heading" id="software-setup">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a>
 <a class="anchor" aria-label="anchor" href="#software-setup"></a></h2>
 <hr class="half-width"><div id="details" class="callout discussion">
@@ -656,7 +684,7 @@ computer and transfer them to the Linux system instead.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-1" class="tab-pane show active" aria-labelledby="nav-tab-1-1" role="tabpanel">
+<div id="nav-tabpanel-1-1" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-1">
 <p>You may use PuTTY to ssh into a system for which your instructor
 should provide access information. In the long run, the MobaXTerm app
 can be installed and used if desired. It provides the same terminal
@@ -664,7 +692,7 @@ access as PuTTY but also provides a convenient file transfer capability.
 This is especially useful if you are more comfortable editing your files
 on the Windows side then transferring them over to the Linux system.</p>
 </div>
-<div id="nav-tabpanel-1-2" class="tab-pane" aria-labelledby="nav-tab-1-2" role="tabpanel">
+<div id="nav-tabpanel-1-2" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-2">
 <p>Use <strong>Terminal.app</strong> or <strong>iTerm2.app</strong>. You
 will ssh into the Linux system for which your instructor should provide
 access information. You can edit your files on the Linux system with
@@ -672,7 +700,7 @@ access information. You can edit your files on the Linux system with
 different editor on your Mac system you may edit the code files there
 and <strong>scp</strong> them over to the Linux system each time.</p>
 </div>
-<div id="nav-tabpanel-1-3" class="tab-pane" aria-labelledby="nav-tab-1-3" role="tabpanel">
+<div id="nav-tabpanel-1-3" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-3">
 <p>Use a Terminal window and ssh into the Linux system for which your
 instructor should provide access information. You can edit your files on
 the Linux HPC system with <strong>vim</strong> or <strong>nano</strong>,
@@ -721,7 +749,7 @@ Python.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <p>Show program examples and diagrams in sections 2-6 in Python. You
 will need to set up a virtual environment on the Linux system that your
 instructor provides access to. The generic directions below should
@@ -737,16 +765,16 @@ usually work.</p>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="ex">pip</span> install time</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
