@@ -5,17 +5,21 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What does performance mean in programming?
 - How do I take advantage of optimized libraries?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Understand that what actually goes on in the computer may be much more
 complex than what the user tells the computer to do.
 - Have a basic understanding of some of the performance issues to be aware of.
 - Learn that you don't have to be an expert programmer to take advantage of 
 advanced performance techniques, you just need to be aware of how to use libraries
 optimized by experts.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

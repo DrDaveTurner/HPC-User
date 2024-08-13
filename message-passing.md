@@ -5,12 +5,16 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What is the distributed-memory programming model?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Learn about message-passing in distributed-memory computing.
 - Understand the strengths and limitations of this approach.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

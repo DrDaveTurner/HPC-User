@@ -5,15 +5,19 @@ exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - How to measure performance?
 - How to measure memory usage?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Learn the different methods available to measure time and memory usage
   externally and from within a program.
 - Understand what parts of a program are important to time.
 - Learn how to do a scaling study for multi-core and multi-node jobs.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

@@ -5,12 +5,16 @@ exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What is the multi-threaded shared-memory programming model?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Learn about multi-threaded computing and how to use it.
 - Understand the strengths and limitations of this approach.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 

@@ -5,12 +5,16 @@ exercises: 5
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What are the strengths and weaknesses of the Matlab language?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Understand the performance and parallelization characteristics of Matlab.
 - Learn the practicality of using the Matlab compiler on HPC systems.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
