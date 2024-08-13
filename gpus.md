@@ -1,6 +1,6 @@
 ---
 title: "Accelerating Scientific Computing with GPUs"
-teaching: 15
+teaching: 10
 exercises: 5
 ---
 
