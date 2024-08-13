@@ -5,11 +5,15 @@ exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
+
 - What should I expect to learn from the HPC User module?
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
+
 - Set the basis for learning about High-Performance Computing in Science.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
