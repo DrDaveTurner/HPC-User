@@ -155,7 +155,7 @@ Need to add info about non-US HTC systems
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Homework: Get an OSG account and submit a test job.
+## Optional Homework: Get an OSG account and submit a test job.
 If you are in the U.S. and want a big challenge, request an OSG account and
 try submitting some small jobs.
 

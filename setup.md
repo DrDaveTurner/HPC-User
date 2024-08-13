@@ -9,7 +9,7 @@ cd episodes
 zip -r code.zip code
 cp code.zip data
 -->
-Download the [code zip file](data/code.zip) and unzip it to your Desktop.
+Download the [code examples zip file](data/code.zip) and unzip it to your Desktop.
 
 ## Software Setup
 
