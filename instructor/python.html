@@ -415,7 +415,7 @@
 
 
 
-        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
+        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
 
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -504,7 +504,8 @@ very easily allows that programmer to define functions as separate apps
 or applications that can be run on different cores or compute nodes.
 This approach is especially useful in expressing multi-step workflows.
 The link below provides more information on this approach.</p>
-<p><a href="https://github.com/Parsl/parsl" class="external-link">Parsl python package</a></p>
+<p><a href="https://github.com/Parsl/parsl" class="external-link">Parsl python package
+github</a></p>
 <p><strong>memory_profiler</strong> is a Python package that allows easy
 profiling of the memory usage of the code. If run externally using the
 <strong>mprof</strong> command it reports the full memory usage of the
@@ -514,8 +515,8 @@ before functions to provide line by line memory profiling to help
 identify exactly where in your code your large memory allocations are
 occurring. The link below provides a more detailed explanation with
 examples.</p>
-<p><a href="https://pypi.org/project/memory-profiler/" class="external-link">Memory profiling
-in Python</a></p>
+<p><a href="https://pypi.org/project/memory-profiler/" class="external-link">Python
+memory-profiler package documentation</a></p>
 </div>
 <div class="section level3">
 <h3 id="python-capabilities">Python capabilities<a class="anchor" aria-label="anchor" href="#python-capabilities"></a></h3>
@@ -666,7 +667,7 @@ compare with versions written in other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>While the syntax is different, the code is basically the same in each
 language. Performance is much slower for raw Python code than the
@@ -697,7 +698,7 @@ difference the highly-tuned library function makes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>If you have already run the optimized C version, you may notice that
 the compiled code still beats the optimized <strong>NumPy</strong>
@@ -728,7 +729,7 @@ active virtual environment meaning that there is no
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Once compiled you should be able to run this with a command like:
 <strong>./matmult.pyc 100</strong>.</p>
@@ -758,7 +759,7 @@ second time takes advantage of the cached compilation code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>Notice that in this code we needed to rewrite the computationally
 intensive loops into functions. This does not take much effort but does
@@ -783,13 +784,13 @@ definitely not what is considered as the Python way.</p>
 </div>
 </div>
 </div>
-<div id="optional-homework---test-the-pi-calculation-program-using-numba" class="callout challenge">
+<div id="optional-homework---write-a-pi-calculation-program-using-numba" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="optional-homework---test-the-pi-calculation-program-using-numba" class="callout-inner">
-<h3 class="callout-title">Optional Homework - Test the Pi calculation
-program using <strong>Numba</strong><a class="anchor" aria-label="anchor" href="#optional-homework---test-the-pi-calculation-program-using-numba"></a>
+<div id="optional-homework---write-a-pi-calculation-program-using-numba" class="callout-inner">
+<h3 class="callout-title">Optional Homework - Write a Pi calculation
+program using <strong>Numba</strong><a class="anchor" aria-label="anchor" href="#optional-homework---write-a-pi-calculation-program-using-numba"></a>
 </h3>
 <div class="callout-content">
 <p>Write a Python version of the Pi calculation program and time raw
@@ -806,7 +807,7 @@ comparing it to optimized functions in <strong>NumPy</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>If you do this please contribute your code and timings.</p>
 </div>
