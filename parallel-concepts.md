@@ -1,7 +1,7 @@
 ---
 title: "Parallel Computing Concepts"
-teaching: 20
-exercises: 10
+teaching: 25
+exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions

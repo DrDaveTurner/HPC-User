@@ -1,7 +1,7 @@
 ---
 title: "The Matlab Language"
 teaching: 20
-exercises: 5
+exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions

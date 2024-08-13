@@ -1,7 +1,7 @@
 ---
 title: "The R Language"
 teaching: 30
-exercises: 15
+exercises: 20
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions

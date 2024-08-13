@@ -1,5 +1,6 @@
 ---
-title: Setup
+title: "Setup"
+teaching: 20
 ---
 
 ## Data Sets

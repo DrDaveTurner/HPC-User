@@ -1,6 +1,6 @@
 ---
 title: "Profiling Code for Performance"
-teaching: 15
+teaching: 20
 exercises: 0
 ---
 
