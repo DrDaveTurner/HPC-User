@@ -1,7 +1,7 @@
 ---
 title: "The Python Language"
-teaching: 15
-exercises: 10
+teaching: 25
+exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
@@ -87,7 +87,7 @@ applications that can be run on different cores or compute nodes.
 This approach is especially useful in expressing multi-step workflows.
 The link below provides more information on this approach.
 
-[Parsl python package](https://github.com/Parsl/parsl)
+[Parsl python package github](https://github.com/Parsl/parsl)
 
 **memory_profiler** is a Python package that allows easy profiling
 of the memory usage of the code.  If run externally using the 
@@ -98,7 +98,7 @@ line by line memory profiling to help identify exactly where in your
 code your large memory allocations are occurring.
 The link below provides a more detailed explanation with examples.
 
-[Memory profiling in Python](https://pypi.org/project/memory-profiler/)
+[Python memory-profiler package documentation](https://pypi.org/project/memory-profiler/)
 
 ### Python capabilities
 
@@ -355,7 +355,7 @@ what is considered as the Python way.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Optional Homework - Test the Pi calculation program using **Numba**
+## Optional Homework - Write a Pi calculation program using **Numba**
 Write a Python version of the Pi calculation program and time
 raw Python code versus **Numba** optimized.
 If you want to have more fun try out **Numba** multi-threading

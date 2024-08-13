@@ -1,7 +1,7 @@
 ---
 title: "Performance Concepts"
-teaching: 20
-exercises: 10
+teaching: 25
+exercises: 15
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
@@ -155,7 +155,7 @@ is fairly simple.
 N = 100
 for i in range( N ):
     for j in range( N ):
-        C[i][j] = 0
+        C[i][j] = 0.0
         for i in range( N ):
             C[i][j] += A[i][k] * B[k][j]
 

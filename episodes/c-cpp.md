@@ -1,6 +1,6 @@
 ---
 title: "C and C++ Languages"
-teaching: 15
+teaching: 20
 exercises: 10
 ---
 
