@@ -2,10 +2,6 @@
 
 This is a new lesson built with [The Carpentries Workbench][workbench]. 
 
-[HPC-User github repository](https://github.com/DrDaveTurner/HPC-User)
-
-[HPC-User website](https://drdaveturner.github.io/HPC-User/instructor/index.html)
-
 The HPC-user Software Carpentry module is aimed at researchers with
 some background in using scientific computing.
 This lesson will teach scientists to understand and deal with performance issues
@@ -28,6 +24,10 @@ eventually be adjustable to display in any
 of these languages.  Each user may also need to know how to run
 jobs in an HPC environment.  These prerequisites may all be covered by
 having an HPC Unix Shell carpentry module taught right before this one.
+
+[HPC-User github repository](https://github.com/DrDaveTurner/HPC-User)
+
+[HPC-User website](https://drdaveturner.github.io/HPC-User/instructor/index.html)
 
 
 
