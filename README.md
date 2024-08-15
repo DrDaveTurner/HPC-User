@@ -29,6 +29,11 @@ having an HPC Unix Shell carpentry module taught right before this one.
 
 [HPC-User website](https://drdaveturner.github.io/HPC-User/instructor/index.html)
 
+## Authors
+
+This Carpentries lesson was created by Dr Dave Turner 
+[(daveturner@ksu.edu)](drdaveturner@ksu.edu)
+at Kansas State University 2022-2024+.
 
 
 [cff-sandpaper-docs]:  https://carpentries.github.io/sandpaper-docs/editing.html#making-your-lesson-citable

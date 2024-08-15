@@ -100,6 +100,12 @@ The link below provides a more detailed explanation with examples.
 
 [Python memory-profiler package documentation](https://pypi.org/project/memory-profiler/)
 
+The **line_profiler** package in Python similarly can run externally
+or internally, but provides timing information in a line-by-line
+manner. Further information can be found at the link below:
+
+[Python line_profiler package github](https://github.com/pyutils/line_profiler)
+
 ### Python capabilities
 
 For what Python lacks in raw performance as an interpreted language
@@ -309,6 +315,18 @@ library installed.
 
 Once compiled you should be able to run this with a command like:
 **./matmult.pyc 100**.
+
+:::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Optional Exercise - Try implementing memory-profiler or line_profiler
+If you have time, try implementing memory-profiler or line_profiler
+in one of the Python test codes supplied like **matmult_numpy.py**.
+Then try running the code to see the memory or timing output.
+
+:::::::::::::::::: solution
 
 :::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
