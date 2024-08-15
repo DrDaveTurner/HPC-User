@@ -409,7 +409,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The Python Language</h1>
-        <p>Last updated on 2024-08-13 |
+        <p>Last updated on 2024-08-15 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -517,6 +517,12 @@ occurring. The link below provides a more detailed explanation with
 examples.</p>
 <p><a href="https://pypi.org/project/memory-profiler/" class="external-link">Python
 memory-profiler package documentation</a></p>
+<p>The <strong>line_profiler</strong> package in Python similarly can
+run externally or internally, but provides timing information in a
+line-by-line manner. Further information can be found at the link
+below:</p>
+<p><a href="https://github.com/pyutils/line_profiler" class="external-link">Python
+line_profiler package github</a></p>
 </div>
 <div class="section level3">
 <h3 id="python-capabilities">Python capabilities<a class="anchor" aria-label="anchor" href="#python-capabilities"></a></h3>
@@ -667,7 +673,7 @@ compare with versions written in other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>While the syntax is different, the code is basically the same in each
 language. Performance is much slower for raw Python code than the
@@ -698,7 +704,7 @@ difference the highly-tuned library function makes.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>If you have already run the optimized C version, you may notice that
 the compiled code still beats the optimized <strong>NumPy</strong>
@@ -729,10 +735,37 @@ active virtual environment meaning that there is no
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Once compiled you should be able to run this with a command like:
 <strong>./matmult.pyc 100</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="optional-exercise---try-implementing-memory-profiler-or-line_profiler" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="optional-exercise---try-implementing-memory-profiler-or-line_profiler" class="callout-inner">
+<h3 class="callout-title">Optional Exercise - Try implementing memory-profiler or line_profiler<a class="anchor" aria-label="anchor" href="#optional-exercise---try-implementing-memory-profiler-or-line_profiler"></a>
+</h3>
+<div class="callout-content">
+<p>If you have time, try implementing memory-profiler or line_profiler
+in one of the Python test codes supplied like
+<strong>matmult_numpy.py</strong>. Then try running the code to see the
+memory or timing output.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
+
 </div>
 </div>
 </div>
@@ -754,12 +787,12 @@ second time takes advantage of the cached compilation code.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
-  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Notice that in this code we needed to rewrite the computationally
 intensive loops into functions. This does not take much effort but does
@@ -802,12 +835,12 @@ comparing it to optimized functions in <strong>NumPy</strong>.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution6" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
-  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
+  <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>If you do this please contribute your code and timings.</p>
 </div>
@@ -905,8 +938,8 @@ package</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/python.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/python.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-13",
-  "datePublished": "2024-08-14"
+  "dateModified": "2024-08-15",
+  "datePublished": "2024-08-15"
 }
 
   </script><script>
