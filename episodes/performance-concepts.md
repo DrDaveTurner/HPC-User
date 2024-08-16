@@ -98,7 +98,7 @@ of the entire cache line being left behind in each layer.
 In this way, the most frequently used data will be more likely to
 be in one of the cache layers where it can be accessed more quickly.
 In the case of our dot product, that means loading the first element
-**X<sub>1</sub>** may take 93-106 ns while the next 7 only take 3 ns since they are
+**X<sub>1</sub>** may take 10-33 ns while the next 7 only take 0.3-1 ns since they are
 already in L1 cache.
 
 ![Memory Hierarchy in a Computer](fig/Memory_Hierarchy.jpg){ alt="Diagram of the memory hierarchy in a typical computer" }
@@ -109,7 +109,7 @@ operations are very fast once the data is in the registers.
 If the vector is instead not stored in contiguous memory, with each
 variable in the next memory location, then the subsequent 7 memory
 loads **X<sub>2</sub>-X<sub>8</sub>** and **Y<sub>2</sub>-Y<sub>8</sub>** 
-will take 100 ns each instead of 3 ns each.
+will take 20-33 ns each instead of 0.3-1 ns each.
 This means that we need to ensure that variables we are using are in
 contiguous memory whenever possible.
 There will be an exercise at the end of this section where you will
