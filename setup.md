@@ -90,18 +90,21 @@ pip install time
 ### R
 
 Not implemented yet.
+Show program examples and diagrams in sections 2-6 in R.
 
 ### C
 
-Not implemented yet.
+Show program examples and diagrams in sections 2-6 in C/C++.
 
 ### Fortran
 
 Not implemented yet.
+Show program examples and diagrams in sections 2-6 in Fortran.
 
 ### Matlab
 
 Not implemented yet.
+Show program examples and diagrams in sections 2-6 in Matlab.
 
 ::::::::::::::::::::::::::
 
