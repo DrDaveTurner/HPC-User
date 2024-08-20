@@ -581,21 +581,22 @@ to isolate your job from others in this case, you will need to do your
 IO to the local disk (usually /tmp).</p>
 </section><section><h2 class="section-heading" id="timing-internal-parts-of-a-program">Timing Internal Parts of a Program<a class="anchor" aria-label="anchor" href="#timing-internal-parts-of-a-program"></a>
 <a class="anchor" aria-label="anchor" href="#timing-internal-parts-of-a-program"></a></h2>
-<hr class="half-width"><p>Every computer language has multiple <strong>clock()</strong>
-functions that can be used to time sections of the code. The syntax is
-different in each language, but they all work about the same, and there
-is always a very high precision function that is accurate down to
-somewhere in the nanosecond range, though I typically don’t trust these
-for measuring less than a microsecond interval. Each of these clock
-functions returns the current time, so to measure the time in an
-interval you need to store the start time, do some calculations or IO,
-then get the end time and subtract the two to get the time used for that
-part of the code.</p>
+<hr class="half-width"><p>Every computer language has multiple clock functions that can be used
+to time sections of the code. The syntax is different in each language,
+but they all work about the same, and there is always a very high
+precision function that is accurate down to somewhere in the nanosecond
+range, though I typically don’t trust these for measuring less than a
+microsecond interval. Each of these clock functions returns the current
+time, so to measure the time in an interval you need to store the start
+time, do some calculations or IO, then get the end time and subtract the
+two to get the time used for that part of the code.</p>
 <p>In Python since version 3.3, the best timer is in the
 <strong>time</strong> package. To use it, you must start by importing
-the package. Below is an example of using the clock function to measure
-the time it takes to do a loop, then measure the time it takes to dump
-an array out to a file.</p>
+the package. In C/C++ the <strong>clock_gettime()</strong> function
+returns the current time accurate to less than a mucrosecond. Below are
+examples of using the clock functions to measure the time it takes to do
+a loop, then measure the time it takes to dump an array out to a
+file.</p>
 <div class="tabs">
 <nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
@@ -625,7 +626,7 @@ an array out to a file.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -633,7 +634,7 @@ an array out to a file.</p>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000000</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
@@ -656,44 +657,105 @@ an array out to a file.</p>
 <span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">// timing_example.c - Example code showing how to put timing around an IO loop</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;sys/time.h&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span>argv<span class="op">)</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>   <span class="dt">int</span> i<span class="op">,</span> N<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>   <span class="dt">double</span> t_loop<span class="op">,</span> t_sum<span class="op">,</span> t_io<span class="op">,</span> a_sum<span class="op">,</span> <span class="op">*</span>array<span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>   <span class="kw">struct</span> timespec ts<span class="op">,</span> tf<span class="op">,</span> ts_sum<span class="op">,</span> tf_sum<span class="op">,</span> ts_io<span class="op">,</span> tf_io<span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>   <span class="dt">FILE</span> <span class="op">*</span>fd<span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>      <span class="co">// Allocate space for the array and initialize it</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>   N <span class="op">=</span> <span class="dv">1000000</span><span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>   array <span class="op">=</span> malloc<span class="op">(</span> N <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">);</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>      array<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> i<span class="op">;</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>      <span class="co">// Put timing around our loop</span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>ts<span class="op">);</span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>   a_sum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>   <span class="co">//t_sum = 0.0;</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a>      <span class="co">//clock_gettime(CLOCK_REALTIME, &amp;ts_sum);</span></span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a>      a_sum <span class="op">+=</span> array<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a>      <span class="co">//clock_gettime(CLOCK_REALTIME, &amp;tf_sum);</span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a>      <span class="co">//t_sum =  (double) ( tf_sum.tv_sec - ts_sum.tv_sec );</span></span>
+<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a>      <span class="co">//t_sum += (double) (tf_sum.tv_nsec - ts_sum.tv_nsec) * 1e-9;</span></span>
+<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>tf<span class="op">);</span></span>
+<span id="cb8-39"><a href="#cb8-39" tabindex="-1"></a>   t_loop <span class="op">=</span>  <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span> tf<span class="op">.</span>tv_sec <span class="op">-</span> ts<span class="op">.</span>tv_sec <span class="op">);</span></span>
+<span id="cb8-40"><a href="#cb8-40" tabindex="-1"></a>   t_loop <span class="op">+=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span>tf<span class="op">.</span>tv_nsec <span class="op">-</span> ts<span class="op">.</span>tv_nsec<span class="op">)</span> <span class="op">*</span> <span class="fl">1e-9</span><span class="op">;</span></span>
+<span id="cb8-41"><a href="#cb8-41" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="#cb8-42" tabindex="-1"></a>   <span class="co">//printf( "The sum took %lf seconds\n", t_sum );</span></span>
+<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a>   printf<span class="op">(</span> <span class="st">"The loop took </span><span class="sc">%lf</span><span class="st"> seconds</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> t_loop <span class="op">);</span></span>
+<span id="cb8-44"><a href="#cb8-44" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" tabindex="-1"></a>      <span class="co">// Now time the file write</span></span>
+<span id="cb8-46"><a href="#cb8-46" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>ts_io<span class="op">);</span></span>
+<span id="cb8-48"><a href="#cb8-48" tabindex="-1"></a></span>
+<span id="cb8-49"><a href="#cb8-49" tabindex="-1"></a>   fd <span class="op">=</span> fopen<span class="op">(</span> <span class="st">"time_example.out"</span><span class="op">,</span> <span class="st">"w"</span> <span class="op">);</span></span>
+<span id="cb8-50"><a href="#cb8-50" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-51"><a href="#cb8-51" tabindex="-1"></a>      fprintf<span class="op">(</span> fd<span class="op">,</span> <span class="st">"</span><span class="sc">%lf\n</span><span class="st">"</span><span class="op">,</span> array<span class="op">[</span>i<span class="op">]</span> <span class="op">);</span></span>
+<span id="cb8-52"><a href="#cb8-52" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb8-53"><a href="#cb8-53" tabindex="-1"></a>   fclose<span class="op">(</span> fd <span class="op">);</span></span>
+<span id="cb8-54"><a href="#cb8-54" tabindex="-1"></a></span>
+<span id="cb8-55"><a href="#cb8-55" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>tf_io<span class="op">);</span></span>
+<span id="cb8-56"><a href="#cb8-56" tabindex="-1"></a>   t_io <span class="op">=</span>  <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span> tf_io<span class="op">.</span>tv_sec <span class="op">-</span> ts_io<span class="op">.</span>tv_sec <span class="op">);</span></span>
+<span id="cb8-57"><a href="#cb8-57" tabindex="-1"></a>   t_io <span class="op">+=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span>tf_io<span class="op">.</span>tv_nsec <span class="op">-</span> ts_io<span class="op">.</span>tv_nsec<span class="op">)</span> <span class="op">*</span> <span class="fl">1e-9</span><span class="op">;</span></span>
+<span id="cb8-58"><a href="#cb8-58" tabindex="-1"></a></span>
+<span id="cb8-59"><a href="#cb8-59" tabindex="-1"></a>   printf<span class="op">(</span> <span class="st">"The IO write took </span><span class="sc">%lf</span><span class="st"> seconds</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> t_io <span class="op">);</span></span>
+<span id="cb8-60"><a href="#cb8-60" tabindex="-1"></a><span class="op">}</span></span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
 </div>
-<p>Try running the <strong>timing_example.py</strong> code yourself. It
-is one of the codes you should have downloaded and unzipped in your HPC
-system, and should be in the <strong>code</strong> directory. You should
-also have the Python environment set up and have done the <strong>pip
-install time</strong>. When I run this, I see that the loop takes about
-30 microseconds on my computer and the output file takes 10
-milliseconds. Since both of these are above the nanosecond range, we can
-be confident that the timing routine is accurately measuring each.</p>
+<p>Try running the <strong>timing_example</strong> code yourself for the
+language you are working with. These are codes you should have
+downloaded and unzipped in your HPC system, and should be in the
+<strong>code</strong> directory. Timing will be dependent on the
+language, but the values I see are in the millisecond range. Since both
+of these are above the nanosecond range, we can be confident that the
+timing routine is accurately measuring each.</p>
 <p>Let’s see what we can learn by playing around with it some more. When
-I run this with <strong>time python timing_example.py</strong>, I see a
-real time of 100 milliseconds even though the loop time and output time
-combined are only about a half millisecond. The initialization time is
-not measured but shouldn’t be more than the loop time. What all this
-means is that there is some startup time for getting the python program
-running and importing the <strong>time</strong> package, but we may also
-be seeing the lack of accuracy of the external <strong>time</strong>
-function when it comes to measuring things down in the millisecond
-range.</p>
-<p>Now lets change the <strong>timing_example.py</strong> program
-itself. Sometimes we need to time a part of something that is in a
-larger loop, so we need to sum the times together. Try changing the
-timing so that it is inside the summation loop instead of outside it to
-see what happens. You can do this by uncommenting the timing and
-printing functions in the <strong>timing_example.py</strong> file.</p>
+I run the python version preceeded by the linux <strong>time</strong>
+function, I see a real time significantly larger than the loop time and
+output time combined. The initialization time is not measured but
+shouldn’t be more than the loop time. What all this means is that there
+is some startup time for getting the python program running and
+importing the <strong>time</strong> package, but we may also be seeing
+the lack of accuracy of the external <strong>time</strong> function when
+it comes to measuring things down in the millisecond range. We do not
+see the same time discrepancy when running the C version.</p>
+<p>Now lets change the program itself. Sometimes we need to time a part
+of something that is in a larger loop, so we need to sum the times
+together. Try changing the timing so that it is inside the summation
+loop instead of outside it to see what happens. You can do this by
+uncommenting the timing and printing functions in the code file.</p>
 <div class="tabs">
 <nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-2-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-2-Python" type="button" role="tab" aria-controls="nav-tabpanel-2-Python" aria-selected="true">
@@ -723,50 +785,113 @@ printing functions in the <strong>timing_example.py</strong> file.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
-<div class="codewrapper sourceCode" id="cb8">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>t_sum <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>   t0 <span class="op">=</span> time.perf_counter()</span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>   t_sum <span class="op">+=</span> time.perf_counter() <span class="op">-</span> t0</span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The sum took "</span>, t_sum, <span class="st">" seconds"</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a></span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>fd <span class="op">=</span> <span class="bu">open</span>( <span class="st">"array.out"</span>, <span class="st">"w"</span>)</span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>   fd.write( <span class="bu">str</span>(array[i]) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> )</span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>fd.close()</span>
-<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a></span>
-<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
-<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>array <span class="op">=</span> [ <span class="bu">float</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ) ]</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>t_sum <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>   t0 <span class="op">=</span> time.perf_counter()</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>   <span class="bu">sum</span> <span class="op">+=</span> array[i]</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>   t_sum <span class="op">+=</span> time.perf_counter() <span class="op">-</span> t0</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>t_loop <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The sum took "</span>, t_sum, <span class="st">" seconds"</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>t_start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>fd <span class="op">=</span> <span class="bu">open</span>( <span class="st">"array.out"</span>, <span class="st">"w"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>   fd.write( <span class="bu">str</span>(array[i]) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span> )</span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>fd.close()</span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>t_output <span class="op">=</span> time.perf_counter() <span class="op">-</span> t_start</span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">// timing_example.c - Example code showing how to put timing around an IO loop.</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;sys/time.h&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="dt">int</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span>argv<span class="op">)</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>   <span class="dt">int</span> i<span class="op">,</span> N<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>   <span class="dt">double</span> t_loop<span class="op">,</span> t_sum<span class="op">,</span> t_io<span class="op">,</span> a_sum<span class="op">,</span> <span class="op">*</span>array<span class="op">;</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>   <span class="kw">struct</span> timespec ts<span class="op">,</span> tf<span class="op">,</span> ts_sum<span class="op">,</span> tf_sum<span class="op">,</span> ts_io<span class="op">,</span> tf_io<span class="op">;</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>   <span class="dt">FILE</span> <span class="op">*</span>fd<span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>      <span class="co">// Allocate space for the array and initialize it</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>   N <span class="op">=</span> <span class="dv">1000000</span><span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>   array <span class="op">=</span> malloc<span class="op">(</span> N <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">);</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>      array<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> i<span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>      <span class="co">// Put timing around our loop</span></span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>ts<span class="op">);</span></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>   a_sum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a>   t_sum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a>      clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>ts_sum<span class="op">);</span></span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a>      a_sum <span class="op">+=</span> array<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a>      clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>tf_sum<span class="op">);</span></span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a>      t_sum <span class="op">=</span>  <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span> tf_sum<span class="op">.</span>tv_sec <span class="op">-</span> ts_sum<span class="op">.</span>tv_sec <span class="op">);</span></span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>      t_sum <span class="op">+=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span>tf_sum<span class="op">.</span>tv_nsec <span class="op">-</span> ts_sum<span class="op">.</span>tv_nsec<span class="op">)</span> <span class="op">*</span> <span class="fl">1e-9</span><span class="op">;</span></span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a></span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>tf<span class="op">);</span></span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a>   t_loop <span class="op">=</span>  <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span> tf<span class="op">.</span>tv_sec <span class="op">-</span> ts<span class="op">.</span>tv_sec <span class="op">);</span></span>
+<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a>   t_loop <span class="op">+=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span>tf<span class="op">.</span>tv_nsec <span class="op">-</span> ts<span class="op">.</span>tv_nsec<span class="op">)</span> <span class="op">*</span> <span class="fl">1e-9</span><span class="op">;</span></span>
+<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a>   printf<span class="op">(</span> <span class="st">"The sum took </span><span class="sc">%lf</span><span class="st"> seconds</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> t_sum <span class="op">);</span></span>
+<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a>   printf<span class="op">(</span> <span class="st">"The loop took </span><span class="sc">%lf</span><span class="st"> seconds</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> t_loop <span class="op">);</span></span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a>      <span class="co">// Now time the file write</span></span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>ts_io<span class="op">);</span></span>
+<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a>   fd <span class="op">=</span> fopen<span class="op">(</span> <span class="st">"time_example.out"</span><span class="op">,</span> <span class="st">"w"</span> <span class="op">);</span></span>
+<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a>      fprintf<span class="op">(</span> fd<span class="op">,</span> <span class="st">"</span><span class="sc">%lf\n</span><span class="st">"</span><span class="op">,</span> array<span class="op">[</span>i<span class="op">]</span> <span class="op">);</span></span>
+<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a>   fclose<span class="op">(</span> fd <span class="op">);</span></span>
+<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a></span>
+<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>tf_io<span class="op">);</span></span>
+<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a>   t_io <span class="op">=</span>  <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span> tf_io<span class="op">.</span>tv_sec <span class="op">-</span> ts_io<span class="op">.</span>tv_sec <span class="op">);</span></span>
+<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a>   t_io <span class="op">+=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span>tf_io<span class="op">.</span>tv_nsec <span class="op">-</span> ts_io<span class="op">.</span>tv_nsec<span class="op">)</span> <span class="op">*</span> <span class="fl">1e-9</span><span class="op">;</span></span>
+<span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a></span>
+<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a>   printf<span class="op">(</span> <span class="st">"The IO write took </span><span class="sc">%lf</span><span class="st"> seconds</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> t_io <span class="op">);</span></span>
+<span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a><span class="op">}</span></span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -846,10 +971,10 @@ are on an HPC system with a batch scheduler like Slurm, you can use the
 running job and <strong>seff</strong> to find the maximum memory used
 for a completed job, using the job ID number in both cases to choose the
 job you are interested in.</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">seff</span> 5072064</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">seff</span> 5072064</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -872,10 +997,10 @@ different ways. In this case, 1 kB is 1024 Bytes, 1 MB is 1024 x 1024
 Bytes, and 1 GB is 1024 x 1024 x 1024 Bytes. So 3 matrices are 3 x NxN x
 8 / (1024x1024x1024) GB = 2.235 GB, rounded up to 2.26 GB. In general,
 if you estimate 1 GB as 10^9 Bytes that works fine.</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">sstat</span> <span class="at">--format</span><span class="op">=</span>MaxRSS 5072069</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">sstat</span> <span class="at">--format</span><span class="op">=</span>MaxRSS 5072069</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
