@@ -149,7 +149,7 @@ need to do your IO to the local disk (usually /tmp).
 
 ## Timing Internal Parts of a Program
 
-Every computer language has multiple **clock()** functions that can
+Every computer language has multiple clock functions that can
 be used to time sections of the code.
 The syntax is different in each language, but they all work about
 the same, and there is always a very high precision function that
@@ -164,7 +164,9 @@ of the code.
 
 In Python since version 3.3, the best timer is in the **time** 
 package.  To use it, you must start by importing the package.
-Below is an example of using the clock function to measure the
+In C/C++ the **clock_gettime()** function returns the current time
+accurate to less than a mucrosecond.
+Below are examples of using the clock functions to measure the
 time it takes to do a loop, then measure the time it takes to
 dump an array out to a file.
 
@@ -177,7 +179,7 @@ dump an array out to a file.
 
 import time
 
-N = 100
+N = 1000000
 array = [ float(i) for i in range( N ) ]
 
 t_start = time.perf_counter()
@@ -205,7 +207,68 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+```c
+// timing_example.c - Example code showing how to put timing around an IO loop
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
+
+int main (int argc, char **argv)
+{
+   int i, N;
+   double t_loop, t_sum, t_io, a_sum, *array;
+   struct timespec ts, tf, ts_sum, tf_sum, ts_io, tf_io;
+   FILE *fd;
+
+      // Allocate space for the array and initialize it
+
+   N = 1000000;
+   array = malloc( N * sizeof(double) );
+
+   for( i = 0; i < N; i++ ) {
+      array[i] = (double) i;
+   }
+
+      // Put timing around our loop
+
+   clock_gettime(CLOCK_REALTIME, &ts);
+
+   a_sum = 0.0;
+   //t_sum = 0.0;
+   for( i = 0; i < N; i++ ) {
+      //clock_gettime(CLOCK_REALTIME, &ts_sum);
+      a_sum += array[i];
+      //clock_gettime(CLOCK_REALTIME, &tf_sum);
+      //t_sum =  (double) ( tf_sum.tv_sec - ts_sum.tv_sec );
+      //t_sum += (double) (tf_sum.tv_nsec - ts_sum.tv_nsec) * 1e-9;
+   }
+
+   clock_gettime(CLOCK_REALTIME, &tf);
+   t_loop =  (double) ( tf.tv_sec - ts.tv_sec );
+   t_loop += (double) (tf.tv_nsec - ts.tv_nsec) * 1e-9;
+
+   //printf( "The sum took %lf seconds\n", t_sum );
+   printf( "The loop took %lf seconds\n", t_loop );
+
+      // Now time the file write
+
+   clock_gettime(CLOCK_REALTIME, &ts_io);
+
+   fd = fopen( "time_example.out", "w" );
+   for( i = 0; i < N; i++ ) {
+      fprintf( fd, "%lf\n", array[i] );
+   }
+   fclose( fd );
+
+   clock_gettime(CLOCK_REALTIME, &tf_io);
+   t_io =  (double) ( tf_io.tv_sec - ts_io.tv_sec );
+   t_io += (double) (tf_io.tv_nsec - ts_io.tv_nsec) * 1e-9;
+
+   printf( "The IO write took %lf seconds\n", t_io );
+}
+```
 
 ### Fortran
 
@@ -217,35 +280,34 @@ Not implemented yet.
 
 ::::::::::::::::::::
 
-Try running the **timing_example.py** code yourself.
-It is one of the codes you should have downloaded and unzipped
+Try running the **timing_example** code yourself for the language
+you are working with.
+These are codes you should have downloaded and unzipped
 in your HPC system, and should be in the **code** directory.
-You should also have the Python environment set up and have
-done the **pip install time**.
-When I run this, I see that the loop takes about 30 microseconds on my computer
-and the output file takes 10 milliseconds.
+Timing will be dependent on the language, but the values I see
+are in the millisecond range.
 Since both of these are above the nanosecond range, we can be confident
 that the timing routine is accurately measuring each.
 
 Let's see what we can learn by playing around with it some more.
-When I run this with **time python timing_example.py**, I see a real time
-of 100 milliseconds even though the loop time and output time 
-combined are only about a half millisecond.
+When I run the python version preceeded by the linux **time** function, 
+I see a real time significantly larger than the loop time and output time 
+combined.
 The initialization time is not measured but shouldn't be more than
 the loop time.
 What all this means is that there is some startup time for getting
 the python program running and importing the **time** package, but
 we may also be seeing the lack of accuracy of the external **time**
-function when it comes to measuring things down in the millisecond
-range.
+function when it comes to measuring things down in the millisecond range.
+We do not see the same time discrepancy when running the C version.
 
-Now lets change the **timing_example.py** program itself.
+Now lets change the program itself.
 Sometimes we need to time a part of something that is in a larger
 loop, so we need to sum the times together.
 Try changing the timing so that it is inside the summation
 loop instead of outside it to see what happens.
 You can do this by uncommenting the timing and printing functions
-in the **timing_example.py** file.
+in the code file.
 
 :::::::::::::::: group-tab
 
@@ -287,7 +349,68 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+```c
+// timing_example.c - Example code showing how to put timing around an IO loop.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
+
+int main (int argc, char **argv)
+{
+   int i, N;
+   double t_loop, t_sum, t_io, a_sum, *array;
+   struct timespec ts, tf, ts_sum, tf_sum, ts_io, tf_io;
+   FILE *fd;
+
+      // Allocate space for the array and initialize it
+
+   N = 1000000;
+   array = malloc( N * sizeof(double) );
+
+   for( i = 0; i < N; i++ ) {
+      array[i] = (double) i;
+   }
+
+      // Put timing around our loop
+
+   clock_gettime(CLOCK_REALTIME, &ts);
+
+   a_sum = 0.0;
+   t_sum = 0.0;
+   for( i = 0; i < N; i++ ) {
+      clock_gettime(CLOCK_REALTIME, &ts_sum);
+      a_sum += array[i];
+      clock_gettime(CLOCK_REALTIME, &tf_sum);
+      t_sum =  (double) ( tf_sum.tv_sec - ts_sum.tv_sec );
+      t_sum += (double) (tf_sum.tv_nsec - ts_sum.tv_nsec) * 1e-9;
+   }
+
+   clock_gettime(CLOCK_REALTIME, &tf);
+   t_loop =  (double) ( tf.tv_sec - ts.tv_sec );
+   t_loop += (double) (tf.tv_nsec - ts.tv_nsec) * 1e-9;
+
+   printf( "The sum took %lf seconds\n", t_sum );
+   printf( "The loop took %lf seconds\n", t_loop );
+
+      // Now time the file write
+
+   clock_gettime(CLOCK_REALTIME, &ts_io);
+
+   fd = fopen( "time_example.out", "w" );
+   for( i = 0; i < N; i++ ) {
+      fprintf( fd, "%lf\n", array[i] );
+   }
+   fclose( fd );
+
+   clock_gettime(CLOCK_REALTIME, &tf_io);
+   t_io =  (double) ( tf_io.tv_sec - ts_io.tv_sec );
+   t_io += (double) (tf_io.tv_nsec - ts_io.tv_nsec) * 1e-9;
+
+   printf( "The IO write took %lf seconds\n", t_io );
+}
+```
 
 ### Fortran
 
