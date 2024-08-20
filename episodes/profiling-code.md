@@ -203,7 +203,7 @@ print("The output took ", t_output, " seconds")
 
 Not implemented yet.
 
-### C/C++
+### C
 
 Not implemented yet.
 
@@ -285,7 +285,7 @@ print("The output took ", t_output, " seconds")
 
 Not implemented yet.
 
-### C/C++
+### C
 
 Not implemented yet.
 
