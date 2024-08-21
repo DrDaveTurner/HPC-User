@@ -250,6 +250,10 @@ The unoptimized code uses **N_atoms * ( 1 + 21 * NQ ) Flops**.
 The optimized version uses **N_atoms * ( 13 + 6 * NQ ) Flops**.
 For large NQ the speedup would be around 21/6 or **3.5 times**.
 
+The compiled languages C/C++/Fortran would optimize some of this
+loop automatically by pulling the **2.0 * PI * dx / NQ** out of the
+**NQ** loop and just multiplying this by **iq** each time.
+
 :::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
