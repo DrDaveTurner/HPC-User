@@ -113,10 +113,10 @@ Not implemented yet.
 ### C
 
 ```c
-# This is just partial code to demonstrate the mechanics of
-#    using Flops minimization to optimize code for performance
+// This is just partial code to demonstrate the mechanics of
+//    using Flops minimization to optimize code for performance
 
-      # Sum over each atom in the simulation and all frequencies
+      // Sum over each atom in the simulation and all frequencies
 
    for( i = 0; i < N_atoms; i++ ) {
 
@@ -124,7 +124,7 @@ Not implemented yet.
 
       for( iq = 0; iq < NQ; iq++ ) {
 
-            # Sum over the frequencies
+            // Sum over the frequencies
 
          theta = (2.0 * PI * dx * iq) / NQ;
          freq_real[iq] += cos( theta );
@@ -148,30 +148,30 @@ Not implemented yet.
 ### Python
 
 ```python
-# This is just partial code to demonstrate the mechanics of
-#    using Flops minimization to optimize code for performance
+// This is just partial code to demonstrate the mechanics of
+//    using Flops minimization to optimize code for performance
 
-    # Define the number of frequencies and zero the array before summation
+    // Define the number of frequencies and zero the array before summation
 
 freq_real = [ 0.0 for i in range( NQ ) ]
 freq_imag = [ 0.0 for i in range( NQ ) ]
 
 d_theta = ( 2.0 * PI * (x[0] - y[0]) ) / NQ
 
-    # Sum over each atom in the simulation
+    // Sum over each atom in the simulation
 
 for i in range( N_atoms ):
 
     dx = x[i] - y[i]
 
-        # Calculate cos/sin of the theta increment and set starting cos/sin values
+        // Calculate cos/sin of the theta increment and set starting cos/sin values
 
     cos_d_theta = cos( d_theta )
     sin_d_theta = sin( d_theta )
     cos_theta = 1.0
     sin_theta = 0.0
 
-        # Sum over the frequencies
+        // Sum over the frequencies
 
     for iq in range( NQ ):
         cos_new = cos_theta * cos_d_theta - sin_theta * sin_d_theta
