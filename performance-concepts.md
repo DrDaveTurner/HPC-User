@@ -152,6 +152,8 @@ is fairly simple.
 ### Python
 
 ```python
+# Complete code is in code/matmult.py
+
 N = 100
 for i in range( N ):
     for j in range( N ):
@@ -167,7 +169,19 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+```c
+// Complete code is in code/matmult.c
+
+   N = 1000;
+   for( i = 0; i < N; i++ ) {
+      for( j = 0; j < N; j++ ) {
+         C[i][j] = 0.0;
+         for( k = 0; k < N; k++ ) {
+            C[i][j] += A[i][k] * B[k][j];
+         }
+      }
+   }
+```
 
 ### Fortran
 
@@ -214,6 +228,8 @@ libraries in the various languages.
 ### Python
 
 ```python
+# Complete code is in code/matmult_numpy.py
+
 import numpy as np
 
 N = 100
@@ -226,7 +242,16 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+```c
+// Complete code is in code/matmult_cblas.c
+
+#include <cblas.h>
+
+   N = 1000;
+   cblas_dgemm( CblasRowMajor, CblasNoTrans, CblasNoTrans,
+                N, N, N, 1.0, *A, N, *B, N, 1.0, *C, N );
+
+```
 
 ### Fortran
 
@@ -271,7 +296,16 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+Compile and run the dot_product_c.c code several times to get an average
+execution time for a dot product between two vectors of
+1 million elements each.  Try to run them on an isolated system
+if possible, or through a batch queue that at least ensures the
+code is being run on an isolated processing core.
+Then compile and run the dot_product_sparse.c code in the same manner for
+comparison.
+How much faster is the first code where the vectors are stored
+in contiguous memory?
+How much faster should it be?
 
 ### Fortran
 
@@ -294,23 +328,21 @@ Is the time difference what we expected?
 When I ran this on a new Intel processor that did not have 
 any other jobs running, I measured 180 milliseconds for the
 contiguous memory case and 1230 milliseconds for the sparse
-case, resulting in a 6.9-times speedup by keeping the vector
+case, resulting in a 6.9 times speedup by keeping the vector
 in contiguous memory.
 Since a cache line is 64 Bytes and each element is 8 bytes,
 when the first element is loaded the next 7 are brought into
 L1 cache essentially for free since they are in contiguous memory.
-Therefore we expect it to take 100 ns to load 8 elements of X,
-then 100 ns to load 8 elements of Y, then only a few ns to get
+Therefore we expect it to take ~33 ns to load 8 elements of X,
+then ~33 ns to load 8 elements of Y, then only a few ns to get
 each element into the registers and do the computations.
 For the sparse vectors, it should take 8 times as long since
-each load will take 100 ns.
+each load will take ~33 ns.
 If you didn't see an 8-times speedup, don't worry.
 The cache system is actually even more complicated than this picture.
-Also remember that you may be sharing parts of the processor
-with others.
 The main thing to learn here is that if you take advantage of 
 the cache line by keeping the vectors in contiguous memory, your
-code will run faster.
+code will run much faster.
 
 ### R
 
@@ -318,7 +350,25 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+Is the time difference what we expected?
+When I ran this on a new processor that did not have
+any other jobs running, I measured ~16 milliseconds for the
+contiguous memory case and ~160 milliseconds for the sparse
+case, resulting in a 10 times speedup by keeping the vector
+in contiguous memory.
+Since a cache line is 64 Bytes and each element is 8 bytes,
+when the first element is loaded the next 7 are brought into
+L1 cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take ~33 ns to load 8 elements of X,
+then ~33 ns to load 8 elements of Y, then only a few ns to get
+each element into the registers and do the computations.
+For the sparse vectors, it should take 8 times as long since
+each load will take ~33 ns.
+If you didn't see an 8 times speedup exactly, don't worry.
+The cache system is actually even more complicated than this picture.
+The main thing to learn here is that if you take advantage of
+the cache line by keeping the vectors in contiguous memory, your
+code will run much faster.
 
 ### Fortran
 
@@ -331,6 +381,7 @@ Not implemented yet.
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -362,7 +413,13 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+Compile and run the **matmult.c** and **matmult_cblas.c** programs
+to compare the times for raw C and the heavily optimized 
+BLAS library **dgemm()** function.
+Since these use statically allocated matrices you may need to increase
+the stack size using 'ulimit -s unlimited'.
+You may also need to use a different compile line than in the code as your
+BLAS library may be different on each system.
 
 ### Fortran
 
@@ -414,7 +471,12 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+For a 1000x1000 matrix I got 1.2 seconds for the raw C code when
+compiling with -O3 optimization.
+The **cblas_dgemm()** function took only 0.015 seconds so it was
+80 times faster.
+Even though compiled C/C++ code is very fast, the **DGEMM** routine
+is hand-optimized for each processor.
 
 ### Fortran
 
@@ -427,6 +489,7 @@ Not implemented yet.
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -434,45 +497,19 @@ Not implemented yet.
 
 ## Advanced Exercise - Transpose B to cache-line optimize it
 
-:::::::::::::::: group-tab
-
-### Python
-
 As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
 memory, as we learned from the dot product example.  Unfortunately,
 elements of B are not since they will be sparse, separated by N-1
 elements each time.
-While we already know that we can simply use the numpy routine
-**np.matmult()** to optimize the code, if this wasn't available
+While in most languages we already know that we can simply use the 
+optimized library routine speedup the code, if this wasn't available
 one thing we'd consider is to transpose the B matrix so that it is
 stored in column-major format before doing the matrix multiplication.
 If you're up for a challenge, try programming this up to see if it
-improves the performance compared to the original Python code.
-
-### R
-
-Not implemented yet.
-
-### C
-
-Not implemented yet.
-
-### Fortran
-
-Not implemented yet.
-
-### Matlab
-
-Not implemented yet.
-
-::::::::::::::::::::::::::
+improves the performance compared to the original code.
 
 :::::::::::::::::: solution
-
-:::::::::::::::: group-tab
-
-### Python
 
 There are a great many levels of optimization that can be done
 to the matrix multiplication algorithm.
@@ -482,27 +519,9 @@ For a more complete overview of what is done in the
 the link:
 https://en.algorithmica.org/hpc/algorithms/matmul/
 
-### R
-
-Not implemented yet.
-
-### C
-
-Not implemented yet.
-
-### Fortran
-
-Not implemented yet.
-
-### Matlab
-
-Not implemented yet.
-
-::::::::::::::::::::::::::
-
 :::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Summary
 
