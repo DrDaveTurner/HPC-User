@@ -1224,7 +1224,7 @@ also be able to calculate total memory for simple programs.</li>
 </div>
 </section></section><section id="aio-performance-concepts"><p>Content from <a href="performance-concepts.html">Performance Concepts</a></p>
 <hr>
-<p>Last updated on 2024-08-16 |
+<p>Last updated on 2024-08-21 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1314,21 +1314,21 @@ the result out to the screen for us.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <figure><img src="fig/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <p>Need fig/dot_prod_fig-1-N.jpg</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
 <figure><img src="fig/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
 <p>Need fig/dot_prod_fig-1-N.jpg</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <p>Need fig/dot_prod_fig-1-N.jpg</p>
 </div>
 </div>
@@ -1406,21 +1406,21 @@ depending on how you write the code.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <figure><img src="fig/matmult_fig.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
 </figure>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
 <p>Need fig/matmult_fig-1-N.jpg.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
 <figure><img src="fig/matmult_fig.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
 </figure>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
 <p>Need fig/matmult_fig-1-N.jpg.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
 <p>Need fig/matmult_fig-1-N.jpg.</p>
 </div>
 </div>
@@ -1456,28 +1456,44 @@ is fairly simple.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-3" class="tab-content">
-<div id="nav-tabpanel-3-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-3-Python">
+<div id="nav-tabpanel-3-Python" class="tab-pane show active" aria-labelledby="nav-tab-3-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>        C[i][j] <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>            C[i][j] <span class="op">+=</span> A[i][k] <span class="op">*</span> B[k][j]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Complete code is in code/matmult.py</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>        C[i][j] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N ):</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>            C[i][j] <span class="op">+=</span> A[i][k] <span class="op">*</span> B[k][j]</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-3-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-R">
+<div id="nav-tabpanel-3-R" class="tab-pane" aria-labelledby="nav-tab-3-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-C">
+<div id="nav-tabpanel-3-C" class="tab-pane" aria-labelledby="nav-tab-3-C" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">// Complete code is in code/matmult.c</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>   N <span class="op">=</span> <span class="dv">1000</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> N<span class="op">;</span> j<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>         C<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>         <span class="cf">for</span><span class="op">(</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> N<span class="op">;</span> k<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>            C<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">+=</span> A<span class="op">[</span>i<span class="op">][</span>k<span class="op">]</span> <span class="op">*</span> B<span class="op">[</span>k<span class="op">][</span>j<span class="op">];</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>         <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-3-Fortran" class="tab-pane" aria-labelledby="nav-tab-3-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Fortran">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-3-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Matlab">
+<div id="nav-tabpanel-3-Matlab" class="tab-pane" aria-labelledby="nav-tab-3-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1534,26 +1550,38 @@ low-level optimized libraries in the various languages.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-4" class="tab-content">
-<div id="nav-tabpanel-4-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-4-Python">
-<div class="codewrapper sourceCode" id="cb2">
+<div id="nav-tabpanel-4-Python" class="tab-pane show active" aria-labelledby="nav-tab-4-Python" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>C <span class="op">=</span> np.matmult( A, B )</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Complete code is in code/matmult_numpy.py</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>C <span class="op">=</span> np.matmult( A, B )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-4-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-R">
+<div id="nav-tabpanel-4-R" class="tab-pane" aria-labelledby="nav-tab-4-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-C">
+<div id="nav-tabpanel-4-C" class="tab-pane" aria-labelledby="nav-tab-4-C" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">// Complete code is in code/matmult_cblas.c</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;cblas.h&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>   N <span class="op">=</span> <span class="dv">1000</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>   cblas_dgemm<span class="op">(</span> CblasRowMajor<span class="op">,</span> CblasNoTrans<span class="op">,</span> CblasNoTrans<span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>                N<span class="op">,</span> N<span class="op">,</span> N<span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="op">*</span>A<span class="op">,</span> N<span class="op">,</span> <span class="op">*</span>B<span class="op">,</span> N<span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="op">*</span>C<span class="op">,</span> N <span class="op">);</span></span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-4-Fortran" class="tab-pane" aria-labelledby="nav-tab-4-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Fortran">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-4-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Matlab">
+<div id="nav-tabpanel-4-Matlab" class="tab-pane" aria-labelledby="nav-tab-4-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1601,7 +1629,7 @@ exercise below.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-5" class="tab-content">
-<div id="nav-tabpanel-5-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-5-Python">
+<div id="nav-tabpanel-5-Python" class="tab-pane show active" aria-labelledby="nav-tab-5-Python" role="tabpanel">
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
@@ -1611,16 +1639,23 @@ manner for comparison. How much faster is the first code where the
 vectors are stored in contiguous memory? How much faster should it
 be?</p>
 </div>
-<div id="nav-tabpanel-5-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-R">
+<div id="nav-tabpanel-5-R" class="tab-pane" aria-labelledby="nav-tab-5-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-5-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-C">
+<div id="nav-tabpanel-5-C" class="tab-pane" aria-labelledby="nav-tab-5-C" role="tabpanel">
+<p>Compile and run the dot_product_c.c code several times to get an
+average execution time for a dot product between two vectors of 1
+million elements each. Try to run them on an isolated system if
+possible, or through a batch queue that at least ensures the code is
+being run on an isolated processing core. Then compile and run the
+dot_product_sparse.c code in the same manner for comparison. How much
+faster is the first code where the vectors are stored in contiguous
+memory? How much faster should it be?</p>
+</div>
+<div id="nav-tabpanel-5-Fortran" class="tab-pane" aria-labelledby="nav-tab-5-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-5-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-Fortran">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-5-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-Matlab">
+<div id="nav-tabpanel-5-Matlab" class="tab-pane" aria-labelledby="nav-tab-5-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1633,7 +1668,7 @@ be?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-6" class="nav nav-tabs" role="tablist">
@@ -1664,34 +1699,47 @@ be?</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-6" class="tab-content">
-<div id="nav-tabpanel-6-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-6-Python">
+<div id="nav-tabpanel-6-Python" class="tab-pane show active" aria-labelledby="nav-tab-6-Python" role="tabpanel">
 <p>Is the time difference what we expected? When I ran this on a new
 Intel processor that did not have any other jobs running, I measured 180
 milliseconds for the contiguous memory case and 1230 milliseconds for
-the sparse case, resulting in a 6.9-times speedup by keeping the vector
+the sparse case, resulting in a 6.9 times speedup by keeping the vector
 in contiguous memory. Since a cache line is 64 Bytes and each element is
 8 bytes, when the first element is loaded the next 7 are brought into L1
 cache essentially for free since they are in contiguous memory.
-Therefore we expect it to take 100 ns to load 8 elements of X, then 100
+Therefore we expect it to take ~33 ns to load 8 elements of X, then ~33
 ns to load 8 elements of Y, then only a few ns to get each element into
 the registers and do the computations. For the sparse vectors, it should
-take 8 times as long since each load will take 100 ns. If you didn’t see
+take 8 times as long since each load will take ~33 ns. If you didn’t see
 an 8-times speedup, don’t worry. The cache system is actually even more
-complicated than this picture. Also remember that you may be sharing
-parts of the processor with others. The main thing to learn here is that
-if you take advantage of the cache line by keeping the vectors in
-contiguous memory, your code will run faster.</p>
+complicated than this picture. The main thing to learn here is that if
+you take advantage of the cache line by keeping the vectors in
+contiguous memory, your code will run much faster.</p>
 </div>
-<div id="nav-tabpanel-6-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-6-R">
+<div id="nav-tabpanel-6-R" class="tab-pane" aria-labelledby="nav-tab-6-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-6-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-6-C">
+<div id="nav-tabpanel-6-C" class="tab-pane" aria-labelledby="nav-tab-6-C" role="tabpanel">
+<p>Is the time difference what we expected? When I ran this on a new
+processor that did not have any other jobs running, I measured ~16
+milliseconds for the contiguous memory case and ~160 milliseconds for
+the sparse case, resulting in a 10 times speedup by keeping the vector
+in contiguous memory. Since a cache line is 64 Bytes and each element is
+8 bytes, when the first element is loaded the next 7 are brought into L1
+cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take ~33 ns to load 8 elements of X, then ~33
+ns to load 8 elements of Y, then only a few ns to get each element into
+the registers and do the computations. For the sparse vectors, it should
+take 8 times as long since each load will take ~33 ns. If you didn’t see
+an 8 times speedup exactly, don’t worry. The cache system is actually
+even more complicated than this picture. The main thing to learn here is
+that if you take advantage of the cache line by keeping the vectors in
+contiguous memory, your code will run much faster.</p>
+</div>
+<div id="nav-tabpanel-6-Fortran" class="tab-pane" aria-labelledby="nav-tab-6-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-6-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-6-Fortran">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-6-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-6-Matlab">
+<div id="nav-tabpanel-6-Matlab" class="tab-pane" aria-labelledby="nav-tab-6-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1737,7 +1785,7 @@ contiguous memory, your code will run faster.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-7" class="tab-content">
-<div id="nav-tabpanel-7-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-7-Python">
+<div id="nav-tabpanel-7-Python" class="tab-pane show active" aria-labelledby="nav-tab-7-Python" role="tabpanel">
 <p>There are 2 separate codes supplied to perform the same matrix
 multiplication for a given matrix size, matmult.py is raw Python code
 and matmult_numpy.py uses the highly optimized
@@ -1752,16 +1800,22 @@ scheduler if at all possible since numpy will grab any cores it can, and
 for a fair comparison we want to test out only the single-core
 performance.</p>
 </div>
-<div id="nav-tabpanel-7-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-7-R">
+<div id="nav-tabpanel-7-R" class="tab-pane" aria-labelledby="nav-tab-7-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-7-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-7-C">
+<div id="nav-tabpanel-7-C" class="tab-pane" aria-labelledby="nav-tab-7-C" role="tabpanel">
+<p>Compile and run the <strong>matmult.c</strong> and
+<strong>matmult_cblas.c</strong> programs to compare the times for raw C
+and the heavily optimized BLAS library <strong>dgemm()</strong>
+function. Since these use statically allocated matrices you may need to
+increase the stack size using ‘ulimit -s unlimited’. You may also need
+to use a different compile line than in the code as your BLAS library
+may be different on each system.</p>
+</div>
+<div id="nav-tabpanel-7-Fortran" class="tab-pane" aria-labelledby="nav-tab-7-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-7-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-7-Fortran">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-7-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-7-Matlab">
+<div id="nav-tabpanel-7-Matlab" class="tab-pane" aria-labelledby="nav-tab-7-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1774,7 +1828,7 @@ performance.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-8" class="nav nav-tabs" role="tablist">
@@ -1805,7 +1859,7 @@ performance.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-8" class="tab-content">
-<div id="nav-tabpanel-8-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-8-Python">
+<div id="nav-tabpanel-8-Python" class="tab-pane show active" aria-labelledby="nav-tab-8-Python" role="tabpanel">
 <p>For the 10x10 matrix size there are 3 matrices having 100 elements
 each needing 8 bytes storage, so storing all 3 matrices requires only
 2.4 kB of memory. Everything fits entirely in L1 cache, so the block
@@ -1832,16 +1886,20 @@ heavily optimized library routines. C is still faster than Python, with
 raw C code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine
 reaching 91 GFlops.</p>
 </div>
-<div id="nav-tabpanel-8-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-8-R">
+<div id="nav-tabpanel-8-R" class="tab-pane" aria-labelledby="nav-tab-8-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-8-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-8-C">
+<div id="nav-tabpanel-8-C" class="tab-pane" aria-labelledby="nav-tab-8-C" role="tabpanel">
+<p>For a 1000x1000 matrix I got 1.2 seconds for the raw C code when
+compiling with -O3 optimization. The <strong>cblas_dgemm()</strong>
+function took only 0.015 seconds so it was 80 times faster. Even though
+compiled C/C++ code is very fast, the <strong>DGEMM</strong> routine is
+hand-optimized for each processor.</p>
+</div>
+<div id="nav-tabpanel-8-Fortran" class="tab-pane" aria-labelledby="nav-tab-8-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-8-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-8-Fortran">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-8-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-8-Matlab">
+<div id="nav-tabpanel-8-Matlab" class="tab-pane" aria-labelledby="nav-tab-8-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1858,62 +1916,16 @@ reaching 91 GFlops.</p>
 <h3 class="callout-title">Advanced Exercise - Transpose B to cache-line optimize it<a class="anchor" aria-label="anchor" href="#advanced-exercise---transpose-b-to-cache-line-optimize-it"></a>
 </h3>
 <div class="callout-content">
-<div class="tabs">
-<nav><div id="nav-tab-9" class="nav nav-tabs" role="tablist">
-<button class="nav-link active" id="nav-tab-9-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-9-Python" type="button" role="tab" aria-controls="nav-tabpanel-9-Python" aria-selected="true">
-  <h3 class="tab-header" id="nav-tab-heading-9-Python">
-  Python
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-9-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-9-R" type="button" role="tab" aria-controls="nav-tabpanel-9-R" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-9-R">
-  R
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-9-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-9-C" type="button" role="tab" aria-controls="nav-tabpanel-9-C" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-9-C">
-  C
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-9-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-9-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-9-Fortran" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-9-Fortran">
-  Fortran
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-9-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-9-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-9-Matlab" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-9-Matlab">
-  Matlab
-  </h3>
-</button>
-</div>
-</nav><div id="nav-tabContent-9" class="tab-content">
-<div id="nav-tabpanel-9-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-9-Python">
 <p>As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
 memory, as we learned from the dot product example. Unfortunately,
 elements of B are not since they will be sparse, separated by N-1
-elements each time. While we already know that we can simply use the
-numpy routine <strong>np.matmult()</strong> to optimize the code, if
-this wasn’t available one thing we’d consider is to transpose the B
-matrix so that it is stored in column-major format before doing the
-matrix multiplication. If you’re up for a challenge, try programming
-this up to see if it improves the performance compared to the original
-Python code.</p>
-</div>
-<div id="nav-tabpanel-9-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-9-R">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-9-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-9-C">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-9-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-9-Fortran">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-9-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-9-Matlab">
-<p>Not implemented yet.</p>
-</div>
-</div>
-</div>
+elements each time. While in most languages we already know that we can
+simply use the optimized library routine speedup the code, if this
+wasn’t available one thing we’d consider is to transpose the B matrix so
+that it is stored in column-major format before doing the matrix
+multiplication. If you’re up for a challenge, try programming this up to
+see if it improves the performance compared to the original code.</p>
 </div>
 </div>
 </div>
@@ -1922,58 +1934,13 @@ Python code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<div class="tabs">
-<nav><div id="nav-tab-10" class="nav nav-tabs" role="tablist">
-<button class="nav-link active" id="nav-tab-10-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-10-Python" type="button" role="tab" aria-controls="nav-tabpanel-10-Python" aria-selected="true">
-  <h3 class="tab-header" id="nav-tab-heading-10-Python">
-  Python
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-10-R" name="R" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-10-R" type="button" role="tab" aria-controls="nav-tabpanel-10-R" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-10-R">
-  R
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-10-C" name="C" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-10-C" type="button" role="tab" aria-controls="nav-tabpanel-10-C" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-10-C">
-  C
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-10-Fortran" name="Fortran" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-10-Fortran" type="button" role="tab" aria-controls="nav-tabpanel-10-Fortran" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-10-Fortran">
-  Fortran
-  </h3>
-</button>
-<button class="nav-link" id="nav-tab-10-Matlab" name="Matlab" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-10-Matlab" type="button" role="tab" aria-controls="nav-tabpanel-10-Matlab" aria-selected="false">
-  <h3 class="tab-header" id="nav-tab-heading-10-Matlab">
-  Matlab
-  </h3>
-</button>
-</div>
-</nav><div id="nav-tabContent-10" class="tab-content">
-<div id="nav-tabpanel-10-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-10-Python">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
 performance some. For a more complete overview of what is done in the
 <strong>np.matmult()</strong> algorithm and others like it, follow the
 link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="external-link uri">https://en.algorithmica.org/hpc/algorithms/matmul/</a></p>
-</div>
-<div id="nav-tabpanel-10-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-10-R">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-10-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-10-C">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-10-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-10-Fortran">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-10-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-10-Matlab">
-<p>Not implemented yet.</p>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -2151,7 +2118,7 @@ identities.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2177,16 +2144,16 @@ identities.</p>
 <span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin( theta )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -2220,7 +2187,7 @@ identities.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2258,16 +2225,16 @@ identities.</p>
 <span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin_theta</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -2876,7 +2843,7 @@ performance is.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-3" class="nav nav-tabs" role="tablist">
@@ -3061,27 +3028,27 @@ rank will print out the results.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <figure><img src="fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
@@ -3177,7 +3144,7 @@ statement.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3231,16 +3198,16 @@ statement.</p>
 <span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>   <span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -3342,7 +3309,7 @@ the only way to go.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-3" class="tab-content">
-<div id="nav-tabpanel-3-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-3-Python">
+<div id="nav-tabpanel-3-Python" class="tab-pane show active" aria-labelledby="nav-tab-3-Python" role="tabpanel">
 <p>Measure the execution time for the dot_product_message_passing.py
 code for 1, 4, 8, and 16 cores if you are on an HPC system with at least
 2 compute nodes. You can try different combinations of nodes and cores
@@ -3351,18 +3318,18 @@ core test, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 <p>If you want a more challenging exercise you can <strong>git
 clone</strong> the Python matrix multiply code and test the scaling.</p>
 </div>
-<div id="nav-tabpanel-3-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-R">
+<div id="nav-tabpanel-3-R" class="tab-pane" aria-labelledby="nav-tab-3-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-C">
+<div id="nav-tabpanel-3-C" class="tab-pane" aria-labelledby="nav-tab-3-C" role="tabpanel">
 <p>Not implemented yet.</p>
 <p>If you want a more challenging exercise you can <strong>git
 clone</strong> the C matrix multiply code and test the scaling.</p>
 </div>
-<div id="nav-tabpanel-3-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Fortran">
+<div id="nav-tabpanel-3-Fortran" class="tab-pane" aria-labelledby="nav-tab-3-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Matlab">
+<div id="nav-tabpanel-3-Matlab" class="tab-pane" aria-labelledby="nav-tab-3-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -3406,7 +3373,7 @@ clone</strong> the C matrix multiply code and test the scaling.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-4" class="tab-content">
-<div id="nav-tabpanel-4-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-4-Python">
+<div id="nav-tabpanel-4-Python" class="tab-pane show active" aria-labelledby="nav-tab-4-Python" role="tabpanel">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
 end, so we expect the scaling to be close to ideal. In my tests I
@@ -3420,16 +3387,16 @@ when the parallelization comes in the loop overhead, while for the
 message-passing code there is no difference in the loop overhead, it’s
 just the added global summation after the loop.</p>
 </div>
-<div id="nav-tabpanel-4-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-R">
+<div id="nav-tabpanel-4-R" class="tab-pane" aria-labelledby="nav-tab-4-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-C">
+<div id="nav-tabpanel-4-C" class="tab-pane" aria-labelledby="nav-tab-4-C" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Fortran">
+<div id="nav-tabpanel-4-Fortran" class="tab-pane" aria-labelledby="nav-tab-4-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Matlab">
+<div id="nav-tabpanel-4-Matlab" class="tab-pane" aria-labelledby="nav-tab-4-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -3808,7 +3775,7 @@ and the optimized version matmult_cblas.c.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>On a modern Intel system the raw scalar code ran in 0.14 seconds as
 did the single-threaded OpenMP and single-task MPI runs. The test on 4
@@ -5216,7 +5183,7 @@ performance of the <strong>matmult.m</strong> code for a matrix size of
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>For the 1000x1000 matrices, I measure 5 seconds for the serial code,
 0.7 seconds for the built-in matrix multiply that uses low level
@@ -5249,7 +5216,7 @@ an array size of 100,000,000 and compare to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>I measure serial performance at 0.5 seconds with the built in
 optimized routine at 0.2 seconds on 8 cores for a modest speedup. The
@@ -5286,7 +5253,7 @@ environments.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>If you do develop code for this, let us know so we can consider
 including your work for others to see.</p>
@@ -5436,7 +5403,7 @@ writing a script to choose an input filename from a list using
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>This will run 3 individual jobs that will show the
 <strong>$SLURM_ARRAY_TASK_ID</strong> to be 1, 3, or 5.</p>
@@ -5637,7 +5604,7 @@ submit the job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The goal is just to start getting you comfortable with compiling and
 submitting GPU jobs. Use <strong>nvcc hello_gpu.cu -o
@@ -6190,8 +6157,8 @@ Azure</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/aio.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/aio.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-20",
-  "datePublished": "2024-08-20"
+  "dateModified": "2024-08-21",
+  "datePublished": "2024-08-21"
 }
 
   </script><script>
