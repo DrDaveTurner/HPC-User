@@ -745,6 +745,10 @@ rate.</p>
 Flops</strong>. The optimized version uses <strong>N_atoms * ( 13 + 6 *
 NQ ) Flops</strong>. For large NQ the speedup would be around 21/6 or
 <strong>3.5 times</strong>.</p>
+<p>The compiled languages C/C++/Fortran would optimize some of this loop
+automatically by pulling the <strong>2.0 * PI * dx / NQ</strong> out of
+the <strong>NQ</strong> loop and just multiplying this by
+<strong>iq</strong> each time.</p>
 </div>
 </div>
 </div>
