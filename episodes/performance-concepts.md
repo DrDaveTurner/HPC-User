@@ -296,7 +296,16 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+Compile and run the dot_product_c.c code several times to get an average
+execution time for a dot product between two vectors of
+1 million elements each.  Try to run them on an isolated system
+if possible, or through a batch queue that at least ensures the
+code is being run on an isolated processing core.
+Then compile and run the dot_product_sparse.c code in the same manner for
+comparison.
+How much faster is the first code where the vectors are stored
+in contiguous memory?
+How much faster should it be?
 
 ### Fortran
 
@@ -372,6 +381,7 @@ Not implemented yet.
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -479,6 +489,7 @@ Not implemented yet.
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -509,6 +520,8 @@ the link:
 https://en.algorithmica.org/hpc/algorithms/matmul/
 
 :::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Summary
 
