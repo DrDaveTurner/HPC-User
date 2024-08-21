@@ -19,8 +19,8 @@ exercises: 10
 
 
 Most computer languages have the ability to do multi-threaded computing.
-C/C++ and Fortran use the OpenMP package which is by far the most well
-developed.
+C/C++ and Fortran use the OpenMP package which is by far the most 
+extensive and well developed.
 It uses pragma statements to control the parallelization of loops so 
 that multiple compute cores work at the same time on different parts
 of the data.
@@ -71,10 +71,13 @@ sums all the partial sums into the dot product and prints it out.
 
 ### The multi-threaded dot product code
 
+:::::::::::::::: group-tab
+
+### Python
+
 Let's go through the multi-threaded version of the dot product code
-dot_product_threaded.py below to illustrate the changes that had to be
-made to the code to parallelize it.
-We should first note that we need to install the **pymp** package into
+below to illustrate the changes that had to be made to the code to parallelize it.
+The **pymp** package needs to be installed into
 our virtual environment by doing **pip install pymp-pypi**.
 Once that is installed, the **import pymp** line will bring those functions
 into the code.
@@ -100,15 +103,12 @@ can use the same variable d_prod in the loop and just declare it as a
 variable to be used locally within each thread then globally summed at
 the end, which is called a **reduction**.
 This is very convenient and requires fewer changes to the code, but the
-pymp package does not support this added function by choice opting for
+**pymp** package does not support this added function by choice opting for
 the Python way of doing it more explicitly, so in our code we need
 to create a shared array of partial sums and manually sum them together
 at the end.  This is just as efficient computationally, it just takes a
 little extra coding but is more explicit.
 
-:::::::::::::::: group-tab
-
-### Python
 ```python
 # Do the dot product between two vectors X and Y then print the result
 # USAGE:  python dot_product_threaded.py 4       to run on 4 threads
@@ -164,7 +164,93 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+Let's go through the multi-threaded version of the dot product code
+below to illustrate the changes that had to be made to the code to parallelize it.
+In C/C++ we need a line **#include <omp.h>** to bring the OpenMP
+headers, then the code needs to be compiled with the 
+**-fopenmp** flag for **gcc** or the **-qopenmp** flag for **icc**.
+
+When we run the code we will want to set the number of threads for it to use.
+In the code below, this is being set internally using the number of threads
+passed in as a command line argument.
+This is used to set the number of threads using 
+the **omp_set_num_threads()** function in C/C++.
+The other method of setting the number of threads is to use the environmental
+variable **OMP_NUM_THREADS** for C/C++/Fortran.  For example, in your job script
+you can have a line **export OMP_NUM_THREADS=4** to tell the program to use
+4 threads.
+
+Right before the loop we must tell the compiler to parallelize the loop
+using a **#pragma omp parallel for** statement, plus we need to indicate
+that there is a reduction of **dprod** taking place at the end where
+the partial sums calculated by each thread get globally summed at the end.
+Then the for loop range is changed so that each thread has a different range
+for the elements of the loop that each thread is responsible for.
+
+```c
+// Dot product in C using OpenMP
+// USAGE:  dot_product_openmp 4   to run with 4 cores
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
+#include <omp.h>
+
+void main (int argc, char **argv)
+{
+   int i, N;
+   double dprod, *X, *Y;
+   double t_elapsed;
+   struct timespec ts, tf;
+
+      // Get the number of threads from the command line
+
+   char *a = argv[1];
+   int nthreads = atoi( a );
+
+   N = 100000000;
+
+      // Allocate space for the X and Y vectors
+
+   X = malloc( N * sizeof(double) );
+   Y = malloc( N * sizeof(double) );
+
+      // Initialize the X and Y vectors
+
+   for( i = 0; i < N; i++ ) {
+      X[i] = (double) i;
+      Y[i] = (double) i;
+   }
+
+      // Allocate and innitialize a dummy array to clear cache
+
+   double *dummy = malloc( 125000000 * sizeof(double) );
+   for( i = 0; i < 125000000; i++ ) { dummy[i] = 0.0; }
+
+
+      // Now we start the timer and do our calculation
+
+   clock_gettime(CLOCK_REALTIME, &ts);
+
+   omp_set_num_threads( nthreads );
+
+   dprod = 0.0;
+#pragma omp parallel for reduction( +:dprod)
+   for( i = 0; i < N; i++ ) {
+      dprod += X[i] * Y[i];
+   }
+
+   clock_gettime(CLOCK_REALTIME, &tf);
+   t_elapsed =  (double) ( tf.tv_sec - ts.tv_sec );
+   t_elapsed += (double) (tf.tv_nsec - ts.tv_nsec) * 1e-9;
+
+   printf("dot product = %e on %d threads took %lf seconds\n", dprod, nthreads, t_elapsed );
+   printf("%lf Gflops (billion floating-point operations per second)\n",
+          2.0*N*1.0e-9 / t_elapsed);
+   printf( "%lf GB memory used\n", 2.0*N*8.0/1.0e9);
+}
+```
 
 ### Fortran
 
