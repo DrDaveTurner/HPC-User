@@ -409,7 +409,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Multi-Threaded Programs</h1>
-        <p>Last updated on 2024-08-13 |
+        <p>Last updated on 2024-08-21 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/multi-threaded.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -445,9 +445,9 @@
 </div>
 <p>Most computer languages have the ability to do multi-threaded
 computing. C/C++ and Fortran use the OpenMP package which is by far the
-most well developed. It uses pragma statements to control the
-parallelization of loops so that multiple compute cores work at the same
-time on different parts of the data. OpenMP is not only extremely
+most extensive and well developed. It uses pragma statements to control
+the parallelization of loops so that multiple compute cores work at the
+same time on different parts of the data. OpenMP is not only extremely
 efficient, but it also provides very advanced features offering greater
 control on how the parallelization is to be done, all without
 encumbering the programmer too much. The <strong>pymp</strong> package
@@ -491,36 +491,6 @@ partial sums into the dot product and prints it out.</p>
 product</div>
 </figure><div class="section level3">
 <h3 id="the-multi-threaded-dot-product-code">The multi-threaded dot product code<a class="anchor" aria-label="anchor" href="#the-multi-threaded-dot-product-code"></a></h3>
-<p>Let’s go through the multi-threaded version of the dot product code
-dot_product_threaded.py below to illustrate the changes that had to be
-made to the code to parallelize it. We should first note that we need to
-install the <strong>pymp</strong> package into our virtual environment
-by doing <strong>pip install pymp-pypi</strong>. Once that is installed,
-the <strong>import pymp</strong> line will bring those functions into
-the code.</p>
-<p>When we run the code we will want to set the number of threads for it
-to use. In the code below, this is being set internally using the number
-of threads passed in as a command line argument. This is used to set the
-number of threads using the <strong>pymp.config.num_threads</strong>
-variable. The other method of setting the number of threads is to use
-the environmental variable <strong>PYMP_NUM_THREADS</strong> externally.
-For example, in your job script you can have a line <strong>export
-PYMP_NUM_THREADS=4</strong> to tell the program to use 4 threads.</p>
-<p>Right before the loop we must define our parallel environment with
-the line <strong>with pymp.Parallel( nthreads ) as p:</strong> which
-spins up the threads with the fork method. Then the for loop range is
-changed so that each thread has a different range for the elements of
-the loop that each thread is responsible for.</p>
-<p>In the OpenMP multi-threading package used with C/C++ and Fortran,
-you can use the same variable d_prod in the loop and just declare it as
-a variable to be used locally within each thread then globally summed at
-the end, which is called a <strong>reduction</strong>. This is very
-convenient and requires fewer changes to the code, but the pymp package
-does not support this added function by choice opting for the Python way
-of doing it more explicitly, so in our code we need to create a shared
-array of partial sums and manually sum them together at the end. This is
-just as efficient computationally, it just takes a little extra coding
-but is more explicit.</p>
 <div class="tabs">
 <nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
@@ -550,7 +520,36 @@ but is more explicit.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<p>Let’s go through the multi-threaded version of the dot product code
+below to illustrate the changes that had to be made to the code to
+parallelize it. The <strong>pymp</strong> package needs to be installed
+into our virtual environment by doing <strong>pip install
+pymp-pypi</strong>. Once that is installed, the <strong>import
+pymp</strong> line will bring those functions into the code.</p>
+<p>When we run the code we will want to set the number of threads for it
+to use. In the code below, this is being set internally using the number
+of threads passed in as a command line argument. This is used to set the
+number of threads using the <strong>pymp.config.num_threads</strong>
+variable. The other method of setting the number of threads is to use
+the environmental variable <strong>PYMP_NUM_THREADS</strong> externally.
+For example, in your job script you can have a line <strong>export
+PYMP_NUM_THREADS=4</strong> to tell the program to use 4 threads.</p>
+<p>Right before the loop we must define our parallel environment with
+the line <strong>with pymp.Parallel( nthreads ) as p:</strong> which
+spins up the threads with the fork method. Then the for loop range is
+changed so that each thread has a different range for the elements of
+the loop that each thread is responsible for.</p>
+<p>In the OpenMP multi-threading package used with C/C++ and Fortran,
+you can use the same variable d_prod in the loop and just declare it as
+a variable to be used locally within each thread then globally summed at
+the end, which is called a <strong>reduction</strong>. This is very
+convenient and requires fewer changes to the code, but the
+<strong>pymp</strong> package does not support this added function by
+choice opting for the Python way of doing it more explicitly, so in our
+code we need to create a shared array of partial sums and manually sum
+them together at the end. This is just as efficient computationally, it
+just takes a little extra coding but is more explicit.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -602,16 +601,104 @@ but is more explicit.</p>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<p>Let’s go through the multi-threaded version of the dot product code
+below to illustrate the changes that had to be made to the code to
+parallelize it. In C/C++ we need a line <strong>#include
+&lt;omp.h&gt;</strong> to bring the OpenMP headers, then the code needs
+to be compiled with the <strong>-fopenmp</strong> flag for
+<strong>gcc</strong> or the <strong>-qopenmp</strong> flag for
+<strong>icc</strong>.</p>
+<p>When we run the code we will want to set the number of threads for it
+to use. In the code below, this is being set internally using the number
+of threads passed in as a command line argument. This is used to set the
+number of threads using the <strong>omp_set_num_threads()</strong>
+function in C/C++. The other method of setting the number of threads is
+to use the environmental variable <strong>OMP_NUM_THREADS</strong> for
+C/C++/Fortran. For example, in your job script you can have a line
+<strong>export OMP_NUM_THREADS=4</strong> to tell the program to use 4
+threads.</p>
+<p>Right before the loop we must tell the compiler to parallelize the
+loop using a <strong>#pragma omp parallel for</strong> statement, plus
+we need to indicate that there is a reduction of <strong>dprod</strong>
+taking place at the end where the partial sums calculated by each thread
+get globally summed at the end. Then the for loop range is changed so
+that each thread has a different range for the elements of the loop that
+each thread is responsible for.</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">// Dot product in C using OpenMP</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">// USAGE:  dot_product_openmp 4   to run with 4 cores</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;sys/time.h&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;omp.h&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="dt">void</span> main <span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span>argv<span class="op">)</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>   <span class="dt">int</span> i<span class="op">,</span> N<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>   <span class="dt">double</span> dprod<span class="op">,</span> <span class="op">*</span>X<span class="op">,</span> <span class="op">*</span>Y<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>   <span class="dt">double</span> t_elapsed<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>   <span class="kw">struct</span> timespec ts<span class="op">,</span> tf<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>      <span class="co">// Get the number of threads from the command line</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>   <span class="dt">char</span> <span class="op">*</span>a <span class="op">=</span> argv<span class="op">[</span><span class="dv">1</span><span class="op">];</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>   <span class="dt">int</span> nthreads <span class="op">=</span> atoi<span class="op">(</span> a <span class="op">);</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>   N <span class="op">=</span> <span class="dv">100000000</span><span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>      <span class="co">// Allocate space for the X and Y vectors</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>   X <span class="op">=</span> malloc<span class="op">(</span> N <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">);</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>   Y <span class="op">=</span> malloc<span class="op">(</span> N <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">);</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>      <span class="co">// Initialize the X and Y vectors</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>      X<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> i<span class="op">;</span></span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>      Y<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> i<span class="op">;</span></span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a>      <span class="co">// Allocate and innitialize a dummy array to clear cache</span></span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a>   <span class="dt">double</span> <span class="op">*</span>dummy <span class="op">=</span> malloc<span class="op">(</span> <span class="dv">125000000</span> <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">);</span></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">125000000</span><span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span> dummy<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a>      <span class="co">// Now we start the timer and do our calculation</span></span>
+<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>ts<span class="op">);</span></span>
+<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a>   omp_set_num_threads<span class="op">(</span> nthreads <span class="op">);</span></span>
+<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a>   dprod <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a><span class="pp">#pragma omp parallel for reduction( +:dprod)</span></span>
+<span id="cb2-50"><a href="#cb2-50" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-51"><a href="#cb2-51" tabindex="-1"></a>      dprod <span class="op">+=</span> X<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> Y<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb2-52"><a href="#cb2-52" tabindex="-1"></a>   <span class="op">}</span></span>
+<span id="cb2-53"><a href="#cb2-53" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" tabindex="-1"></a>   clock_gettime<span class="op">(</span>CLOCK_REALTIME<span class="op">,</span> <span class="op">&amp;</span>tf<span class="op">);</span></span>
+<span id="cb2-55"><a href="#cb2-55" tabindex="-1"></a>   t_elapsed <span class="op">=</span>  <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span> tf<span class="op">.</span>tv_sec <span class="op">-</span> ts<span class="op">.</span>tv_sec <span class="op">);</span></span>
+<span id="cb2-56"><a href="#cb2-56" tabindex="-1"></a>   t_elapsed <span class="op">+=</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> <span class="op">(</span>tf<span class="op">.</span>tv_nsec <span class="op">-</span> ts<span class="op">.</span>tv_nsec<span class="op">)</span> <span class="op">*</span> <span class="fl">1e-9</span><span class="op">;</span></span>
+<span id="cb2-57"><a href="#cb2-57" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" tabindex="-1"></a>   printf<span class="op">(</span><span class="st">"dot product = </span><span class="sc">%e</span><span class="st"> on </span><span class="sc">%d</span><span class="st"> threads took </span><span class="sc">%lf</span><span class="st"> seconds</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> dprod<span class="op">,</span> nthreads<span class="op">,</span> t_elapsed <span class="op">);</span></span>
+<span id="cb2-59"><a href="#cb2-59" tabindex="-1"></a>   printf<span class="op">(</span><span class="st">"</span><span class="sc">%lf</span><span class="st"> Gflops (billion floating-point operations per second)</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb2-60"><a href="#cb2-60" tabindex="-1"></a>          <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">1.0e-9</span> <span class="op">/</span> t_elapsed<span class="op">);</span></span>
+<span id="cb2-61"><a href="#cb2-61" tabindex="-1"></a>   printf<span class="op">(</span> <span class="st">"</span><span class="sc">%lf</span><span class="st"> GB memory used</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span><span class="op">);</span></span>
+<span id="cb2-62"><a href="#cb2-62" tabindex="-1"></a><span class="op">}</span></span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -688,7 +775,7 @@ be used.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <p>Measure the execution time for the dot_product_threaded.py code for
 1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
 and do all runs in the same job. You can look at the job scripts like
@@ -699,16 +786,16 @@ performance is.</p>
 <p>If you want, you may also run a scaling study for the
 <strong>matmult.py</strong> code.</p>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -721,7 +808,7 @@ performance is.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-3" class="nav nav-tabs" role="tablist">
@@ -752,7 +839,7 @@ performance is.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-3" class="tab-content">
-<div id="nav-tabpanel-3-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-3-Python">
+<div id="nav-tabpanel-3-Python" class="tab-pane show active" aria-labelledby="nav-tab-3-Python" role="tabpanel">
 <p>For this very simple problem, each thread can do its computations
 totally independently. There is only a global sum of all the partial
 sums at the end, so we would expect the scaling to be close to ideal. In
@@ -765,16 +852,16 @@ runs 170 times faster because it is a compiled language, but likewise
 does not scale well due to the few computations being done in each pass
 through the loop.</p>
 </div>
-<div id="nav-tabpanel-3-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-R">
+<div id="nav-tabpanel-3-R" class="tab-pane" aria-labelledby="nav-tab-3-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-C">
+<div id="nav-tabpanel-3-C" class="tab-pane" aria-labelledby="nav-tab-3-C" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Fortran">
+<div id="nav-tabpanel-3-Fortran" class="tab-pane" aria-labelledby="nav-tab-3-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Matlab">
+<div id="nav-tabpanel-3-Matlab" class="tab-pane" aria-labelledby="nav-tab-3-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -866,7 +953,7 @@ tutorial</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/multi-threaded.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/multi-threaded.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-13",
+  "dateModified": "2024-08-21",
   "datePublished": "2024-08-21"
 }
 
