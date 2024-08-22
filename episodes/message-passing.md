@@ -99,6 +99,8 @@ the original scalar version and contrast it to the multi-threaded version.
 If you are using Python, you first need to **pip install mpi4py** into your
 virtual environment then you can **import mpi4py as MPI** to bring the package 
 into your code.
+The compiled languages C/C++/Fortran need an **#include<mpi.h>** to pull
+in the headers for MPI, then you compile with **mpicc** or **mpifort**.
 
 Since a message-passing job is many identical copies of the same program
 working on different data, we need to use the **mpirun -np 4** command for
@@ -203,7 +205,78 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
+#include <mpi.h>
+
+void main (int argc, char **argv)
+{
+   int i, j, N, myrank, nranks, n_elements;
+   double psum, dprod, *X, *Y;
+   double t_elapsed;
+   struct timespec ts, tf;
+
+   MPI_Init( NULL, NULL);
+   MPI_Comm_rank( MPI_COMM_WORLD,&myrank );
+   MPI_Comm_size( MPI_COMM_WORLD,&nranks );
+
+   N = 100000000;
+   n_elements = N / nranks;
+   if( N % nranks != 0 ) {
+      printf("Please use an even number of ranks\n");
+      exit(0);
+   }
+
+      // Allocate space for my parts of the X and Y vectors
+
+   X = malloc( n_elements * sizeof(double) );
+   Y = malloc( n_elements * sizeof(double) );
+
+      // Initialize the X and Y vectors
+
+   j = 0;
+   for( i = myrank; i < N; i += nranks ) {
+      j++;
+      X[j] = (double) i;
+      Y[j] = (double) i;
+   }
+
+      // Allocate and innitialize a dummy array to clear cache
+
+   double *dummy = malloc( 125000000 * sizeof(double) );
+   for( i = 0; i < 125000000; i++ ) { dummy[i] = 0.0; }
+
+
+      // Now we sync then start the timer and do our calculation
+
+   MPI_Barrier( MPI_COMM_WORLD );
+   clock_gettime(CLOCK_REALTIME, &ts);
+
+   psum = 0.0;
+   for( i = 0; i < n_elements; i++ ) {
+      psum += X[i] * Y[i];
+   }
+
+   dprod = 0.0;
+   MPI_Allreduce( &psum, &dprod, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
+   clock_gettime(CLOCK_REALTIME, &tf);
+   t_elapsed =  (double) ( tf.tv_sec - ts.tv_sec );
+   t_elapsed += (double) (tf.tv_nsec - ts.tv_nsec) * 1e-9;
+
+   if( myrank == 0 ) {
+      printf("dot product = %lf  took %lf seconds on %d tasks\n", dprod, t_elapsed, nranks );
+      printf("%lf Gflops (billion floating-point operations per second)\n",
+            2.0*N*1.0e-9 / t_elapsed);
+      printf( "%lf GB memory used\n", 2.0*N*8.0/1.0e9);
+   }
+
+   MPI_Finalize( );
+}
+```
 
 ### Fortran
 
@@ -306,7 +379,12 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+Measure the execution time for the dot_product_c_mpi.c code
+for 1, 4, 8, and 16 cores if you are on an HPC system with
+at least 2 compute nodes.
+You can try different combinations of nodes and cores for
+each if you would like to see the effects of the network
+(for the 4 core test, try 2 nodes 2 cores vs 4 nodes 1 core).
 
 If you want a more challenging exercise you can **git clone**
 the C matrix multiply code and test the scaling.
@@ -349,7 +427,24 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+In this code we initialize the vectors locally so there
+is no communication involved.
+The only communication is the global sum at the end, so
+we expect the scaling to be close to ideal.
+In my tests on a single compute node I measured the single core 
+run at 0.158 seconds, the 4 core run at 0.038 seconds for a 4.2 times speedup,
+the 8 core run at 0.019 seconds for a 8.3 times speedup,
+the 16 core run at 0.013 seconds for a 12.1 times speedup,
+and the 32 core run at 0.023 seconds for a 6.9 times speedup.
+While the 4 and 8 task runs are close to ideal, there scaling
+is not as great for the 16 and 32 core runs.
+Compiled C/C++/Fortran code is much faster than other interpreted
+languages so there isn't as much work to overcome the overhead.
+The inefficiency in the multi-threaded code comes from there
+being too little work in each loop when the parallelization
+comes in the loop overhead, while for the message-passing
+code there is no difference in the loop overhead, it's just
+the added global summation after the loop.
 
 ### Fortran
 
