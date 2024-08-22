@@ -320,9 +320,6 @@ different.
 Then calculate the speedup compared to the scalar (single-core)
 run to see how close to ideal the performance is.
 
-If you want, you may also run a scaling study for the **matmult.py**
-code.
-
 ### R
 
 Not implemented yet.
@@ -368,7 +365,15 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+For this very simple problem, each thread can do its computations
+totally independently.  There is only a global sum of all the
+partial sums at the end, so we would expect the scaling to be
+close to ideal.
+In my measurements, I saw a 2.3x speedup on 4 cores, a 3.3x
+speedup on 8 cores, and a 3.9x speedup on 16 cores.
+For this problem, there just are so few computations being done
+in each loop iteration, only 2 floating-point operations, that the
+loop overhead is preventing better scaling.
 
 ### Fortran
 
