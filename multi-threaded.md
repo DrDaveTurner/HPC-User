@@ -314,7 +314,7 @@ This always leads to terrible scaling and should almost never be used.
 Measure the execution time for the dot_product_threaded.py code
 for 1, 4, 8, and 16 cores.  If possible, use a job script
 requesting 16 cores and do all runs in the same job.
-You can look at the job scripts like sb.ddot_py in the **code**
+You can look at the job scripts like **sb.ddot_py** in the **code**
 directory as an example but your job script will probably be
 different.
 Then calculate the speedup compared to the scalar (single-core)
@@ -326,7 +326,14 @@ Not implemented yet.
 
 ### C
 
-Not implemented yet.
+Measure the execution time for the **dot_product_c_openmp.c** code
+for 1, 4, 8, and 16 cores.  If possible, use a job script
+requesting 16 cores and do all runs in the same job.
+You can look at the job scripts like **sb.ddot_c** in the **code**
+directory as an example but your job script will probably be
+different.
+Then calculate the speedup compared to the scalar (single-core)
+run to see how close to ideal the performance is.
 
 ### Fortran
 
