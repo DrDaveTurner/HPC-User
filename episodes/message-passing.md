@@ -288,7 +288,7 @@ Not implemented yet.
 
 ::::::::::::::::::::::::::
 
-If you want to other examples of MPI code, the scalar algorithm
+If you want to try other examples of MPI code, the scalar algorithm
 for a matrix multiply is very simple but you can compare that to
 the **MPI** versions in the links below.
 These algorithms are much more complicated since you need to have 
