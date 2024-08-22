@@ -67,7 +67,10 @@ As you go through each lesson, you may always click on the other tabs
 to see how each code is implemented in the different programming
 languages.
 
-**NOTE** - Examples are currently only available in Python.
+**NOTE** - Example programs for sections 2-6  are currently only available 
+in Python and C.
+I'm looking volunteers to program the R, Matlab, and modern Fortran
+example programs.
 
 :::::::::::::::: group-tab
 
