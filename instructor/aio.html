@@ -438,10 +438,10 @@
             </div>
 
             <hr class="half-width">
-<div class="accordion accordion-flush resources" id="accordionFlush12">
+<div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
                     RESOURCES
                   </button>
                 </h2>
@@ -464,7 +464,7 @@
                 </div>
               </div>
             </div>
-            <hr class="half-width resources">
+            <hr class="half-width lesson-resources">
 <a href="../instructor/aio.html">See all in one page</a>
 
 
@@ -524,7 +524,6 @@ Science.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
-<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <hr class="half-width">
 <p>In doing computational science it is very common to start a project
@@ -546,7 +545,6 @@ environment. This lesson will be aimed at giving an overview of
 performance concepts to provide a general understanding of how to
 operate in an HPC environment.</p>
 </section><section><h2 class="section-heading" id="organization">Organization<a class="anchor" aria-label="anchor" href="#organization"></a>
-<a class="anchor" aria-label="anchor" href="#organization"></a>
 </h2>
 <hr class="half-width">
 <p>The first few chapters concentrate on discussing performance issues
@@ -576,8 +574,7 @@ means to seek out more information.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>The HPC User lesson will help to understand basic concepts affecting
@@ -636,7 +633,6 @@ internally each part of the code. For parallel codes, we also need to
 know how efficiently they scale as we increase the number of cores or
 compute nodes in order to determine what resources to request.</p>
 <section><h2 class="section-heading" id="timing-a-program-externally">Timing a Program Externally<a class="anchor" aria-label="anchor" href="#timing-a-program-externally"></a>
-<a class="anchor" aria-label="anchor" href="#timing-a-program-externally"></a>
 </h2>
 <hr class="half-width">
 <p>Linux has a <strong>time</strong> function that can proceed any
@@ -747,7 +743,6 @@ the other jobs are not on the same compute node as your job. If you want
 to isolate your job from others in this case, you will need to do your
 IO to the local disk (usually /tmp).</p>
 </section><section><h2 class="section-heading" id="timing-internal-parts-of-a-program">Timing Internal Parts of a Program<a class="anchor" aria-label="anchor" href="#timing-internal-parts-of-a-program"></a>
-<a class="anchor" aria-label="anchor" href="#timing-internal-parts-of-a-program"></a>
 </h2>
 <hr class="half-width">
 <p>Every computer language has multiple clock functions that can be used
@@ -795,7 +790,7 @@ file.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -826,10 +821,10 @@ file.</p>
 <span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -895,10 +890,10 @@ file.</p>
 <span id="cb8-60"><a href="#cb8-60" tabindex="-1"></a><span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -954,7 +949,7 @@ uncommenting the timing and printing functions in the code file.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -988,10 +983,10 @@ uncommenting the timing and printing functions in the code file.</p>
 <span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1057,10 +1052,10 @@ uncommenting the timing and printing functions in the code file.</p>
 <span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a><span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1078,7 +1073,6 @@ is doing a subtraction and addition itself to calculate the time
 interval, so it is probably more surprising that doing the timing in
 this way is not more intrusive.</p>
 </section><section><h2 class="section-heading" id="what-to-time">What to Time<a class="anchor" aria-label="anchor" href="#what-to-time"></a>
-<a class="anchor" aria-label="anchor" href="#what-to-time"></a>
 </h2>
 <hr class="half-width">
 <p>The goal is to fully profile your code so that you understand where
@@ -1093,7 +1087,6 @@ have a complete profile of where time is being spent, then you can
 understand where to start in trying to optimize your program to make it
 run faster.</p>
 </section><section><h2 class="section-heading" id="measuring-parallel-job-scaling">Measuring Parallel Job Scaling<a class="anchor" aria-label="anchor" href="#measuring-parallel-job-scaling"></a>
-<a class="anchor" aria-label="anchor" href="#measuring-parallel-job-scaling"></a>
 </h2>
 <hr class="half-width">
 <p>When we get to talking about multi-processor jobs it will be very
@@ -1118,7 +1111,6 @@ For multi-node jobs, choosing the fastest networking options, and
 ensuring that all compute nodes are on the same network switch can both
 increase the scaling efficiency.</p>
 </section><section><h2 class="section-heading" id="tracking-memory-usage">Tracking Memory Usage<a class="anchor" aria-label="anchor" href="#tracking-memory-usage"></a>
-<a class="anchor" aria-label="anchor" href="#tracking-memory-usage"></a>
 </h2>
 <hr class="half-width">
 <p>When we think about high peformance, we mostly think about running
@@ -1208,8 +1200,7 @@ use over time can be very helpful.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>The <strong>time</strong> function can always be used externally to
@@ -1228,7 +1219,7 @@ also be able to calculate total memory for simple programs.</li>
 </div>
 </section></section><section id="aio-performance-concepts"><p>Content from <a href="performance-concepts.html">Performance Concepts</a></p>
 <hr>
-<p>Last updated on 2024-08-21 |
+<p>Last updated on 2024-08-23 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -1268,7 +1259,6 @@ of how to use libraries optimized by experts.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="conceptual-view">Conceptual View<a class="anchor" aria-label="anchor" href="#conceptual-view"></a>
-<a class="anchor" aria-label="anchor" href="#conceptual-view"></a>
 </h2>
 <hr class="half-width">
 <p>When we write a program for a computer, we view the operation from a
@@ -1319,22 +1309,25 @@ the result out to the screen for us.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <figure><img src="../fig/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
-<p>Need fig/dot_prod_fig-1-N.jpg</p>
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<figure><img src="../fig/dot_prod_fig-1-N.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
+</figure>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
 <figure><img src="../fig/dot_prod_fig.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
-<p>Need fig/dot_prod_fig-1-N.jpg</p>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<figure><img src="../fig/dot_prod_fig-1-N.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
+</figure>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
-<p>Need fig/dot_prod_fig-1-N.jpg</p>
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<figure><img src="../fig/dot_prod_fig-1-N.jpg" alt="Dot product formula" class="figure mx-auto d-block"><div class="figcaption">Dot product between vectors X and Y</div>
+</figure>
 </div>
 </div>
 </div>
@@ -1351,7 +1344,6 @@ techniques in each language may cause performance problems, and
 understand how to take advantage of optimization libraries that experts
 have written for us.</p>
 </section><section><h2 class="section-heading" id="the-computers-view">The Computer’s View<a class="anchor" aria-label="anchor" href="#the-computers-view"></a>
-<a class="anchor" aria-label="anchor" href="#the-computers-view"></a>
 </h2>
 <hr class="half-width">
 <p>Let’s walk through the same dot product example again, but this time
@@ -1411,22 +1403,25 @@ depending on how you write the code.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <figure><img src="../fig/matmult_fig.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
 </figure>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
-<p>Need fig/matmult_fig-1-N.jpg.</p>
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<figure><img src="../fig/matmult_fig-1-N.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
+</figure>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
 <figure><img src="../fig/matmult_fig.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
 </figure>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
-<p>Need fig/matmult_fig-1-N.jpg.</p>
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<figure><img src="../fig/matmult_fig-1-N.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
+</figure>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
-<p>Need fig/matmult_fig-1-N.jpg.</p>
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<figure><img src="../fig/matmult_fig-1-N.jpg" alt="Formula and diagram of a matrix multiply" class="figure mx-auto d-block"><div class="figcaption">Matrix multiplication C = A * B</div>
+</figure>
 </div>
 </div>
 </div>
@@ -1461,7 +1456,7 @@ is fairly simple.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-3" class="tab-content">
-<div id="nav-tabpanel-3-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-3-Python">
+<div id="nav-tabpanel-3-Python" class="tab-pane show active" aria-labelledby="nav-tab-3-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1475,10 +1470,10 @@ is fairly simple.</p>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>            C[i][j] <span class="op">+=</span> A[i][k] <span class="op">*</span> B[k][j]</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-3-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-R">
+<div id="nav-tabpanel-3-R" class="tab-pane" aria-labelledby="nav-tab-3-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-C">
+<div id="nav-tabpanel-3-C" class="tab-pane" aria-labelledby="nav-tab-3-C" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1495,10 +1490,10 @@ is fairly simple.</p>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-3-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Fortran">
+<div id="nav-tabpanel-3-Fortran" class="tab-pane" aria-labelledby="nav-tab-3-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Matlab">
+<div id="nav-tabpanel-3-Matlab" class="tab-pane" aria-labelledby="nav-tab-3-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1555,7 +1550,7 @@ low-level optimized libraries in the various languages.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-4" class="tab-content">
-<div id="nav-tabpanel-4-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-4-Python">
+<div id="nav-tabpanel-4-Python" class="tab-pane show active" aria-labelledby="nav-tab-4-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1567,10 +1562,10 @@ low-level optimized libraries in the various languages.</p>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>C <span class="op">=</span> np.matmult( A, B )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-4-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-R">
+<div id="nav-tabpanel-4-R" class="tab-pane" aria-labelledby="nav-tab-4-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-C">
+<div id="nav-tabpanel-4-C" class="tab-pane" aria-labelledby="nav-tab-4-C" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1583,10 +1578,10 @@ low-level optimized libraries in the various languages.</p>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>                N<span class="op">,</span> N<span class="op">,</span> N<span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="op">*</span>A<span class="op">,</span> N<span class="op">,</span> <span class="op">*</span>B<span class="op">,</span> N<span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="op">*</span>C<span class="op">,</span> N <span class="op">);</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-4-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Fortran">
+<div id="nav-tabpanel-4-Fortran" class="tab-pane" aria-labelledby="nav-tab-4-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Matlab">
+<div id="nav-tabpanel-4-Matlab" class="tab-pane" aria-labelledby="nav-tab-4-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1602,8 +1597,7 @@ exercise below.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="measuring-cache-line-effects" class="callout-inner">
-<h3 class="callout-title">Measuring Cache Line Effects<a class="anchor" aria-label="anchor" href="#measuring-cache-line-effects"></a>
-</h3>
+<h3 class="callout-title">Measuring Cache Line Effects</h3>
 <div class="callout-content">
 <div class="tabs">
 <nav><div id="nav-tab-5" class="nav nav-tabs" role="tablist">
@@ -1634,7 +1628,7 @@ exercise below.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-5" class="tab-content">
-<div id="nav-tabpanel-5-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-5-Python">
+<div id="nav-tabpanel-5-Python" class="tab-pane show active" aria-labelledby="nav-tab-5-Python" role="tabpanel">
 <p>Run the dot_product.py code several times to get an average execution
 time for a dot product between two vectors of 1 million elements each.
 Try to run them on an isolated system if possible, or through a batch
@@ -1644,10 +1638,10 @@ manner for comparison. How much faster is the first code where the
 vectors are stored in contiguous memory? How much faster should it
 be?</p>
 </div>
-<div id="nav-tabpanel-5-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-R">
+<div id="nav-tabpanel-5-R" class="tab-pane" aria-labelledby="nav-tab-5-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-5-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-C">
+<div id="nav-tabpanel-5-C" class="tab-pane" aria-labelledby="nav-tab-5-C" role="tabpanel">
 <p>Compile and run the dot_product_c.c code several times to get an
 average execution time for a dot product between two vectors of 1
 million elements each. Try to run them on an isolated system if
@@ -1657,10 +1651,10 @@ dot_product_sparse.c code in the same manner for comparison. How much
 faster is the first code where the vectors are stored in contiguous
 memory? How much faster should it be?</p>
 </div>
-<div id="nav-tabpanel-5-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-Fortran">
+<div id="nav-tabpanel-5-Fortran" class="tab-pane" aria-labelledby="nav-tab-5-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-5-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-5-Matlab">
+<div id="nav-tabpanel-5-Matlab" class="tab-pane" aria-labelledby="nav-tab-5-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1673,7 +1667,7 @@ memory? How much faster should it be?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-6" class="nav nav-tabs" role="tablist">
@@ -1704,7 +1698,7 @@ memory? How much faster should it be?</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-6" class="tab-content">
-<div id="nav-tabpanel-6-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-6-Python">
+<div id="nav-tabpanel-6-Python" class="tab-pane show active" aria-labelledby="nav-tab-6-Python" role="tabpanel">
 <p>Is the time difference what we expected? When I ran this on a new
 Intel processor that did not have any other jobs running, I measured 180
 milliseconds for the contiguous memory case and 1230 milliseconds for
@@ -1721,10 +1715,10 @@ complicated than this picture. The main thing to learn here is that if
 you take advantage of the cache line by keeping the vectors in
 contiguous memory, your code will run much faster.</p>
 </div>
-<div id="nav-tabpanel-6-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-6-R">
+<div id="nav-tabpanel-6-R" class="tab-pane" aria-labelledby="nav-tab-6-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-6-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-6-C">
+<div id="nav-tabpanel-6-C" class="tab-pane" aria-labelledby="nav-tab-6-C" role="tabpanel">
 <p>Is the time difference what we expected? When I ran this on a new
 processor that did not have any other jobs running, I measured ~16
 milliseconds for the contiguous memory case and ~160 milliseconds for
@@ -1741,10 +1735,10 @@ even more complicated than this picture. The main thing to learn here is
 that if you take advantage of the cache line by keeping the vectors in
 contiguous memory, your code will run much faster.</p>
 </div>
-<div id="nav-tabpanel-6-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-6-Fortran">
+<div id="nav-tabpanel-6-Fortran" class="tab-pane" aria-labelledby="nav-tab-6-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-6-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-6-Matlab">
+<div id="nav-tabpanel-6-Matlab" class="tab-pane" aria-labelledby="nav-tab-6-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1758,8 +1752,7 @@ contiguous memory, your code will run much faster.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="time-different-matrix-multiplication-methods" class="callout-inner">
-<h3 class="callout-title">Time Different Matrix Multiplication Methods<a class="anchor" aria-label="anchor" href="#time-different-matrix-multiplication-methods"></a>
-</h3>
+<h3 class="callout-title">Time Different Matrix Multiplication Methods</h3>
 <div class="callout-content">
 <div class="tabs">
 <nav><div id="nav-tab-7" class="nav nav-tabs" role="tablist">
@@ -1790,7 +1783,7 @@ contiguous memory, your code will run much faster.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-7" class="tab-content">
-<div id="nav-tabpanel-7-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-7-Python">
+<div id="nav-tabpanel-7-Python" class="tab-pane show active" aria-labelledby="nav-tab-7-Python" role="tabpanel">
 <p>There are 2 separate codes supplied to perform the same matrix
 multiplication for a given matrix size, matmult.py is raw Python code
 and matmult_numpy.py uses the highly optimized
@@ -1805,10 +1798,10 @@ scheduler if at all possible since numpy will grab any cores it can, and
 for a fair comparison we want to test out only the single-core
 performance.</p>
 </div>
-<div id="nav-tabpanel-7-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-7-R">
+<div id="nav-tabpanel-7-R" class="tab-pane" aria-labelledby="nav-tab-7-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-7-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-7-C">
+<div id="nav-tabpanel-7-C" class="tab-pane" aria-labelledby="nav-tab-7-C" role="tabpanel">
 <p>Compile and run the <strong>matmult.c</strong> and
 <strong>matmult_cblas.c</strong> programs to compare the times for raw C
 and the heavily optimized BLAS library <strong>dgemm()</strong>
@@ -1817,10 +1810,10 @@ increase the stack size using ‘ulimit -s unlimited’. You may also need
 to use a different compile line than in the code as your BLAS library
 may be different on each system.</p>
 </div>
-<div id="nav-tabpanel-7-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-7-Fortran">
+<div id="nav-tabpanel-7-Fortran" class="tab-pane" aria-labelledby="nav-tab-7-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-7-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-7-Matlab">
+<div id="nav-tabpanel-7-Matlab" class="tab-pane" aria-labelledby="nav-tab-7-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1833,7 +1826,7 @@ may be different on each system.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-8" class="nav nav-tabs" role="tablist">
@@ -1864,7 +1857,7 @@ may be different on each system.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-8" class="tab-content">
-<div id="nav-tabpanel-8-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-8-Python">
+<div id="nav-tabpanel-8-Python" class="tab-pane show active" aria-labelledby="nav-tab-8-Python" role="tabpanel">
 <p>For the 10x10 matrix size there are 3 matrices having 100 elements
 each needing 8 bytes storage, so storing all 3 matrices requires only
 2.4 kB of memory. Everything fits entirely in L1 cache, so the block
@@ -1891,20 +1884,20 @@ heavily optimized library routines. C is still faster than Python, with
 raw C code reaching 1.6 GFlops and the optimized CBLAS DGEMM routine
 reaching 91 GFlops.</p>
 </div>
-<div id="nav-tabpanel-8-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-8-R">
+<div id="nav-tabpanel-8-R" class="tab-pane" aria-labelledby="nav-tab-8-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-8-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-8-C">
+<div id="nav-tabpanel-8-C" class="tab-pane" aria-labelledby="nav-tab-8-C" role="tabpanel">
 <p>For a 1000x1000 matrix I got 1.2 seconds for the raw C code when
 compiling with -O3 optimization. The <strong>cblas_dgemm()</strong>
 function took only 0.015 seconds so it was 80 times faster. Even though
 compiled C/C++ code is very fast, the <strong>DGEMM</strong> routine is
 hand-optimized for each processor.</p>
 </div>
-<div id="nav-tabpanel-8-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-8-Fortran">
+<div id="nav-tabpanel-8-Fortran" class="tab-pane" aria-labelledby="nav-tab-8-Fortran" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-8-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-8-Matlab">
+<div id="nav-tabpanel-8-Matlab" class="tab-pane" aria-labelledby="nav-tab-8-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1918,8 +1911,7 @@ hand-optimized for each processor.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="advanced-exercise---transpose-b-to-cache-line-optimize-it" class="callout-inner">
-<h3 class="callout-title">Advanced Exercise - Transpose B to cache-line optimize it<a class="anchor" aria-label="anchor" href="#advanced-exercise---transpose-b-to-cache-line-optimize-it"></a>
-</h3>
+<h3 class="callout-title">Advanced Exercise - Transpose B to cache-line optimize it</h3>
 <div class="callout-content">
 <p>As k is incremented in the innermost loop, elements of A are being
 brought into cache efficiently since they are stored in contiguous
@@ -1939,7 +1931,7 @@ see if it improves the performance compared to the original code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
@@ -1951,7 +1943,6 @@ link: <a href="https://en.algorithmica.org/hpc/algorithms/matmul/" class="extern
 </div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
 <p>When it starts taking longer to run a given program, we need to start
@@ -1970,8 +1961,7 @@ highly optimized code.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>A computer’s view of code is more complex than a user’s view.</li>
@@ -2033,7 +2023,6 @@ well. Reducing or eliminating IO can sometimes help, but ensuring that
 the IO is done without costly locks, and to a file server that is not
 overly used, can often help performance greatly as well.</p>
 <section><h2 class="section-heading" id="optimizing-scalar-code">Optimizing Scalar Code<a class="anchor" aria-label="anchor" href="#optimizing-scalar-code"></a>
-<a class="anchor" aria-label="anchor" href="#optimizing-scalar-code"></a>
 </h2>
 <hr class="half-width">
 <p>Programming in languages like C/C++ and Fortran produces fairly
@@ -2308,8 +2297,7 @@ the Intel and AMD x86 architectures.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="flops-count" class="callout-inner">
-<h3 class="callout-title">Flops count<a class="anchor" aria-label="anchor" href="#flops-count"></a>
-</h3>
+<h3 class="callout-title">Flops count</h3>
 <div class="callout-content">
 <p>Count the floating-point operations (Flops) in the unoptimized and
 optimized versions of the code above and calculate the expected speedup
@@ -2322,7 +2310,7 @@ rate.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The unoptimized code uses <strong>N_atoms * ( 1 + 21 * NQ )
 Flops</strong>. The optimized version uses <strong>N_atoms * ( 13 + 6 *
@@ -2337,7 +2325,6 @@ the <strong>NQ</strong> loop and just multiplying this by
 </div>
 </div>
 </section><section><h2 class="section-heading" id="parallelizing-code">Parallelizing Code<a class="anchor" aria-label="anchor" href="#parallelizing-code"></a>
-<a class="anchor" aria-label="anchor" href="#parallelizing-code"></a>
 </h2>
 <hr class="half-width">
 <p>It is always good to optimize a scalar code first, but if you still
@@ -2384,7 +2371,6 @@ but unfortunately you cannot do multi-node computing with R.</p>
 this course, but you will be shown how to recognize each type of
 parallel approach and how to work with each efficiently.</p>
 </section><section><h2 class="section-heading" id="parallel-computing-concepts">Parallel Computing Concepts<a class="anchor" aria-label="anchor" href="#parallel-computing-concepts"></a>
-<a class="anchor" aria-label="anchor" href="#parallel-computing-concepts"></a>
 </h2>
 <hr class="half-width">
 <p>The syntax for doing parallel processing is different for
@@ -2476,7 +2462,6 @@ inner loop that is easiest to parallelize, and this is most often the
 case with multi-threaded parallelism.</p>
 </div>
 </section><section><h2 class="section-heading" id="using-accelerators-like-gpus">Using Accelerators like GPUs<a class="anchor" aria-label="anchor" href="#using-accelerators-like-gpus"></a>
-<a class="anchor" aria-label="anchor" href="#using-accelerators-like-gpus"></a>
 </h2>
 <hr class="half-width">
 <p>Some programs can be sped up by using a GPU as a computational
@@ -2500,7 +2485,6 @@ application can make use of one or more GPUs, there will be directions
 on how to specify the number of GPUs. If you are on an HPC system, you
 can request the number and type of GPUs you want for each job.</p>
 </section><section><h2 class="section-heading" id="optimizing-input-and-output">Optimizing Input and Output<a class="anchor" aria-label="anchor" href="#optimizing-input-and-output"></a>
-<a class="anchor" aria-label="anchor" href="#optimizing-input-and-output"></a>
 </h2>
 <hr class="half-width">
 <p>The first thing to understand about IO (Input and Output) is that it
@@ -2542,8 +2526,7 @@ then choose the fastest file server available.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="scaling-study-of-the-distributed-memory-dot-product-code" class="callout-inner">
-<h3 class="callout-title">Scaling Study of the Distributed-Memory Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-distributed-memory-dot-product-code"></a>
-</h3>
+<h3 class="callout-title">Scaling Study of the Distributed-Memory Dot Product Code</h3>
 <div class="callout-content">
 <p>Measure the entire run-time for the dot_product_message_passing code
 for the language you are working with for 1, 4, 8, and 16 cores if you
@@ -2559,7 +2542,7 @@ see the effects of the network (for the 4 cores, try 2 nodes 2 cores vs
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -2579,8 +2562,7 @@ cores, and especially over more nodes.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>What techniques can be used to speed up scalar code?</li>
@@ -2930,8 +2912,7 @@ be used.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="scaling-study-of-the-multi-threaded-dot-product-code" class="callout-inner">
-<h3 class="callout-title">Scaling Study of the Multi-Threaded Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-multi-threaded-dot-product-code"></a>
-</h3>
+<h3 class="callout-title">Scaling Study of the Multi-Threaded Dot Product Code</h3>
 <div class="callout-content">
 <div class="tabs">
 <nav><div id="nav-tab-2" class="nav nav-tabs" role="tablist">
@@ -3000,7 +2981,7 @@ ideal the performance is.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-3" class="nav nav-tabs" role="tablist">
@@ -3074,8 +3055,7 @@ scaling.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Multi-threaded computing is powerful and fairly easy to use but only
@@ -3131,7 +3111,6 @@ tutorial</a></li>
 </div>
 </div>
 <section><h2 class="section-heading" id="the-message-passing-paradigm">The Message-Passing Paradigm<a class="anchor" aria-label="anchor" href="#the-message-passing-paradigm"></a>
-<a class="anchor" aria-label="anchor" href="#the-message-passing-paradigm"></a>
 </h2>
 <hr class="half-width">
 <p>While multi-threaded parallelization is very efficient when running
@@ -3518,8 +3497,7 @@ the only way to go.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="scaling-study-of-the-distributed-memory-dot-product-code" class="callout-inner">
-<h3 class="callout-title">Scaling Study of the Distributed-Memory Dot Product Code<a class="anchor" aria-label="anchor" href="#scaling-study-of-the-distributed-memory-dot-product-code"></a>
-</h3>
+<h3 class="callout-title">Scaling Study of the Distributed-Memory Dot Product Code</h3>
 <div class="callout-content">
 <div class="tabs">
 <nav><div id="nav-tab-3" class="nav nav-tabs" role="tablist">
@@ -3587,7 +3565,7 @@ clone</strong> the C matrix multiply code and test the scaling.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-4" class="nav nav-tabs" role="tablist">
@@ -3669,8 +3647,7 @@ just the added global summation after the loop.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Distributed-memory computing is very flexible, extremely scalable,
@@ -3797,7 +3774,6 @@ scientific computing. Some languages have common practices that are
 performance bottlenecks that need to be avoided, so these will be
 discussed and alternative approaches presented.</p>
 <section><h2 class="section-heading" id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
-<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <hr class="half-width">
 <ul>
@@ -3815,8 +3791,7 @@ performance.</p></li>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Performance is just one criteria we need to understand when choosing
@@ -3863,7 +3838,6 @@ C++?</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="the-c-programming-language">The C Programming Language<a class="anchor" aria-label="anchor" href="#the-c-programming-language"></a>
-<a class="anchor" aria-label="anchor" href="#the-c-programming-language"></a>
 </h2>
 <hr class="half-width">
 <p>C is a very low level language that is extremely flexible and
@@ -3904,7 +3878,6 @@ developed for R, nor the mathematical toolboxes of Matlab and the wide
 variety of artificial intelligence toolkits of Python. But it is
 unrivaled in power, performance and flexibility.</p>
 </section><section><h2 class="section-heading" id="the-c-language">The C++ Language<a class="anchor" aria-label="anchor" href="#the-c-language"></a>
-<a class="anchor" aria-label="anchor" href="#the-c-language"></a>
 </h2>
 <hr class="half-width">
 <p>C++ is a super set of C, meaning that it starts with C and adds
@@ -3943,7 +3916,6 @@ identify where performance issues may lie.</p>
 <pre class="sourceCode cpp" tabindex="0"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>C <span class="op">=</span> A <span class="op">*</span> B<span class="op">;</span></span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="cc-compilers">C/C++ Compilers<a class="anchor" aria-label="anchor" href="#cc-compilers"></a>
-<a class="anchor" aria-label="anchor" href="#cc-compilers"></a>
 </h2>
 <hr class="half-width">
 <p>Unlike interpreted languages like Python, R, and Matlab, you have to
@@ -3961,7 +3933,6 @@ number where the error occurred in case of a crash and
 OpenMP pragmas using <strong>-fopenmp</strong> for the Gnu compiles and
 <strong>-openmp</strong> for the Intel compilers.</p>
 </section><section><h2 class="section-heading" id="makefiles-for-compiling">Makefiles for compiling<a class="anchor" aria-label="anchor" href="#makefiles-for-compiling"></a>
-<a class="anchor" aria-label="anchor" href="#makefiles-for-compiling"></a>
 </h2>
 <hr class="half-width">
 <p>Compilation is actually done in two stages although for single file
@@ -3978,7 +3949,6 @@ process by allowing only those source files that have changed to be
 recompiled into new object files. You will get a chance to examine a
 small makefile in the exercise at the end of this lesson.</p>
 </section><section><h2 class="section-heading" id="installing-large-software-packages">Installing large software packages<a class="anchor" aria-label="anchor" href="#installing-large-software-packages"></a>
-<a class="anchor" aria-label="anchor" href="#installing-large-software-packages"></a>
 </h2>
 <hr class="half-width">
 <p>To install any large software package you will need to read the
@@ -4000,8 +3970,7 @@ approach it is good to at least understand this as a starting point.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="practice-compiling-and-running-c-codes" class="callout-inner">
-<h3 class="callout-title">Practice compiling and running C codes<a class="anchor" aria-label="anchor" href="#practice-compiling-and-running-c-codes"></a>
-</h3>
+<h3 class="callout-title">Practice compiling and running C codes</h3>
 <div class="callout-content">
 <p>The most common compiler for C is the Gnu C Compiler
 <strong>gcc</strong>. This may be available by default on your system,
@@ -4036,7 +4005,7 @@ and the optimized version matmult_cblas.c.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>On a modern Intel system the raw scalar code ran in 0.14 seconds as
 did the single-threaded OpenMP and single-task MPI runs. The test on 4
@@ -4055,8 +4024,7 @@ manner. How do your results compare to these?</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Learn about the characteristics of C/C++</li>
@@ -4113,7 +4081,7 @@ Tutorial</a></li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>This Fortran section can certainly be skipped if time is limited. If
 so, I’d suggest at least saying a few lines from the first paragraph
@@ -4123,7 +4091,6 @@ below.</p>
 </div>
 </div>
 <section><h2 class="section-heading" id="modern-fortran">Modern Fortran<a class="anchor" aria-label="anchor" href="#modern-fortran"></a>
-<a class="anchor" aria-label="anchor" href="#modern-fortran"></a>
 </h2>
 <hr class="half-width">
 <p>Fortran is one of the oldest computer languages used for scientific
@@ -4204,8 +4171,7 @@ together to produce the executable.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="practice-compiling-and-running-fortran-codes" class="callout-inner">
-<h3 class="callout-title">Practice compiling and running Fortran codes<a class="anchor" aria-label="anchor" href="#practice-compiling-and-running-fortran-codes"></a>
-</h3>
+<h3 class="callout-title">Practice compiling and running Fortran codes</h3>
 <div class="callout-content">
 <p>Try compiling the <strong>dot_product_fortran.f90</strong> code with
 the <strong>gfortran</strong> compiler, then try with
@@ -4228,7 +4194,7 @@ command <strong>make all_fortran</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Each computer system may be set up differently with regard to what
 compilers are available and how they need to be accessed. You may need
@@ -4250,8 +4216,7 @@ version, and 0.027 seconds for 8 tasks showing better scaling.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Learn about the characteristics of modern Fortran</li>
@@ -4520,8 +4485,7 @@ issue.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="play-with-the-python-dot-product-examples" class="callout-inner">
-<h3 class="callout-title">Play with the Python dot product examples<a class="anchor" aria-label="anchor" href="#play-with-the-python-dot-product-examples"></a>
-</h3>
+<h3 class="callout-title">Play with the Python dot product examples</h3>
 <div class="callout-content">
 <p>Take a look at the Python versions of the dot product code to see how
 they differ from the C and Fortran versions. Also compare the
@@ -4554,8 +4518,7 @@ which do you think would be easiest to write from scratch?</p>
 </div>
 <div id="compare-the-raw-matrix-multiply-code-to-a-numpy-version" class="callout-inner">
 <h3 class="callout-title">Compare the raw matrix multiply code to a
-<strong>NumPy</strong> version<a class="anchor" aria-label="anchor" href="#compare-the-raw-matrix-multiply-code-to-a-numpy-version"></a>
-</h3>
+<strong>NumPy</strong> version</h3>
 <div class="callout-content">
 <p>Do a scaling study of the <strong>matmult.py</strong> code for
 various matrix sizes of 10, 100, and 1000. Compare this to the
@@ -4585,8 +4548,7 @@ better.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="optional-exercise---try-compiling-a-python-code" class="callout-inner">
-<h3 class="callout-title">Optional Exercise - Try compiling a Python code<a class="anchor" aria-label="anchor" href="#optional-exercise---try-compiling-a-python-code"></a>
-</h3>
+<h3 class="callout-title">Optional Exercise - Try compiling a Python code</h3>
 <div class="callout-content">
 <p>If you have time, try compiling one of the Python test codes supplied
 like <strong>matmult_numpy.py</strong>. Then try running it without an
@@ -4613,8 +4575,7 @@ active virtual environment meaning that there is no
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="optional-exercise---try-implementing-memory-profiler-or-line_profiler" class="callout-inner">
-<h3 class="callout-title">Optional Exercise - Try implementing memory-profiler or line_profiler<a class="anchor" aria-label="anchor" href="#optional-exercise---try-implementing-memory-profiler-or-line_profiler"></a>
-</h3>
+<h3 class="callout-title">Optional Exercise - Try implementing memory-profiler or line_profiler</h3>
 <div class="callout-content">
 <p>If you have time, try implementing memory-profiler or line_profiler
 in one of the Python test codes supplied like
@@ -4641,8 +4602,7 @@ memory or timing output.</p>
 </div>
 <div id="optional-homework---test-the-numba-version-of-the-dot-product-code" class="callout-inner">
 <h3 class="callout-title">Optional Homework - Test the
-<strong>Numba</strong> version of the dot product code<a class="anchor" aria-label="anchor" href="#optional-homework---test-the-numba-version-of-the-dot-product-code"></a>
-</h3>
+<strong>Numba</strong> version of the dot product code</h3>
 <div class="callout-content">
 <p>Do a <strong>pip install numba</strong> then time the
 <strong>dot_product_numba.py</strong> performance and compare to the raw
@@ -4688,7 +4648,7 @@ definitely not what is considered as the Python way.</p>
 </div>
 <div id="optional-homework---write-a-pi-calculation-program-using-numba" class="callout-inner">
 <h3 class="callout-title">Optional Homework - Write a Pi calculation
-program using <strong>Numba</strong><a class="anchor" aria-label="anchor" href="#optional-homework---write-a-pi-calculation-program-using-numba"></a>
+program using <strong>Numba</strong>
 </h3>
 <div class="callout-content">
 <p>Write a Python version of the Pi calculation program and time raw
@@ -4717,8 +4677,7 @@ comparing it to optimized functions in <strong>NumPy</strong>.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Learn about the characteristics of the Python language.</li>
@@ -4784,7 +4743,6 @@ language?</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="programming-in-the-r-language">Programming in the R Language<a class="anchor" aria-label="anchor" href="#programming-in-the-r-language"></a>
-<a class="anchor" aria-label="anchor" href="#programming-in-the-r-language"></a>
 </h2>
 <hr class="half-width">
 <p>R is a high level programming language with an extremely rich set of
@@ -4874,7 +4832,6 @@ These provide true interfaces to MPI functions, not a back-end to
 <strong>mclapply()</strong> or <strong>doParallel</strong>, so they are
 more difficult to use but also much more powerful.</p>
 </section><section><h2 class="section-heading" id="performance-pitfalls-in-r">Performance Pitfalls in R<a class="anchor" aria-label="anchor" href="#performance-pitfalls-in-r"></a>
-<a class="anchor" aria-label="anchor" href="#performance-pitfalls-in-r"></a>
 </h2>
 <hr class="half-width">
 <p>While all languages take effort to optimize and parallelize when
@@ -4944,7 +4901,6 @@ the end of this section that will allow you to see the difference in the
 code and measure the performance of each approach.</p>
 </div>
 </section><section><h2 class="section-heading" id="parallelizing-r-code">Parallelizing R code<a class="anchor" aria-label="anchor" href="#parallelizing-r-code"></a>
-<a class="anchor" aria-label="anchor" href="#parallelizing-r-code"></a>
 </h2>
 <hr class="half-width">
 <p>As mentioned above, when a loop is parallelizable it is conceptually
@@ -5007,8 +4963,7 @@ implementation.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="compare-raw-and-optimized-performance-of-matmult.r" class="callout-inner">
-<h3 class="callout-title">Compare raw and optimized performance of matmult.R<a class="anchor" aria-label="anchor" href="#compare-raw-and-optimized-performance-of-matmult.r"></a>
-</h3>
+<h3 class="callout-title">Compare raw and optimized performance of matmult.R</h3>
 <div class="callout-content">
 <p>Run matmult_loops.R, matmult_foreach.R, and matmult_builtin.R for
 matrix sizes 100 and 1000 to compare the performance of a raw loop to
@@ -5022,7 +4977,7 @@ to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
 optimized built-in matrix multiplication function. Be aware that the
@@ -5043,8 +4998,7 @@ Python is a little faster.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="test-the-scaling-of-the-rbind-function" class="callout-inner">
-<h3 class="callout-title">Test the scaling of the rbind() function<a class="anchor" aria-label="anchor" href="#test-the-scaling-of-the-rbind-function"></a>
-</h3>
+<h3 class="callout-title">Test the scaling of the rbind() function</h3>
 <div class="callout-content">
 <p>Profile the run time for using rbind() as the number of rows in the
 data frame increases. Time runs of <strong>rbind.R</strong> for 10, 100,
@@ -5057,7 +5011,7 @@ data frame increases. Time runs of <strong>rbind.R</strong> for 10, 100,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>While rbind() is convenient and works well for small data frames, the
 time to add rows begins to increase exponentially for data frames around
@@ -5075,8 +5029,7 @@ entire data frame over each time it adds a new row.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="investigate-the-data-table-performance." class="callout-inner">
-<h3 class="callout-title">Investigate the data table performance.<a class="anchor" aria-label="anchor" href="#investigate-the-data-table-performance."></a>
-</h3>
+<h3 class="callout-title">Investigate the data table performance.</h3>
 <div class="callout-content">
 <p>Test the <strong>datatable.R</strong> code for 100, 1000, and 10000
 rows and compare to the rbind() results.</p>
@@ -5088,7 +5041,7 @@ rows and compare to the rbind() results.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>For 1,000 rows I measured 0.12 seconds for a data table set()
 compared to 5.4 seconds for a data table assignment and 1.1 second for a
@@ -5109,8 +5062,7 @@ you have to use data tables and the set() function.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="optional-homework---test-the-io-performance-in-r." class="callout-inner">
-<h3 class="callout-title">Optional Homework - Test the IO performance in R.<a class="anchor" aria-label="anchor" href="#optional-homework---test-the-io-performance-in-r."></a>
-</h3>
+<h3 class="callout-title">Optional Homework - Test the IO performance in R.</h3>
 <div class="callout-content">
 <p>Test the <strong>fread.R</strong> code to see the speedup of the
 <strong>fread()</strong> function from the optimized
@@ -5125,7 +5077,7 @@ you have to use data tables and the set() function.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>For 10,000 rows I saw similar results for each function, but for
 100,000 rows <strong>fread()</strong> was 10 times faster than
@@ -5144,8 +5096,7 @@ performance in your code.</p>
 <div id="advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program" class="callout-inner">
 <h3 class="callout-title">Advanced Homework - Use the
 <strong>pdbMPI</strong> package to code and run a parallel Hello World
-program<a class="anchor" aria-label="anchor" href="#advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program"></a>
-</h3>
+program</h3>
 <div class="callout-content">
 <p>For those who want a challenge, follow the <strong>pdbMPI</strong>
 link at the end of this lesson an write, run, and test the Hello World
@@ -5158,7 +5109,7 @@ program.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>I would love to have a pdbMPI-based matrix multiply code available
 for people to look at and test if anyone finds one.</p>
@@ -5168,7 +5119,6 @@ for people to look at and test if anyone finds one.</p>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
 <p>R is a very powerful language because of the enormous set of
@@ -5197,8 +5147,7 @@ correct direction with some of these performance oriented issues.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Learn about the characteristics of the R language.</li>
@@ -5264,7 +5213,6 @@ systems.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="programming-in-the-matlab-language">Programming in the Matlab Language<a class="anchor" aria-label="anchor" href="#programming-in-the-matlab-language"></a>
-<a class="anchor" aria-label="anchor" href="#programming-in-the-matlab-language"></a>
 </h2>
 <hr class="half-width">
 <p>Matlab is a commercial programming language designed for broad use in
@@ -5371,7 +5319,6 @@ parallelized library routines throughout its modules which brings
 automatic efficiency and parallelization when available.</p>
 </div>
 </section><section><h2 class="section-heading" id="parallelization-methods">Parallelization methods<a class="anchor" aria-label="anchor" href="#parallelization-methods"></a>
-<a class="anchor" aria-label="anchor" href="#parallelization-methods"></a>
 </h2>
 <hr class="half-width">
 <p>The <strong>Parallel Computing Toolbox</strong> is the source of most
@@ -5427,7 +5374,6 @@ be consecutive increasing integers, and there is no nesting of loops
 allowed.</strong></p>
 </div>
 </section><section><h2 class="section-heading" id="octave">Octave<a class="anchor" aria-label="anchor" href="#octave"></a>
-<a class="anchor" aria-label="anchor" href="#octave"></a>
 </h2>
 <hr class="half-width">
 <p>GNU Octave is a language that is largely compatible with Matlab, but
@@ -5448,8 +5394,7 @@ evaluation.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="test-the-performance-of-the-matlab-matrix-multiplication-code." class="callout-inner">
-<h3 class="callout-title">Test the performance of the Matlab matrix multiplication code.<a class="anchor" aria-label="anchor" href="#test-the-performance-of-the-matlab-matrix-multiplication-code."></a>
-</h3>
+<h3 class="callout-title">Test the performance of the Matlab matrix multiplication code.</h3>
 <div class="callout-content">
 <p>If you have access to a Matlab license or Octave, test the
 performance of the <strong>matmult.m</strong> code for a matrix size of
@@ -5482,8 +5427,7 @@ what is happening behind the scenes for this to be so slow.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="test-the-performance-of-the-matlab-dot-product-code." class="callout-inner">
-<h3 class="callout-title">Test the performance of the Matlab dot product code.<a class="anchor" aria-label="anchor" href="#test-the-performance-of-the-matlab-dot-product-code."></a>
-</h3>
+<h3 class="callout-title">Test the performance of the Matlab dot product code.</h3>
 <div class="callout-content">
 <p>Test the performance of the <strong>dot_product.m</strong> code for
 an array size of 100,000,000 and compare to other languages.</p>
@@ -5516,8 +5460,7 @@ used for very coarse grained algorithms.</p>
 <div id="optional-homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores." class="callout-inner">
 <h3 class="callout-title">Optional Homework: Alter the
 <strong>matmult.m</strong> code to run on multiple nodes and multiple
-cores.<a class="anchor" aria-label="anchor" href="#optional-homework-alter-the-matmult.m-code-to-run-on-multiple-nodes-and-multiple-cores."></a>
-</h3>
+cores.</h3>
 <div class="callout-content">
 <p>Test on multiple compute nodes and compare performance to the serial
 and multi-threaded versions. If you want a real challenge try setting
@@ -5541,7 +5484,6 @@ including your work for others to see.</p>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
 <p>The greatest value of Matlab is the very wide range of professionally
@@ -5566,8 +5508,7 @@ itself.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Learn about the characteristics of the Matlab language.</li>
@@ -5664,8 +5605,7 @@ starts at 1, ends at 5, and steps by 2.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="submit-an-array-job" class="callout-inner">
-<h3 class="callout-title">Submit an array job<a class="anchor" aria-label="anchor" href="#submit-an-array-job"></a>
-</h3>
+<h3 class="callout-title">Submit an array job</h3>
 <div class="callout-content">
 <p>If you have access to an HPC system with Slurm installed, submit the
 <strong>sb.array_test</strong> script from the <strong>scripts</strong>
@@ -5738,8 +5678,7 @@ working as intended you are ready to submit the full array job.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Array jobs provide an easy way submit and manage large numbers of
@@ -5790,7 +5729,6 @@ codes.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="how-to-use-a-gpu-to-accelerate-scientific-calculations">How to use a GPU to Accelerate Scientific Calculations?<a class="anchor" aria-label="anchor" href="#how-to-use-a-gpu-to-accelerate-scientific-calculations"></a>
-<a class="anchor" aria-label="anchor" href="#how-to-use-a-gpu-to-accelerate-scientific-calculations"></a>
 </h2>
 <hr class="half-width">
 <p>We normally think of a Graphics Processing Unit or GPU in terms of
@@ -5870,8 +5808,7 @@ request for one NVIDIA RTX 3090 would be
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="run-a-simple-gpu-job-if-you-have-access-to-an-hpc-system-with-gpus" class="callout-inner">
-<h3 class="callout-title">Run a simple GPU job if you have access to an HPC system with GPUs<a class="anchor" aria-label="anchor" href="#run-a-simple-gpu-job-if-you-have-access-to-an-hpc-system-with-gpus"></a>
-</h3>
+<h3 class="callout-title">Run a simple GPU job if you have access to an HPC system with GPUs</h3>
 <div class="callout-content">
 <p>Compile and run the hello_from_gpu.cu CUDA program. You may need to
 load a module to gain access to the <strong>nvcc</strong> compiler.
@@ -5885,7 +5822,7 @@ submit the job.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The goal is just to start getting you comfortable with compiling and
 submitting GPU jobs. Use <strong>nvcc hello_gpu.cu -o
@@ -5898,7 +5835,6 @@ may need to add a partition.</p>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
 <p>GPUs are more difficult to program, so for most scientists you will
@@ -5912,8 +5848,7 @@ the cost of doing a calculation.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Start to become comfortable with using GPUs on an HPC system.</li>
@@ -5974,7 +5909,6 @@ computing?</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="high-throughput-computing">High-Throughput Computing<a class="anchor" aria-label="anchor" href="#high-throughput-computing"></a>
-<a class="anchor" aria-label="anchor" href="#high-throughput-computing"></a>
 </h2>
 <hr class="half-width">
 <p>A typical HPC system today is a cluster computer made of one or more
@@ -6094,8 +6028,7 @@ using commands like those below.</p>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="op">&gt;</span> condor_rm <span class="ex">daveturner</span>                       <span class="co"># Remove all jobs for the given username</span></span></code></pre>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="htc-outside-the-u-s-">HTC Outside the U.S.<a class="anchor" aria-label="anchor" href="#htc-outside-the-u.s."></a>
-<a class="anchor" aria-label="anchor" href="#htc-outside-the-u-s-"></a>
+</section><section><h2 class="section-heading" id="htc-outside-the-u-s-">HTC Outside the U.S.<a class="anchor" aria-label="anchor" href="#htc-outside-the-u-s-"></a>
 </h2>
 <hr class="half-width">
 <p>Need to add info about non-US HTC systems</p>
@@ -6104,8 +6037,7 @@ using commands like those below.</p>
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="optional-homework-get-an-osg-account-and-submit-a-test-job." class="callout-inner">
-<h3 class="callout-title">Optional Homework: Get an OSG account and submit a test job.<a class="anchor" aria-label="anchor" href="#optional-homework-get-an-osg-account-and-submit-a-test-job."></a>
-</h3>
+<h3 class="callout-title">Optional Homework: Get an OSG account and submit a test job.</h3>
 <div class="callout-content">
 <p>If you are in the U.S. and want a big challenge, request an OSG
 account and try submitting some small jobs.</p>
@@ -6113,7 +6045,6 @@ account and try submitting some small jobs.</p>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
 <p>High-Throughput Computing is free in the U.S. using the Open Science
@@ -6126,8 +6057,7 @@ other scheduler.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Explore the basics of HTC computing.</li>
@@ -6187,7 +6117,6 @@ scheduler youtube video</a></li>
 </div>
 </div>
 <section><h2 class="section-heading" id="getting-access-to-hpc-resources">Getting Access to HPC Resources<a class="anchor" aria-label="anchor" href="#getting-access-to-hpc-resources"></a>
-<a class="anchor" aria-label="anchor" href="#getting-access-to-hpc-resources"></a>
 </h2>
 <hr class="half-width">
 <p>It is very typical to start a project on a personal computer only to
@@ -6305,7 +6234,6 @@ systems available (last updated August of 2022).</p>
 </ul>
 </div>
 </section><section><h2 class="section-heading" id="national-energy-research-scientific-computing-center-nersc">National Energy Research Scientific Computing Center (NERSC)<a class="anchor" aria-label="anchor" href="#national-energy-research-scientific-computing-center-nersc"></a>
-<a class="anchor" aria-label="anchor" href="#national-energy-research-scientific-computing-center-nersc"></a>
 </h2>
 <hr class="half-width">
 <p>While allocations for the NSF supercomputing centers are managed
@@ -6319,7 +6247,6 @@ you intend to do is important and fits within the DoE mission, and
 demonstrate that your code will use the requested resources
 efficiently.</p>
 </section><section><h2 class="section-heading" id="open-science-grid-osg">Open Science Grid (OSG)<a class="anchor" aria-label="anchor" href="#open-science-grid-osg"></a>
-<a class="anchor" aria-label="anchor" href="#open-science-grid-osg"></a>
 </h2>
 <hr class="half-width">
 <p>If you need to run many smaller jobs, then High-Throughput Computing
@@ -6327,7 +6254,6 @@ efficiently.</p>
 is fairly easy for users in the U.S. and provides virtually unlimited
 access.</p>
 </section><section><h2 class="section-heading" id="national-research-platform-nrp">National Research Platform (NRP)<a class="anchor" aria-label="anchor" href="#national-research-platform-nrp"></a>
-<a class="anchor" aria-label="anchor" href="#national-research-platform-nrp"></a>
 </h2>
 <hr class="half-width">
 <p>The NRP is a partnership of over 50 institutions led by UC San Diego
@@ -6341,7 +6267,6 @@ provides access to much more powerful computing including very high-end
 GPUs. The compute nodes are mainly GPU-based and research is aimed at
 Machine Learning codes.</p>
 </section><section><h2 class="section-heading" id="cloud-computing">Cloud Computing<a class="anchor" aria-label="anchor" href="#cloud-computing"></a>
-<a class="anchor" aria-label="anchor" href="#cloud-computing"></a>
 </h2>
 <hr class="half-width">
 <p>Running HPC jobs in the cloud is much more difficult and costly than
@@ -6354,7 +6279,6 @@ to new customers for example. Amazon Web Services (AWS) offered several
 free trial plans with $750 credits. Microsoft Azure offers a $200 credit
 for 30 days for eligible new customers.</p>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
 <p>Many projects that start on a laptop or desktop system end up needing
@@ -6367,8 +6291,7 @@ give you ideas on where to start.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>There are many HPC resources that are totally free for the
@@ -6417,7 +6340,7 @@ Azure</a></li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.6" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.4" class="external-link">varnish (1.0.4)</a></p>
 			</div>
 		</footer>
 </div> <!-- / div.container -->
@@ -6440,8 +6363,8 @@ Azure</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/aio.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/aio.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-22",
-  "datePublished": "2024-08-22"
+  "dateModified": "2024-08-23",
+  "datePublished": "2024-08-23"
 }
 
   </script><script>
