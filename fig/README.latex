@@ -1,3 +1,6 @@
 
+Open Keynote and inssert->equation without $$ and \Large
+
 dot_product_formula:     $$\Large D_{prod} = \sum_{i=0}^{N-1} X_i * Y_i$$
+dot_product_formula:     $$\Large D_{prod} = \sum_{i=1}^{N} X_i * Y_i$$
 matrix_element_formula:  $$\Large C_{i,j} = \sum_{k=0}^{N-1} A_{i,k} * B_{k,j}$$
