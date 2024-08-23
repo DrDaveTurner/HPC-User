@@ -53,7 +53,7 @@ prints the result out to the screen for us.
 
 ### R
 
-Need fig/dot_prod_fig-1-N.jpg
+![Dot product between vectors X and Y](fig/dot_prod_fig-1-N.jpg ){ alt="Dot product formula" }
 
 ### C
 
@@ -61,11 +61,11 @@ Need fig/dot_prod_fig-1-N.jpg
 
 ### Fortran
 
-Need fig/dot_prod_fig-1-N.jpg
+![Dot product between vectors X and Y](fig/dot_prod_fig-1-N.jpg ){ alt="Dot product formula" }
 
 ### Matlab
 
-Need fig/dot_prod_fig-1-N.jpg
+![Dot product between vectors X and Y](fig/dot_prod_fig-1-N.jpg ){ alt="Dot product formula" }
 
 ::::::::::::::::::::::::::
 
@@ -128,7 +128,7 @@ depending on how you write the code.
 
 ### R
 
-Need fig/matmult_fig-1-N.jpg.
+![Matrix multiplication C = A * B](fig/matmult_fig-1-N.jpg ){ alt="Formula and diagram of a matrix multiply" }
 
 ### C
 
@@ -136,11 +136,11 @@ Need fig/matmult_fig-1-N.jpg.
 
 ### Fortran
 
-Need fig/matmult_fig-1-N.jpg.
+![Matrix multiplication C = A * B](fig/matmult_fig-1-N.jpg ){ alt="Formula and diagram of a matrix multiply" }
 
 ### Matlab
 
-Need fig/matmult_fig-1-N.jpg.
+![Matrix multiplication C = A * B](fig/matmult_fig-1-N.jpg ){ alt="Formula and diagram of a matrix multiply" }
 
 ::::::::::::::::::::::::::
 
