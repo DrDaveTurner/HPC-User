@@ -1219,7 +1219,7 @@ also be able to calculate total memory for simple programs.</li>
 </div>
 </section></section><section id="aio-performance-concepts"><p>Content from <a href="performance-concepts.html">Performance Concepts</a></p>
 <hr>
-<p>Last updated on 2024-08-23 |
+<p>Last updated on 2024-08-24 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -1264,22 +1264,23 @@ of how to use libraries optimized by experts.</li>
 <p>When we write a program for a computer, we view the operation from a
 more conceptual level. The picture below is for a simple dot product
 between two vectors <strong>X</strong> and <strong>Y</strong>, where the
-dot product <strong>D</strong> is the sum of the elements of each vector
-multiplied together. Notice first that the indexing for arrays in Python
-starts at 0 and goes to N-1. This varies between languages, with C/C++
-also starting at 0, while R, Matlab, and Fortran start arrays at 1 and
-go to N.</p>
+dot product <strong>D<sub>prod</sub></strong> is the sum of the elements
+of each vector multiplied together. Notice first that the indexing for
+arrays in Python starts at 0 and goes to N-1. This varies between
+languages, with C/C++ also starting at 0, while R, Matlab, and Fortran
+start arrays at 1 and go to N.</p>
 <p>When we think of a computer running a program to do this calculation,
-we view it as starting with the variable <strong>D</strong> being pulled
-from main memory into the processor where this sum is zeroed out. We
-then start by pulling <strong>X<sub>0</sub></strong> up into the
-processor, then <strong>Y<sub>0</sub></strong>, multiplying them
-together and summing them into <strong>D</strong>. We loop through all
-elements of the vectors, each time pulling the <strong>X</strong> and
-<strong>Y</strong> element into memory, multiplying them together and
-summing them into <strong>D</strong>. Then at the end, we push
-<strong>D</strong> back down into main memory where the program prints
-the result out to the screen for us.</p>
+we view it as starting with the variable
+<strong>D<sub>prod</sub></strong> being pulled from main memory into the
+processor where this sum is zeroed out. We then pull the first element
+of <strong>X</strong> and the first element of <strong>Y</strong> into
+the registers and multiply them together then summing them into
+<strong>D<sub>prod</sub></strong>. We loop through all elements of the
+vectors, each time pulling the <strong>X</strong> and <strong>Y</strong>
+element into memory, multiplying them together and summing them into
+<strong>D<sub>prod</sub></strong>. Then at the end, we push
+<strong>D<sub>prod</sub></strong> back down into main memory where the
+program prints the result out to the screen.</p>
 <div class="tabs">
 <nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
@@ -1333,7 +1334,7 @@ the result out to the screen for us.</p>
 </div>
 <p>This conceptual view of what the computer is doing is all we really
 need to be aware of when we are starting to writing programs. But when
-those programs start taking too long to run on a desktop computer then
+those programs start taking too long to run on a personal computer then
 we need to understand what the computer is doing in more depth so we can
 make sure that the code is running optimally. Computers are internally
 quite complex, so fully understanding how code can be written in
@@ -1358,19 +1359,20 @@ cache layers, with a copy of the entire cache line being left behind in
 each layer. In this way, the most frequently used data will be more
 likely to be in one of the cache layers where it can be accessed more
 quickly. In the case of our dot product, that means loading the first
-element <strong>X<sub>1</sub></strong> may take 10-33 ns while the next
-7 only take 0.3-1 ns since they are already in L1 cache.</p>
+element of <strong>X</strong> and its 64-byte cache line may take 10-33
+ns while the next 7 only take 0.3-1 ns since those elements are now in
+L1 cache too.</p>
 <figure><img src="../fig/Memory_Hierarchy.jpg" alt="Diagram of the memory hierarchy in a typical computer" class="figure mx-auto d-block"><div class="figcaption">Memory Hierarchy in a Computer</div>
 </figure><p>How does this knowledge help us? Performance is more about getting
 data to the processor since most operations are very fast once the data
-is in the registers. If the vector is instead not stored in contiguous
-memory, with each variable in the next memory location, then the
-subsequent 7 memory loads <strong>X<sub>2</sub>-X<sub>8</sub></strong>
-and <strong>Y<sub>2</sub>-Y<sub>8</sub></strong> will take 20-33 ns each
-instead of 0.3-1 ns each. This means that we need to ensure that
-variables we are using are in contiguous memory whenever possible. There
-will be an exercise at the end of this section where you will measure
-the difference in execution time between these two cases.</p>
+is in the processor registers. If the vector is instead not stored in
+contiguous memory, with each variable in the next memory location, then
+the subsequent 7 memory loads of <strong>X</strong> and
+<strong>Y</strong> will take 20-33 ns each instead of 0.3-1 ns each.
+This means that we need to ensure that variables we are using are in
+contiguous memory whenever possible. There will be an exercise at the
+end of this section where you will measure the difference in execution
+time between these two cases.</p>
 <p>Now let’s look at a simple matrix multiplication algorithm which is
 fairly simple to program, but may have very different performance
 depending on how you write the code.</p>
@@ -1667,7 +1669,7 @@ memory? How much faster should it be?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-6" class="nav nav-tabs" role="tablist">
@@ -1826,7 +1828,7 @@ may be different on each system.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-8" class="nav nav-tabs" role="tablist">
@@ -1931,7 +1933,7 @@ see if it improves the performance compared to the original code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
@@ -2113,7 +2115,7 @@ identities.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2139,10 +2141,10 @@ identities.</p>
 <span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin( theta )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2166,10 +2168,10 @@ identities.</p>
 <span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -2203,7 +2205,7 @@ identities.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2241,10 +2243,10 @@ identities.</p>
 <span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin_theta</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2280,10 +2282,10 @@ identities.</p>
 <span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -2310,7 +2312,7 @@ rate.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The unoptimized code uses <strong>N_atoms * ( 1 + 21 * NQ )
 Flops</strong>. The optimized version uses <strong>N_atoms * ( 13 + 6 *
@@ -2542,7 +2544,7 @@ see the effects of the network (for the 4 cores, try 2 nodes 2 cores vs
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -3172,27 +3174,27 @@ rank will print out the results.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <figure><img src="../fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <figure><img src="../fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
 <figure><img src="../fig/distributed-memory-dot-product-0.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <figure><img src="../fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <figure><img src="../fig/distributed-memory-dot-product-1.jpg" alt="Distributed-memory dot product showing the layout of both vectors on both computers" class="figure mx-auto d-block"><div class="figcaption">Diagram of a distributed-memory multi-node dot
 product on two computers</div>
 </figure>
@@ -3291,7 +3293,7 @@ statement.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3345,10 +3347,10 @@ statement.</p>
 <span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>   <span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3424,10 +3426,10 @@ statement.</p>
 <span id="cb2-70"><a href="#cb2-70" tabindex="-1"></a><span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -3528,7 +3530,7 @@ the only way to go.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-3" class="tab-content">
-<div id="nav-tabpanel-3-Python" class="tab-pane show active" aria-labelledby="nav-tab-3-Python" role="tabpanel">
+<div id="nav-tabpanel-3-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-3-Python">
 <p>Measure the execution time for the dot_product_message_passing.py
 code for 1, 4, 8, and 16 cores if you are on an HPC system with at least
 2 compute nodes. You can try different combinations of nodes and cores
@@ -3537,10 +3539,10 @@ core test, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 <p>If you want a more challenging exercise you can <strong>git
 clone</strong> the Python matrix multiply code and test the scaling.</p>
 </div>
-<div id="nav-tabpanel-3-R" class="tab-pane" aria-labelledby="nav-tab-3-R" role="tabpanel">
+<div id="nav-tabpanel-3-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-C" class="tab-pane" aria-labelledby="nav-tab-3-C" role="tabpanel">
+<div id="nav-tabpanel-3-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-C">
 <p>Measure the execution time for the dot_product_c_mpi.c code for 1, 4,
 8, and 16 cores if you are on an HPC system with at least 2 compute
 nodes. You can try different combinations of nodes and cores for each if
@@ -3549,10 +3551,10 @@ try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 <p>If you want a more challenging exercise you can <strong>git
 clone</strong> the C matrix multiply code and test the scaling.</p>
 </div>
-<div id="nav-tabpanel-3-Fortran" class="tab-pane" aria-labelledby="nav-tab-3-Fortran" role="tabpanel">
+<div id="nav-tabpanel-3-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Matlab" class="tab-pane" aria-labelledby="nav-tab-3-Matlab" role="tabpanel">
+<div id="nav-tabpanel-3-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -3565,7 +3567,7 @@ clone</strong> the C matrix multiply code and test the scaling.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-4" class="nav nav-tabs" role="tablist">
@@ -3596,7 +3598,7 @@ clone</strong> the C matrix multiply code and test the scaling.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-4" class="tab-content">
-<div id="nav-tabpanel-4-Python" class="tab-pane show active" aria-labelledby="nav-tab-4-Python" role="tabpanel">
+<div id="nav-tabpanel-4-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-4-Python">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
 end, so we expect the scaling to be close to ideal. In my tests I
@@ -3610,10 +3612,10 @@ when the parallelization comes in the loop overhead, while for the
 message-passing code there is no difference in the loop overhead, it’s
 just the added global summation after the loop.</p>
 </div>
-<div id="nav-tabpanel-4-R" class="tab-pane" aria-labelledby="nav-tab-4-R" role="tabpanel">
+<div id="nav-tabpanel-4-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-C" class="tab-pane" aria-labelledby="nav-tab-4-C" role="tabpanel">
+<div id="nav-tabpanel-4-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-C">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
 end, so we expect the scaling to be close to ideal. In my tests on a
@@ -3630,10 +3632,10 @@ loop when the parallelization comes in the loop overhead, while for the
 message-passing code there is no difference in the loop overhead, it’s
 just the added global summation after the loop.</p>
 </div>
-<div id="nav-tabpanel-4-Fortran" class="tab-pane" aria-labelledby="nav-tab-4-Fortran" role="tabpanel">
+<div id="nav-tabpanel-4-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-4-Matlab" class="tab-pane" aria-labelledby="nav-tab-4-Matlab" role="tabpanel">
+<div id="nav-tabpanel-4-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -4005,7 +4007,7 @@ and the optimized version matmult_cblas.c.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>On a modern Intel system the raw scalar code ran in 0.14 seconds as
 did the single-threaded OpenMP and single-task MPI runs. The test on 4
@@ -4081,7 +4083,7 @@ Tutorial</a></li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>This Fortran section can certainly be skipped if time is limited. If
 so, I’d suggest at least saying a few lines from the first paragraph
@@ -4194,7 +4196,7 @@ command <strong>make all_fortran</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Each computer system may be set up differently with regard to what
 compilers are available and how they need to be accessed. You may need
@@ -4977,7 +4979,7 @@ to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
 optimized built-in matrix multiplication function. Be aware that the
@@ -5011,7 +5013,7 @@ data frame increases. Time runs of <strong>rbind.R</strong> for 10, 100,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>While rbind() is convenient and works well for small data frames, the
 time to add rows begins to increase exponentially for data frames around
@@ -5041,7 +5043,7 @@ rows and compare to the rbind() results.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>For 1,000 rows I measured 0.12 seconds for a data table set()
 compared to 5.4 seconds for a data table assignment and 1.1 second for a
@@ -5077,7 +5079,7 @@ you have to use data tables and the set() function.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>For 10,000 rows I saw similar results for each function, but for
 100,000 rows <strong>fread()</strong> was 10 times faster than
@@ -5109,7 +5111,7 @@ program.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>I would love to have a pdbMPI-based matrix multiply code available
 for people to look at and test if anyone finds one.</p>
@@ -5407,7 +5409,7 @@ performance of the <strong>matmult.m</strong> code for a matrix size of
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>For the 1000x1000 matrices, I measure 5 seconds for the serial code,
 0.7 seconds for the built-in matrix multiply that uses low level
@@ -5439,7 +5441,7 @@ an array size of 100,000,000 and compare to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>I measure serial performance at 0.5 seconds with the built in
 optimized routine at 0.2 seconds on 8 cores for a modest speedup. The
@@ -5475,7 +5477,7 @@ environments.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>If you do develop code for this, let us know so we can consider
 including your work for others to see.</p>
@@ -5623,7 +5625,7 @@ writing a script to choose an input filename from a list using
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>This will run 3 individual jobs that will show the
 <strong>$SLURM_ARRAY_TASK_ID</strong> to be 1, 3, or 5.</p>
@@ -6363,8 +6365,8 @@ Azure</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/aio.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/aio.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-23",
-  "datePublished": "2024-08-23"
+  "dateModified": "2024-08-24",
+  "datePublished": "2024-08-24"
 }
 
   </script><script>
