@@ -28,22 +28,23 @@ optimized by experts.
 When we write a program for a computer, we view the operation from
 a more conceptual level.
 The picture below is for a simple dot product between two vectors
-**X** and **Y**, where the dot product **D** is the sum of the elements of each
-vector multiplied together.
+**X** and **Y**, where the dot product **D<sub>prod</sub>** is the 
+sum of the elements of each vector multiplied together.
 Notice first that the indexing for arrays in Python starts at 0 and
 goes to N-1.  This varies between languages, with C/C++ also starting
 at 0, while R, Matlab, and Fortran start arrays at 1 and go to N.
 
 When we think of a computer running a program to do this calculation,
-we view it as starting with the variable **D** being pulled from main memory 
-into the processor where this sum is zeroed out.
-We then start
-by pulling **X<sub>0</sub>** up into the processor, then **Y<sub>0</sub>**, 
-multiplying them together and summing them into **D**.
+we view it as starting with the variable **D<sub>prod</sub>** being pulled 
+from main memory into the processor where this sum is zeroed out.
+We then pull the first element of **X** and the first element of **Y**
+into the registers and multiply them together then summing 
+them into **D<sub>prod</sub>**.
 We loop through all elements of the vectors, each time pulling the **X** and
-**Y** element into memory, multiplying them together and summing them into **D**.
-Then at the end, we push **D** back down into main memory where the program
-prints the result out to the screen for us.
+**Y** element into memory, multiplying them together and 
+summing them into **D<sub>prod</sub>**.
+Then at the end, we push **D<sub>prod</sub>** back down into main memory 
+where the program prints the result out to the screen.
 
 :::::::::::::::: group-tab
 
@@ -71,7 +72,7 @@ prints the result out to the screen for us.
 
 This conceptual view of what the computer is doing is all we really
 need to be aware of when we are starting to writing programs.
-But when those programs start taking too long to run on a desktop computer
+But when those programs start taking too long to run on a personal computer
 then we need to understand what the computer is doing in more depth
 so we can make sure that the code is running optimally.
 Computers are internally quite complex, so fully understanding how code can be
@@ -97,19 +98,18 @@ layers of increasingly fast memory known as cache layers, with a copy
 of the entire cache line being left behind in each layer.
 In this way, the most frequently used data will be more likely to
 be in one of the cache layers where it can be accessed more quickly.
-In the case of our dot product, that means loading the first element
-**X<sub>1</sub>** may take 10-33 ns while the next 7 only take 0.3-1 ns since they are
-already in L1 cache.
+In the case of our dot product, that means loading the first element of
+**X** and its 64-byte cache line may take 10-33 ns while the next 7 only 
+take 0.3-1 ns since those elements are now in L1 cache too.
 
 ![Memory Hierarchy in a Computer](fig/Memory_Hierarchy.jpg){ alt="Diagram of the memory hierarchy in a typical computer" }
 
 How does this knowledge help us?
 Performance is more about getting data to the processor since most
-operations are very fast once the data is in the registers.
+operations are very fast once the data is in the processor registers.
 If the vector is instead not stored in contiguous memory, with each
 variable in the next memory location, then the subsequent 7 memory
-loads **X<sub>2</sub>-X<sub>8</sub>** and **Y<sub>2</sub>-Y<sub>8</sub>** 
-will take 20-33 ns each instead of 0.3-1 ns each.
+loads of **X** and **Y** will take 20-33 ns each instead of 0.3-1 ns each.
 This means that we need to ensure that variables we are using are in
 contiguous memory whenever possible.
 There will be an exercise at the end of this section where you will
