@@ -271,6 +271,7 @@ int main (int argc, char **argv)
 
 ### Fortran
 
+```fortran
 ! timing_example.f90 - Example code showing how to put timing around an IO loop.
 
 PROGRAM timing_example
@@ -330,6 +331,7 @@ PROGRAM timing_example
    WRITE(*,*) "The IO write  took = ", t_io, " seconds "
 
 END PROGRAM timing_example
+```
 
 ### Matlab
 
@@ -471,6 +473,7 @@ int main (int argc, char **argv)
 
 ### Fortran
 
+```fortran
 ! timing_example.f90 - Example code showing how to put timing around an IO loop.
 
 PROGRAM timing_example
@@ -536,6 +539,7 @@ PROGRAM timing_example
    WRITE(*,*) "The IO write  took = ", t_io, " seconds "
 
 END PROGRAM timing_example
+```
 
 ### Matlab
 
