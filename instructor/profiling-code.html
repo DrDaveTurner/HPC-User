@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Profiling Code for Performance</h1>
-        <p>Last updated on 2024-08-28 |
+        <p>Last updated on 2024-08-30 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/profiling-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -595,12 +595,7 @@ returns the current time accurate to less than a microsecond. Accuracy
 of other timers like <strong>SYSTEM CLOCK()</strong> in Fortran 90 vary
 with the system and compiler. Below are examples of using the clock
 functions to measure the time it takes to do a loop, then measure the
-time it takes to dump an array out to a file. Some of these codes
-initialize a dummy array to clear the values of <strong>array</strong>
-out of all levels of cache before starting the timing. This is just done
-because we want the time to include retrieving the elements of
-<strong>array</strong> from main memory and would not be done in a
-normal code.</p>
+time it takes to dump an array out to a file.</p>
 <div class="tabs">
 <nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
 <button class="nav-link active" id="nav-tab-1-Python" name="Python" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-Python" type="button" role="tab" aria-controls="nav-tabpanel-1-Python" aria-selected="true">
@@ -630,7 +625,7 @@ normal code.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -661,10 +656,10 @@ normal code.</p>
 <span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -724,7 +719,7 @@ normal code.</p>
 <span id="cb8-54"><a href="#cb8-54" tabindex="-1"></a><span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">FORTRAN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -736,60 +731,52 @@ normal code.</p>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>   <span class="dt">INTEGER</span> <span class="dt">::</span> cio_start, cio_stop, fd</span>
 <span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>   <span class="dt">DOUBLE PRECISION</span> <span class="dt">::</span> t_sum, t_loop, a_sum, t_io</span>
 <span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>   <span class="dt">DOUBLE PRECISION</span>, <span class="dt">ALLOCATABLE</span> <span class="dt">::</span> array(:)</span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>   <span class="dt">DOUBLE PRECISION</span>, <span class="dt">ALLOCATABLE</span> <span class="dt">::</span> dummy(:)</span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>      <span class="co">! Allocate space for the array and initialize it</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>   N <span class="kw">=</span> <span class="dv">100000000</span>;</span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>   <span class="kw">ALLOCATE</span>( array(N) )</span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>      array(i) <span class="kw">=</span> i</span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>   <span class="kw">END DO</span></span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>      <span class="co">! Initialize a dummy array to clear cache</span></span>
-<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>   <span class="kw">ALLOCATE</span>( dummy(<span class="dv">125000000</span>) )</span>
-<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, <span class="dv">125000000</span></span>
-<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>      dummy(i) <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>   <span class="kw">END DO</span></span>
-<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a></span>
-<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>      <span class="co">! Put timing around our loop</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>      <span class="co">! Allocate space for the array and initialize it</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>   N <span class="kw">=</span> <span class="dv">100000000</span>;</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>   <span class="kw">ALLOCATE</span>( array(N) )</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>      array(i) <span class="kw">=</span> i</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>   <span class="kw">END DO</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>      <span class="co">! Put timing around our loop</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( COUNT_RATE <span class="kw">=</span> c_rate )</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> c_start )</span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>   a_sum <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>      a_sum <span class="kw">=</span> a_sum <span class="kw">+</span> array(i)</span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>   <span class="kw">END DO</span></span>
 <span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a></span>
-<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( COUNT_RATE <span class="kw">=</span> c_rate )</span>
-<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> c_start )</span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> c_stop )</span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>   t_loop <span class="kw">=</span> <span class="bu">DBLE</span>(c_stop <span class="kw">-</span> c_start) <span class="kw">/</span> c_rate</span>
 <span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>   a_sum <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
-<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a>      a_sum <span class="kw">=</span> a_sum <span class="kw">+</span> array(i)</span>
-<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a>   <span class="kw">END DO</span></span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"a_sum = "</span>, a_sum</span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds "</span></span>
+<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a><span class="co">!      Now time the file write</span></span>
 <span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> c_stop )</span>
-<span id="cb9-38"><a href="#cb9-38" tabindex="-1"></a>   t_loop <span class="kw">=</span> <span class="bu">DBLE</span>(c_stop <span class="kw">-</span> c_start) <span class="kw">/</span> c_rate</span>
-<span id="cb9-39"><a href="#cb9-39" tabindex="-1"></a></span>
-<span id="cb9-40"><a href="#cb9-40" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"a_sum = "</span>, a_sum</span>
-<span id="cb9-41"><a href="#cb9-41" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds "</span></span>
-<span id="cb9-42"><a href="#cb9-42" tabindex="-1"></a></span>
-<span id="cb9-43"><a href="#cb9-43" tabindex="-1"></a><span class="co">!      Now time the file write</span></span>
-<span id="cb9-44"><a href="#cb9-44" tabindex="-1"></a></span>
-<span id="cb9-45"><a href="#cb9-45" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cio_start, COUNT_RATE <span class="kw">=</span> c_rate )</span>
-<span id="cb9-46"><a href="#cb9-46" tabindex="-1"></a></span>
-<span id="cb9-47"><a href="#cb9-47" tabindex="-1"></a>   <span class="fu">open(</span> fd, <span class="fu">file</span> <span class="kw">=</span> <span class="st">"timing_example.out"</span> <span class="fu">)</span></span>
-<span id="cb9-48"><a href="#cb9-48" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
-<span id="cb9-49"><a href="#cb9-49" tabindex="-1"></a>      <span class="fu">write(</span> fd, <span class="fu">*)</span> array(i)</span>
-<span id="cb9-50"><a href="#cb9-50" tabindex="-1"></a>   <span class="kw">END DO</span></span>
-<span id="cb9-51"><a href="#cb9-51" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" tabindex="-1"></a>   <span class="fu">close(</span> fd <span class="fu">)</span></span>
-<span id="cb9-53"><a href="#cb9-53" tabindex="-1"></a></span>
-<span id="cb9-54"><a href="#cb9-54" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cio_stop )</span>
-<span id="cb9-55"><a href="#cb9-55" tabindex="-1"></a>   t_io <span class="kw">=</span> <span class="bu">DBLE</span>(cio_stop <span class="kw">-</span> cio_start) <span class="kw">/</span> c_rate</span>
-<span id="cb9-56"><a href="#cb9-56" tabindex="-1"></a></span>
-<span id="cb9-57"><a href="#cb9-57" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The IO write  took = "</span>, t_io, <span class="st">" seconds "</span></span>
-<span id="cb9-58"><a href="#cb9-58" tabindex="-1"></a></span>
-<span id="cb9-59"><a href="#cb9-59" tabindex="-1"></a><span class="kw">END PROGRAM</span> timing_example</span></code></pre>
+<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cio_start, COUNT_RATE <span class="kw">=</span> c_rate )</span>
+<span id="cb9-38"><a href="#cb9-38" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" tabindex="-1"></a>   <span class="fu">open(</span> fd, <span class="fu">file</span> <span class="kw">=</span> <span class="st">"timing_example.out"</span> <span class="fu">)</span></span>
+<span id="cb9-40"><a href="#cb9-40" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
+<span id="cb9-41"><a href="#cb9-41" tabindex="-1"></a>      <span class="fu">write(</span> fd, <span class="fu">*)</span> array(i)</span>
+<span id="cb9-42"><a href="#cb9-42" tabindex="-1"></a>   <span class="kw">END DO</span></span>
+<span id="cb9-43"><a href="#cb9-43" tabindex="-1"></a></span>
+<span id="cb9-44"><a href="#cb9-44" tabindex="-1"></a>   <span class="fu">close(</span> fd <span class="fu">)</span></span>
+<span id="cb9-45"><a href="#cb9-45" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cio_stop )</span>
+<span id="cb9-47"><a href="#cb9-47" tabindex="-1"></a>   t_io <span class="kw">=</span> <span class="bu">DBLE</span>(cio_stop <span class="kw">-</span> cio_start) <span class="kw">/</span> c_rate</span>
+<span id="cb9-48"><a href="#cb9-48" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The IO write  took = "</span>, t_io, <span class="st">" seconds "</span></span>
+<span id="cb9-50"><a href="#cb9-50" tabindex="-1"></a></span>
+<span id="cb9-51"><a href="#cb9-51" tabindex="-1"></a><span class="kw">END PROGRAM</span> timing_example</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -845,7 +832,7 @@ uncommenting the timing and printing functions in the code file.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -879,10 +866,10 @@ uncommenting the timing and printing functions in the code file.</p>
 <span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The output took "</span>, t_output, <span class="st">" seconds"</span>)</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -948,7 +935,7 @@ uncommenting the timing and printing functions in the code file.</p>
 <span id="cb11-60"><a href="#cb11-60" tabindex="-1"></a><span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">FORTRAN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -960,66 +947,57 @@ uncommenting the timing and printing functions in the code file.</p>
 <span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>   <span class="dt">INTEGER</span> <span class="dt">::</span> cio_start, cio_stop, fd</span>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>   <span class="dt">DOUBLE PRECISION</span> <span class="dt">::</span> t_sum, t_loop, a_sum, t_io</span>
 <span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>   <span class="dt">DOUBLE PRECISION</span>, <span class="dt">ALLOCATABLE</span> <span class="dt">::</span> array(:)</span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>   <span class="dt">DOUBLE PRECISION</span>, <span class="dt">ALLOCATABLE</span> <span class="dt">::</span> dummy(:)</span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>      <span class="co">! Allocate space for the array and initialize it</span></span>
 <span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>      <span class="co">! Allocate space for the array and initialize it</span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>   N <span class="kw">=</span> <span class="dv">100000000</span>;</span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>   <span class="kw">ALLOCATE</span>( array(N) )</span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a>      array(i) <span class="kw">=</span> i</span>
-<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a>   <span class="kw">END DO</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>   N <span class="kw">=</span> <span class="dv">100000000</span>;</span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>   <span class="kw">ALLOCATE</span>( array(N) )</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>      array(i) <span class="kw">=</span> i</span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>   <span class="kw">END DO</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a>      <span class="co">! Put timing around our loop</span></span>
 <span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a></span>
-<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a>      <span class="co">! Initialize a dummy array to clear cache</span></span>
-<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a></span>
-<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a>   <span class="kw">ALLOCATE</span>( dummy(<span class="dv">125000000</span>) )</span>
-<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, <span class="dv">125000000</span></span>
-<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a>      dummy(i) <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a>   <span class="kw">END DO</span></span>
-<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a></span>
-<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a>      <span class="co">! Put timing around our loop</span></span>
-<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a></span>
-<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( COUNT_RATE <span class="kw">=</span> c_rate )</span>
-<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> c_start )</span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( COUNT_RATE <span class="kw">=</span> c_rate )</span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> c_start )</span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a>   t_sum <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a>   a_sum <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
+<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a>      <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cs_start )</span>
+<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a>      a_sum <span class="kw">=</span> a_sum <span class="kw">+</span> array(i)</span>
+<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a>      <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cs_stop )</span>
+<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a>      t_sum <span class="kw">=</span> t_sum <span class="kw">+</span> <span class="bu">DBLE</span>(cs_stop <span class="kw">-</span> cs_start) <span class="kw">/</span> c_rate</span>
+<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a>   <span class="kw">END DO</span></span>
 <span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a></span>
-<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a>   t_sum <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a>   a_sum <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
-<span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a>      <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cs_start )</span>
-<span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a>      a_sum <span class="kw">=</span> a_sum <span class="kw">+</span> array(i)</span>
-<span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a>      <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cs_stop )</span>
-<span id="cb12-39"><a href="#cb12-39" tabindex="-1"></a>      t_sum <span class="kw">=</span> t_sum <span class="kw">+</span> <span class="bu">DBLE</span>(cs_stop <span class="kw">-</span> cs_start) <span class="kw">/</span> c_rate</span>
-<span id="cb12-40"><a href="#cb12-40" tabindex="-1"></a>   <span class="kw">END DO</span></span>
+<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> c_stop )</span>
+<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a>   t_loop <span class="kw">=</span> <span class="bu">DBLE</span>(c_stop <span class="kw">-</span> c_start) <span class="kw">/</span> c_rate</span>
+<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"a_sum = "</span>, a_sum</span>
+<span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The sum took "</span>, t_sum, <span class="st">" seconds "</span></span>
+<span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds "</span></span>
+<span id="cb12-39"><a href="#cb12-39" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" tabindex="-1"></a>      <span class="co">! Now time the file write</span></span>
 <span id="cb12-41"><a href="#cb12-41" tabindex="-1"></a></span>
-<span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> c_stop )</span>
-<span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a>   t_loop <span class="kw">=</span> <span class="bu">DBLE</span>(c_stop <span class="kw">-</span> c_start) <span class="kw">/</span> c_rate</span>
-<span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a></span>
-<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"a_sum = "</span>, a_sum</span>
-<span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The sum took "</span>, t_sum, <span class="st">" seconds "</span></span>
-<span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The loop took "</span>, t_loop, <span class="st">" seconds "</span></span>
+<span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cio_start, COUNT_RATE <span class="kw">=</span> c_rate )</span>
+<span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a>   <span class="fu">open(</span> fd, <span class="fu">file</span> <span class="kw">=</span> <span class="st">"timing_example.out"</span> <span class="fu">)</span></span>
+<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
+<span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a>      <span class="fu">write(</span> fd, <span class="fu">*)</span> array(i)</span>
+<span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a>   <span class="kw">END DO</span></span>
 <span id="cb12-48"><a href="#cb12-48" tabindex="-1"></a></span>
-<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a>      <span class="co">! Now time the file write</span></span>
+<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a>   <span class="fu">close(</span> fd <span class="fu">)</span></span>
 <span id="cb12-50"><a href="#cb12-50" tabindex="-1"></a></span>
-<span id="cb12-51"><a href="#cb12-51" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cio_start, COUNT_RATE <span class="kw">=</span> c_rate )</span>
-<span id="cb12-52"><a href="#cb12-52" tabindex="-1"></a></span>
-<span id="cb12-53"><a href="#cb12-53" tabindex="-1"></a>   <span class="fu">open(</span> fd, <span class="fu">file</span> <span class="kw">=</span> <span class="st">"timing_example.out"</span> <span class="fu">)</span></span>
-<span id="cb12-54"><a href="#cb12-54" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N</span>
-<span id="cb12-55"><a href="#cb12-55" tabindex="-1"></a>      <span class="fu">write(</span> fd, <span class="fu">*)</span> array(i)</span>
-<span id="cb12-56"><a href="#cb12-56" tabindex="-1"></a>   <span class="kw">END DO</span></span>
-<span id="cb12-57"><a href="#cb12-57" tabindex="-1"></a></span>
-<span id="cb12-58"><a href="#cb12-58" tabindex="-1"></a>   <span class="fu">close(</span> fd <span class="fu">)</span></span>
-<span id="cb12-59"><a href="#cb12-59" tabindex="-1"></a></span>
-<span id="cb12-60"><a href="#cb12-60" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cio_stop )</span>
-<span id="cb12-61"><a href="#cb12-61" tabindex="-1"></a>   t_io <span class="kw">=</span> <span class="bu">DBLE</span>(cio_stop <span class="kw">-</span> cio_start) <span class="kw">/</span> c_rate</span>
-<span id="cb12-62"><a href="#cb12-62" tabindex="-1"></a></span>
-<span id="cb12-63"><a href="#cb12-63" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The IO write  took = "</span>, t_io, <span class="st">" seconds "</span></span>
-<span id="cb12-64"><a href="#cb12-64" tabindex="-1"></a></span>
-<span id="cb12-65"><a href="#cb12-65" tabindex="-1"></a><span class="kw">END PROGRAM</span> timing_example</span></code></pre>
+<span id="cb12-51"><a href="#cb12-51" tabindex="-1"></a>   <span class="kw">CALL</span> <span class="fu">SYSTEM_CLOCK</span>( <span class="fu">COUNT</span> <span class="kw">=</span> cio_stop )</span>
+<span id="cb12-52"><a href="#cb12-52" tabindex="-1"></a>   t_io <span class="kw">=</span> <span class="bu">DBLE</span>(cio_stop <span class="kw">-</span> cio_start) <span class="kw">/</span> c_rate</span>
+<span id="cb12-53"><a href="#cb12-53" tabindex="-1"></a></span>
+<span id="cb12-54"><a href="#cb12-54" tabindex="-1"></a>   <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"The IO write  took = "</span>, t_io, <span class="st">" seconds "</span></span>
+<span id="cb12-55"><a href="#cb12-55" tabindex="-1"></a></span>
+<span id="cb12-56"><a href="#cb12-56" tabindex="-1"></a><span class="kw">END PROGRAM</span> timing_example</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -1231,8 +1209,8 @@ also be able to calculate total memory for simple programs.</li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/profiling-code.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/profiling-code.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-28",
-  "datePublished": "2024-08-28"
+  "dateModified": "2024-08-30",
+  "datePublished": "2024-08-30"
 }
 
   </script><script>
