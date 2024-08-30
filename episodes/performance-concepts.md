@@ -185,7 +185,19 @@ Not implemented yet.
 
 ### Fortran
 
-Not implemented yet.
+```fortran
+! Complete code is in code/matmult.f90
+
+   N = 1000
+   DO i = 1, N
+      DO j = 1, N
+         C(i,j) = 0.0
+         DO k = 1, N
+            C( i, j ) = C( i, j ) + A( i, k ) * B( k, j )
+         END DO
+      END DO
+   END DO
+```
 
 ### Matlab
 
@@ -255,7 +267,13 @@ Not implemented yet.
 
 ### Fortran
 
-Not implemented yet.
+```fortran
+! Complete code is in code/matmult_blas.f90
+! gfortran -O3 -lblas -o matmult_blas matmult_blas.f90
+
+   N = 1000;
+   CALL DGEMM( 'N', 'N', N, N, N, 1.0, A, N, B, N, 0.0, C, N )
+```
 
 ### Matlab
 
@@ -309,7 +327,16 @@ How much faster should it be?
 
 ### Fortran
 
-Not implemented yet.
+Compile and run the dot_product_fortran.f90 code several times to get an average
+execution time for a dot product between two vectors of
+1 million elements each.  Try to run them on an isolated system
+if possible, or through a batch queue that at least ensures the
+code is being run on an isolated processing core.
+Then compile and run the dot_product_fortran_sparse.f90 code in 
+the same manner for comparison.
+How much faster is the first code where the vectors are stored
+in contiguous memory?
+How much faster should it be?
 
 ### Matlab
 
@@ -372,7 +399,25 @@ code will run much faster.
 
 ### Fortran
 
-Not implemented yet.
+Is the time difference what we expected?
+When I ran this on a new processor that did not have
+any other jobs running, I measured ~20 milliseconds for the
+contiguous memory case and ~300 milliseconds for the sparse
+case, resulting in a 15 times speedup by keeping the vector
+in contiguous memory.
+Since a cache line is 64 Bytes and each element is 8 bytes,
+when the first element is loaded the next 7 are brought into
+L1 cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take ~33 ns to load 8 elements of X,
+then ~33 ns to load 8 elements of Y, then only a few ns to get
+each element into the registers and do the computations.
+For the sparse vectors, it should take 8 times as long since
+each load will take ~33 ns.
+If you didn't see an 8 times speedup exactly, don't worry.
+The cache system is actually even more complicated than this picture.
+The main thing to learn here is that if you take advantage of
+the cache line by keeping the vectors in contiguous memory, your
+code will run much faster.
 
 ### Matlab
 
@@ -423,7 +468,14 @@ BLAS library may be different on each system.
 
 ### Fortran
 
-Not implemented yet.
+Compile and run the **matmult.f90** and **matmult_blas.f90** programs
+to compare the times for raw Fortran and the heavily optimized 
+BLAS library **DGEMM()** function.
+Since these use statically allocated matrices you may need to increase
+the stack size using 'ulimit -s unlimited'.
+You may also need to use a different compile line than in the code as your
+BLAS library may be different on each system.
+
 
 ### Matlab
 
@@ -480,7 +532,13 @@ is hand-optimized for each processor.
 
 ### Fortran
 
-Not implemented yet.
+For a 1000x1000 matrix I got 1.2 seconds for the raw Fortran code when
+compiling with -O3 optimization.
+The **DGEMM()** function took only 0.015 seconds so it was
+80 times faster.
+Even though compiled C/C++/Fortran code is very fast, the **DGEMM** routine
+is hand-optimized for each processor.
+
 
 ### Matlab
 
