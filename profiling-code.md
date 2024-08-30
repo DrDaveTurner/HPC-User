@@ -169,11 +169,7 @@ accurate to less than a microsecond. Accuracy of other timers like
 **SYSTEM CLOCK()** in Fortran 90 vary with the system and compiler.
 Below are examples of using the clock functions to measure the
 time it takes to do a loop, then measure the time it takes to
-dump an array out to a file.  Some of these codes initialize a
-dummy array to clear the values of **array** out of all levels
-of cache before starting the timing.  This is just done because
-we want the time to include retrieving the elements of **array**
-from main memory and would not be done in a normal code.
+dump an array out to a file.
 
 :::::::::::::::: group-tab
 
@@ -280,7 +276,6 @@ PROGRAM timing_example
    INTEGER :: cio_start, cio_stop, fd
    DOUBLE PRECISION :: t_sum, t_loop, a_sum, t_io
    DOUBLE PRECISION, ALLOCATABLE :: array(:)
-   DOUBLE PRECISION, ALLOCATABLE :: dummy(:)
 
       ! Allocate space for the array and initialize it
 
@@ -289,13 +284,6 @@ PROGRAM timing_example
 
    DO i = 1, N
       array(i) = i
-   END DO
-
-      ! Initialize a dummy array to clear cache
-
-   ALLOCATE( dummy(125000000) )
-   DO i = 1, 125000000
-      dummy(i) = 0.0
    END DO
 
       ! Put timing around our loop
@@ -482,8 +470,6 @@ PROGRAM timing_example
    INTEGER :: cio_start, cio_stop, fd
    DOUBLE PRECISION :: t_sum, t_loop, a_sum, t_io
    DOUBLE PRECISION, ALLOCATABLE :: array(:)
-   DOUBLE PRECISION, ALLOCATABLE :: dummy(:)
-
 
       ! Allocate space for the array and initialize it
 
@@ -492,13 +478,6 @@ PROGRAM timing_example
 
    DO i = 1, N
       array(i) = i
-   END DO
-
-      ! Initialize a dummy array to clear cache
-
-   ALLOCATE( dummy(125000000) )
-   DO i = 1, 125000000
-      dummy(i) = 0.0
    END DO
 
       ! Put timing around our loop
