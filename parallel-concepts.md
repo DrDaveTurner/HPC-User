@@ -129,13 +129,36 @@ Not implemented yet.
          theta = (2.0 * PI * dx * iq) / NQ;
          freq_real[iq] += cos( theta );
          freq_imag[iq] += sin( theta );
+
       }
+
    }
 ```
 
 ### Fortran
 
-Not implemented yet.
+```fortran
+! This is just partial code to demonstrate the mechanics of
+!    using Flops minimization to optimize code for performance
+
+      ! Sum over each atom in the simulation and all frequencies
+
+   DO i = 1, N_atoms
+
+      dx = x(i) - y(i)
+
+      DO iq = 1, NQ
+
+            ! Sum over the frequencies
+
+         theta = (2.0 * PI * dx * iq) / NQ
+         freq_real(iq) = freq_real(iq) + cos( theta )
+         freq_imag(iq) = freq_imag(iq) + sin( theta )
+
+      END DO
+
+   END DO
+```
 
 ### Matlab
 
@@ -217,12 +240,47 @@ Not implemented yet.
          freq_real[iq] += cos_theta;
          freq_imag[iq] += sin_theta;
       }
+
    }
 ```
 
 ### Fortran
 
-Not implemented yet.
+```fortran
+! This is just partial code to demonstrate the mechanics of
+!    using Flops minimization to optimize code for performance
+
+   d_theta = ( 2.0 * PI * (x(0) - y(0)) ) / NQ
+
+      ! Sum over each atom in the simulation and all frequencies
+
+   DO i = 1, N_atoms
+
+      dx = x(i) - y(i)
+
+         ! Calculate cos/sin of the theta increment and set starting cos/sin values
+
+      cos_d_theta = cos( d_theta )
+      sin_d_theta = sin( d_theta )
+      cos_theta = 1.0
+      sin_theta = 0.0
+
+
+      DO iq = 1, NQ
+
+         cos_new = cos_theta * cos_d_theta - sin_theta * sin_d_theta
+         sin_theta = sin_theta * cos_d_theta + cos_theta * cos_d_theta
+         cos_theta = cos_new
+
+            ! Sum over the frequencies
+
+         freq_real(iq) = freq_real(iq) + cos_theta
+         freq_imag(iq) = freq_imag(iq) + sin_theta
+
+      END DO
+
+   END DO
+```
 
 ### Matlab
 

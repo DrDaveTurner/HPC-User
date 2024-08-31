@@ -271,7 +271,7 @@ Not implemented yet.
 ! Complete code is in code/matmult_blas.f90
 ! gfortran -O3 -lblas -o matmult_blas matmult_blas.f90
 
-   N = 1000;
+   N = 1000
    CALL DGEMM( 'N', 'N', N, N, N, 1.0, A, N, B, N, 0.0, C, N )
 ```
 
