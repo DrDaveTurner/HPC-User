@@ -1323,7 +1323,7 @@ also be able to calculate total memory for simple programs.</li>
 </div>
 </section></section><section id="aio-performance-concepts"><p>Content from <a href="performance-concepts.html">Performance Concepts</a></p>
 <hr>
-<p>Last updated on 2024-08-30 |
+<p>Last updated on 2024-08-31 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/performance-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1704,7 +1704,7 @@ low-level optimized libraries in the various languages.</p>
 <pre class="sourceCode fortran" tabindex="0"><code class="sourceCode fortranfixed"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">! Complete code is in code/matmult_blas.f90</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">! gfortran -O3 -lblas -o matmult_blas matmult_blas.f90</span></span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>   N <span class="kw">=</span> <span class="dv">1000</span>;</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>   N <span class="kw">=</span> <span class="dv">1000</span></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>   <span class="kw">CALL</span> DGEMM( <span class="st">'N'</span>, <span class="st">'N'</span>, N, N, N, <span class="fl">1.0</span>, A, N, B, N, <span class="fl">0.0</span>, C, N )</span></code></pre>
 </div>
 </div>
@@ -1801,7 +1801,7 @@ contiguous memory? How much faster should it be?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-6" class="nav nav-tabs" role="tablist">
@@ -1980,7 +1980,7 @@ may be different on each system.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-8" class="nav nav-tabs" role="tablist">
@@ -2089,7 +2089,7 @@ see if it improves the performance compared to the original code.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>There are a great many levels of optimization that can be done to the
 matrix multiplication algorithm. Transposing B should improve the
@@ -2134,7 +2134,7 @@ of writing your own version.</li>
 </div>
 </section></section><section id="aio-parallel-concepts"><p>Content from <a href="parallel-concepts.html">Parallel Computing Concepts</a></p>
 <hr>
-<p>Last updated on 2024-08-21 |
+<p>Last updated on 2024-08-31 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/parallel-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2270,7 +2270,7 @@ identities.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2296,10 +2296,10 @@ identities.</p>
 <span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin( theta )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2319,14 +2319,39 @@ identities.</p>
 <span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>         theta <span class="op">=</span> <span class="op">(</span><span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> dx <span class="op">*</span> iq<span class="op">)</span> <span class="op">/</span> NQ<span class="op">;</span></span>
 <span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>         freq_real<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> cos<span class="op">(</span> theta <span class="op">);</span></span>
 <span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>         freq_imag<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> sin<span class="op">(</span> theta <span class="op">);</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>      <span class="op">}</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
-<p>Not implemented yet.</p>
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">FORTRAN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode fortran" tabindex="0"><code class="sourceCode fortranfixed"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">! This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">!    using Flops minimization to optimize code for performance</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>      <span class="co">! Sum over each atom in the simulation and all frequencies</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N_atoms</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>      dx <span class="kw">=</span> x(i) <span class="kw">-</span> y(i)</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>      <span class="kw">DO</span> iq <span class="kw">=</span> <span class="dv">1</span>, NQ</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>            <span class="co">! Sum over the frequencies</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>         theta <span class="kw">=</span> (<span class="fl">2.0</span> <span class="kw">*</span> PI <span class="kw">*</span> dx <span class="kw">*</span> iq) <span class="kw">/</span> NQ</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>         freq_real(iq) <span class="kw">=</span> freq_real(iq) <span class="kw">+</span> <span class="bu">cos</span>( theta )</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>         freq_imag(iq) <span class="kw">=</span> freq_imag(iq) <span class="kw">+</span> <span class="bu">sin</span>( theta )</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>      <span class="kw">END DO</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>   <span class="kw">END DO</span></span></code></pre>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+</div>
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -2360,87 +2385,124 @@ identities.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
-<div class="codewrapper sourceCode" id="cb3">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># This is just partial code to demonstrate the mechanics of</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#    using Flops minimization to optimize code for performance</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    <span class="co"># Define the number of frequencies and zero the array before summation</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>freq_real <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( NQ ) ]</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>freq_imag <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( NQ ) ]</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>d_theta <span class="op">=</span> ( <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> (x[<span class="dv">0</span>] <span class="op">-</span> y[<span class="dv">0</span>]) ) <span class="op">/</span> NQ</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>    <span class="co"># Sum over each atom in the simulation</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N_atoms ):</span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    dx <span class="op">=</span> x[i] <span class="op">-</span> y[i]</span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>        <span class="co"># Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>    cos_d_theta <span class="op">=</span> cos( d_theta )</span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>    sin_d_theta <span class="op">=</span> sin( d_theta )</span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>    cos_theta <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>    sin_theta <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>        <span class="co"># Sum over the frequencies</span></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>    <span class="cf">for</span> iq <span class="kw">in</span> <span class="bu">range</span>( NQ ):</span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>        cos_new <span class="op">=</span> cos_theta <span class="op">*</span> cos_d_theta <span class="op">-</span> sin_theta <span class="op">*</span> sin_d_theta</span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>        sin_theta <span class="op">=</span> sin_theta <span class="op">*</span> cos_d_theta <span class="op">+</span> cos_theta <span class="op">*</span> cos_d_theta</span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>        cos_theta <span class="op">=</span> cos_new</span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>        freq_real[iq] <span class="op">+=</span> cos_theta</span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin_theta</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#    using Flops minimization to optimize code for performance</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="co"># Define the number of frequencies and zero the array before summation</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>freq_real <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( NQ ) ]</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>freq_imag <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( NQ ) ]</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>d_theta <span class="op">=</span> ( <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> (x[<span class="dv">0</span>] <span class="op">-</span> y[<span class="dv">0</span>]) ) <span class="op">/</span> NQ</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    <span class="co"># Sum over each atom in the simulation</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N_atoms ):</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>    dx <span class="op">=</span> x[i] <span class="op">-</span> y[i]</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>        <span class="co"># Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>    cos_d_theta <span class="op">=</span> cos( d_theta )</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>    sin_d_theta <span class="op">=</span> sin( d_theta )</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>    cos_theta <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>    sin_theta <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>        <span class="co"># Sum over the frequencies</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>    <span class="cf">for</span> iq <span class="kw">in</span> <span class="bu">range</span>( NQ ):</span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>        cos_new <span class="op">=</span> cos_theta <span class="op">*</span> cos_d_theta <span class="op">-</span> sin_theta <span class="op">*</span> sin_d_theta</span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>        sin_theta <span class="op">=</span> sin_theta <span class="op">*</span> cos_d_theta <span class="op">+</span> cos_theta <span class="op">*</span> cos_d_theta</span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>        cos_theta <span class="op">=</span> cos_new</span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>        freq_real[iq] <span class="op">+=</span> cos_theta</span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin_theta</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
-<div class="codewrapper sourceCode" id="cb4">
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">// This is just partial code to demonstrate the mechanics of</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">//    using Flops minimization to optimize code for performance</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>   d_theta <span class="op">=</span> <span class="op">(</span> <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> <span class="op">(</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">-</span> y<span class="op">[</span><span class="dv">0</span><span class="op">])</span> <span class="op">)</span> <span class="op">/</span> NQ<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>      <span class="co">// Sum over each atom in the simulation and all frequencies</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N_atoms<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>      dx <span class="op">=</span> x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> y<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>         <span class="co">// Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>      cos_d_theta <span class="op">=</span> cos<span class="op">(</span> d_theta <span class="op">);</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>      sin_d_theta <span class="op">=</span> sin<span class="op">(</span> d_theta <span class="op">);</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>      cos_theta <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>      sin_theta <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span> iq <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> iq <span class="op">&lt;</span> NQ<span class="op">;</span> iq<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>         cos_new <span class="op">=</span> cos_theta <span class="op">*</span> cos_d_theta <span class="op">-</span> sin_theta <span class="op">*</span> sin_d_theta<span class="op">;</span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>         sin_theta <span class="op">=</span> sin_theta <span class="op">*</span> cos_d_theta <span class="op">+</span> cos_theta <span class="op">*</span> cos_d_theta<span class="op">;</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>         cos_theta <span class="op">=</span> cos_new<span class="op">;</span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>            <span class="co">// Sum over the frequencies</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>         freq_real<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> cos_theta<span class="op">;</span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>         freq_imag<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> sin_theta<span class="op">;</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>      <span class="op">}</span></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">// This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">//    using Flops minimization to optimize code for performance</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>   d_theta <span class="op">=</span> <span class="op">(</span> <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> <span class="op">(</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">-</span> y<span class="op">[</span><span class="dv">0</span><span class="op">])</span> <span class="op">)</span> <span class="op">/</span> NQ<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>      <span class="co">// Sum over each atom in the simulation and all frequencies</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N_atoms<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>      dx <span class="op">=</span> x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> y<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>         <span class="co">// Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>      cos_d_theta <span class="op">=</span> cos<span class="op">(</span> d_theta <span class="op">);</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>      sin_d_theta <span class="op">=</span> sin<span class="op">(</span> d_theta <span class="op">);</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>      cos_theta <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>      sin_theta <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span> iq <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> iq <span class="op">&lt;</span> NQ<span class="op">;</span> iq<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>         cos_new <span class="op">=</span> cos_theta <span class="op">*</span> cos_d_theta <span class="op">-</span> sin_theta <span class="op">*</span> sin_d_theta<span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>         sin_theta <span class="op">=</span> sin_theta <span class="op">*</span> cos_d_theta <span class="op">+</span> cos_theta <span class="op">*</span> cos_d_theta<span class="op">;</span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>         cos_theta <span class="op">=</span> cos_new<span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>            <span class="co">// Sum over the frequencies</span></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>         freq_real<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> cos_theta<span class="op">;</span></span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>         freq_imag<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> sin_theta<span class="op">;</span></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
-<p>Not implemented yet.</p>
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">FORTRAN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode fortran" tabindex="0"><code class="sourceCode fortranfixed"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">! This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">!    using Flops minimization to optimize code for performance</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>   d_theta <span class="kw">=</span> ( <span class="fl">2.0</span> <span class="kw">*</span> PI <span class="kw">*</span> (x(<span class="dv">0</span>) <span class="kw">-</span> y(<span class="dv">0</span>)) ) <span class="kw">/</span> NQ</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>      <span class="co">! Sum over each atom in the simulation and all frequencies</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N_atoms</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>      dx <span class="kw">=</span> x(i) <span class="kw">-</span> y(i)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>         <span class="co">! Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>      cos_d_theta <span class="kw">=</span> <span class="bu">cos</span>( d_theta )</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>      sin_d_theta <span class="kw">=</span> <span class="bu">sin</span>( d_theta )</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>      cos_theta <span class="kw">=</span> <span class="fl">1.0</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>      sin_theta <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>      <span class="kw">DO</span> iq <span class="kw">=</span> <span class="dv">1</span>, NQ</span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>         cos_new <span class="kw">=</span> cos_theta <span class="kw">*</span> cos_d_theta <span class="kw">-</span> sin_theta <span class="kw">*</span> sin_d_theta</span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>         sin_theta <span class="kw">=</span> sin_theta <span class="kw">*</span> cos_d_theta <span class="kw">+</span> cos_theta <span class="kw">*</span> cos_d_theta</span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>         cos_theta <span class="kw">=</span> cos_new</span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>            <span class="co">! Sum over the frequencies</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>         freq_real(iq) <span class="kw">=</span> freq_real(iq) <span class="kw">+</span> cos_theta</span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>         freq_imag(iq) <span class="kw">=</span> freq_imag(iq) <span class="kw">+</span> sin_theta</span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>      <span class="kw">END DO</span></span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>   <span class="kw">END DO</span></span></code></pre>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
+</div>
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -2467,7 +2529,7 @@ rate.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The unoptimized code uses <strong>N_atoms * ( 1 + 21 * NQ )
 Flops</strong>. The optimized version uses <strong>N_atoms * ( 13 + 6 *
@@ -2699,7 +2761,7 @@ see the effects of the network (for the 4 cores, try 2 nodes 2 cores vs
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -2844,7 +2906,7 @@ product</div>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <p>Let’s go through the multi-threaded version of the dot product code
 below to illustrate the changes that had to be made to the code to
 parallelize it. The <strong>pymp</strong> package needs to be installed
@@ -2925,10 +2987,10 @@ just takes a little extra coding but is more explicit.</p>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
 <p>Let’s go through the multi-threaded version of the dot product code
 below to illustrate the changes that had to be made to the code to
 parallelize it. In C/C++ we need a line <strong>#include
@@ -3019,10 +3081,10 @@ each thread is responsible for.</p>
 <span id="cb2-62"><a href="#cb2-62" tabindex="-1"></a><span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -3099,7 +3161,7 @@ be used.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
 <p>Measure the execution time for the dot_product_threaded.py code for
 1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
 and do all runs in the same job. You can look at the job scripts like
@@ -3108,10 +3170,10 @@ example but your job script will probably be different. Then calculate
 the speedup compared to the scalar (single-core) run to see how close to
 ideal the performance is.</p>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
 <p>Measure the execution time for the
 <strong>dot_product_c_openmp.c</strong> code for 1, 4, 8, and 16 cores.
 If possible, use a job script requesting 16 cores and do all runs in the
@@ -3121,10 +3183,10 @@ example but your job script will probably be different. Then calculate
 the speedup compared to the scalar (single-core) run to see how close to
 ideal the performance is.</p>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -3168,7 +3230,7 @@ ideal the performance is.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-3" class="tab-content">
-<div id="nav-tabpanel-3-Python" class="tab-pane show active" aria-labelledby="nav-tab-3-Python" role="tabpanel">
+<div id="nav-tabpanel-3-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-3-Python">
 <p>For this very simple problem, each thread can do its computations
 totally independently. There is only a global sum of all the partial
 sums at the end, so we would expect the scaling to be close to ideal. In
@@ -3181,10 +3243,10 @@ runs 170 times faster because it is a compiled language, but likewise
 does not scale well due to the few computations being done in each pass
 through the loop.</p>
 </div>
-<div id="nav-tabpanel-3-R" class="tab-pane" aria-labelledby="nav-tab-3-R" role="tabpanel">
+<div id="nav-tabpanel-3-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-C" class="tab-pane" aria-labelledby="nav-tab-3-C" role="tabpanel">
+<div id="nav-tabpanel-3-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-C">
 <p>For this very simple problem, each thread can do its computations
 totally independently. There is only a global sum of all the partial
 sums at the end, so we would expect the scaling to be close to ideal. In
@@ -3194,10 +3256,10 @@ so few computations being done in each loop iteration, only 2
 floating-point operations, that the loop overhead is preventing better
 scaling.</p>
 </div>
-<div id="nav-tabpanel-3-Fortran" class="tab-pane" aria-labelledby="nav-tab-3-Fortran" role="tabpanel">
+<div id="nav-tabpanel-3-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Matlab" class="tab-pane" aria-labelledby="nav-tab-3-Matlab" role="tabpanel">
+<div id="nav-tabpanel-3-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -3720,7 +3782,7 @@ clone</strong> the C matrix multiply code and test the scaling.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-4" class="nav nav-tabs" role="tablist">
@@ -4332,7 +4394,7 @@ command <strong>make all_fortran</strong>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Each computer system may be set up differently with regard to what
 compilers are available and how they need to be accessed. You may need
@@ -5113,7 +5175,7 @@ to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
 optimized built-in matrix multiplication function. Be aware that the
@@ -5147,7 +5209,7 @@ data frame increases. Time runs of <strong>rbind.R</strong> for 10, 100,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>While rbind() is convenient and works well for small data frames, the
 time to add rows begins to increase exponentially for data frames around
@@ -5177,7 +5239,7 @@ rows and compare to the rbind() results.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>For 1,000 rows I measured 0.12 seconds for a data table set()
 compared to 5.4 seconds for a data table assignment and 1.1 second for a
@@ -5213,7 +5275,7 @@ you have to use data tables and the set() function.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>For 10,000 rows I saw similar results for each function, but for
 100,000 rows <strong>fread()</strong> was 10 times faster than
@@ -5245,7 +5307,7 @@ program.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>I would love to have a pdbMPI-based matrix multiply code available
 for people to look at and test if anyone finds one.</p>
@@ -6494,8 +6556,8 @@ Azure</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/aio.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/aio.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-30",
-  "datePublished": "2024-08-30"
+  "dateModified": "2024-08-31",
+  "datePublished": "2024-08-31"
 }
 
   </script><script>

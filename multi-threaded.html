@@ -520,7 +520,7 @@ product</div>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
 <p>Let’s go through the multi-threaded version of the dot product code
 below to illustrate the changes that had to be made to the code to
 parallelize it. The <strong>pymp</strong> package needs to be installed
@@ -601,10 +601,10 @@ just takes a little extra coding but is more explicit.</p>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="bu">print</span>( <span class="fl">2.0</span><span class="op">*</span>N<span class="op">*</span><span class="fl">8.0</span><span class="op">/</span><span class="fl">1.0e9</span>, <span class="st">' GB memory used'</span> )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
+<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
 <p>Let’s go through the multi-threaded version of the dot product code
 below to illustrate the changes that had to be made to the code to
 parallelize it. In C/C++ we need a line <strong>#include
@@ -695,10 +695,10 @@ each thread is responsible for.</p>
 <span id="cb2-62"><a href="#cb2-62" tabindex="-1"></a><span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -774,7 +774,7 @@ be used.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
 <p>Measure the execution time for the dot_product_threaded.py code for
 1, 4, 8, and 16 cores. If possible, use a job script requesting 16 cores
 and do all runs in the same job. You can look at the job scripts like
@@ -783,10 +783,10 @@ example but your job script will probably be different. Then calculate
 the speedup compared to the scalar (single-core) run to see how close to
 ideal the performance is.</p>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
 <p>Measure the execution time for the
 <strong>dot_product_c_openmp.c</strong> code for 1, 4, 8, and 16 cores.
 If possible, use a job script requesting 16 cores and do all runs in the
@@ -796,10 +796,10 @@ example but your job script will probably be different. Then calculate
 the speedup compared to the scalar (single-core) run to see how close to
 ideal the performance is.</p>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -843,7 +843,7 @@ ideal the performance is.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-3" class="tab-content">
-<div id="nav-tabpanel-3-Python" class="tab-pane show active" aria-labelledby="nav-tab-3-Python" role="tabpanel">
+<div id="nav-tabpanel-3-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-3-Python">
 <p>For this very simple problem, each thread can do its computations
 totally independently. There is only a global sum of all the partial
 sums at the end, so we would expect the scaling to be close to ideal. In
@@ -856,10 +856,10 @@ runs 170 times faster because it is a compiled language, but likewise
 does not scale well due to the few computations being done in each pass
 through the loop.</p>
 </div>
-<div id="nav-tabpanel-3-R" class="tab-pane" aria-labelledby="nav-tab-3-R" role="tabpanel">
+<div id="nav-tabpanel-3-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-R">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-C" class="tab-pane" aria-labelledby="nav-tab-3-C" role="tabpanel">
+<div id="nav-tabpanel-3-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-C">
 <p>For this very simple problem, each thread can do its computations
 totally independently. There is only a global sum of all the partial
 sums at the end, so we would expect the scaling to be close to ideal. In
@@ -869,10 +869,10 @@ so few computations being done in each loop iteration, only 2
 floating-point operations, that the loop overhead is preventing better
 scaling.</p>
 </div>
-<div id="nav-tabpanel-3-Fortran" class="tab-pane" aria-labelledby="nav-tab-3-Fortran" role="tabpanel">
+<div id="nav-tabpanel-3-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Fortran">
 <p>Not implemented yet.</p>
 </div>
-<div id="nav-tabpanel-3-Matlab" class="tab-pane" aria-labelledby="nav-tab-3-Matlab" role="tabpanel">
+<div id="nav-tabpanel-3-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Matlab">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -964,7 +964,7 @@ tutorial</a></li>
   "identifier": "https://DrDaveTurner.github.io/HPC-User/multi-threaded.html",
   "dateCreated": "2022-01-01",
   "dateModified": "2024-08-22",
-  "datePublished": "2024-08-30"
+  "datePublished": "2024-08-31"
 }
 
   </script><script>
