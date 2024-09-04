@@ -416,7 +416,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Message-Passing Programs</h1>
-        <p>Last updated on 2024-08-22 |
+        <p>Last updated on 2024-09-04 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/message-passing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -757,7 +757,79 @@ statement.</p>
 </div>
 </div>
 <div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
-<p>Not implemented yet.</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">FORTRAN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode fortran" tabindex="0"><code class="sourceCode fortranfixed"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">! Do product in Fortran using MPI message-passing</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="kw">PROGRAM</span> dot_product_fortran_mpi</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>   <span class="kw">USE</span> mpi</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>   <span class="dt">INTEGER</span> <span class="dt">::</span> i, n, myrank, nranks, n_elements, ierr</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>   <span class="dt">DOUBLE PRECISION</span> <span class="dt">::</span> psum, <span class="bu">dprod</span>, t_start, t_elapsed</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>   <span class="dt">DOUBLE PRECISION</span>, <span class="dt">ALLOCATABLE</span> <span class="dt">::</span> x(:), y(:)</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>   <span class="dt">DOUBLE PRECISION</span>, <span class="dt">ALLOCATABLE</span> <span class="dt">::</span> dummy(:)</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>      <span class="co">! Initialize the MPI environment</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>   <span class="kw">CALL</span> MPI_Init( ierr )</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>   <span class="kw">CALL</span> MPI_Comm_rank( MPI_COMM_WORLD, myrank, ierr )</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>   <span class="kw">CALL</span> MPI_Comm_size( MPI_COMM_WORLD, nranks, ierr )</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>      <span class="co">! Dynamically allocate large arrays to avoid overflowing the stack</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>   n <span class="kw">=</span> <span class="dv">100000000</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>   n_elements <span class="kw">=</span> n <span class="kw">/</span> nranks</span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>   <span class="kw">IF</span>( <span class="bu">MOD</span>( n, nranks) <span class="op">.NE.</span> <span class="dv">0</span> ) <span class="kw">THEN</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>      <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"Please use an even number of ranks"</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>      <span class="kw">CALL</span> <span class="kw">EXIT</span>(<span class="dv">0</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>   <span class="kw">END IF</span></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>   <span class="kw">ALLOCATE</span>( x(n_elements) )</span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>   <span class="kw">ALLOCATE</span>( y(n_elements) )</span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>   <span class="kw">ALLOCATE</span>( dummy(<span class="dv">125000000</span>) )</span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>      <span class="co">! Initialize the vectors</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>   j <span class="kw">=</span> <span class="dv">0</span></span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> myrank<span class="kw">+</span><span class="dv">1</span>, n, nranks    <span class="co">! Initialize to match non-MPI vectors</span></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>      j <span class="kw">=</span> j <span class="kw">+</span> <span class="dv">1</span></span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>      x(j) <span class="kw">=</span> i</span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>      y(j) <span class="kw">=</span> i</span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>   <span class="kw">END DO</span></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>      <span class="co">! Initialize a dummy array to clear cache</span></span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, <span class="dv">125000000</span></span>
+<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a>      dummy(i) <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a>   <span class="kw">END DO</span></span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a>      <span class="co">! Now start the timer and do the calculations</span></span>
+<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a>   <span class="kw">CALL</span> MPI_Barrier( MPI_COMM_WORLD, ierr )  <span class="co">! Sync before starting timer</span></span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>   t_start <span class="kw">=</span> MPI_Wtime( )</span>
+<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>   psum <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, n_elements</span>
+<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a>      psum <span class="kw">=</span> psum <span class="kw">+</span> x(i) <span class="kw">*</span> y(i)</span>
+<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>   <span class="kw">END DO</span></span>
+<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a>   <span class="bu">dprod</span> <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a>   <span class="kw">CALL</span> MPI_Allreduce( psum, <span class="bu">dprod</span>, <span class="dv">1</span>, MPI_DOUBLE_PRECISION, MPI_SUM, <span class="kw">&amp;</span></span>
+<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a>        MPI_COMM_WORLD, ierr )</span>
+<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a>   t_elapsed <span class="kw">=</span> MPI_Wtime( ) <span class="kw">-</span> t_start</span>
+<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a></span>
+<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>   <span class="kw">IF</span>( myrank <span class="op">.eq.</span> <span class="dv">0</span> ) <span class="kw">THEN</span></span>
+<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a>      <span class="fu">WRITE(*</span>,<span class="fu">*)</span> <span class="st">"dot product = "</span>, <span class="bu">dprod</span>, <span class="st">" took "</span>, <span class="kw">&amp;</span></span>
+<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a>         t_elapsed, <span class="st">" seconds  on "</span>, nranks, <span class="st">" tasks"</span></span>
+<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a>   <span class="kw">END IF</span></span>
+<span id="cb3-66"><a href="#cb3-66" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" tabindex="-1"></a>   <span class="kw">CALL</span> MPI_Finalize( ierr )</span>
+<span id="cb3-68"><a href="#cb3-68" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a><span class="kw">END PROGRAM</span> dot_product_fortran_mpi</span></code></pre>
+</div>
 </div>
 <div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
 <p>Not implemented yet.</p>
@@ -879,7 +951,11 @@ try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 clone</strong> the C matrix multiply code and test the scaling.</p>
 </div>
 <div id="nav-tabpanel-3-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Fortran">
-<p>Not implemented yet.</p>
+<p>Measure the execution time for the dot_product_fortran_mpi.f90 code
+for 1, 4, 8, and 16 cores if you are on an HPC system with at least 2
+compute nodes. You can try different combinations of nodes and cores for
+each if you would like to see the effects of the network (for the 4 core
+test, try 2 nodes 2 cores vs 4 nodes 1 core).</p>
 </div>
 <div id="nav-tabpanel-3-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-3-Matlab">
 <p>Not implemented yet.</p>
@@ -950,7 +1026,7 @@ single compute node I measured the single core run at 0.158 seconds, the
 4 core run at 0.038 seconds for a 4.2 times speedup, the 8 core run at
 0.019 seconds for a 8.3 times speedup, the 16 core run at 0.013 seconds
 for a 12.1 times speedup, and the 32 core run at 0.023 seconds for a 6.9
-times speedup. While the 4 and 8 task runs are close to ideal, there
+times speedup. While the 4 and 8 task runs are close to ideal, the
 scaling is not as great for the 16 and 32 core runs. Compiled
 C/C++/Fortran code is much faster than other interpreted languages so
 there isn’t as much work to overcome the overhead. The inefficiency in
@@ -960,7 +1036,21 @@ message-passing code there is no difference in the loop overhead, it’s
 just the added global summation after the loop.</p>
 </div>
 <div id="nav-tabpanel-4-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Fortran">
-<p>Not implemented yet.</p>
+<p>In this code we initialize the vectors locally so there is no
+communication involved. The only communication is the global sum at the
+end, so we expect the scaling to be close to ideal. In my tests on a
+single compute node I measured the single core run at 0.166 seconds, the
+4 core run at 0.038 seconds for a 4.4 times speedup, the 8 core run at
+0.019 seconds for a 8.5 times speedup, the 16 core run at 0.016 seconds
+for a 10.1 times speedup, and the 32 core run took much longer. While
+the 4 and 8 task runs are close to ideal, the scaling is not great for
+16 cores. Compiled C/C++/Fortran code is much faster than other
+interpreted languages so there isn’t as much work to overcome the
+overhead. The inefficiency in the multi-threaded code comes from there
+being too little work in each loop when the parallelization comes in the
+loop overhead, while for the message-passing code there is no difference
+in the loop overhead, it’s just the added global summation after the
+loop.</p>
 </div>
 <div id="nav-tabpanel-4-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-4-Matlab">
 <p>Not implemented yet.</p>
@@ -1054,7 +1144,7 @@ pages</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/message-passing.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/message-passing.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-22",
+  "dateModified": "2024-09-04",
   "datePublished": "2024-09-04"
 }
 
