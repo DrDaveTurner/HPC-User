@@ -182,7 +182,7 @@ you can have a line **export OMP_NUM_THREADS=4** to tell the program to use
 
 Right before the loop we must tell the compiler to parallelize the loop
 using a **#pragma omp parallel for** statement, plus we need to indicate
-that there is a reduction of **dprod** taking place at the end where
+that there is a summation reduction of **dprod** taking place where
 the partial sums calculated by each thread get globally summed at the end.
 Then the for loop range is changed so that each thread has a different range
 for the elements of the loop that each thread is responsible for.
@@ -254,7 +254,86 @@ void main (int argc, char **argv)
 
 ### Fortran
 
-Not implemented yet.
+Let's go through the multi-threaded version of the dot product code
+below to illustrate the changes that had to be made to the code to parallelize it.
+In Fortran we need a line **USE omp_lib** to bring the OpenMP
+functions, then the code needs to be compiled with the
+**-fopenmp** flag for **gfortran** or the **-qopenmp** flag for **ifort**.
+
+When we run the code we will want to set the number of threads for it to use.
+In the code below, this is being set internally using the number of threads
+passed in as a command line argument.
+This is used to set the number of threads using
+the **OMP_SET_NUM_THREADS()** subroutine in Fortran.
+The other method of setting the number of threads is to use the environmental
+variable **OMP_NUM_THREADS** for C/C++/Fortran.  For example, in your job script
+you can have a line **export OMP_NUM_THREADS=4** to tell the program to use
+4 threads.
+
+Right before the loop we must tell the compiler to parallelize the loop
+using a **!$OMP PARALLEL DO** statement, plus we need to indicate
+that there is a summation reduction of **dprod** taking place where
+the partial sums calculated by each thread get globally summed at the end.
+Then the **DO** loop range is changed so that each thread has a different range
+for the elements of the loop that each thread is responsible for.
+
+```fortran
+! Dot product in Fortran using OpenMP
+
+PROGRAM dot_product_fortran_openmp
+   USE omp_lib
+
+   INTEGER :: i, n, nthreads
+   CHARACTER(100) :: arg1
+
+   DOUBLE PRECISION :: dprod, t_start, t_elapsed
+   DOUBLE PRECISION, ALLOCATABLE :: x(:), y(:)
+   DOUBLE PRECISION, ALLOCATABLE :: dummy(:)
+
+      ! Dynamically allocate large arrays to avoid overflowing the stack
+
+   n = 100000000
+   ALLOCATE( x(n) )
+   ALLOCATE( y(n) )
+   ALLOCATE( dummy(125000000) )
+
+      ! Set the number of threads from the command line argument
+
+   CALL GET_COMMAND_ARGUMENT( 1, arg1 )
+   READ( arg1, *) nthreads
+   CALL OMP_SET_NUM_THREADS( nthreads )   ! Set the number of threads
+
+      ! Initialize the vectors
+
+   DO i = 1, n
+      x(i) = i
+      y(i) = i
+   END DO
+
+      ! Initialize a dummy array to clear cache
+
+   DO i = 1, 125000000
+      dummy(i) = 0.0
+   END DO
+
+      ! Now start the timer and do the calculations
+
+t_start = OMP_GET_WTIME()
+
+   dprod = 0.0
+!$OMP PARALLEL DO REDUCTION(+:dprod)
+   DO i = 1, n
+      dprod = dprod + x(i) * y(i)
+   END DO
+
+t_elapsed = OMP_GET_WTIME() - t_start
+
+   WRITE(*,*) "dot product = ", dprod, " took ", &
+      t_elapsed, " seconds  on ", nthreads, " threads"
+
+END PROGRAM dot_product_fortran_openmp
+
+```
 
 ### Matlab
 
@@ -265,8 +344,8 @@ Not implemented yet.
 So parallelizing this program really only requires us to change around 11 lines
 of code, and from that we get the benefit of being able to apply much greater
 computing power.
-We do have some control over how the parallelization works internally.
-Using **p.range(N)** in our for loop will use static scheduling
+In Python for example we do have some control over how the parallelization works 
+internally.  Using **p.range(N)** in our for loop will use static scheduling
 where each thread is responsible for a pre-determined set of indices
 at regular intervals as in the figure above.
 If instead we use **p.xrange(N)** then dynamic scheduling will be used
@@ -337,7 +416,15 @@ run to see how close to ideal the performance is.
 
 ### Fortran
 
-Not implemented yet.
+Measure the execution time for the **dot_product_fortran_openmp.f90** code
+for 1, 4, 8, and 16 cores.  If possible, use a job script
+requesting 16 cores and do all runs in the same job.
+You can look at the job scripts like **sb.ddot_c** in the **code**
+directory as an example but your job script will probably be
+different.
+Then calculate the speedup compared to the scalar (single-core)
+run to see how close to ideal the performance is.
+
 
 ### Matlab
 
@@ -384,7 +471,12 @@ loop overhead is preventing better scaling.
 
 ### Fortran
 
-Not implemented yet.
+For this very simple problem, each thread can do its computations
+totally independently.  There is only a global sum of all the
+partial sums at the end, so we would expect the scaling to be
+close to ideal.
+In my measurements, I saw a 3.5x speedup on 4 cores, a 6.6x
+speedup on 8 cores.
 
 ### Matlab
 
