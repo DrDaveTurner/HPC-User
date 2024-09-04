@@ -280,7 +280,77 @@ void main (int argc, char **argv)
 
 ### Fortran
 
-Not implemented yet.
+```fortran
+! Do product in Fortran using MPI message-passing
+
+PROGRAM dot_product_fortran_mpi
+   USE mpi
+
+   INTEGER :: i, n, myrank, nranks, n_elements, ierr
+
+   DOUBLE PRECISION :: psum, dprod, t_start, t_elapsed
+   DOUBLE PRECISION, ALLOCATABLE :: x(:), y(:)
+   DOUBLE PRECISION, ALLOCATABLE :: dummy(:)
+
+      ! Initialize the MPI environment
+
+   CALL MPI_Init( ierr )
+   CALL MPI_Comm_rank( MPI_COMM_WORLD, myrank, ierr )
+   CALL MPI_Comm_size( MPI_COMM_WORLD, nranks, ierr )
+
+      ! Dynamically allocate large arrays to avoid overflowing the stack
+
+   n = 100000000
+   n_elements = n / nranks
+   IF( MOD( n, nranks) .NE. 0 ) THEN
+      WRITE(*,*) "Please use an even number of ranks"
+      CALL EXIT(0)
+   END IF
+
+   ALLOCATE( x(n_elements) )
+   ALLOCATE( y(n_elements) )
+   ALLOCATE( dummy(125000000) )
+
+      ! Initialize the vectors
+
+   j = 0
+   DO i = myrank+1, n, nranks    ! Initialize to match non-MPI vectors
+      j = j + 1
+      x(j) = i
+      y(j) = i
+   END DO
+
+      ! Initialize a dummy array to clear cache
+
+   DO i = 1, 125000000
+      dummy(i) = 0.0
+   END DO
+
+      ! Now start the timer and do the calculations
+
+   CALL MPI_Barrier( MPI_COMM_WORLD, ierr )  ! Sync before starting timer
+   t_start = MPI_Wtime( )
+
+   psum = 0.0
+   DO i = 1, n_elements
+      psum = psum + x(i) * y(i)
+   END DO
+
+   dprod = 0.0
+   CALL MPI_Allreduce( psum, dprod, 1, MPI_DOUBLE_PRECISION, MPI_SUM, &
+        MPI_COMM_WORLD, ierr )
+
+   t_elapsed = MPI_Wtime( ) - t_start
+
+   IF( myrank .eq. 0 ) THEN
+      WRITE(*,*) "dot product = ", dprod, " took ", &
+         t_elapsed, " seconds  on ", nranks, " tasks"
+   END IF
+
+   CALL MPI_Finalize( ierr )
+
+END PROGRAM dot_product_fortran_mpi
+```
 
 ### Matlab
 
@@ -391,7 +461,12 @@ the C matrix multiply code and test the scaling.
 
 ### Fortran
 
-Not implemented yet.
+Measure the execution time for the dot_product_fortran_mpi.f90 code
+for 1, 4, 8, and 16 cores if you are on an HPC system with
+at least 2 compute nodes.
+You can try different combinations of nodes and cores for
+each if you would like to see the effects of the network
+(for the 4 core test, try 2 nodes 2 cores vs 4 nodes 1 core).
 
 ### Matlab
 
@@ -436,7 +511,7 @@ run at 0.158 seconds, the 4 core run at 0.038 seconds for a 4.2 times speedup,
 the 8 core run at 0.019 seconds for a 8.3 times speedup,
 the 16 core run at 0.013 seconds for a 12.1 times speedup,
 and the 32 core run at 0.023 seconds for a 6.9 times speedup.
-While the 4 and 8 task runs are close to ideal, there scaling
+While the 4 and 8 task runs are close to ideal, the scaling
 is not as great for the 16 and 32 core runs.
 Compiled C/C++/Fortran code is much faster than other interpreted
 languages so there isn't as much work to overcome the overhead.
@@ -448,7 +523,24 @@ the added global summation after the loop.
 
 ### Fortran
 
-Not implemented yet.
+In this code we initialize the vectors locally so there
+is no communication involved.
+The only communication is the global sum at the end, so
+we expect the scaling to be close to ideal.
+In my tests on a single compute node I measured the single core
+run at 0.166 seconds, the 4 core run at 0.038 seconds for a 4.4 times speedup,
+the 8 core run at 0.019 seconds for a 8.5 times speedup,
+the 16 core run at 0.016 seconds for a 10.1 times speedup,
+and the 32 core run took much longer.
+While the 4 and 8 task runs are close to ideal, the scaling
+is not  great for 16 cores.
+Compiled C/C++/Fortran code is much faster than other interpreted
+languages so there isn't as much work to overcome the overhead.
+The inefficiency in the multi-threaded code comes from there
+being too little work in each loop when the parallelization
+comes in the loop overhead, while for the message-passing
+code there is no difference in the loop overhead, it's just
+the added global summation after the loop.
 
 ### Matlab
 
