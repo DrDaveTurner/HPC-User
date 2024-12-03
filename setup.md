@@ -33,10 +33,19 @@ your personal computer and transfer them to the Linux system instead.
 
 ### Windows
 
-You may use PuTTY to ssh into a system for which your instructor should provide
-access information.  In the long run, the MobaXTerm app can be installed and used
-if desired.  It provides the same terminal access as PuTTY but also provides a
-convenient file transfer capability.  This is especially useful if you are more
+You may use the built in Windows PowerShell to connect to the Linux 
+system when your instructor provides the address.  If the address
+provided was 'linux.cluster.edu' and your username on that
+system was 'your_cluster_username' then you would type:
+
+**ssh your_cluster_username@linux.cluster.edu**
+
+You may also install and use PuTTY to ssh into a system in the same manner.
+
+If you plan on using HPC systems in the long run, 
+the MobaXTerm app can very beneficial as it provides a terminal as
+well as a file transfer utility in the same application
+This is especially useful if you are more
 comfortable editing your files on the Windows side then transferring them over
 to the Linux system.
 
