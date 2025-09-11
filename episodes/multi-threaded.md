@@ -160,7 +160,224 @@ print( 2.0*N*8.0/1.0e9, ' GB memory used' )
 
 ### R
 
-Not implemented yet.
+Let's go through the multi-threaded version of the dot product code
+below to illustrate the changes that had to be made to the code to parallelize it.
+In R we need to define a virtual cluster that will be used to spread the work
+from the **for** loops across the CPU cores. This can be done in several ways
+in R and the choice should come down to what works best for the problem you
+are coding up.
+
+We start by loading the library **parallel** in the 
+first example code below to pull in the detectCores(), makeCluster(),
+clusterExport(), and clusterApply() functions.
+We next detect the number of cores accessible to the job
+then define the cluster with **makeCluster()** spawning independent worker processes
+to handle parts of the parallel processing.
+For this **parallel** library we need the body of the loop to be put into a
+function and any variables that need to be used inside this function must 
+be exported using **clusterExport()** commands.
+The **clusterApply()** command uses the cluster object, iteration range, 
+and function name which then spawns multiple processes to execute the
+function for the iteration loop, automatically splitting them across the 
+cores in the virtual cluster on a single compute node.
+At the end there is a **stopCluster()** statement
+that cleans up the virtual cluster before the program ends.
+
+This basic approach is simple and can be useful but also may be inefficient since 
+the overhead for dividing the work between threads may be much greater
+than the work done within each iteration, as is clearly the case in
+our simle example where there is only a single multiplication for each
+pass through the loop.
+In the second part of this code, the loop is instead
+divided over the number of threads with the function then manually splitting
+the loop iterations internally.  This greatly limits the assignment-of-work 
+overhead since only the initial assignment is needed and you will see
+for yourself that the resulting performance is enormously better.
+
+```R
+# Dot product in R using a loop and a vector summation
+# USAGE:  Rscript dot_product_multi_thread.R 100000 8   for 100,000 elements on 8 cores
+
+library( parallel )
+
+   # Get the vector size and nThreads from the command line
+
+args <- commandArgs(TRUE)
+if( length( args ) == 2 ) {
+   n <- as.integer( args[1] )
+   nThreads <- as.integer( args[2] )
+} else {
+   n <- 100000
+   nThreads <- detectCores()
+}
+
+cl <- makeCluster( nThreads )
+
+
+   # Allocate space for and initialize the arrays
+
+x <- vector( "double", n )
+y <- vector( "double", n )
+
+for( i in 1:n )
+{
+   x[i] <- as.double(i)
+   y[i] <- as.double(3*i)
+}
+
+   # Export variables needed within the functions
+
+clusterExport( cl, "x" )
+clusterExport( cl, "y" )
+clusterExport( cl, "n" )
+clusterExport( cl, "nThreads" )
+
+   # Time a multi-threaded dot product even though it's inefficient
+
+dot_product_function <- function( i ) {
+
+   return( x[i] * y[i] )
+
+}
+
+dummy <- matrix( 1:125000000 )       # Clear the cache buffers before timing
+
+t_start <- proc.time()[[3]]
+
+dot_product_list <- clusterApply( cl, 1:n, dot_product_function )
+dot_product <- sum( unlist(dot_product_list) )
+
+t_end <- proc.time()[[3]]
+
+print(sprintf("Threaded dot product by clusterApply took %6.3f seconds", t_end-t_start))
+print(sprintf("dot_product = %.6e on %i threads for vector size %i", dot_product, nThreads, n ) )
+
+
+   # Now try dividing the iterations manually between workers
+
+dot_product_workers <- function( myThread ) {
+
+   mySum <- 0.0
+   for( i in seq( myThread, n, by = nThreads ) )
+   {
+      mySum <- mySum + x[i] * y[i]
+   }
+   return( mySum )
+
+}
+
+dummy <- matrix( 1:125000000 )       # Clear the cache buffers before timing
+
+t_start <- proc.time()[[3]]
+
+dot_product_list <- clusterApply( cl, 1:nThreads, dot_product_workers )
+dot_product <- sum( unlist(dot_product_list) )
+
+t_end <- proc.time()[[3]]
+
+print(sprintf("Threaded dot product with nThreads workers took %6.3f seconds", t_end-t_start))
+print(sprintf("dot_product = %.6e on %i threads for vector size %i", dot_product, nThreads, n ) )
+
+stopCluster( cl )
+```
+
+This second multi-threaded example below uses the **foreach** and **doParallel** 
+libraries.  This code similarly defines and initiates a virtual
+cluster.  The **foreach** loop is similar to a **for** loop but you can
+choose between different back ends.  A **%do%** back end would run the body
+in scalar, while the **%dopar** will split the iterations across the cores
+of the virtual cluster, and we will discuss later that there is a
+**%doMPI%** back end that can split the work across cores on different
+compute nodes.
+While similar to the previous example, the **foreach** approach is cleaner
+programming in that you don't have to create a separate function for the
+body of the loop.  You also don't need to manually export variables since
+the processes that are spawned inherit the environment of the parent process.
+So we get more flexibility in the back ends as well as a more convenient 
+programming approach.
+You'll be asked to measure the performance of each approach in the
+excersize below.
+
+```R
+# Dot product in R using a loop and a vector summation
+# USAGE:  Rscript dot_product_threaded_dopar.R 100000 8     for 100,000 elements on 8 threads
+
+library( foreach )
+library( iterators )
+library( parallel )
+library( doParallel )
+
+   # Get the vector size and nThreads from the command line
+
+args <- commandArgs(TRUE)
+if( length( args ) == 2 ) {
+   n <- as.integer( args[1] )
+   nThreads <- as.integer( args[2] )
+} else {
+   n <- 100000
+   nThreads <- detectCores()
+}
+
+   # Initialize the vectors and our virtual cluster
+
+x <- vector( "double", n )
+y <- vector( "double", n )
+
+for( i in 1:n )
+{
+   x[i] <- as.double(i)
+   y[i] <- as.double(3*i)
+}
+
+cl <- makeCluster( nThreads )
+registerDoParallel( cl, nThreads )
+
+   # Time the multi-threaded dot product foreach loop
+   #   This returns a vector of size 'n' that will need to be summed
+   #   so it is very inefficient.
+
+dummy <- matrix( 1:125000000 )       # Clear the cache buffers before timing
+
+t_start <- proc.time()[[3]]
+
+#dot_product_vector <- foreach( i = 1:n, .combine = c, mc.preschedule = TRUE ) %dopar% {
+dot_product_vector <- foreach( i = 1:n, .combine = c ) %dopar% {
+
+   x[i] * y[i]
+
+}
+dot_product <- sum( dot_product_vector )
+
+t_end <- proc.time()[[3]]
+
+print(sprintf("dopar dot product took %6.3f seconds", t_end-t_start))
+print(sprintf("dot_product = %.6e on %i threads for vector size %i", dot_product, nThreads, n ) )
+
+   # Now let's try a more complex but more efficient method where
+   #    we manually divide the work between the threads.
+
+dummy <- matrix( 1:125000000 )       # Clear the cache buffers before timing
+
+t_start <- proc.time()[[3]]
+
+dot_product_vector <- foreach( myThread = 1:nThreads, .combine = c ) %dopar% {
+
+   psum <- 0.0
+   for( j in seq( myThread, n, nThreads ) ) {
+      psum <- psum + x[j] * y[j]
+   }
+   psum
+
+}
+dot_product <- sum( dot_product_vector )
+
+t_end <- proc.time()[[3]]
+
+print(sprintf("dopar dot product with nThreads workers took %6.3f seconds", t_end-t_start))
+print(sprintf("dot_product = %.6e on %i threads for vector size %i", dot_product, nThreads, n ) )
+
+stopCluster( cl )
+```
 
 ### C
 
@@ -390,7 +607,7 @@ This always leads to terrible scaling and should almost never be used.
 
 ### Python
 
-Measure the execution time for the dot_product_threaded.py code
+Measure the execution time for the **dot_product_threaded.py** code
 for 1, 4, 8, and 16 cores.  If possible, use a job script
 requesting 16 cores and do all runs in the same job.
 You can look at the job scripts like **sb.ddot_py** in the **code**
@@ -401,7 +618,17 @@ run to see how close to ideal the performance is.
 
 ### R
 
-Not implemented yet.
+Measure the performance of **dot_product_threaded.R** and
+**dot_product_threaded_dopar.R** for a given number of threads
+like 8 if you have that many cores available.  You should be able
+to run both in a few minutes using 100,000 elements. 
+
+If you have time, try running a scaling study using a job script
+similar to **sb.ddot_R** in the **code** directory.
+This will allow us to see how each code scales with the number of
+cores used.
+Then calculate the speedup compared to the scalar (single-core)
+run to see how close to ideal the performance is.
 
 ### C
 
@@ -455,7 +682,38 @@ few computations being done in each pass through the loop.
 
 ### R
 
-Not implemented yet.
+For 8 cores on a modern Intel processor I get 4.7 seconds for the 
+first loop and 33 ms for the second loop in **dot_product_threaded.R**.
+Manually dividing the workload between our processes greatly reduces the
+overhead compared to letting R handle it.  The extra programming we did
+is an absolute necessity in this case since we don't have much work in
+the body of the loop.  It may be less necessary in more realistic
+applications but this illustrates that the difference in overhead is enormous.
+
+For the **dot_product_threaded_dopar.R** code, I measure 18.6 seconds for the
+first loop and 70 ms for the second, so again there is an enormous saving in
+overhead by manually dividing the work among the threads to limit the 
+overhead from R scheduling the iterations across the workers.
+
+If you have time you can try increasing the workload greatly.
+Comment out the first loop in each code since that would take too long,
+then increase the number of elements by 100 to 10,000,000.
+My scaling studies now show **dot_product_threaded.R** getting
+a 3.65 times speedup on 4 cores, a 6.5 times speedup on 8 cores,
+and a 9.3 times speedup on 16 cores.  These are now very reasonable.
+However, for **dot_product_threaded_dopar.R** I still measure over
+a second for a single core and the time increases as I add more cores,
+so the overhead for this method is still dominating the computations
+inside the loop.
+You can also measure the performance difference using the matrix
+multiplication codes if you wish.
+
+The conclusion from all this is that while using a **foreach**
+is simple and clean code, the **clusterApply()** approach or
+**foreach** over the number of threads with manually splitting the
+iterations internally provides much greater performance. If each 
+iteration is doing enough calculations then the overhead may not
+matter.
 
 ### C
 
@@ -496,6 +754,6 @@ Not implemented yet.
 
 ### Links for additional information
 
-* [github pymp](https://github.com/classner/pymp)
 * [LLNL OpenMP tutorial](https://hpc-tutorials.llnl.gov/openmp/)
+* [github pymp](https://github.com/classner/pymp)
 

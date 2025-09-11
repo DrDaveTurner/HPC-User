@@ -9,7 +9,9 @@ cd episodes
 zip -r code.zip code
 cp code.zip data
 -->
-Download the [code examples zip file](data/code.zip) and unzip it to your Desktop.
+Download the [code examples zip file](data/code.zip) and unzip it to your Desktop
+or use the download the [code.tar.gz file](data/code.tar.gz) and uncompress with
+**tar -xvzf code.tar.gz**..
 
 ## Software Setup
 
@@ -79,9 +81,8 @@ to see how each code is implemented in the different programming
 languages.
 
 **NOTE** - Example programs for sections 2-6  are currently only available 
-in Python and C.
-I'm looking volunteers to program the R, Matlab, and modern Fortran
-example programs.
+in Python, R, Fortran and C.
+I'm looking a volunteer to program the Matlab example programs.
 
 :::::::::::::::: group-tab
 
@@ -103,7 +104,6 @@ pip install time
 
 ### R
 
-Not implemented yet.
 Show program examples and diagrams in sections 2-6 in R.
 
 ### C
@@ -112,7 +112,6 @@ Show program examples and diagrams in sections 2-6 in C/C++.
 
 ### Fortran
 
-Not implemented yet.
 Show program examples and diagrams in sections 2-6 in Fortran.
 
 ### Matlab

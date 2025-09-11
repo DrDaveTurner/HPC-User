@@ -204,7 +204,50 @@ print("The output took ", t_output, " seconds")
 ```
 ### R
 
-Not implemented yet.
+```R
+# timing example code for R
+# USAGE:  Rscript timing_example.R
+
+
+   # Allocate space for and initialize the array
+
+n <- 1000000
+x <- vector( "double", n )
+
+for( i in 1:n )
+{
+   x[i] <- as.double(i)
+}
+
+
+   # Time a simple summation loop first
+
+dummy <- matrix( 1:125000000 )       # 1 GB of data to flush caches
+
+t_start = proc.time()[[3]]
+
+a_sum <- 0.0
+for( i in 1:n )
+{
+   a_sum <- a_sum + x[i]
+}
+
+t_end = proc.time()[[3]]
+
+print(sprintf("Summation with for loop took %6.3f seconds", t_end-t_start))
+print(sprintf("a_sum = %.6e for vector size %i", a_sum, n ) )
+
+
+   # Time the file write
+
+t_start = proc.time()[[3]]
+
+writeLines( as.character( x ), "timing_example.out" )
+
+t_end = proc.time()[[3]]
+
+print(sprintf("File write for vector size %i took %6.3f seconds", n, t_end-t_start))
+```
 
 ### C
 
@@ -276,6 +319,8 @@ PROGRAM timing_example
    INTEGER :: cio_start, cio_stop, fd
    DOUBLE PRECISION :: t_sum, t_loop, a_sum, t_io
    DOUBLE PRECISION, ALLOCATABLE :: array(:)
+   DOUBLE PRECISION, ALLOCATABLE :: dummy(:)
+
 
       ! Allocate space for the array and initialize it
 
@@ -286,23 +331,35 @@ PROGRAM timing_example
       array(i) = i
    END DO
 
+      ! Initialize a dummy array to clear cache
+
+   ALLOCATE( dummy(125000000) )
+   DO i = 1, 125000000
+      dummy(i) = 0.0
+   END DO
+
       ! Put timing around our loop
 
    CALL SYSTEM_CLOCK( COUNT_RATE = c_rate )
    CALL SYSTEM_CLOCK( COUNT = c_start )
 
+   !t_sum = 0.0
    a_sum = 0.0
    DO i = 1, N
+      !CALL SYSTEM_CLOCK( COUNT = cs_start )
       a_sum = a_sum + array(i)
+      !CALL SYSTEM_CLOCK( COUNT = cs_stop )
+      !t_sum = t_sum + DBLE(cs_stop - cs_start) / c_rate
    END DO
 
    CALL SYSTEM_CLOCK( COUNT = c_stop )
    t_loop = DBLE(c_stop - c_start) / c_rate
 
    WRITE(*,*) "a_sum = ", a_sum
+   !WRITE(*,*) "The sum took ", t_sum, " seconds "
    WRITE(*,*) "The loop took ", t_loop, " seconds "
 
-!      Now time the file write
+      ! Now time the file write
 
    CALL SYSTEM_CLOCK( COUNT = cio_start, COUNT_RATE = c_rate )
 
@@ -317,8 +374,6 @@ PROGRAM timing_example
    t_io = DBLE(cio_stop - cio_start) / c_rate
 
    WRITE(*,*) "The IO write  took = ", t_io, " seconds "
-
-END PROGRAM timing_example
 ```
 
 ### Matlab
@@ -392,7 +447,44 @@ print("The output took ", t_output, " seconds")
 ```
 ### R
 
-Not implemented yet.
+```R
+# timing example code with internal loop timings for R
+#   This shows how to do this, but demonstrates that it can be very intrusive
+# USAGE:  Rscript timing_example2.R
+
+
+   # Allocate space for and initialize the array
+
+n <- 1000000
+x <- vector( "double", n )
+
+for( i in 1:n )
+{
+   x[i] <- as.double(i)
+}
+
+
+   # Time a simple summation loop with internal timing as well
+
+dummy <- matrix( 1:125000000 )       # 1 GB of data to flush caches
+
+t_sum <- 0.0
+t_start = proc.time()[[3]]
+
+a_sum <- 0.0
+for( i in 1:n )
+{
+   t_0 = proc.time()[[3]]
+   a_sum <- a_sum + x[i]
+   t_sum = t_sum + ( proc.time()[[3]] - t_0 )
+}
+
+t_end = proc.time()[[3]]
+
+print(sprintf("Internal sums took %6.3f seconds", t_sum))
+print(sprintf("For loop with internal timing too took %6.3f seconds", t_end-t_start))
+print(sprintf("a_sum = %.6e for vector size %i", a_sum, n ) )
+```
 
 ### C
 

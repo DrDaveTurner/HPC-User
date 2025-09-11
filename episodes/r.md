@@ -40,7 +40,7 @@ from the **CRAN** mirrors using commands like
 **install.packages("data.table")** then referenced in the code
 with a similar statement like **library(data.table)**.
 The wide range of scientific and code packages available in R
-and their ease of installation and use are its real strengths.
+and their ease of installation and use are the language's real strengths.
 
 R programs can be run through the Linux command line interface (CLI),
 submitted to batch queues, or run interactively from the 
@@ -64,12 +64,25 @@ of R are much more limited than the compiled languages C/C++ and Fortran
 and even compared to Python.
 The basic parallel model for R is that loops whether from **lapply()**
 or **foreach** return an object that is either a list or a 
-data frame with one entry for the results from  each pass through the loop.
+data frame with one entry for the results from each pass through the loop.
 If your code uses the loops in this manner then parallelizing them is
 relatively easy as you just need to choose a back-end package to use,
 tell it how many cores you want to use, then change the 
 **lapply()** to an **mclapply()** or the **%do%** in the **foreach**
 to a **%%dopar%**.
+
+There are many multi-threaded back end options to choose from.
+The **parallel** library is now built into R and is a merger of
+the **multicore** and **snow** libraries. 
+The **dot_product_threaded.R** code shows that the programming 
+approach is a little clunky in that the body of the loop needs to
+be put in a function, but the efficiency is comparable to other back ends.
+The **doParallel** library is a merger of the **doSNOW** and **doMC**
+libraries.  The **foreach** command with **dopar** make for cleaner
+programming that looks more like traditional loops.  The 
+**dot_product_threaded_dopar.R** code shows that a little extra 
+programming can be used to greatly reduced the overhead even for
+loops with little computatotions.
 
 However, it is very common in scientific codes to want to instead have
 all parallel tasks operate on a shared-memory object like the resulting
@@ -98,15 +111,23 @@ dependent.
 There is extensive support for running C/C++/Fortran code across
 multiple nodes using the message-passing interface MPI, and Python has
 a stripped down version of this with the **mpi4py** package.
-There is a package for R called Rmpi that provides wrappers around
-some of the common MPI functions, but it was developed up until 2014 and
-looks to have only been patched every year or two since then.
+There is a package for R called **Rmpi** that provides wrappers around
+some of the common MPI functions, but it old code that is being updated
+every few years and it can be difficult to get working as you need 
+certain versions of R and OpenMPI for everything to work.
 Under Windows you must compile with Microsoft MPI, and there are some
 limitations in functionality.
+
 The doMPI back-end to **foreach** runs
-on this Rmpi package, but it is not clear that either work or work well
-due to the lack of current support so neither can be recommended at this
-point.
+on this Rmpi package. This perfectly fits into the R parallelization
+model where the programmer can just slip in a different back end
+to fit their needs, but this often results in poor parallel performance
+which is the case with doMPI.
+The **dot_product_doMPI.R** code can be used to test the performance 
+for a simple application compared multi-core back ends.
+There's also a newer package called **Rhpc** which supposedly provides
+better performance but it was removed from the CRAN repository some
+years ago.
 
 There is a newer package called **pdbMPI** where the *pbd* stands for
 Programming with Big Data.  This is an interface to the Message-Passing
@@ -118,7 +139,7 @@ These packages are much more recently developed and while still having
 0.x version numbers they are actively managed and being used on
 large supercomputer systems.
 These provide true interfaces to MPI functions, not a back-end to
-**mclapply()** or **doParallel**, so they are more difficult to use
+**mclapply()** or **dopar**, so they are more difficult to use
 but also much more powerful.
 
 
@@ -260,7 +281,7 @@ The **mclapply()** function is fairly straight forward to use
 since you mostly need to supply the number of cores through
 the **mc.cores=** argument.
 There are options to tune the way the parallelization is done.
-The **mc.preschedule=True** argument is the default, and this
+The **mc.preschedule=mRUE** argument is the default, and this
 means that the number of iterations is divided among the available
 cores at the start.  This is highly recommended since if this is
 turned off the system will fork a new process for each iteration,

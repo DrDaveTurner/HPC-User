@@ -165,7 +165,20 @@ for i in range( N ):
 
 ### R
 
-Not implemented yet.
+```R
+# Complete code is in code/matmult_loops.R
+
+for( i in 1:n )
+{
+   for( j in 1:n )
+   {
+      for( k in 1:n )
+      {
+         c[i,j] <- c[i,j] + a[i,k] * b[k,j]
+      }
+   }
+}
+```
 
 ### C
 
@@ -250,8 +263,12 @@ C = np.matmult( A, B )
 
 ### R
 
-Not implemented yet.
+```R
+# Complete code is in matmult_builtin.R
 
+   c <- a %*% b
+
+```
 ### C
 
 ```c
@@ -310,7 +327,17 @@ How much faster should it be?
 
 ### R
 
-Not implemented yet.
+Run the dot_product.R code several times to get an average
+execution time for a dot product between two vectors of
+1 million elements each.  Try to run them on an isolated system
+if possible, or through a batch queue that at least ensures the
+code is being run on an isolated processing core.
+Then run the dot_product_sparse.R code in the same manner for
+comparison.
+How much faster is the first code where the vectors are stored
+in contiguous memory?
+How much faster should it be?
+
 
 ### C
 
@@ -357,6 +384,7 @@ any other jobs running, I measured 180 milliseconds for the
 contiguous memory case and 1230 milliseconds for the sparse
 case, resulting in a 6.9 times speedup by keeping the vector
 in contiguous memory.
+I also saw different results for other programming languages.
 Since a cache line is 64 Bytes and each element is 8 bytes,
 when the first element is loaded the next 7 are brought into
 L1 cache essentially for free since they are in contiguous memory.
@@ -373,7 +401,26 @@ code will run much faster.
 
 ### R
 
-Not implemented yet.
+Is the time difference what we expected?
+When I ran this on a new Intel processor that did not have
+any other jobs running, I measured 51 milliseconds for the
+contiguous memory case and 217 milliseconds for the sparse
+case, resulting in a 4.25 times speedup by keeping the vector
+in contiguous memory.
+I also saw different results for other programming languages.
+Since a cache line is 64 Bytes and each element is 8 bytes,
+when the first element is loaded the next 7 are brought into
+L1 cache essentially for free since they are in contiguous memory.
+Therefore we expect it to take ~33 ns to load 8 elements of X,
+then ~33 ns to load 8 elements of Y, then only a few ns to get
+each element into the registers and do the computations.
+For the sparse vectors, it should take 8 times as long since
+each load will take ~33 ns.
+If you didn't see an 8-times speedup, don't worry.
+The cache system is actually even more complicated than this picture.
+The main thing to learn here is that if you take advantage of
+the cache line by keeping the vectors in contiguous memory, your
+code will run much faster.
 
 ### C
 
@@ -383,6 +430,7 @@ any other jobs running, I measured ~16 milliseconds for the
 contiguous memory case and ~160 milliseconds for the sparse
 case, resulting in a 10 times speedup by keeping the vector
 in contiguous memory.
+I also saw different results for other programming languages.
 Since a cache line is 64 Bytes and each element is 8 bytes,
 when the first element is loaded the next 7 are brought into
 L1 cache essentially for free since they are in contiguous memory.
@@ -405,6 +453,7 @@ any other jobs running, I measured ~20 milliseconds for the
 contiguous memory case and ~300 milliseconds for the sparse
 case, resulting in a 15 times speedup by keeping the vector
 in contiguous memory.
+I also saw different results for other programming languages.
 Since a cache line is 64 Bytes and each element is 8 bytes,
 when the first element is loaded the next 7 are brought into
 L1 cache essentially for free since they are in contiguous memory.
@@ -454,7 +503,18 @@ we want to test out only the single-core performance.
 
 ### R
 
-Not implemented yet.
+There are 2 separate codes supplied to perform the same matrix multiplication
+for a given matrix size, matmult_loops.R is raw R code and matmult_builtin.R
+uses the built in **%*%** operator.
+Both programs take the matrix size as an argument, so you run using
+**Rscript matmult_loops.R 100** for example to measure the performance
+for multiplying two 100x100 matrices.
+Measure the performance for each method on
+a small 10x10 matrix, an intermediate sized 100x100 matrix, and
+a large 1000x1000 matrix to see how each performs.
+You should run this through a batch scheduler if at all possible
+since numpy will grab any cores it can, and for a fair comparison
+we want to test out only the single-core performance.
 
 ### C
 
@@ -505,7 +565,8 @@ block optimizing the algorithm so that it reuses data in L1 cache though.
 There are also computational optimizations that allow for many 
 multiply-add operations to occur in the same clock cycle, which is called
 vectorization.
-My measurements on a modern Intel processor more of a performance
+
+My measurements on a modern Intel processor show more of a performance
 benefit for larger matrix sizes.
 For 1000x1000 matrices, the raw Python code was very slow at
 6.5 MFlops (Million floating-point operations per second).
@@ -519,9 +580,55 @@ and the optimized CBLAS DGEMM routine reaching 91 GFlops.
 
 ### R
 
-Not implemented yet.
+For the 10x10 matrix size there are 3 matrices having 100 elements each
+needing 8 bytes storage, so storing all 3 matrices requires only 2.4 kB
+of memory.  Everything fits entirely in L1 cache, so a block optimized
+algorithm from an optimized matrix multiply isn't really needed.
+For the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache.
+We therefore expect a significant improvement by using 
+an optimized matrix multiply function.
+For the 1000x1000 matrix size, we need 24 MB to store all 3 matrices so
+it will reside in L3 cache.  An optimized matrix multiply function should
+speed up this run by substantially more.
+An optimized matrix multiply routine however can go far beyond just
+block optimizing the algorithm so that it reuses data in L1 cache though.
+There are also computational optimizations that allow for many
+multiply-add operations to occur in the same clock cycle, which is called
+vectorization.
+
+My measurements on a modern Intel processor show some very interesting
+results.  Using simple **for** loops I get 4 ms for a 10x10 matrix, 
+154 ms for a 100x100 matrix, and a much larger 148 seconds for a
+1000x1000 matrix.
+The built in matrix multiplication is expected to be more optimized
+and I get 13 ms for a 10x10 matrix, 1 ms for a 100x100 matrix, and
+26 ms for the 1000x1000 matrix.
+The built in matrix multiplication is clearly better except for the
+very small 10x10 matrix which seems to be an aberation.
+The 1000x1000 matrix is where it shines taking only 26 ms where the
+**for** loop takes 148 seconds or nearly 5700 times as long.
+It isn't clear why the difference is this large, but clearly the
+built in matrix multiply is managing cache much better.
 
 ### C
+
+For the 10x10 matrix size there are 3 matrices having 100 elements each
+needing 8 bytes storage, so storing all 3 matrices requires only 2.4 kB
+of memory.  Everything fits entirely in L1 cache, so a block optimized
+algorithm from an optimized matrix multiply isn't really needed.
+For the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache.
+We therefore expect a significant improvement by using
+an optimized matrix multiply function.
+For the 1000x1000 matrix size, we need 24 MB to store all 3 matrices so
+it will reside in L3 cache.  An optimized matrix multiply function should
+speed up this run by substantially more.
+An optimized matrix multiply routine however can go far beyond just
+block optimizing the algorithm so that it reuses data in L1 cache though.
+There are also computational optimizations that allow for many
+multiply-add operations to occur in the same clock cycle, which is called
+vectorization.
 
 For a 1000x1000 matrix I got 1.2 seconds for the raw C code when
 compiling with -O3 optimization.
@@ -531,6 +638,23 @@ Even though compiled C/C++ code is very fast, the **DGEMM** routine
 is hand-optimized for each processor.
 
 ### Fortran
+
+For the 10x10 matrix size there are 3 matrices having 100 elements each
+needing 8 bytes storage, so storing all 3 matrices requires only 2.4 kB
+of memory.  Everything fits entirely in L1 cache, so a block optimized
+algorithm from an optimized matrix multiply isn't really needed.
+For the 100x100 matrix size, 240 kB is needed to store all 3 matrices so
+they will fit entirely in L2 cache, but not L1 cache.
+We therefore expect a significant improvement by using
+an optimized matrix multiply function.
+For the 1000x1000 matrix size, we need 24 MB to store all 3 matrices so
+it will reside in L3 cache.  An optimized matrix multiply function should
+speed up this run by substantially more.
+An optimized matrix multiply routine however can go far beyond just
+block optimizing the algorithm so that it reuses data in L1 cache though.
+There are also computational optimizations that allow for many
+multiply-add operations to occur in the same clock cycle, which is called
+vectorization.
 
 For a 1000x1000 matrix I got 1.2 seconds for the raw Fortran code when
 compiling with -O3 optimization.
