@@ -20,7 +20,7 @@
       <div class="large-logo">
         <img id="incubator-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
           <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://cdh.carpentries.org/the-lesson-life-cycle.html#early-development-pre-alpha-through-alpha" class="external-link alert-link">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
               <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
               Pre-Alpha
             </a>
@@ -419,7 +419,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>The R Language</h1>
-        <p>Last updated on 2024-08-13 |
+        <p>Last updated on 2025-09-12 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/r.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -475,7 +475,7 @@ like <strong>install.packages(“data.table”)</strong> then referenced in
 the code with a similar statement like
 <strong>library(data.table)</strong>. The wide range of scientific and
 code packages available in R and their ease of installation and use are
-its real strengths.</p>
+the language’s real strengths.</p>
 <p>R programs can be run through the Linux command line interface (CLI),
 submitted to batch queues, or run interactively from the CLI or the
 popular graphical user interface Rstudio. The package Rshiny also makes
@@ -500,6 +500,19 @@ just need to choose a back-end package to use, tell it how many cores
 you want to use, then change the <strong>lapply()</strong> to an
 <strong>mclapply()</strong> or the <strong>%do%</strong> in the
 <strong>foreach</strong> to a <strong>%%dopar%</strong>.</p>
+<p>There are many multi-threaded back end options to choose from. The
+<strong>parallel</strong> library is now built into R and is a merger of
+the <strong>multicore</strong> and <strong>snow</strong> libraries. The
+<strong>dot_product_threaded.R</strong> code shows that the programming
+approach is a little clunky in that the body of the loop needs to be put
+in a function, but the efficiency is comparable to other back ends. The
+<strong>doParallel</strong> library is a merger of the
+<strong>doSNOW</strong> and <strong>doMC</strong> libraries. The
+<strong>foreach</strong> command with <strong>dopar</strong> make for
+cleaner programming that looks more like traditional loops. The
+<strong>dot_product_threaded_dopar.R</strong> code shows that a little
+extra programming can be used to greatly reduced the overhead even for
+loops with little computatotions.</p>
 <p>However, it is very common in scientific codes to want to instead
 have all parallel tasks operate on a shared-memory object like the
 resulting matrix in our matrix multiplication example. People in the R
@@ -525,14 +538,21 @@ operating-system dependent.</p>
 <p>There is extensive support for running C/C++/Fortran code across
 multiple nodes using the message-passing interface MPI, and Python has a
 stripped down version of this with the <strong>mpi4py</strong> package.
-There is a package for R called Rmpi that provides wrappers around some
-of the common MPI functions, but it was developed up until 2014 and
-looks to have only been patched every year or two since then. Under
-Windows you must compile with Microsoft MPI, and there are some
-limitations in functionality. The doMPI back-end to
-<strong>foreach</strong> runs on this Rmpi package, but it is not clear
-that either work or work well due to the lack of current support so
-neither can be recommended at this point.</p>
+There is a package for R called <strong>Rmpi</strong> that provides
+wrappers around some of the common MPI functions, but it old code that
+is being updated every few years and it can be difficult to get working
+as you need certain versions of R and OpenMPI for everything to work.
+Under Windows you must compile with Microsoft MPI, and there are some
+limitations in functionality.</p>
+<p>The doMPI back-end to <strong>foreach</strong> runs on this Rmpi
+package. This perfectly fits into the R parallelization model where the
+programmer can just slip in a different back end to fit their needs, but
+this often results in poor parallel performance which is the case with
+doMPI. The <strong>dot_product_doMPI.R</strong> code can be used to test
+the performance for a simple application compared multi-core back ends.
+There’s also a newer package called <strong>Rhpc</strong> which
+supposedly provides better performance but it was removed from the CRAN
+repository some years ago.</p>
 <p>There is a newer package called <strong>pdbMPI</strong> where the
 <em>pbd</em> stands for Programming with Big Data. This is an interface
 to the Message-Passing Initiative that is the foundation for distributed
@@ -542,8 +562,8 @@ working with matrices across multiple compute nodes. These packages are
 much more recently developed and while still having 0.x version numbers
 they are actively managed and being used on large supercomputer systems.
 These provide true interfaces to MPI functions, not a back-end to
-<strong>mclapply()</strong> or <strong>doParallel</strong>, so they are
-more difficult to use but also much more powerful.</p>
+<strong>mclapply()</strong> or <strong>dopar</strong>, so they are more
+difficult to use but also much more powerful.</p>
 </section><section><h2 class="section-heading" id="performance-pitfalls-in-r">Performance Pitfalls in R<a class="anchor" aria-label="anchor" href="#performance-pitfalls-in-r"></a></h2>
 <hr class="half-width"><p>While all languages take effort to optimize and parallelize when
 performance becomes important, with R it is often more about what
@@ -654,7 +674,7 @@ data.table.</p>
 <p>The <strong>mclapply()</strong> function is fairly straight forward
 to use since you mostly need to supply the number of cores through the
 <strong>mc.cores=</strong> argument. There are options to tune the way
-the parallelization is done. The <strong>mc.preschedule=True</strong>
+the parallelization is done. The <strong>mc.preschedule=mRUE</strong>
 argument is the default, and this means that the number of iterations is
 divided among the available cores at the start. This is highly
 recommended since if this is turned off the system will fork a new
@@ -668,8 +688,10 @@ implementation.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="compare-raw-and-optimized-performance-of-matmult.r" class="callout-inner">
-<h3 class="callout-title">Compare raw and optimized performance of matmult.R</h3>
+<h3 class="callout-title">Compare raw and optimized performance of
+matmult.R</h3>
 <div class="callout-content">
 <p>Run matmult_loops.R, matmult_foreach.R, and matmult_builtin.R for
 matrix sizes 100 and 1000 to compare the performance of a raw loop to
@@ -683,7 +705,7 @@ to other languages.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>I measured 500 seconds for the raw loop in R and 0.10 seconds for the
 optimized built-in matrix multiplication function. Be aware that the
@@ -703,6 +725,7 @@ Python is a little faster.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="test-the-scaling-of-the-rbind-function" class="callout-inner">
 <h3 class="callout-title">Test the scaling of the rbind() function</h3>
 <div class="callout-content">
@@ -717,7 +740,7 @@ data frame increases. Time runs of <strong>rbind.R</strong> for 10, 100,
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>While rbind() is convenient and works well for small data frames, the
 time to add rows begins to increase exponentially for data frames around
@@ -734,6 +757,7 @@ entire data frame over each time it adds a new row.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="investigate-the-data-table-performance." class="callout-inner">
 <h3 class="callout-title">Investigate the data table performance.</h3>
 <div class="callout-content">
@@ -747,7 +771,7 @@ rows and compare to the rbind() results.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>For 1,000 rows I measured 0.12 seconds for a data table set()
 compared to 5.4 seconds for a data table assignment and 1.1 second for a
@@ -767,8 +791,10 @@ you have to use data tables and the set() function.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="optional-homework---test-the-io-performance-in-r." class="callout-inner">
-<h3 class="callout-title">Optional Homework - Test the IO performance in R.</h3>
+<h3 class="callout-title">Optional Homework - Test the IO performance in
+R.</h3>
 <div class="callout-content">
 <p>Test the <strong>fread.R</strong> code to see the speedup of the
 <strong>fread()</strong> function from the optimized
@@ -783,7 +809,7 @@ you have to use data tables and the set() function.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>For 10,000 rows I saw similar results for each function, but for
 100,000 rows <strong>fread()</strong> was 10 times faster than
@@ -799,6 +825,7 @@ performance in your code.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="advanced-homework---use-the-pdbmpi-package-to-code-and-run-a-parallel-hello-world-program" class="callout-inner">
 <h3 class="callout-title">Advanced Homework - Use the
 <strong>pdbMPI</strong> package to code and run a parallel Hello World
@@ -815,7 +842,7 @@ program.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>I would love to have a pdbMPI-based matrix multiply code available
 for people to look at and test if anyone finds one.</p>
@@ -850,8 +877,8 @@ correct direction with some of these performance oriented issues.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Learn about the characteristics of the R language.</li>
 </ul></div>
@@ -910,7 +937,7 @@ package</a></li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.10" class="external-link">sandpaper (0.16.10)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.5" class="external-link">varnish (1.0.5)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.17.1" class="external-link">sandpaper (0.17.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.7" class="external-link">varnish (1.0.7)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -921,10 +948,10 @@ package</a></li>
   <script type="application/ld+json">
     {
   "@context": "https://schema.org",
-  "@type": "TrainingMaterial",
+  "@type": "LearningResource",
   "@id": "https://DrDaveTurner.github.io/HPC-User/instructor/r.html",
   "inLanguage": "en",
-  "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+  "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
   "keywords": " HPC, software, lesson, The Carpentries, Python, C, C++, Fortran, R, Matlab",
   "name": "The R Language",
@@ -932,8 +959,8 @@ package</a></li>
   "url": "https://DrDaveTurner.github.io/HPC-User/instructor/r.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/instructor/r.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-13",
-  "datePublished": "2024-12-10"
+  "dateModified": "2025-09-12",
+  "datePublished": "2025-09-12"
 }
 
   </script><script>

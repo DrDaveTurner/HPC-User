@@ -20,7 +20,7 @@
       <div class="large-logo">
         <img id="incubator-logo" alt="Carpentries Incubator" src="assets/images/incubator-logo.svg"><span class="badge text-bg-danger">
           <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
-            <a href="https://cdh.carpentries.org/the-lesson-life-cycle.html#early-development-pre-alpha-through-alpha" class="external-link alert-link">
+            <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
               <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
               Pre-Alpha
             </a>
@@ -420,7 +420,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Parallel Computing Concepts</h1>
-        <p>Last updated on 2024-08-31 |
+        <p>Last updated on 2025-09-12 |
 
         <a href="https://github.com/DrDaveTurner/HPC-User/edit/main/episodes/parallel-concepts.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -540,88 +540,102 @@ identities.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-Python">
+<div id="nav-tabpanel-1-Python" class="tab-pane show active" aria-labelledby="nav-tab-1-Python" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># This is just partial code to demonstrate the mechanics of</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#    using Flops minimization to optimize code for performance</span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="co"># Define the number of frequencies and zero the array before summation</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="co"># Sum over each atom in the simulation</span></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>freq_real <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( NQ ) ]</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>freq_imag <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( NQ ) ]</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    <span class="co"># Sum over each atom in the simulation</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N_atoms ):</span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    dx <span class="op">=</span> x[i] <span class="op">-</span> y[i]</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>        <span class="co"># Sum over the frequencies</span></span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    <span class="cf">for</span> iq <span class="kw">in</span> <span class="bu">range</span>( NQ ):</span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>        theta <span class="op">=</span> <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> dx <span class="op">*</span> iq <span class="op">/</span> NQ</span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>        freq_real[iq] <span class="op">+=</span> cos( theta )</span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin( theta )</span></code></pre>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N_atoms ):</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    dx <span class="op">=</span> x[i] <span class="op">-</span> y[i]</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>        <span class="co"># Sum over the frequencies</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    <span class="cf">for</span> iq <span class="kw">in</span> <span class="bu">range</span>( NQ ):</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>        theta <span class="op">=</span> <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> dx <span class="op">*</span> iq <span class="op">/</span> NQ</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>        freq_real[iq] <span class="op">+=</span> cos( theta )</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin( theta )</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-R">
-<p>Not implemented yet.</p>
-</div>
-<div id="nav-tabpanel-1-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-C">
+<div id="nav-tabpanel-1-R" class="tab-pane" aria-labelledby="nav-tab-1-R" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#    using Flops minimization to optimize code for performance</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    <span class="co"># Sum over each atom in the simulation</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_atoms )</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>{</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    dx <span class="ot">&lt;-</span> x[i] <span class="sc">-</span> y[i]</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>        <span class="co"># Sum over the frequencies</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>    <span class="cf">for</span>( iq <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>NQ )</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>        theta <span class="ot">&lt;-</span> <span class="fl">2.0</span> <span class="sc">*</span> PI <span class="sc">*</span> dx <span class="sc">*</span> iq <span class="sc">/</span> NQ</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>        freq_real[iq] <span class="ot">&lt;-</span> freq_real[iq] <span class="sc">+</span> <span class="fu">cos</span>( theta )</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>        freq_imag[iq] <span class="ot">&lt;-</span> freq_imag[iq] <span class="sc">+</span> <span class="fu">sin</span>( theta )</span></code></pre>
+</div>
+</div>
+<div id="nav-tabpanel-1-C" class="tab-pane" aria-labelledby="nav-tab-1-C" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">// This is just partial code to demonstrate the mechanics of</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">//    using Flops minimization to optimize code for performance</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>      <span class="co">// Sum over each atom in the simulation and all frequencies</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N_atoms<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>      dx <span class="op">=</span> x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> y<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span> iq <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> iq <span class="op">&lt;</span> NQ<span class="op">;</span> iq<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>            <span class="co">// Sum over the frequencies</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>         theta <span class="op">=</span> <span class="op">(</span><span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> dx <span class="op">*</span> iq<span class="op">)</span> <span class="op">/</span> NQ<span class="op">;</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>         freq_real<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> cos<span class="op">(</span> theta <span class="op">);</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>         freq_imag<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> sin<span class="op">(</span> theta <span class="op">);</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>      <span class="op">}</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">// This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">//    using Flops minimization to optimize code for performance</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>      <span class="co">// Sum over each atom in the simulation and all frequencies</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N_atoms<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>      dx <span class="op">=</span> x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> y<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span> iq <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> iq <span class="op">&lt;</span> NQ<span class="op">;</span> iq<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>            <span class="co">// Sum over the frequencies</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>         theta <span class="op">=</span> <span class="op">(</span><span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> dx <span class="op">*</span> iq<span class="op">)</span> <span class="op">/</span> NQ<span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>         freq_real<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> cos<span class="op">(</span> theta <span class="op">);</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>         freq_imag<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> sin<span class="op">(</span> theta <span class="op">);</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Fortran">
-<div class="codewrapper sourceCode" id="cb3">
+<div id="nav-tabpanel-1-Fortran" class="tab-pane" aria-labelledby="nav-tab-1-Fortran" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">FORTRAN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode fortran" tabindex="0"><code class="sourceCode fortranfixed"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">! This is just partial code to demonstrate the mechanics of</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">!    using Flops minimization to optimize code for performance</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>      <span class="co">! Sum over each atom in the simulation and all frequencies</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N_atoms</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>      dx <span class="kw">=</span> x(i) <span class="kw">-</span> y(i)</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>      <span class="kw">DO</span> iq <span class="kw">=</span> <span class="dv">1</span>, NQ</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>            <span class="co">! Sum over the frequencies</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>         theta <span class="kw">=</span> (<span class="fl">2.0</span> <span class="kw">*</span> PI <span class="kw">*</span> dx <span class="kw">*</span> iq) <span class="kw">/</span> NQ</span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>         freq_real(iq) <span class="kw">=</span> freq_real(iq) <span class="kw">+</span> <span class="bu">cos</span>( theta )</span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>         freq_imag(iq) <span class="kw">=</span> freq_imag(iq) <span class="kw">+</span> <span class="bu">sin</span>( theta )</span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>      <span class="kw">END DO</span></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>   <span class="kw">END DO</span></span></code></pre>
+<pre class="sourceCode fortran" tabindex="0"><code class="sourceCode fortranfixed"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">! This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">!    using Flops minimization to optimize code for performance</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>      <span class="co">! Sum over each atom in the simulation and all frequencies</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N_atoms</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>      dx <span class="kw">=</span> x(i) <span class="kw">-</span> y(i)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>      <span class="kw">DO</span> iq <span class="kw">=</span> <span class="dv">1</span>, NQ</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>            <span class="co">! Sum over the frequencies</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>         theta <span class="kw">=</span> (<span class="fl">2.0</span> <span class="kw">*</span> PI <span class="kw">*</span> dx <span class="kw">*</span> iq) <span class="kw">/</span> NQ</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>         freq_real(iq) <span class="kw">=</span> freq_real(iq) <span class="kw">+</span> <span class="bu">cos</span>( theta )</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>         freq_imag(iq) <span class="kw">=</span> freq_imag(iq) <span class="kw">+</span> <span class="bu">sin</span>( theta )</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>      <span class="kw">END DO</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>   <span class="kw">END DO</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-1-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-Matlab">
+<div id="nav-tabpanel-1-Matlab" class="tab-pane" aria-labelledby="nav-tab-1-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -655,124 +669,150 @@ identities.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-2" class="tab-content">
-<div id="nav-tabpanel-2-Python" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-2-Python">
-<div class="codewrapper sourceCode" id="cb4">
+<div id="nav-tabpanel-2-Python" class="tab-pane show active" aria-labelledby="nav-tab-2-Python" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># This is just partial code to demonstrate the mechanics of</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#    using Flops minimization to optimize code for performance</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="co"># Define the number of frequencies and zero the array before summation</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>freq_real <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( NQ ) ]</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>freq_imag <span class="op">=</span> [ <span class="fl">0.0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( NQ ) ]</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>d_theta <span class="op">=</span> ( <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> (x[<span class="dv">0</span>] <span class="op">-</span> y[<span class="dv">0</span>]) ) <span class="op">/</span> NQ</span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    <span class="co"># Sum over each atom in the simulation</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N_atoms ):</span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>    dx <span class="op">=</span> x[i] <span class="op">-</span> y[i]</span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>        <span class="co"># Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>    cos_d_theta <span class="op">=</span> cos( d_theta )</span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>    sin_d_theta <span class="op">=</span> sin( d_theta )</span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>    cos_theta <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>    sin_theta <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>        <span class="co"># Sum over the frequencies</span></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>    <span class="cf">for</span> iq <span class="kw">in</span> <span class="bu">range</span>( NQ ):</span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>        cos_new <span class="op">=</span> cos_theta <span class="op">*</span> cos_d_theta <span class="op">-</span> sin_theta <span class="op">*</span> sin_d_theta</span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>        sin_theta <span class="op">=</span> sin_theta <span class="op">*</span> cos_d_theta <span class="op">+</span> cos_theta <span class="op">*</span> cos_d_theta</span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>        cos_theta <span class="op">=</span> cos_new</span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>        freq_real[iq] <span class="op">+=</span> cos_theta</span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin_theta</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#    using Flops minimization to optimize code for performance</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>d_theta <span class="op">=</span> ( <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> (x[<span class="dv">0</span>] <span class="op">-</span> y[<span class="dv">0</span>]) ) <span class="op">/</span> NQ</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="co"># Sum over each atom in the simulation</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>( N_atoms ):</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    dx <span class="op">=</span> x[i] <span class="op">-</span> y[i]</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>        <span class="co"># Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    cos_d_theta <span class="op">=</span> cos( d_theta )</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    sin_d_theta <span class="op">=</span> sin( d_theta )</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    cos_theta <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>    sin_theta <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>        <span class="co"># Sum over the frequencies</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>    <span class="cf">for</span> iq <span class="kw">in</span> <span class="bu">range</span>( NQ ):</span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>        cos_new <span class="op">=</span> cos_theta <span class="op">*</span> cos_d_theta <span class="op">-</span> sin_theta <span class="op">*</span> sin_d_theta</span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>        sin_theta <span class="op">=</span> sin_theta <span class="op">*</span> cos_d_theta <span class="op">+</span> cos_theta <span class="op">*</span> cos_d_theta</span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>        cos_theta <span class="op">=</span> cos_new</span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>        freq_real[iq] <span class="op">+=</span> cos_theta</span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>        freq_imag[iq] <span class="op">+=</span> sin_theta</span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-R" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-R">
-<p>Not implemented yet.</p>
+<div id="nav-tabpanel-2-R" class="tab-pane" aria-labelledby="nav-tab-2-R" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#    using Flops minimization to optimize code for performance</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>d_theta <span class="ot">&lt;-</span> ( <span class="fl">2.0</span> <span class="sc">*</span> PI <span class="sc">*</span> (x[<span class="dv">0</span>] <span class="sc">-</span> y[<span class="dv">0</span>]) ) <span class="sc">/</span> NQ</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    <span class="co"># Sum over each atom in the simulation</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_atoms )</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>{</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    dx <span class="ot">&lt;-</span> x[i] <span class="sc">-</span> y[i]</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>        <span class="co"># Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>    cos_d_theta <span class="ot">&lt;-</span> <span class="fu">cos</span>( d_theta )</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>    sin_d_theta <span class="ot">&lt;-</span> <span class="fu">sin</span>( d_theta )</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>    cos_theta <span class="ot">&lt;-</span> <span class="fl">1.0</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>    sin_theta <span class="ot">&lt;-</span> <span class="fl">0.0</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>        <span class="co"># Sum over the frequencies</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>    <span class="cf">for</span>( iq <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>NQ )</span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>        cos_new <span class="ot">&lt;-</span> cos_theta <span class="sc">*</span> cos_d_theta <span class="sc">-</span> sin_theta <span class="sc">*</span> sin_d_theta</span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>        sin_theta <span class="ot">&lt;-</span> sin_theta <span class="sc">*</span> cos_d_theta <span class="sc">+</span> cos_theta <span class="sc">*</span> cos_d_theta</span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>        cos_theta <span class="ot">&lt;-</span> cos_new</span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>        freq_real[iq] <span class="ot">&lt;-</span> freq_real[iq] <span class="sc">+</span> cos_theta</span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>        freq_imag[iq] <span class="ot">&lt;-</span> freq_imag[iq] <span class="sc">+</span> sin_theta</span></code></pre>
 </div>
-<div id="nav-tabpanel-2-C" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-C">
-<div class="codewrapper sourceCode" id="cb5">
+</div>
+<div id="nav-tabpanel-2-C" class="tab-pane" aria-labelledby="nav-tab-2-C" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">C<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">// This is just partial code to demonstrate the mechanics of</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">//    using Flops minimization to optimize code for performance</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>   d_theta <span class="op">=</span> <span class="op">(</span> <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> <span class="op">(</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">-</span> y<span class="op">[</span><span class="dv">0</span><span class="op">])</span> <span class="op">)</span> <span class="op">/</span> NQ<span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>      <span class="co">// Sum over each atom in the simulation and all frequencies</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N_atoms<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>      dx <span class="op">=</span> x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> y<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>         <span class="co">// Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>      cos_d_theta <span class="op">=</span> cos<span class="op">(</span> d_theta <span class="op">);</span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>      sin_d_theta <span class="op">=</span> sin<span class="op">(</span> d_theta <span class="op">);</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>      cos_theta <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>      sin_theta <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span> iq <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> iq <span class="op">&lt;</span> NQ<span class="op">;</span> iq<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>         cos_new <span class="op">=</span> cos_theta <span class="op">*</span> cos_d_theta <span class="op">-</span> sin_theta <span class="op">*</span> sin_d_theta<span class="op">;</span></span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>         sin_theta <span class="op">=</span> sin_theta <span class="op">*</span> cos_d_theta <span class="op">+</span> cos_theta <span class="op">*</span> cos_d_theta<span class="op">;</span></span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>         cos_theta <span class="op">=</span> cos_new<span class="op">;</span></span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>            <span class="co">// Sum over the frequencies</span></span>
-<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>         freq_real<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> cos_theta<span class="op">;</span></span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>         freq_imag<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> sin_theta<span class="op">;</span></span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>      <span class="op">}</span></span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
+<pre class="sourceCode c" tabindex="0"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">// This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">//    using Flops minimization to optimize code for performance</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>   d_theta <span class="op">=</span> <span class="op">(</span> <span class="fl">2.0</span> <span class="op">*</span> PI <span class="op">*</span> <span class="op">(</span>x<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">-</span> y<span class="op">[</span><span class="dv">0</span><span class="op">])</span> <span class="op">)</span> <span class="op">/</span> NQ<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>      <span class="co">// Sum over each atom in the simulation and all frequencies</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>   <span class="cf">for</span><span class="op">(</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> N_atoms<span class="op">;</span> i<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>      dx <span class="op">=</span> x<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> y<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>         <span class="co">// Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>      cos_d_theta <span class="op">=</span> cos<span class="op">(</span> d_theta <span class="op">);</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>      sin_d_theta <span class="op">=</span> sin<span class="op">(</span> d_theta <span class="op">);</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>      cos_theta <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>      sin_theta <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>      <span class="cf">for</span><span class="op">(</span> iq <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> iq <span class="op">&lt;</span> NQ<span class="op">;</span> iq<span class="op">++</span> <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>         cos_new <span class="op">=</span> cos_theta <span class="op">*</span> cos_d_theta <span class="op">-</span> sin_theta <span class="op">*</span> sin_d_theta<span class="op">;</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>         sin_theta <span class="op">=</span> sin_theta <span class="op">*</span> cos_d_theta <span class="op">+</span> cos_theta <span class="op">*</span> cos_d_theta<span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>         cos_theta <span class="op">=</span> cos_new<span class="op">;</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>            <span class="co">// Sum over the frequencies</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>         freq_real<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> cos_theta<span class="op">;</span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>         freq_imag<span class="op">[</span>iq<span class="op">]</span> <span class="op">+=</span> sin_theta<span class="op">;</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>   <span class="op">}</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-Fortran" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Fortran">
-<div class="codewrapper sourceCode" id="cb6">
+<div id="nav-tabpanel-2-Fortran" class="tab-pane" aria-labelledby="nav-tab-2-Fortran" role="tabpanel">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">FORTRAN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode fortran" tabindex="0"><code class="sourceCode fortranfixed"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">! This is just partial code to demonstrate the mechanics of</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">!    using Flops minimization to optimize code for performance</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>   d_theta <span class="kw">=</span> ( <span class="fl">2.0</span> <span class="kw">*</span> PI <span class="kw">*</span> (x(<span class="dv">0</span>) <span class="kw">-</span> y(<span class="dv">0</span>)) ) <span class="kw">/</span> NQ</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>      <span class="co">! Sum over each atom in the simulation and all frequencies</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N_atoms</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>      dx <span class="kw">=</span> x(i) <span class="kw">-</span> y(i)</span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>         <span class="co">! Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>      cos_d_theta <span class="kw">=</span> <span class="bu">cos</span>( d_theta )</span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>      sin_d_theta <span class="kw">=</span> <span class="bu">sin</span>( d_theta )</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>      cos_theta <span class="kw">=</span> <span class="fl">1.0</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>      sin_theta <span class="kw">=</span> <span class="fl">0.0</span></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>      <span class="kw">DO</span> iq <span class="kw">=</span> <span class="dv">1</span>, NQ</span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>         cos_new <span class="kw">=</span> cos_theta <span class="kw">*</span> cos_d_theta <span class="kw">-</span> sin_theta <span class="kw">*</span> sin_d_theta</span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>         sin_theta <span class="kw">=</span> sin_theta <span class="kw">*</span> cos_d_theta <span class="kw">+</span> cos_theta <span class="kw">*</span> cos_d_theta</span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>         cos_theta <span class="kw">=</span> cos_new</span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>            <span class="co">! Sum over the frequencies</span></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>         freq_real(iq) <span class="kw">=</span> freq_real(iq) <span class="kw">+</span> cos_theta</span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>         freq_imag(iq) <span class="kw">=</span> freq_imag(iq) <span class="kw">+</span> sin_theta</span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>      <span class="kw">END DO</span></span>
-<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>   <span class="kw">END DO</span></span></code></pre>
+<pre class="sourceCode fortran" tabindex="0"><code class="sourceCode fortranfixed"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">! This is just partial code to demonstrate the mechanics of</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">!    using Flops minimization to optimize code for performance</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>   d_theta <span class="kw">=</span> ( <span class="fl">2.0</span> <span class="kw">*</span> PI <span class="kw">*</span> (x(<span class="dv">0</span>) <span class="kw">-</span> y(<span class="dv">0</span>)) ) <span class="kw">/</span> NQ</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>      <span class="co">! Sum over each atom in the simulation and all frequencies</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>   <span class="kw">DO</span> i <span class="kw">=</span> <span class="dv">1</span>, N_atoms</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>      dx <span class="kw">=</span> x(i) <span class="kw">-</span> y(i)</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>         <span class="co">! Calculate cos/sin of the theta increment and set starting cos/sin values</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>      cos_d_theta <span class="kw">=</span> <span class="bu">cos</span>( d_theta )</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>      sin_d_theta <span class="kw">=</span> <span class="bu">sin</span>( d_theta )</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>      cos_theta <span class="kw">=</span> <span class="fl">1.0</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>      sin_theta <span class="kw">=</span> <span class="fl">0.0</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>      <span class="kw">DO</span> iq <span class="kw">=</span> <span class="dv">1</span>, NQ</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>         cos_new <span class="kw">=</span> cos_theta <span class="kw">*</span> cos_d_theta <span class="kw">-</span> sin_theta <span class="kw">*</span> sin_d_theta</span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>         sin_theta <span class="kw">=</span> sin_theta <span class="kw">*</span> cos_d_theta <span class="kw">+</span> cos_theta <span class="kw">*</span> cos_d_theta</span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>         cos_theta <span class="kw">=</span> cos_new</span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>            <span class="co">! Sum over the frequencies</span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>         freq_real(iq) <span class="kw">=</span> freq_real(iq) <span class="kw">+</span> cos_theta</span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>         freq_imag(iq) <span class="kw">=</span> freq_imag(iq) <span class="kw">+</span> sin_theta</span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a>      <span class="kw">END DO</span></span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a>   <span class="kw">END DO</span></span></code></pre>
 </div>
 </div>
-<div id="nav-tabpanel-2-Matlab" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-2-Matlab">
+<div id="nav-tabpanel-2-Matlab" class="tab-pane" aria-labelledby="nav-tab-2-Matlab" role="tabpanel">
 <p>Not implemented yet.</p>
 </div>
 </div>
@@ -785,6 +825,7 @@ the Intel and AMD x86 architectures.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="flops-count" class="callout-inner">
 <h3 class="callout-title">Flops count</h3>
 <div class="callout-content">
@@ -799,7 +840,7 @@ rate.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The unoptimized code uses <strong>N_atoms * ( 1 + 21 * NQ )
 Flops</strong>. The optimized version uses <strong>N_atoms * ( 13 + 6 *
@@ -1002,8 +1043,10 @@ then choose the fastest file server available.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="scaling-study-of-the-distributed-memory-dot-product-code" class="callout-inner">
-<h3 class="callout-title">Scaling Study of the Distributed-Memory Dot Product Code</h3>
+<h3 class="callout-title">Scaling Study of the Distributed-Memory Dot
+Product Code</h3>
 <div class="callout-content">
 <p>Measure the entire run-time for the dot_product_message_passing code
 for the language you are working with for 1, 4, 8, and 16 cores if you
@@ -1019,7 +1062,7 @@ see the effects of the network (for the 4 cores, try 2 nodes 2 cores vs
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>In this code we initialize the vectors locally so there is no
 communication involved. The only communication is the global sum at the
@@ -1038,8 +1081,8 @@ cores, and especially over more nodes.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>What techniques can be used to speed up scalar code?</li>
 <li>How to improve input and output?</li>
@@ -1086,7 +1129,7 @@ programs.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.10" class="external-link">sandpaper (0.16.10)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.5" class="external-link">varnish (1.0.5)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.17.1" class="external-link">sandpaper (0.17.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.7" class="external-link">varnish (1.0.7)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1097,10 +1140,10 @@ programs.</li>
   <script type="application/ld+json">
     {
   "@context": "https://schema.org",
-  "@type": "TrainingMaterial",
+  "@type": "LearningResource",
   "@id": "https://DrDaveTurner.github.io/HPC-User/parallel-concepts.html",
   "inLanguage": "en",
-  "dct:conformsTo": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+  "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
   "keywords": " HPC, software, lesson, The Carpentries, Python, C, C++, Fortran, R, Matlab",
   "name": "Parallel Computing Concepts",
@@ -1108,8 +1151,8 @@ programs.</li>
   "url": "https://DrDaveTurner.github.io/HPC-User/parallel-concepts.html",
   "identifier": "https://DrDaveTurner.github.io/HPC-User/parallel-concepts.html",
   "dateCreated": "2022-01-01",
-  "dateModified": "2024-08-31",
-  "datePublished": "2024-12-10"
+  "dateModified": "2025-09-12",
+  "datePublished": "2025-09-12"
 }
 
   </script><script>
