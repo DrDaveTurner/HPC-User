@@ -88,11 +88,6 @@ using trigonometric identities.
 # This is just partial code to demonstrate the mechanics of
 #    using Flops minimization to optimize code for performance
 
-    # Define the number of frequencies and zero the array before summation
-
-freq_real = [ 0.0 for i in range( NQ ) ]
-freq_imag = [ 0.0 for i in range( NQ ) ]
-
     # Sum over each atom in the simulation
 
 for i in range( N_atoms ):
@@ -108,7 +103,24 @@ for i in range( N_atoms ):
 ```
 ### R
 
-Not implemented yet.
+```R
+# This is just partial code to demonstrate the mechanics of
+#    using Flops minimization to optimize code for performance
+
+    # Sum over each atom in the simulation
+
+for( i in 1:N_atoms )
+{
+
+    dx <- x[i] - y[i]
+
+        # Sum over the frequencies
+
+    for( iq in 1:NQ )
+        theta <- 2.0 * PI * dx * iq / NQ
+        freq_real[iq] <- freq_real[iq] + cos( theta )
+        freq_imag[iq] <- freq_imag[iq] + sin( theta )
+```
 
 ### C
 
@@ -174,11 +186,6 @@ Not implemented yet.
 # This is just partial code to demonstrate the mechanics of
 #    using Flops minimization to optimize code for performance
 
-    # Define the number of frequencies and zero the array before summation
-
-freq_real = [ 0.0 for i in range( NQ ) ]
-freq_imag = [ 0.0 for i in range( NQ ) ]
-
 d_theta = ( 2.0 * PI * (x[0] - y[0]) ) / NQ
 
     # Sum over each atom in the simulation
@@ -206,7 +213,36 @@ for i in range( N_atoms ):
 ```
 ### R
 
-Not implemented yet.
+```R
+# This is just partial code to demonstrate the mechanics of
+#    using Flops minimization to optimize code for performance
+
+d_theta <- ( 2.0 * PI * (x[0] - y[0]) ) / NQ
+
+    # Sum over each atom in the simulation
+
+for( i in 1:N_atoms )
+{
+
+    dx <- x[i] - y[i]
+
+        # Calculate cos/sin of the theta increment and set starting cos/sin values
+
+    cos_d_theta <- cos( d_theta )
+    sin_d_theta <- sin( d_theta )
+    cos_theta <- 1.0
+    sin_theta <- 0.0
+
+        # Sum over the frequencies
+
+    for( iq in 1:NQ )
+        cos_new <- cos_theta * cos_d_theta - sin_theta * sin_d_theta
+        sin_theta <- sin_theta * cos_d_theta + cos_theta * cos_d_theta
+        cos_theta <- cos_new
+
+        freq_real[iq] <- freq_real[iq] + cos_theta
+        freq_imag[iq] <- freq_imag[iq] + sin_theta
+```
 
 ### C
 

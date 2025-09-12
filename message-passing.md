@@ -201,7 +201,18 @@ if ( myrank == 0 ):    # Only rank 0 will print results
 
 ### R
 
-Not implemented yet.
+* [Rmpi documentations](https://cran.r-project.org/web/packages/Rmpi/Rmpi.pdf)
+
+While there is an MPI interface for R called **Rmpi**, it was originally developed for
+LAM MPI which has not been actively developed in 20 years and the documentations
+still cite LAM commands.
+Although it is getting some updates it is strongly recommended to avoid
+this package. An **Rmpi** version **dot_product_doMPI.R" in the **code** directory
+run on a modern Linux system with up-to-date R 4.3.2 and a GNU build of OpenMPI 5.0.3 
+spawns processes but never returns from the **startMPIcluster()** call.  **Rmpi** can
+also be used to write explicit MPI code.  If **Rmpi** can be made to work it would
+bring the ability to spread work across multiple compute nodes as well as multiple
+cores within each node, but the performance is unknown.
 
 ### C
 
@@ -445,7 +456,7 @@ the Python matrix multiply code and test the scaling.
 
 ### R
 
-Not implemented yet.
+**Rmpi** is not recommended.
 
 ### C
 
@@ -559,9 +570,11 @@ Not implemented yet.
 
 ### Links for additional information
 
-* [mpi4py](https://mpi4py.readthedocs.io/)
 * [LLNL MPI tutorial](https://hpc-tutorials.llnl.gov/mpi/)
 * [MPICH user guides](https://www.mpich.org/documentation/guides/)
 * [OpenMPI function man pages](https://www.open-mpi.org/doc/)
+* [mpi4py](https://mpi4py.readthedocs.io/)
+* [CRAN Rmpi](https://cran.r-universe.dev/Rmpi)
+
 
 

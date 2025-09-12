@@ -40,7 +40,7 @@ it is used.
  * Many compute nodes where the jobs actually get run, each having multiple cores.
  * The Linux operating system with a command line interface (CLI).
  * Possibly a more graphical interface like OnDemand.
- * A batch queue system that scheduled jobs to compute nodes.
+ * A batch queue system that schedules jobs to compute nodes.
  * A common file system available on all head nodes and compute nodes.
  * Possibly some GPU cards for accelerating some scientific codes.
  * A module system for loading compilers and scientific applications.
@@ -50,3 +50,4 @@ then submits the job script to the batch queue where it gets scheduled
 to run on the compute nodes when there is space available.
 
 :::::::::::::::::::::
+
