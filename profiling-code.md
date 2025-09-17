@@ -39,7 +39,7 @@ Linux has a **time** function that can proceed any command, so this
 can be used to time the entire job externally even if we don't have
 access to the source code.
 This can be used to time a short test run in order to estimate the
-runtime needed for the complete job.
+run time needed for the complete job.
 When we get to talking about parallel computing, or using multiple
 compute cores to run a single job, the **time** function will
 prove useful for getting the execution time for a job as it
@@ -105,7 +105,7 @@ for programs when they are running.
 Below we are going to use the **sleep** command to time an interval
 of 5 seconds just to simulate what we might see in a real job.
 In this case, even though the sleep function was supposed to go
-5 seconds, there was some overhead or inaccuracy in the timnig 
+5 seconds, there was some overhead or inaccuracy in the timing 
 routine or the length of the sleep.
 This is one thing that you always need to be aware of when measuring
 performance.
@@ -122,7 +122,7 @@ sys	0m0.003s
 ```
 
 In addition to worrying about the clock accuracy, you also need to 
-worry about interferrence from other jobs that may be running on
+worry about interference from other jobs that may be running on
 the same compute node you are on.
 The best way to time a real job is to test it out on a completely
 isolated computer.
@@ -140,7 +140,7 @@ If your job is using the network to communicate with other
 compute nodes, that might also be shared with other jobs running
 on the same node.
 The single largest factor to be aware of is that other jobs using
-the same file server as you are can definitely affect the peroformance
+the same file server as you are can definitely affect the performance
 of your job if your code is doing lots of IO (Input and Output).
 On HPC systems, this can be true even if the other jobs are not on
 the same compute node as your job.
@@ -392,7 +392,7 @@ Since both of these are above the nanosecond range, we can be confident
 that the timing routine is accurately measuring each.
 
 Let's see what we can learn by playing around with it some more.
-When I run the python version preceeded by the linux **time** function, 
+When I run the python version preceded by the Linux **time** function, 
 I see a real time significantly larger than the loop time and output time 
 combined.
 The initialization time is not measured but shouldn't be more than
@@ -625,7 +625,7 @@ If we look at the **t_loop** time instead, in my computer it is more
 than double what it was before.
 When the clock routine is measuring very small intervals each time,
 it can be intrusive in that it distorts the measurement by increasing
-the runtime of the entire code.
+the run time of the entire code.
 It isn't surprising that this is intrusive since we are measuring the
 time it takes to retrieve a single array element and do one addition.
 The code is doing a subtraction and addition itself to calculate the
@@ -636,10 +636,10 @@ doing the timing in this way is not more intrusive.
 
 The goal is to fully profile your code so that you understand
 where all the time is being spent.
-This means timnig each computational section where time is being
+This means timing each computational section where time is being
 spent, usually the loops for example.
-While simple print statements may not be important contributers to
-the overall runtime of a code, any large input or output from files
+While simple print statements may not be important contributors to
+the overall run time of a code, any large input or output from files
 may be.
 When we start talking about parallel programs that use multiple
 cores or even multiple compute nodes it will become important
@@ -684,7 +684,7 @@ both increase the scaling efficiency.
 
 ## Tracking Memory Usage
 
-When we think about high peformance, we mostly think about running
+When we think about high performance, we mostly think about running
 jobs faster.
 For some programs, the memory usage may be the factor limiting what
 types of science we can do.
@@ -777,7 +777,7 @@ We will practice these approaches more in the upcoming modules.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 - The **time** function can always be used externally to measure performance
-  but has limitted accuracy of around 1 millisecond.
+  but has limited accuracy of around 1 millisecond.
 - Internally there are precise clock routines that can be used to measure 
   the performance of each part of a code.  These are different for each 
   programming language, but the use is always the same.

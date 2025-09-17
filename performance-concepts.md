@@ -605,7 +605,7 @@ The built in matrix multiplication is expected to be more optimized
 and I get 13 ms for a 10x10 matrix, 1 ms for a 100x100 matrix, and
 26 ms for the 1000x1000 matrix.
 The built in matrix multiplication is clearly better except for the
-very small 10x10 matrix which seems to be an aberation.
+very small 10x10 matrix which seems to be an aberration.
 The 1000x1000 matrix is where it shines taking only 26 ms where the
 **for** loop takes 148 seconds or nearly 5700 times as long.
 It isn't clear why the difference is this large, but clearly the

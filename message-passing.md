@@ -209,7 +209,7 @@ failed with OpenMPI 5.0.3 so I had to use an older OpenMPI 4.1.6 version).
 This package provides a **doMPI** back end that can be easily slipped into a
 program using **foreach** loops with **%dopar%** allowing the code to run
 on cores on multiple compute nodes.
-**Rmpi** also provides wrappered MPI commands for programmers who wish to
+**Rmpi** also provides wrapped MPI commands for programmers who wish to
 write explicit MPI programs in R.
 
 ```R
@@ -524,7 +524,7 @@ the Python matrix multiply code and test the scaling.
 
 Measure the execution time for the **dot_product_message_passing.R** code
 for 1, 4, 8, and 16 cores on a single compute node to compare with other
-parallelizaton methods available in R.
+parallelization methods available in R.
 If you are on an HPC system with multiple nodes, try running the same
 tests on 2 or 4 compute nodes to compare.
 You can also try running the **dot_product_doMPI.R** code to see how
