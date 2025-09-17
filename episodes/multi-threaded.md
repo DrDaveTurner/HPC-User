@@ -186,7 +186,7 @@ that cleans up the virtual cluster before the program ends.
 This basic approach is simple and can be useful but also may be inefficient since 
 the overhead for dividing the work between threads may be much greater
 than the work done within each iteration, as is clearly the case in
-our simle example where there is only a single multiplication for each
+our simple example where there is only a single multiplication for each
 pass through the loop.
 In the second part of this code, the loop is instead
 divided over the number of threads with the function then manually splitting
@@ -296,7 +296,7 @@ the processes that are spawned inherit the environment of the parent process.
 So we get more flexibility in the back ends as well as a more convenient 
 programming approach.
 You'll be asked to measure the performance of each approach in the
-excersize below.
+exercise below.
 
 ```R
 # Dot product in R using a loop and a vector summation
