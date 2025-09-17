@@ -203,16 +203,82 @@ if ( myrank == 0 ):    # Only rank 0 will print results
 
 * [Rmpi documentations](https://cran.r-project.org/web/packages/Rmpi/Rmpi.pdf)
 
-While there is an MPI interface for R called **Rmpi**, it was originally developed for
-LAM MPI which has not been actively developed in 20 years and the documentations
-still cite LAM commands.
-Although it is getting some updates it is strongly recommended to avoid
-this package. An **Rmpi** version **dot_product_doMPI.R" in the **code** directory
-run on a modern Linux system with up-to-date R 4.3.2 and a GNU build of OpenMPI 5.0.3 
-spawns processes but never returns from the **startMPIcluster()** call.  **Rmpi** can
-also be used to write explicit MPI code.  If **Rmpi** can be made to work it would
-bring the ability to spread work across multiple compute nodes as well as multiple
-cores within each node, but the performance is unknown.
+The **Rmpi** package was developed about 20 years ago but has been updated every few 
+years to be compatible with current versions of R and OpenMPI (except my tests
+failed with OpenMPI 5.0.3 so I had to use an older OpenMPI 4.1.6 version).
+This package provides a **doMPI** back end that can be easily slipped into a
+program using **foreach** loops with **%dopar%** allowing the code to run
+on cores on multiple compute nodes.
+**Rmpi** also provides wrappered MPI commands for programmers who wish to
+write explicit MPI programs in R.
+
+```R
+# Do the dot product between two vectors X and Y then print the result
+# USAGE:  mpirun -np 4 Rscript dot_product_message_passing.R 100000
+#    This will run 100,000 elements on 4 cores, possibly spread on multiple compute nodes
+# must install.packages("Rmpi") first
+
+library( Rmpi )     # This does the MPI_Init() behind the scenes
+
+   # Get the vector size from the command line
+
+args <- commandArgs(TRUE)
+if( length( args ) == 1 ) {
+   n <- as.integer( args[1] )
+} else {
+   n <- 100000
+}
+
+   # Get my rank and the number of ranks - (MPI talks about ranks instead of threads)
+
+com <- 0     # MPI_COMM_WORLD or all ranks
+nRanks <- mpi.comm.size( com )    # The number of ranks (threads)
+myRank <- mpi.comm.rank( com )    # Which rank am I ( 1 .. nRanks )
+
+if( (n %% nRanks) != 0 ) {
+   print("Please ensure vector size is divisable by the number of ranks")
+   quit()
+}
+myElements <- n / nRanks
+
+   # Allocate space and initialize the reduced arrays for each rank
+
+x <- vector( "double", myElements )
+y <- vector( "double", myElements )
+
+j <- 0
+for( i in seq( myRank+1, n, nRanks ) )
+{
+   j <- j + 1
+   x[j] <- as.double(i)
+   y[j] <- as.double(3*i)
+}
+
+   # Clear cache then barrier sync so all ranks are ready then time
+
+dummy <- matrix( 1:125000000 )       # Clear the cache buffers before timing
+
+ret <- mpi.barrier( com )            # mpi.barrier() returns 1 if successful
+
+t_start <- proc.time()[[3]]
+
+p_sum <- 0.0
+for( i in 1:myElements )
+{
+   p_sum <- p_sum + x[i] * y[i]
+}
+
+dot_product <- mpi.allreduce( p_sum, type = 2, op = "sum", comm = com )
+
+t_end <- proc.time()[[3]]
+
+if( myRank == 0 ) {
+   print(sprintf("Rmpi dot product with nRanks workers took %6.3f seconds", t_end-t_start))
+   print(sprintf("dot_product = %.6e on %i MPI ranks for vector size %i", dot_product, nRanks, n ) )
+}
+
+mpi.quit( )
+```
 
 ### C
 
@@ -456,7 +522,13 @@ the Python matrix multiply code and test the scaling.
 
 ### R
 
-**Rmpi** is not recommended.
+Measure the execution time for the **dot_product_message_passing.R** code
+for 1, 4, 8, and 16 cores on a single compute node to compare with other
+parallelizaton methods available in R.
+If you are on an HPC system with multiple nodes, try running the same
+tests on 2 or 4 compute nodes to compare.
+You can also try running the **dot_product_doMPI.R** code to see how
+it compares to using explicit **MPI** programming in R.
 
 ### C
 
@@ -509,7 +581,27 @@ the added global summation after the loop.
 
 ### R
 
-Not implemented yet.
+For the single node tests I used 10,000,000 element vectors to
+get a good result with enough work to expect better scaling.
+Smaller vector tests will illustrate the difference in
+overhead better but be less indicative of the performance of most
+real applications.
+
+For the **dot_product_message_passing.R** code I got 481 ms for 1 core,
+132 ms for 4 cores, 68 ms for 8 cores, and 49 ms for 16 cores showing good
+performance and scaling which is expected given the only communication is
+for the global summation at the end.
+The **dot_product_doMPI.R** code had 1.1 seconds, 0.85 seconds, 4.8 seconds,
+and 8.4 seconds respectively showing much poorer performance and actually
+got worse as more cores were used.  The overhead was just too great, so while
+using a **doMPI** back end is much easier than using explicit MPI commands,
+the performance and scaling are much worse.
+
+Running on 4 nodes 4 cores each I got 53 ms for **dot_product_message_passing.R**
+compared to 49 ms on a single node which is very good but again the only
+communication is the global summation at the end.
+I did not manage to get the **dot_product_doMPI.R** code to run on multiple
+nodes yet.
 
 ### C
 
